@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Shopy.Admin.ViewModels; 
+@model ProductListViewModel
+<h2>Products <a href="@Url.RouteUrl("Products" , new { action = "Add"})" class="btn btn-success">Add</a></h2>
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th>#ID</th>
+                <th>Caption</th>
+                <th>Price (EUR)</th>
+                <th colspan="3">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (ProductListItemViewModel item in Model.Items)
+            { 
+                <tr>
+                    <td>@item.Number</td>
+                    <td>@item.Caption</td>
+                    <td>@item.Price</td>
+                    <td>
+                        <a href="@Url.RouteUrl("Products" , new { action = "Edit", uid = item.Uid})" 
+                           class="btn btn-primary" role="button">Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a href="@Url.RouteUrl("Products", new { action = "Delete", uid = item.Uid})" 
+                           class="btn btn-secondary" role="button">Delete
+                        </a>
+                    </td>
+                    <td>
+                        <a href="@Url.RouteUrl("Products", new { action = "ChangeCategories", uid = item.Uid})"
+                           class="btn btn-secondary" role="button">
+                            ChangeCategories
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

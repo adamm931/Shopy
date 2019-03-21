@@ -1,0 +1,1 @@
+C:\DEV\DotNet\Web\Shopy\obj\Debug\Shopy.SDK.csprojResolveAssemblyReference.cache

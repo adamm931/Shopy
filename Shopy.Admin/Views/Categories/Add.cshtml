@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-6 order-md-1">
+    <div class="col-md-6 mb-4">
+        <h2>Add category</h2>
+    </div>
+    <form class="needs-validation" novalidate="">
+        <div class="mb-3 col-md-12">
+            <label for="firstName">Caption</label>
+            <input type="text" class="form-control">
+            <div class="invalid-feedback">Valid first name is required.</div>
+        </div>
+        <hr class="col-md-10 mb-4" />
+        <div class="col-md-9 row">
+            <div class="col-md-6 mb-3"><a href="categories-list.html" class="btn btn-primary btn-lg btn-block">Save</a></div>
+            <div class="col-md-6 mb-3"><a href="categories-list.html" class="btn btn-secondary btn-lg btn-block">Cancel</a></div>
+        </div>
+    </form>
+    </div>
+

@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "AddRemoveProducts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Shopy.Admin.ViewModels;
+@using System.Web.Mvc;
+@model ChangeProductCategoiresViewModel
+
+<h2>Add or remove product categories for product #Caption#</h2>
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th>#ID</th>
+                <th>Caption</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Model.AssignedCategories)
+            {
+                <tr>
+                    <td>@category.Uid</td>
+                    <td>@category.Caption</td>
+                    <td><a class="btn btn-secondary" role="button">Remove from category</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row col-md-9">
+        <div class="col-md-4">
+            <select class="custom-select" required="">
+                <option value="">Select category...</option>
+                @foreach (SelectListItem item in  Model.AvailableCategories1)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a href="" onclick="alert('Hello')" class="btn btn-success">Add</a>
+        </div>
+    </div>
+</div>
+

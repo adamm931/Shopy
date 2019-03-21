@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Html.EnableClientValidation();
+}
+@using Shopy.Admin.ViewModels;
+@model ProductViewModel
+<div class="col-md-6 order-md-1">
+
+    <div class="col-md-6 mb-4">
+        <h2>Add product</h2>
+    </div>
+    @using (Html.BeginRouteForm("Products", new { controller = "Products", action = "Edit" }))
+    {
+        @Html.HiddenFor(m => m.Uid);
+
+        <div class="mb-3 col-md-12">
+            @Html.LabelFor(m => m.Caption)
+            @Html.TextBoxFor(m => m.Caption, new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Caption)
+        </div>
+        <div class="mb-3 col-md-12">
+
+            @Html.LabelFor(m => m.Description)
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Description)
+        </div>
+        <div class="mb-3 col-md-6">
+
+            @Html.LabelFor(m => m.Price)
+            @Html.TextBoxFor(m => m.Price, new { @class = "form-control", @type = "number" })
+            @Html.ValidationMessageFor(m => m.Price)
+        </div>
+        <div class="mb-3 col-md-6">
+            @Html.LabelFor(m => m.Size)
+            @Html.DropDownListFor(m => m.Size, ProductViewModel.Sizes, new { @class = "custom-select d-block" })
+            @Html.ValidationMessageFor(m => m.Size)
+        </div>
+        <div class="mb-3 col-md-6">
+
+            @Html.LabelFor(m => m.Brand)
+            @Html.DropDownListFor(m => m.Brand, ProductViewModel.Brands, new { @class = "custom-select d-block" })
+            @Html.ValidationMessageFor(m => m.Brand)
+        </div>
+        <hr class="col-md-10 mb-4" />
+        <div class="col-md-9 row">
+            <div class="col-md-6 mb-3"><button type="submit" class="btn btn-primary btn-lg btn-block">Save</button></div>
+            <div class="col-md-6 mb-3"><a href="@Url.RouteUrl("Products", new { action = "List" })" class="btn btn-secondary btn-lg btn-block">Cancel</a></div>
+        </div>
+    }
+</div>
+
+
