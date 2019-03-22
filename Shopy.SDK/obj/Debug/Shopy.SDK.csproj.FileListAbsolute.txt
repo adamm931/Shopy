@@ -11,3 +11,9 @@ C:\DEV\DotNet\Web\Shopy\Shop.SDK\bin\Debug\Newtonsoft.Json.dll
 C:\DEV\DotNet\Web\Shopy\Shop.SDK\obj\Debug\Shopy.SDK.csprojResolveAssemblyReference.cache
 C:\DEV\DotNet\Web\Shopy\Shop.SDK\obj\Debug\Shopy.SDK.dll
 C:\DEV\DotNet\Web\Shopy\Shop.SDK\obj\Debug\Shopy.SDK.pdb
+C:\DEV\DotNet\Web\Shopy\Shopy.SDK\bin\Debug\Shopy.SDK.dll
+C:\DEV\DotNet\Web\Shopy\Shopy.SDK\bin\Debug\Shopy.SDK.pdb
+C:\DEV\DotNet\Web\Shopy\Shopy.SDK\bin\Debug\Newtonsoft.Json.dll
+C:\DEV\DotNet\Web\Shopy\Shopy.SDK\obj\Debug\Shopy.SDK.csprojResolveAssemblyReference.cache
+C:\DEV\DotNet\Web\Shopy\Shopy.SDK\obj\Debug\Shopy.SDK.dll
+C:\DEV\DotNet\Web\Shopy\Shopy.SDK\obj\Debug\Shopy.SDK.pdb

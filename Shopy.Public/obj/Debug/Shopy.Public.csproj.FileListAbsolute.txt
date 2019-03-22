@@ -1,3 +1,4 @@
+C:\DEV\DotNet\Web\Shopy\Shopy.Public\obj\Debug\Shopy.Public.csprojResolveAssemblyReference.cache
 C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\ApplicationInsights.config
 C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\roslyn\csc.exe
 C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -11,6 +12,9 @@ C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\roslyn\System.Reflection.Metadata.dll
 C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\roslyn\vbc.exe
 C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\roslyn\VBCSCompiler.exe
 C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\roslyn\VBCSCompiler.exe.config
+C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\Shopy.Public.dll.config
+C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\Shopy.Public.dll
+C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\Shopy.Public.pdb
 C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\Antlr3.Runtime.dll
 C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\Microsoft.AI.Agent.Intercept.dll
 C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\Microsoft.AI.DependencyCollector.dll
@@ -45,9 +49,5 @@ C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\System.Web.Razor.xml
 C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\System.Web.WebPages.xml
 C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\System.Web.WebPages.Deployment.xml
 C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\System.Web.WebPages.Razor.xml
-C:\DEV\DotNet\Web\Shopy\Shopy.Public\obj\Debug\Shopy.Public.csprojResolveAssemblyReference.cache
-C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\Shopy.Public.dll.config
-C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\Shopy.Public.dll
-C:\DEV\DotNet\Web\Shopy\Shopy.Public\bin\Shopy.Public.pdb
 C:\DEV\DotNet\Web\Shopy\Shopy.Public\obj\Debug\Shopy.Public.dll
 C:\DEV\DotNet\Web\Shopy\Shopy.Public\obj\Debug\Shopy.Public.pdb
