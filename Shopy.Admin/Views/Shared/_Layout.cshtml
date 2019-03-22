@@ -6,7 +6,7 @@
 <body>
 
 
-    @Html.Partial("_Header")
+    @(ViewBag.Authenticated ? Html.Partial("_HeaderLoged") : Html.Partial("_Header"))
 
     <div id="main-container" class="container-fluid">
         <div class="row">

@@ -5,6 +5,9 @@ namespace Shopy.Admin.Controllers
 {
     public class LoginController : BaseController
     {
+        private const string Admin = "Admin";
+
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
@@ -15,18 +18,21 @@ namespace Shopy.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                //do authentication here
-                return RedirectToRoute("Home");
+                if (model.Username == Admin && model.Password == Admin)
+                {
+                    HttpContext.Session["Authenticated"] = 1;
+                    return RedirectToRoute("Products", new { action = "List" });
+                }
             }
 
             return View("Index");
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult Logout()
         {
-            //log out
-            return View("Index");
+            HttpContext.Session["Authenticated"] = null;
+            return RedirectToAction("Index");
         }
     }
 }

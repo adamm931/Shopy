@@ -14,5 +14,12 @@ namespace Shopy.Admin.Controllers
                 return shopy ?? (shopy = ShopyProxy.Create());
             }
         }
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            ViewBag.Authenticated = HttpContext?.Session?["Authenticated"] != null;
+
+            base.OnActionExecuting(filterContext);
+        }
     }
 }

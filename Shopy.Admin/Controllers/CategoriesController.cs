@@ -1,10 +1,12 @@
-﻿using Shopy.Admin.ViewModels;
+﻿using Shopy.Admin.Authentication;
+using Shopy.Admin.ViewModels;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Shopy.Admin.Controllers
 {
+    [AdminAuthetication]
     public class CategoriesController : BaseController
     {
         [HttpGet]
