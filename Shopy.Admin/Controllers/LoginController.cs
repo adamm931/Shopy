@@ -1,5 +1,6 @@
 ﻿using Shopy.Admin.ViewModels;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Shopy.Admin.Controllers
 {
@@ -18,9 +19,10 @@ namespace Shopy.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                //TODO: login service here to authenticate
                 if (model.Username == Admin && model.Password == Admin)
                 {
-                    HttpContext.Session["Authenticated"] = 1;
+                    FormsAuthentication.SetAuthCookie("Admin", false);
                     return RedirectToRoute("Products", new { action = "List" });
                 }
             }
@@ -31,7 +33,7 @@ namespace Shopy.Admin.Controllers
         [HttpGet]
         public ActionResult Logout()
         {
-            HttpContext.Session["Authenticated"] = null;
+            FormsAuthentication.SignOut();
             return RedirectToAction("Index");
         }
     }

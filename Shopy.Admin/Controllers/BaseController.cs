@@ -17,8 +17,7 @@ namespace Shopy.Admin.Controllers
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            ViewBag.Authenticated = HttpContext?.Session?["Authenticated"] != null;
-
+            ViewBag.IsAuthenticated = User?.Identity?.IsAuthenticated ?? false;
             base.OnActionExecuting(filterContext);
         }
     }

@@ -1,5 +1,4 @@
-﻿using Shopy.Admin.Authentication;
-using Shopy.Admin.ViewModels;
+﻿using Shopy.Admin.ViewModels;
 using Shopy.SDK.Models.Products;
 using System;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Web.Mvc;
 
 namespace Shopy.Admin.Controllers
 {
-    [AdminAuthetication]
+    [Authorize]
     public class ProductsController : BaseController
     {
         [HttpGet]
