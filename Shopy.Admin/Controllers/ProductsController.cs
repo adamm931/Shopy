@@ -37,24 +37,25 @@ namespace Shopy.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> Add(ProductViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var addProduct = new AddProduct()
-                {
-                    Caption = model.Caption,
-                    Description = model.Description,
-                    Price = model.Price,
-                    BrandType = model.Brand,
-                    SizeType = model.Size
-                };
-
-                await this.Shopy.AddProductAsycn(addProduct);
-
-                return RedirectToAction("List");
+                return View("Index", model);
             }
 
-            return View("Index", model);
+            var addProduct = new AddProduct()
+            {
+                Caption = model.Caption,
+                Description = model.Description,
+                Price = model.Price,
+                BrandType = model.Brand,
+                SizeType = model.Size
+            };
+
+            await this.Shopy.AddProductAsync(addProduct);
+
+            return RedirectToAction("List");
         }
+
 
         [HttpGet]
         public async Task<ActionResult> Edit(Guid uid)
@@ -77,24 +78,24 @@ namespace Shopy.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(ProductViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var editProduct = new EditProduct()
-                {
-                    Uid = model.Uid,
-                    Caption = model.Caption,
-                    Description = model.Description,
-                    Price = model.Price,
-                    BrandType = model.Brand,
-                    SizeType = model.Size
-                };
-
-                await this.Shopy.EditProductAsync(editProduct);
-
-                return RedirectToAction("List");
+                return View("Index", model);
             }
 
-            return View("Index", model);
+            var editProduct = new EditProduct()
+            {
+                Uid = model.Uid,
+                Caption = model.Caption,
+                Description = model.Description,
+                Price = model.Price,
+                BrandType = model.Brand,
+                SizeType = model.Size
+            };
+
+            await this.Shopy.EditProductAsync(editProduct);
+
+            return RedirectToAction("List");
         }
 
         [HttpGet]
@@ -104,31 +105,49 @@ namespace Shopy.Admin.Controllers
             return RedirectToAction("List");
         }
 
-        public async Task<ActionResult> ChangeCategories(Guid uid)
+        [HttpGet]
+        public ActionResult ChangeCategories(Guid uid)
+        {
+            var model = new ChangeProductCategoiresViewModel()
+            {
+                ProductUid = uid
+            };
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> LoadCategories(Guid uid)
         {
             var product = await Shopy.GetProductDetailsAsync(uid);
 
-            var model = new ChangeProductCategoiresViewModel()
+            var availableCategories = product.AvailableCategories
+                .Select(c => new SelectListItem()
+                {
+                    Text = c.Caption,
+                    Value = c.Uid.ToString()
+                });
+
+            var model = new
             {
                 AssignedCategories = product.AssignedCategories,
                 AvailableCategories = product.AvailableCategories,
             };
 
-            return View(model);
-
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddToCategory(Guid productUid, Guid categoryUid)
+        public async Task<ActionResult> AddToCategory(Guid uid, Guid categoryUid)
         {
-            await Shopy.AddProductToCategoryAsync(productUid, categoryUid);
+            await Shopy.AddProductToCategoryAsync(uid, categoryUid);
             return Json(true);
         }
 
         [HttpPost]
-        public async Task<ActionResult> RemoveFromCategory(Guid productUid, Guid categoryUid)
+        public async Task<ActionResult> RemoveFromCategory(Guid uid, Guid categoryUid)
         {
-            await Shopy.RemoveProductFromCategoryAsync(productUid, categoryUid);
+            await Shopy.RemoveProductFromCategoryAsync(uid, categoryUid);
             return Json(true);
         }
     }

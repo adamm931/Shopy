@@ -1,11 +1,11 @@
-﻿using Shopy.Api.Application.DTOS;
+﻿using Shopy.Api.Models;
 using System.Collections.Generic;
 
 namespace Shopy.Api.Application.Products.Queries
 {
-    public class ListProductsResponse : Response<IEnumerable<ProductDTO>>
+    public class ListProductsResponse : Response<IEnumerable<Product>>
     {
-        public ListProductsResponse(IEnumerable<ProductDTO> result) : base(result)
+        public ListProductsResponse(IEnumerable<Product> result) : base(result)
         { }
     }
 }

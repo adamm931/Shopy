@@ -1,7 +1,6 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Api.Application.DTOS;
-using Shopy.Api.Data;
+using Shopy.Api.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;
@@ -21,17 +20,19 @@ namespace Shopy.Api.Application.Products.Queries
                 .Include(p => p.Categories)
                 .ToListAsync();
 
-            var projection = result.Select(r => new ProductDTO()
+            var projection = result.Select(r => new Product()
             {
                 Caption = r.Caption,
                 Description = r.Description,
                 ProductID = r.ProductID,
-                BrandType = r.Brand.Caption,
+                Brand = r.Brand.Caption,
                 Price = r.Price,
-                SizeType = r.Size.Caption,
+                Size = r.Size.Caption,
                 Uid = r.Uid,
-                Categories = r.Categories.Select(c => new ProductCategoryDTO()
+                Categories = r.Categories.Select(c => new CategoryLight()
                 {
+                    Uid = c.Uid,
+                    CategoryId = c.CategoryID,
                     Caption = c.Caption
                 }).ToList()
             });

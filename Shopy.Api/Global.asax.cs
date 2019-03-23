@@ -1,4 +1,4 @@
-﻿using Shopy.Api.Data;
+﻿using Shopy;
 using System.Web.Http;
 
 namespace Sample_v1

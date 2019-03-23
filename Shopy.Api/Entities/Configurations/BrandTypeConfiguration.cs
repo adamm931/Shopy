@@ -1,9 +1,8 @@
-﻿using Shopy.Api.Data.Models;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 
-namespace Shopy.Api.Data.Configurations
+namespace Shopy.Api.Entities.Configurations
 {
-    public class BrandTypeConfiguration : EntityTypeConfiguration<BrandType>
+    public class BrandTypeConfiguration : EntityTypeConfiguration<BrandTypeEF>
     {
         public BrandTypeConfiguration()
         {

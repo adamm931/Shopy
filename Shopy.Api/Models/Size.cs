@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace Shopy.SDK.Models.Categories
+namespace Shopy.Api.Models
 {
-    public class Category
+    public class Size
     {
         public Guid Uid { get; set; }
-        public long CategoryId { get; set; }
+
         public string Caption { get; set; }
     }
 }

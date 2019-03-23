@@ -1,7 +1,6 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Api.Application.DTOS;
-using Shopy.Api.Data;
+using Shopy.Api.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;
@@ -34,19 +33,21 @@ namespace Shopy.Api.Application.Products.Queries
             return new GetProductDetailsResponse()
             {
                 Uid = product.Uid,
-                BrandType = product.Brand.Caption,
-                SizeType = product.Size.Caption,
+                Brand = product.Brand.Caption,
+                Size = product.Size.Caption,
                 Caption = product.Caption,
                 Description = product.Description,
                 Price = product.Price,
-                AssignedCategories = assignedCategories.Select(c => new ProductCategoryDTO()
+                AssignedCategories = assignedCategories.Select(c => new CategoryLight()
                 {
                     Uid = c.Uid,
+                    CategoryId = c.CategoryID,
                     Caption = c.Caption
                 }),
-                AvailableCategories = availableCategories.Select(c => new ProductCategoryDTO()
+                AvailableCategories = availableCategories.Select(c => new CategoryLight()
                 {
                     Uid = c.Uid,
+                    CategoryId = c.CategoryID,
                     Caption = c.Caption
                 })
             };

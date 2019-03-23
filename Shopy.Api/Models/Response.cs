@@ -1,6 +1,6 @@
 ﻿using Mediator.Net.Contracts;
 
-namespace Shopy.Api.Application
+namespace Shopy.Api.Models
 {
     public class Response<T> : IResponse
     {

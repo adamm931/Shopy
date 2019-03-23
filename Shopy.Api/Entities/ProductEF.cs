@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Shopy.Api.Data.Models
+namespace Shopy.Api.Entities
 {
-    public class Product
+    public class ProductEF
     {
         public long ProductID { get; set; }
 
@@ -19,15 +19,15 @@ namespace Shopy.Api.Data.Models
 
         public Guid BrandEId { get; set; }
 
-        public SizeType Size { get; set; }
+        public SizeTypeEF Size { get; set; }
 
-        public BrandType Brand { get; set; }
+        public BrandTypeEF Brand { get; set; }
 
-        public List<Category> Categories { get; set; }
+        public List<CategoryEF> Categories { get; set; }
 
-        public Product()
+        public ProductEF()
         {
-            Categories = new List<Category>();
+            Categories = new List<CategoryEF>();
         }
     }
 }

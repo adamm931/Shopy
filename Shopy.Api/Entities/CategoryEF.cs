@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Shopy.Api.Data.Models
+namespace Shopy.Api.Entities
 {
-    public class Category
+    public class CategoryEF
     {
         public long CategoryID { get; set; }
 
@@ -11,11 +11,11 @@ namespace Shopy.Api.Data.Models
 
         public string Caption { get; set; }
 
-        public List<Product> Products { get; set; }
+        public List<ProductEF> Products { get; set; }
 
-        public Category()
+        public CategoryEF()
         {
-            Products = new List<Product>();
+            Products = new List<ProductEF>();
         }
     }
 }

@@ -167,12 +167,14 @@
     <Compile Include="Application\Categories\Queries\ListCategoriesHandler.cs" />
     <Compile Include="Application\Categories\Queries\ListCategoriesRequest.cs" />
     <Compile Include="Application\Categories\Queries\ListCategoriesResponse.cs" />
-    <Compile Include="Application\DTOS\CategoryDTO.cs" />
-    <Compile Include="Application\DTOS\CategoryProductDTO.cs" />
-    <Compile Include="Application\DTOS\ProductCategoryDTO.cs" />
-    <Compile Include="Application\DTOS\ProductDetailsDTO.cs" />
-    <Compile Include="Application\DTOS\ProductDTO.cs" />
-    <Compile Include="Application\DTOS\Response.cs" />
+    <Compile Include="Models\Brand.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\CategoryLight.cs" />
+    <Compile Include="Models\ProductDetails.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductLight.cs" />
+    <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\Size.cs" />
     <Compile Include="Application\Products\Commands\AddProductCommandHandler.cs" />
     <Compile Include="Application\Products\Commands\AddProductCommand.cs" />
     <Compile Include="Application\Products\Commands\RemoveFromCategoryCommand.cs" />
@@ -193,16 +195,16 @@
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Data\Models\BrandType.cs" />
-    <Compile Include="Data\Models\Category.cs" />
-    <Compile Include="Data\Configurations\BrandTypeConfiguration.cs" />
-    <Compile Include="Data\Configurations\CategoryConfiguration.cs" />
-    <Compile Include="Data\Configurations\SizeTypeConfiguration.cs" />
-    <Compile Include="Data\DatabaseSeeder.cs" />
-    <Compile Include="Data\Models\Product.cs" />
-    <Compile Include="Data\Configurations\ProductConfiguration.cs" />
-    <Compile Include="Data\ShopContext.cs" />
-    <Compile Include="Data\Models\SizeType.cs" />
+    <Compile Include="Entities\BrandTypeEF.cs" />
+    <Compile Include="Entities\Configurations\BrandTypeConfiguration.cs" />
+    <Compile Include="Entities\Configurations\CategoryConfiguration.cs" />
+    <Compile Include="Entities\Configurations\SizeTypeConfiguration.cs" />
+    <Compile Include="DatabaseSeeder.cs" />
+    <Compile Include="Entities\CategoryEF.cs" />
+    <Compile Include="Entities\Configurations\ProductConfiguration.cs" />
+    <Compile Include="Entities\ProductEF.cs" />
+    <Compile Include="Entities\SizeTypeEF.cs" />
+    <Compile Include="ShopContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

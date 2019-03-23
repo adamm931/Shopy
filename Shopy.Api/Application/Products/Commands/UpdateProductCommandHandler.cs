@@ -1,6 +1,5 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Api.Data;
 using System;
 using System.Data.Entity;
 using System.Threading;

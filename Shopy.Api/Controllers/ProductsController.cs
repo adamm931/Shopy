@@ -67,7 +67,7 @@ namespace Shopy.Api.Controllers
         [Route("api/v1/products/{productid}/add-to-category/{categoryid}")]
         public async Task<IHttpActionResult> AddToCategory(Guid productid, Guid categoryid)
         {
-            var command = new RemoveProductFromCategoryCommand()
+            var command = new AddProductFromCategoryCommand()
             {
                 CategoryUid = categoryid,
                 ProductUid = productid

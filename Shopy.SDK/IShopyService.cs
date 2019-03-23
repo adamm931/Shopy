@@ -1,4 +1,5 @@
-﻿using Shopy.SDK.Models.Categories;
+﻿using Shopy.SDK.ApiModels.Categories;
+using Shopy.SDK.Models.Categories;
 using Shopy.SDK.Models.Products;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,9 @@ namespace Shopy.SDK
 
         Task<ProductDetails> GetProductDetailsAsync(Guid uid);
 
-        Task AddProductAsycn(AddProduct addProduct);
+        Task AddProductAsync(AddProduct addProduct);
+
+        Task AddCategoryAsync(AddCategory addProduct);
 
         Task EditProductAsync(EditProduct editProduct);
 

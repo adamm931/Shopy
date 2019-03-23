@@ -1,4 +1,5 @@
-﻿using Shopy.SDK.Client;
+﻿using Shopy.SDK.ApiModels.Categories;
+using Shopy.SDK.Client;
 using Shopy.SDK.Models.Categories;
 using Shopy.SDK.Models.Products;
 using System;
@@ -38,7 +39,7 @@ namespace Shopy.SDK
             await _products.AddAsync(addProduct);
         }
 
-        public async Task AddProductAsycn(AddProduct addProduct)
+        public async Task AddProductAsync(AddProduct addProduct)
         {
             await _products.AddAsync(addProduct);
         }
@@ -66,6 +67,11 @@ namespace Shopy.SDK
         public async Task<ProductDetails> GetProductDetailsAsync(Guid uid)
         {
             return await _products.GetDetailsAsync(uid);
+        }
+
+        public async Task AddCategoryAsync(AddCategory addCategory)
+        {
+            await _categories.AddAsync(addCategory);
         }
     }
 }

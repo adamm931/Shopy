@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Shopy.Api.Application.DTOS
+namespace Shopy.Api.Models
 {
-    public class ProductDTO
+    public class Product
     {
         public Guid Uid { get; set; }
 
@@ -15,10 +15,10 @@ namespace Shopy.Api.Application.DTOS
 
         public string Description { get; set; }
 
-        public string BrandType { get; set; }
+        public string Brand { get; set; }
 
-        public string SizeType { get; set; }
+        public string Size { get; set; }
 
-        public List<ProductCategoryDTO> Categories { get; set; }
+        public List<CategoryLight> Categories { get; set; }
     }
 }

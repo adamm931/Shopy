@@ -12,7 +12,23 @@ namespace Shopy.Admin
             routes.MapRoute(
                 name: "products",
                 url: "Products/{action}/{uid}/",
-                defaults: new { controller = "Products", action = "List", uid = UrlParameter.Optional }
+                defaults: new
+                {
+                    controller = "Products",
+                    action = "List",
+                    uid = UrlParameter.Optional,
+                }
+            );
+
+            routes.MapRoute(
+                name: "ProductCategories",
+                url: "ProductCategories/{uid}/{action}/{categoryUid}/",
+                defaults: new
+                {
+                    controller = "Products",
+                    action = "LoadCategories",
+                    categoryUid = UrlParameter.Optional
+                }
             );
 
             routes.MapRoute(

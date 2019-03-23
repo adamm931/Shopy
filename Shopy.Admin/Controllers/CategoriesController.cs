@@ -1,4 +1,5 @@
 ﻿using Shopy.Admin.ViewModels;
+using Shopy.SDK.ApiModels.Categories;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -17,6 +18,7 @@ namespace Shopy.Admin.Controllers
             {
                 Items = categories.Select(c => new CategoryListItemViewModel()
                 {
+                    CategoryId = c.CategoryId,
                     Caption = c.Caption
                 })
             };
@@ -33,16 +35,19 @@ namespace Shopy.Admin.Controllers
         [HttpPost]
         public ActionResult Add(AddCategoryViewModel model)
         {
-            //if (ModelState.IsValid)
-            //{
-            //}
-            return View();
-        }
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
-        [HttpGet]
-        public ActionResult AddRemoveProducts()
-        {
-            return View();
+            var addCategory = new AddCategory()
+            {
+                Caption = model.Caption
+            };
+
+            Shopy.AddCategoryAsync(addCategory);
+
+            return RedirectToAction("List");
         }
     }
 }

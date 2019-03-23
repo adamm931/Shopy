@@ -8,7 +8,10 @@
 
     @(ViewBag.IsAuthenticated ? Html.Partial("_HeaderLoged") : Html.Partial("_Header"))
 
-    <div id="main-container" class="container-fluid">
+    @Scripts.Render("~/Content/bundle/js")
+    @RenderSection("scripts", required: false)
+
+    <div class="container-fluid">
         <div class="row">
 
             @Html.Partial("_Sidebar")
@@ -21,14 +24,5 @@
 
     @*@Html.Partial("_Footer")*@
 
-    @Scripts.Render("~/Content/bundle/js")
-    @Scripts.Render("~/Scripts")
-    @RenderSection("scripts", required: false)
-
-    <script type="text/javascript">
-        var Shopy = Shopy || {};
-        Shopy.Admin = Shopy.Admin || {};
-        ko.applyBindings(Shopy.Admin, document.getElementById('main-container'));
-    </script>
 </body>
 </html>

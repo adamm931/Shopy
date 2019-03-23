@@ -1,6 +1,6 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Api.Data;
+using Shopy.Api.Entities;
 using System;
 using System.Linq;
 using System.Threading;
@@ -21,7 +21,7 @@ namespace Shopy.Api.Application.Products.Commands
             var size = dbContext.SizeTypes
                 .FirstOrDefault(b => b.Caption.Equals(command.SizeType, StringComparison.OrdinalIgnoreCase));
 
-            dbContext.Products.Add(new Data.Models.Product()
+            dbContext.Products.Add(new ProductEF()
             {
                 Uid = Guid.NewGuid(),
                 Caption = command.Caption,

@@ -1,4 +1,5 @@
-﻿using Shopy.SDK.Models.Categories;
+﻿using Shopy.SDK.ApiModels.Categories;
+using Shopy.SDK.Models.Categories;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,6 +18,11 @@ namespace Shopy.SDK.Client
         {
             var list = await _client.GetAsync<CategoryList>("categories");
             return list.Result;
+        }
+
+        public async Task AddAsync(AddCategory addCategory)
+        {
+            await _client.PostAsync<AddCategory, object>("categories", addCategory);
         }
     }
 }

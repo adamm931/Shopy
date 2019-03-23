@@ -1,10 +1,9 @@
-﻿using Shopy.Api.Data.Models;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Shopy.Api.Data.Configurations
+namespace Shopy.Api.Entities.Configurations
 {
-    public class CategoryConfiguration : EntityTypeConfiguration<Category>
+    public class CategoryConfiguration : EntityTypeConfiguration<CategoryEF>
     {
         public CategoryConfiguration()
         {

@@ -13,6 +13,7 @@ namespace Shopy.Admin
             var scripts = new ScriptBundle("~/Content/bundle/js");
             scripts.IncludeDirectory("~/Content/js", "*.js");
             scripts.IncludeDirectory("~/Scripts", "*.js");
+            scripts.IncludeDirectory("~/Scripts/ViewModels", "*.js");
 
             bundles.Add(scripts);
         }

@@ -1,7 +1,6 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Api.Data;
-using Shopy.Api.Data.Models;
+using Shopy.Api.Entities;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,7 +14,7 @@ namespace Shopy.Api.Application.Categories.Commands
             var dbContext = ShopContext.Current;
             var request = context.Message;
 
-            var category = dbContext.Categories.Add(new Category()
+            var category = dbContext.Categories.Add(new CategoryEF()
             {
                 Uid = Guid.NewGuid(),
                 Caption = request.Caption

@@ -1,8 +1,8 @@
-﻿using Shopy.Api.Data.Models;
+﻿using Shopy.Api.Entities;
 using System;
 using System.Linq;
 
-namespace Shopy.Api.Data
+namespace Shopy
 {
     public class DatabaseSeeder
     {
@@ -10,10 +10,10 @@ namespace Shopy.Api.Data
         {
             var dbContext = new ShopContext();
 
-            //if (dbContext.Database.Exists())
-            //{
-            //    return;
-            //}
+            if (dbContext.Database.Exists())
+            {
+                return;
+            }
 
 
             dbContext.Database.Delete();
@@ -62,25 +62,25 @@ namespace Shopy.Api.Data
             dbContext.SaveChanges();
         }
 
-        private static Product[] GetProducts()
+        private static ProductEF[] GetProducts()
         {
             return new[]
             {
-                new Product()
+                new ProductEF()
                 {
                     Uid = Guid.NewGuid(),
                     Caption = "test123",
                     Price = 12.5m,
                     Description = "Description 1"
                 },
-                new Product()
+                new ProductEF()
                 {
                     Uid = Guid.NewGuid(),
                     Caption = "test1234",
                     Price = 13.5m,
                     Description = "Description 2"
                 },
-                new Product()
+                new ProductEF()
                 {
                     Uid = Guid.NewGuid(),
                     Caption = "test1235",
@@ -90,21 +90,21 @@ namespace Shopy.Api.Data
             };
         }
 
-        private static Category[] GetCategories()
+        private static CategoryEF[] GetCategories()
         {
             return new[]
             {
-                new Category()
+                new CategoryEF()
                 {
                     Uid = Guid.NewGuid(),
                     Caption = "category1"
                 },
-                new Category()
+                new CategoryEF()
                 {
                     Uid = Guid.NewGuid(),
                     Caption = "category2"
                 },
-                new Category()
+                new CategoryEF()
                 {
                     Uid = Guid.NewGuid(),
                     Caption = "category3"
@@ -127,10 +127,10 @@ namespace Shopy.Api.Data
             "XXL"};
 
 
-        private static BrandType[] GetBrandTypes()
+        private static BrandTypeEF[] GetBrandTypes()
         {
             return brands.Select(b =>
-                new BrandType()
+                new BrandTypeEF()
                 {
                     BrandTypeEId = Guid.NewGuid(),
                     Caption = b
@@ -138,10 +138,10 @@ namespace Shopy.Api.Data
                 .ToArray();
         }
 
-        private static SizeType[] GetSizeTypes()
+        private static SizeTypeEF[] GetSizeTypes()
         {
             return sizes.Select(s =>
-                new SizeType()
+                new SizeTypeEF()
                 {
                     SizeTypeEID = Guid.NewGuid(),
                     Caption = s

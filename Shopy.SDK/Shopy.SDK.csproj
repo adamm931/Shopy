@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiModels\Categories\AddCategory.cs" />
     <Compile Include="Client\CategoriesClient.cs" />
     <Compile Include="IShopyService.cs" />
     <Compile Include="ApiModels\ErrorResponse.cs" />

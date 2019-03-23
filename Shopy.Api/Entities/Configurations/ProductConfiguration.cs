@@ -1,10 +1,10 @@
-﻿using Shopy.Api.Data.Models;
+﻿using Shopy.Api.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Shopy.Api.Data.Configurations
+namespace SShopy.Api.Entities.Configurations
 {
-    public class ProductConfiguration : EntityTypeConfiguration<Product>
+    public class ProductConfiguration : EntityTypeConfiguration<ProductEF>
     {
         public ProductConfiguration()
         {
