@@ -1,32 +1,31 @@
 ﻿using Shopy.SDK.ApiModels.Categories;
+using Shopy.SDK.ApiModels.Products;
 using Shopy.SDK.Client;
-using Shopy.SDK.Models.Categories;
-using Shopy.SDK.Models.Products;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Shopy.SDK
 {
-    public class ShopyProxy : IShopyProxy
+    public class ShopyDriver : IShopyDriver
     {
         private ProductsClient _products;
         private CategoriesClient _categories;
 
-        private ShopyProxy()
+        private ShopyDriver()
         {
             _products = new ProductsClient();
             _categories = new CategoriesClient();
         }
 
-        public static IShopyProxy Create()
+        public static IShopyDriver Create()
         {
-            return new ShopyProxy();
+            return new ShopyDriver();
         }
 
-        public async Task<IEnumerable<Product>> ListProductsAsync()
+        public async Task<IEnumerable<Product>> ListProductsAsync(ProductFilter filter = null)
         {
-            return await _products.ListAsync();
+            return await _products.ListAsync(filter);
         }
 
         public async Task<IEnumerable<Category>> ListCategoriesAsync()
@@ -72,6 +71,11 @@ namespace Shopy.SDK
         public async Task AddCategoryAsync(AddCategory addCategory)
         {
             await _categories.AddAsync(addCategory);
+        }
+
+        public async Task<IEnumerable<Category>> ListCategoriesWithProductsAsync()
+        {
+            return await _categories.ListWithProductsAsync();
         }
     }
 }

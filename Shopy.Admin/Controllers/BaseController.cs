@@ -5,13 +5,13 @@ namespace Shopy.Admin.Controllers
 {
     public class BaseController : Controller
     {
-        private IShopyProxy shopy;
+        private IShopyDriver shopy;
 
-        protected IShopyProxy Shopy
+        protected IShopyDriver Shopy
         {
             get
             {
-                return shopy ?? (shopy = ShopyProxy.Create());
+                return shopy ?? (shopy = SDK.ShopyDriver.Create());
             }
         }
 

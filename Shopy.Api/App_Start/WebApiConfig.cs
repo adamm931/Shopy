@@ -7,12 +7,16 @@ namespace Sample_v1
     {
         public static void Register(HttpConfiguration config)
         {
+
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/v1/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                defaults: new
+                {
+                    id = RouteParameter.Optional
+                }
             );
 
             config.Formatters.JsonFormatter.SupportedMediaTypes

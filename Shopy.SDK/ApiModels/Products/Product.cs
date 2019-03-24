@@ -1,7 +1,7 @@
-﻿using Shopy.SDK.Models.Categories;
+﻿using Shopy.SDK.ApiModels.Categories;
 using System;
 
-namespace Shopy.SDK.Models.Products
+namespace Shopy.SDK.ApiModels.Products
 {
     public class Product
     {
@@ -10,8 +10,8 @@ namespace Shopy.SDK.Models.Products
         public long ProductID { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }
-        public string BrandType { get; set; }
-        public string SizeType { get; set; }
+        public string Brand { get; set; }
+        public string Size { get; set; }
         public Category[] Categories { get; set; }
     }
 }

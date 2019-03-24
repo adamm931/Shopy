@@ -8,10 +8,15 @@ namespace Shopy.Api.Controllers
     public class CategoriesController : BaseApiController
     {
         [HttpGet]
-        public async Task<IHttpActionResult> Get()
+        public async Task<IHttpActionResult> Get(bool withProductsOnly = false)
         {
+            var request = new ListCategoriesRequest()
+            {
+                WithProductsOnly = withProductsOnly
+            };
+
             var items = await Mediator
-                .RequestAsync<ListCategoriesRequest, ListCategoriesResponse>(new ListCategoriesRequest());
+                .RequestAsync<ListCategoriesRequest, ListCategoriesResponse>(request);
 
             return Ok(items);
         }

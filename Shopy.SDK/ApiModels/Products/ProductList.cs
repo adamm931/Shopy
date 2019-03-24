@@ -1,6 +1,5 @@
-﻿using Shopy.SDK.Models.Categories;
-
-namespace Shopy.SDK.Models.Products
+﻿
+namespace Shopy.SDK.ApiModels.Products
 {
     public class ProductList : ListResult<Product>
     { }

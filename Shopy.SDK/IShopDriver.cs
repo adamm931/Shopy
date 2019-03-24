@@ -1,17 +1,18 @@
 ﻿using Shopy.SDK.ApiModels.Categories;
-using Shopy.SDK.Models.Categories;
-using Shopy.SDK.Models.Products;
+using Shopy.SDK.ApiModels.Products;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Shopy.SDK
 {
-    public interface IShopyProxy
+    public interface IShopyDriver
     {
-        Task<IEnumerable<Product>> ListProductsAsync();
+        Task<IEnumerable<Product>> ListProductsAsync(ProductFilter filter = null);
 
         Task<IEnumerable<Category>> ListCategoriesAsync();
+
+        Task<IEnumerable<Category>> ListCategoriesWithProductsAsync();
 
         Task<ProductDetails> GetProductDetailsAsync(Guid uid);
 

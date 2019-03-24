@@ -1,5 +1,6 @@
 ﻿using Shopy.Api.Application.Products.Commands;
 using Shopy.Api.Application.Products.Queries;
+using Shopy.Api.Models;
 using System;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -12,10 +13,15 @@ namespace Shopy.Api.Controllers
     public class ProductsController : BaseApiController
     {
         [HttpGet]
-        public async Task<IHttpActionResult> Get()
+        public async Task<IHttpActionResult> List([FromUri]ProductFilter filter)
         {
+            var request = new ListProductsRequest()
+            {
+                Filter = filter
+            };
+
             var items = await Mediator
-                .RequestAsync<ListProductsRequest, ListProductsResponse>(new ListProductsRequest());
+                .RequestAsync<ListProductsRequest, ListProductsResponse>(request);
 
             return Ok(items);
         }

@@ -1,4 +1,4 @@
-﻿using Shopy.SDK.Models.Products;
+﻿using Shopy.SDK.ApiModels.Products;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,9 +14,9 @@ namespace Shopy.SDK.Client
             _client = new ShopyHttpClient();
         }
 
-        public async Task<IEnumerable<Product>> ListAsync()
+        public async Task<IEnumerable<Product>> ListAsync(ProductFilter filter = null)
         {
-            var list = await _client.GetAsync<ProductList>("products");
+            var list = await _client.GetAsync<ProductList>($"products/{filter?.ToQueryString()}");
             return list.Result;
         }
 

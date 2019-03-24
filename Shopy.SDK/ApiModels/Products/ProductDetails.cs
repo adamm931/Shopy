@@ -1,6 +1,7 @@
-﻿using Shopy.SDK.Models.Categories;
+﻿
+using Shopy.SDK.ApiModels.Categories;
 
-namespace Shopy.SDK.Models.Products
+namespace Shopy.SDK.ApiModels.Products
 {
     public class ProductDetails
     {

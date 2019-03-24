@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shopy.SDK.Models.Categories
+namespace Shopy.SDK.ApiModels.Categories
 {
     public class Category
     {

@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+\
+<!-- ko with: products -->
+<p data-bind="text: message"></p>
+<!-- /ko -->
+
+@section scripts {
+ <script type="text/javascript">
+
+     var endpoint = {
+         Search: "@Url.RouteUrl("Products", new { action = "Search"})"
+     };
+
+     var products = new Products(endpoint);
+     products.init();
+     products.search();
+
+    ko.applyBindings(products);
+
+</script>
+}
+    
+

@@ -4,25 +4,22 @@
 @Html.Partial("_Head")
 </head>
 <body>
-
-
     @(ViewBag.IsAuthenticated ? Html.Partial("_HeaderLoged") : Html.Partial("_Header"))
 
     @Scripts.Render("~/Content/bundle/js")
     @RenderSection("scripts", required: false)
 
-    <div class="container-fluid">
+    <div class="container-fluid main-container">
         <div class="row">
 
             @Html.Partial("_Sidebar")
 
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main id="content-wrap" role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 ">
                 @RenderBody()
             </main>
+
         </div>
+    @Html.Partial("_Footer")
     </div>
-
-    @*@Html.Partial("_Footer")*@
-
 </body>
 </html>

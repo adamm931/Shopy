@@ -1,4 +1,4 @@
-﻿namespace Shopy.SDK.Models.Categories
+﻿namespace Shopy.SDK.ApiModels
 {
     public class ListResult<T>
     {

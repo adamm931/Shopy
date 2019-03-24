@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shopy.SDK.Models.Products
+namespace Shopy.SDK.ApiModels.Products
 {
     public class EditProduct
     {

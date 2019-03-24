@@ -13,14 +13,19 @@ namespace Shopy.Api.Application.Products.Queries
         public async Task<ListCategoriesResponse> Handle(ReceiveContext<ListCategoriesRequest> context, CancellationToken cancellationToken)
         {
             var dbContext = new ShopContext();
+            var request = context.Message;
 
-            var result = await dbContext.Categories
+            var result = dbContext.Categories
                 .Include(p => p.Products)
                 .Include("Products.Brand")
-                .Include("Products.Size")
-                .ToListAsync();
+                .Include("Products.Size");
 
-            var projection = result.Select(r => new Category()
+            if (request.WithProductsOnly)
+            {
+                result = result.Where(c => c.Products.Any());
+            }
+
+            var projection = await result.Select(r => new Category()
             {
                 Uid = r.Uid,
                 CategoryId = r.CategoryID,
@@ -31,7 +36,7 @@ namespace Shopy.Api.Application.Products.Queries
                     Uid = p.Uid,
                     Size = p.Size.Caption
                 }).ToList()
-            });
+            }).ToListAsync();
 
             return new ListCategoriesResponse(projection);
 

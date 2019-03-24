@@ -138,8 +138,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\add-product.css" />
-    <Content Include="Content\css\sticky-footer.css" />
+    <Content Include="Content\css\main.css" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -169,7 +168,6 @@
   <ItemGroup>
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
-    <Content Include="Content\css\signin.css" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -216,9 +214,7 @@
     <Compile Include="ViewModels\ProductListItemViewModel.cs" />
     <Compile Include="ViewModels\ProductListViewModel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Analyzer Include="..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll" />
   </ItemGroup>

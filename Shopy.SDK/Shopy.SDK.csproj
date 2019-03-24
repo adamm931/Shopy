@@ -44,20 +44,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiModels\Categories\AddCategory.cs" />
+    <Compile Include="ApiModels\Products\Filter.cs" />
+    <Compile Include="ApiModels\Products\ProductFilter.cs" />
     <Compile Include="Client\CategoriesClient.cs" />
-    <Compile Include="IShopyService.cs" />
+    <Compile Include="IShopDriver.cs" />
     <Compile Include="ApiModels\ErrorResponse.cs" />
     <Compile Include="ApiModels\Products\AddProduct.cs" />
     <Compile Include="ApiModels\Categories\CategoryList.cs" />
     <Compile Include="ApiModels\Categories\Category.cs" />
-    <Compile Include="ApiModels\Categories\ListResult.cs" />
+    <Compile Include="ApiModels\ListResult.cs" />
     <Compile Include="ApiModels\Products\EditProduct.cs" />
     <Compile Include="ApiModels\Products\Product.cs" />
     <Compile Include="ApiModels\Products\ProductDetails.cs" />
     <Compile Include="ApiModels\Products\ProductList.cs" />
     <Compile Include="Client\ProductsClient.cs" />
     <Compile Include="Client\ShopyHttpClient.cs" />
-    <Compile Include="ShopyService.cs" />
+    <Compile Include="ShopyDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
