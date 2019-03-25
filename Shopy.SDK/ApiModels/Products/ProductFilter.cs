@@ -17,7 +17,7 @@ namespace Shopy.SDK.ApiModels.Products
 
         public decimal? MinPrice { get; set; }
 
-        public string ToQueryString()
+        public string GetQueryString()
         {
             var @params = new Dictionary<string, object>();
 

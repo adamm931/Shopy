@@ -161,12 +161,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Brands\Queries\ListBrandsHandler.cs" />
+    <Compile Include="Application\Brands\Queries\ListBrandsRequest.cs" />
+    <Compile Include="Application\Brands\Queries\ListBrandsResponse.cs" />
     <Compile Include="Application\Categories\Commands\AddCategoryHandler.cs" />
     <Compile Include="Application\Categories\Commands\AddCategoryRequest.cs" />
     <Compile Include="Application\Categories\Commands\AddCategoryResponse.cs" />
     <Compile Include="Application\Categories\Queries\ListCategoriesHandler.cs" />
     <Compile Include="Application\Categories\Queries\ListCategoriesRequest.cs" />
     <Compile Include="Application\Categories\Queries\ListCategoriesResponse.cs" />
+    <Compile Include="Application\Sizes\Queries\ListSizesHandler.cs" />
+    <Compile Include="Application\Sizes\Queries\ListSizesRequest.cs" />
+    <Compile Include="Application\Sizes\Queries\ListSizesResponse.cs" />
+    <Compile Include="Controllers\SizesController.cs" />
+    <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryLight.cs" />

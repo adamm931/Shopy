@@ -11,7 +11,10 @@ namespace Shopy.Admin.Controllers
         {
             get
             {
-                return shopy ?? (shopy = SDK.ShopyDriver.Create());
+                return shopy ?? (shopy = new ShopyDriveBuilder()
+                    .WithBaseAddress("http://localhost:50253/api")
+                    .Build()
+                    );
             }
         }
 

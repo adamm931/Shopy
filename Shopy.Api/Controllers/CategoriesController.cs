@@ -21,27 +21,12 @@ namespace Shopy.Api.Controllers
             return Ok(items);
         }
 
-        [HttpGet]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         [HttpPost]
         public async Task<IHttpActionResult> Post([FromBody]AddCategoryRequest addCategory)
         {
             var category = await Mediator.RequestAsync<AddCategoryRequest, AddCategoryResponse>(addCategory);
 
             return Ok(category);
-        }
-
-        [HttpPut]
-        public void Put(int id, [FromBody]string value)
-        { }
-
-        [HttpDelete]
-        public void Delete(int id)
-        {
         }
     }
 }

@@ -46,19 +46,22 @@
     <Compile Include="ApiModels\Categories\AddCategory.cs" />
     <Compile Include="ApiModels\Products\Filter.cs" />
     <Compile Include="ApiModels\Products\ProductFilter.cs" />
+    <Compile Include="ApiModels\BrandType.cs" />
+    <Compile Include="ApiModels\SizeType.cs" />
+    <Compile Include="Client\SizesClient.cs" />
+    <Compile Include="Client\BrandsClient.cs" />
     <Compile Include="Client\CategoriesClient.cs" />
-    <Compile Include="IShopDriver.cs" />
     <Compile Include="ApiModels\ErrorResponse.cs" />
     <Compile Include="ApiModels\Products\AddProduct.cs" />
-    <Compile Include="ApiModels\Categories\CategoryList.cs" />
     <Compile Include="ApiModels\Categories\Category.cs" />
     <Compile Include="ApiModels\ListResult.cs" />
     <Compile Include="ApiModels\Products\EditProduct.cs" />
     <Compile Include="ApiModels\Products\Product.cs" />
     <Compile Include="ApiModels\Products\ProductDetails.cs" />
-    <Compile Include="ApiModels\Products\ProductList.cs" />
     <Compile Include="Client\ProductsClient.cs" />
     <Compile Include="Client\ShopyHttpClient.cs" />
+    <Compile Include="IShopyDriver.cs" />
+    <Compile Include="ShopyDriveBuilder.cs" />
     <Compile Include="ShopyDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

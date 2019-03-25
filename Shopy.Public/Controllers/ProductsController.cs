@@ -12,7 +12,7 @@ namespace Shopy.Public.Controllers
         {
             get
             {
-                return shopy ?? (shopy = ShopyDriver.Create());
+                return shopy ?? (shopy = new ShopyDriveBuilder().WithBaseAddress("http://localhost:50253/api").Build());
             }
         }
 
@@ -28,9 +28,10 @@ namespace Shopy.Public.Controllers
             var data = new
             {
                 Categories = Shopy.ListCategoriesWithProductsAsync(),
-                Sizes = "",//provder api call to fetch available sizes
-                Brands = "",//provide api call to fetch avalable brands
+                Sizes = Shopy.ListSizesAsync(),
+                Brands = Shopy.ListBrandsAsync(),
             };
+
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 

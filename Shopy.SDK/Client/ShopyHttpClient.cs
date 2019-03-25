@@ -12,11 +12,11 @@ namespace Shopy.SDK.Client
 
         private const string ApplicationJson = "application/json";
 
-        public ShopyHttpClient()
+        public ShopyHttpClient(string baseAddres)
         {
             _httpClient = new HttpClient()
             {
-                BaseAddress = new Uri("http://localhost:50253/api/v1/")
+                BaseAddress = new Uri(baseAddres)
             };
         }
 

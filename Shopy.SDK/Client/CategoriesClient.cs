@@ -1,4 +1,5 @@
-﻿using Shopy.SDK.ApiModels.Categories;
+﻿using Shopy.SDK.ApiModels;
+using Shopy.SDK.ApiModels.Categories;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,20 +9,20 @@ namespace Shopy.SDK.Client
     {
         private ShopyHttpClient _client;
 
-        public CategoriesClient()
+        public CategoriesClient(ShopyHttpClient client)
         {
-            _client = new ShopyHttpClient();
+            _client = client;
         }
 
         public async Task<IEnumerable<Category>> ListAsync()
         {
-            var list = await _client.GetAsync<CategoryList>("categories");
+            var list = await _client.GetAsync<ListResult<Category>>("categories");
             return list.Result;
         }
 
         public async Task<IEnumerable<Category>> ListWithProductsAsync()
         {
-            var list = await _client.GetAsync<CategoryList>($"categories/?withProductsOnly={true}");
+            var list = await _client.GetAsync<ListResult<Category>>($"categories/?withProductsOnly={true}");
             return list.Result;
         }
 

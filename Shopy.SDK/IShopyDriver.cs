@@ -1,4 +1,5 @@
-﻿using Shopy.SDK.ApiModels.Categories;
+﻿using Shopy.SDK.ApiModels;
+using Shopy.SDK.ApiModels.Categories;
 using Shopy.SDK.ApiModels.Products;
 using System;
 using System.Collections.Generic;
@@ -27,5 +28,10 @@ namespace Shopy.SDK
         Task RemoveProductFromCategoryAsync(Guid productUid, Guid categoryUid);
 
         Task DeleteProductAsync(Guid uid);
+
+        Task<IEnumerable<SizeType>> ListSizesAsync();
+
+        Task<IEnumerable<BrandType>> ListBrandsAsync();
+
     }
 }

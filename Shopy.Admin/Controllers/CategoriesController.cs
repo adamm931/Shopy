@@ -33,7 +33,7 @@ namespace Shopy.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(AddCategoryViewModel model)
+        public async Task<ActionResult> Add(AddCategoryViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -45,7 +45,7 @@ namespace Shopy.Admin.Controllers
                 Caption = model.Caption
             };
 
-            Shopy.AddCategoryAsync(addCategory);
+            await Shopy.AddCategoryAsync(addCategory);
 
             return RedirectToAction("List");
         }

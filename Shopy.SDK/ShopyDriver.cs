@@ -1,4 +1,5 @@
-﻿using Shopy.SDK.ApiModels.Categories;
+﻿using Shopy.SDK.ApiModels;
+using Shopy.SDK.ApiModels.Categories;
 using Shopy.SDK.ApiModels.Products;
 using Shopy.SDK.Client;
 using System;
@@ -11,16 +12,15 @@ namespace Shopy.SDK
     {
         private ProductsClient _products;
         private CategoriesClient _categories;
+        private SizesClient _sizes;
+        private BrandsClient _brands;
 
-        private ShopyDriver()
+        public ShopyDriver(ShopyHttpClient client)
         {
-            _products = new ProductsClient();
-            _categories = new CategoriesClient();
-        }
-
-        public static IShopyDriver Create()
-        {
-            return new ShopyDriver();
+            _products = new ProductsClient(client);
+            _categories = new CategoriesClient(client);
+            _sizes = new SizesClient(client);
+            _brands = new BrandsClient(client);
         }
 
         public async Task<IEnumerable<Product>> ListProductsAsync(ProductFilter filter = null)
@@ -76,6 +76,16 @@ namespace Shopy.SDK
         public async Task<IEnumerable<Category>> ListCategoriesWithProductsAsync()
         {
             return await _categories.ListWithProductsAsync();
+        }
+
+        public async Task<IEnumerable<SizeType>> ListSizesAsync()
+        {
+            return await _sizes.ListAsync();
+        }
+
+        public async Task<IEnumerable<BrandType>> ListBrandsAsync()
+        {
+            return await _brands.ListAsync();
         }
     }
 }
