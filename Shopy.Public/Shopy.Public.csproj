@@ -138,21 +138,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\material-kit.min.css" />
+    <Content Include="Content\imgs\payment-methods.jpg" />
+    <Content Include="Content\imgs\shopy-logo.jpg" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\knockout-3.5.0.js" />
+    <None Include="Scripts\Common\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Common\jquery-1.10.2.js" />
+    <Content Include="Scripts\Common\jquery-1.10.2.min.js" />
+    <None Include="Scripts\Common\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\Common\jquery.validate.js" />
+    <Content Include="Scripts\Common\jquery.validate.min.js" />
+    <Content Include="Scripts\Common\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\Common\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Common\knockout-3.5.0.js" />
+    <Content Include="Scripts\Common\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Common\underscore.js" />
     <Content Include="Scripts\ViewModels\Products.js" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\web.config" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Products\List.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_Head.cshtml" />
+    <Content Include="Scripts\Common\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -166,15 +180,6 @@
     <Content Include="Global.asax" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

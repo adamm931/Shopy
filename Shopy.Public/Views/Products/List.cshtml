@@ -3,17 +3,110 @@
     ViewBag.Title = "List";
 }
 
-<h2>List</h2>
-\
 <!-- ko with: products -->
-<p data-bind="text: message"></p>
+<div class="container">
+    <div class="row">
+
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title filters-title">Categories</h4>
+                    <div class="list-group">
+                        <!-- ko foreach: categoryFilters-->
+                        <a href="#" class="list-group-item" data-bind="text: caption"></a>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title filters-title">Sizes</h4>
+                    <div class="list-group">
+                        <!-- ko foreach: sizeFilters-->
+                        <div class="custom-control"> <!-- custom-checkbox -->
+                            <input type="checkbox" @*class="custom-control-input"*@ data-bind="checked: $parent.selectedSizes, checkedValue: caption">
+                            <label @*class="custom-control-label"*@ data-bind="text: caption"></label>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title filters-title">Brands</h4>
+                    <div class="list-group">
+                        <!-- ko foreach: brandFilters -->
+                        <div class="custom-control"> <!-- custom-checkbox -->
+                            <input type="checkbox" @*class="custom-control-input"*@ data-bind="checked: $parent.selectedBrands, checkedValue: caption">
+                            <label @*class="custom-control-label"*@ data-bind="text: caption"></label>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+            <div class="separator"></div>
+
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+
+            <div class="row text-center">
+
+                <!-- ko foreach: items -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-90">
+                        <a href="product.html"><img class="card-img-top" src="http://placehold.it/200x200" alt=""></a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="product.html" data-bind="text: caption"></a>
+                            </h4>
+                            <h5 class="price font-weight-bold" data-bind="text: price"></h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <div class="col-lg-12">
+                    <a class="btn btn-lg btn-block load-more">...</a>
+                </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.col-lg-9 -->
+    </div>
+        <!-- /.col-lg-9 -->
+
+        <div class="col-lg-12 card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h5 class="text-uppercase news-letter">NEWS LETTER</h5>
+                    </div>
+                    <div class="col-lg-3" style="padding-top: 3%;">
+                        <span class="glyphicon glyphicon-envelope"></span><span class="font-italic" style="font-size: 15px">type your mail here</span>
+                    </div>
+                    <div class="col-lg-3" style="padding-top: 2%"><button type="button" class="btn btn-deep-orange text-uppercase font-weight-bold join-us">join us</button></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- /.col-lg-12 -->
+    </div>
+    
+    <!-- /.row -->
+    </div>
+<!-- /.container -->
+
 <!-- /ko -->
 
 @section scripts {
  <script type="text/javascript">
 
      var endpoint = {
-         Search: "@Url.RouteUrl("Products", new { action = "Search"})"
+         Search: "@Url.RouteUrl("Products", new { action = "Search"})",
+         Filters: "@Url.RouteUrl("Products", new { action = "Filters" })",
      };
 
      var products = new Products(endpoint);
@@ -24,5 +117,49 @@
 
 </script>
 }
-    
 
+<script type="text/javascript">
+
+</script>
+<style>
+    .price {
+        color: #ff8332;
+    }
+    .news-letter-container {
+        margin-left: 2%;
+    }
+
+    .join-us {
+        color: #ffffff;
+        background-color: #ff8332 !important;
+        border-color: #ff8332 !important;
+    }
+
+    .news-letter {
+        color: #ff8332;
+        font-size: 20px;
+        font-weight: 900;
+    }
+
+    .news-letter-card {
+        padding: 3%;
+    }
+
+    .filters-title {
+        color: #ff8332;
+    }
+
+    .main {
+        background-color: #f7f7f9;
+    }
+
+    .load-more {
+        color: #ff8332 !important;
+        background-color: #fff !important;
+        border-color: none #fff !important;
+        font-size: 4rem !important;
+        letter-spacing: -4px;
+        /*box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;*/
+    }
+
+</style>

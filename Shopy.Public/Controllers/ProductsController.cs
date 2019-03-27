@@ -23,13 +23,13 @@ namespace Shopy.Public.Controllers
         }
 
         [HttpGet]
-        public ActionResult Data()
+        public async Task<ActionResult> Filters()
         {
             var data = new
             {
-                Categories = Shopy.ListCategoriesWithProductsAsync(),
-                Sizes = Shopy.ListSizesAsync(),
-                Brands = Shopy.ListBrandsAsync(),
+                Categories = await Shopy.ListCategoriesWithProductsAsync(),
+                Sizes = await Shopy.ListSizesAsync(),
+                Brands = await Shopy.ListBrandsAsync(),
             };
 
             return Json(data, JsonRequestBehavior.AllowGet);

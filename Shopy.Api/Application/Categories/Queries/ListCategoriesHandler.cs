@@ -39,7 +39,6 @@ namespace Shopy.Api.Application.Products.Queries
             }).ToListAsync();
 
             return new ListCategoriesResponse(projection);
-
         }
     }
 }

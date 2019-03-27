@@ -15,7 +15,7 @@ namespace Shopy.SDK.Client
 
         public async Task<IEnumerable<SizeType>> ListAsync()
         {
-            var list = await _client.GetAsync<ListResult<SizeType>>("sizesS");
+            var list = await _client.GetAsync<ListResult<SizeType>>("sizes");
             return list.Result;
         }
     }

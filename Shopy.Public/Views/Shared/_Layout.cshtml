@@ -1,16 +1,15 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/bundle/css")
-</head>
-<body>
-    @Html.Partial("_Header")
-    <div class="container body-content">
-        @RenderBody()
-    </div>
-    @Html.Partial("_Footer")
-    @Scripts.Render("~/Content/bundle/js")
-    @RenderSection("scripts", required: false)
-</body>
+    <head>
+        @Html.Partial("_Head")
+    </head>
+    <body class="landing-page sidebar-collapse">
+        @Html.Partial("_Header")
+        <div class="main">
+            @RenderBody()
+        </div>
+        @Html.Partial("_Footer")
+        @Scripts.Render("~/Content/bundle/js")
+        @RenderSection("scripts", required: false)
+    </body>
 </html>
