@@ -1,88 +1,82 @@
-﻿<!-- Footer -->
-<footer class="page-footer font-small blue pt-4">
-
-    <!-- Footer Links -->
+﻿<footer class="page-footer font-small blue pt-4">
     <div class="container-fluid text-center text-md-left">
-
-        <!-- Grid row -->
-        <div class="row">
-
-            <!-- Grid column -->
-            <div class="col-md-3 mt-md-0 mt-3">
-
-                <!-- Content -->
-                <img src="~/Content/imgs/shopy-logo.jpg" width="150" height="150"/>
-                <p>shopy c @DateTime.Now.Year your are right here</p>
-
+        <div class="row pt-5">
+            <div class="col-md-3 pl-5 logo">
+                <div class="logo">
+                    <a href="javascript:void(0);"></a>
+                </div>
+                <p class="font-weight-bold float-md-right">shopy c @DateTime.Now.Year your are right here</p>
             </div>
-            <!-- Grid column -->
-
-            @*<hr class="clearfix w-100 d-md-none pb-3">*@
-
-            <!-- Grid column -->
-            <div class="col-md-3 mb-md-0 mb-3">
-
-                <!-- Links -->
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="#!">about us</a>
-                    </li>
-                    <li>
-                        <a href="#!">contact us</a>
-                    </li>
-                    <li>
-                        <a href="#!">support</a>
-                    </li>
-                </ul>
-
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-3 mb-md-0 mb-3">
+            <div class="col-md-2">
                 <ul>
-                    <li>
-                        <a href="#!">our feed</a>
+                    <li class="d-block">
+                        <a class="text-lowercase" href="javacript:void(0);">about us</a>
                     </li>
-                    <li>
-                        <a href="#!">terms and conditions</a>
+                    <li class="d-block">
+                        <a class="text-lowercase" href="javacript:void(0);">contact us</a>
                     </li>
-                    <li>
-                        <a href="#!">our privacy</a>
+                    <li class="d-block">
+                        <a class="text-lowercase" href="javacript:void(0);">support</a>
                     </li>
                 </ul>
 
             </div>
-            <div class="col-md-3 mb-md-0 mb-3">
+            <div class="col-md-2">
                 <ul>
-                    <li>
-                        <a href="#!">join us</a>
+                    <li class="d-block">
+                        <a class="text-lowercase" href="javacript:void(0);">our feed</a>
                     </li>
-                    <li>
-                        <a href="#!">live support</a>
+                    <li class="d-block">
+                        <a class="text-lowercase" href="javacript:void(0);">terms and conditions</a>
+                    </li>
+                    <li class="d-block">
+                        <a class="text-lowercase" href="javacript:void(0);">our privacy</a>
                     </li>
                 </ul>
-
             </div>
-            <!-- Grid column -->
-
+            <div class="col-md-2">
+                <ul>
+                    <li class="d-block">
+                        <a class="text-lowercase" href="javacript:void(0);">join us</a>
+                    </li>
+                    <li class="d-block">
+                        <a class="text-lowercase" href="javacript:void(0);">live support</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <strong class="h3 font-weight-bold color-main">Payment methods</strong>
+                <img src="~/Content/imgs/payment-methods.jpg" width="120" height="40" />
+            </div>
         </div>
-        <!-- Grid row -->
-
     </div>
-    <!-- Footer Links -->
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3" style="color: #ff8332">Payment methods
-        <img src="~/Content/imgs/payment-methods.jpg" width="120" height="40"/>
-    </div>
-    <!-- Copyright -->
-
 </footer>
-<!-- Footer -->
-
-
 <style>
     footer {
         background-color: #ffffff;
     }
+
+    footer ul{
+        list-style-type: disc !important;
+    }
+
+    .color-main {
+        color: #ff8332;
+    }
+
+    a:hover, a:focus {
+        color: #ff8332;
+    }
+
+   .logo a {
+        margin: auto;
+        height: 100px;
+        width: 150px;
+        display: block;
+        background-image: url("/Content/imgs/shopy-logo.jpg");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
 </style>

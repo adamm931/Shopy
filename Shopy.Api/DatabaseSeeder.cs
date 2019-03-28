@@ -10,14 +10,16 @@ namespace Shopy
         {
             var dbContext = new ShopContext();
 
-            if (dbContext.Database.Exists())
-            {
-                return;
-            }
+            //if (dbContext.Database.Exists())
+            //{
+            //    return;
+            //}
 
 
-            dbContext.Database.Delete();
-            dbContext.Database.Create();
+            //dbContext.Database.Delete();
+            //dbContext.Database.Create();
+
+            dbContext.Database.CreateIfNotExists();
 
             //standlone models
             var products = GetProducts();

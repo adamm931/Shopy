@@ -69,8 +69,6 @@ function Products(endpoints) {
 
     self.selectedSizes.subscribe(function (value) { console.log('selectedSizes.subscribe' + value); });
     self.selectedBrands.subscribe(function (value) { console.log('selectedBrands.subscribe' + value); });
-
-
 }
 
 function Product(item) {
