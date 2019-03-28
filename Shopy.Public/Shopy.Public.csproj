@@ -139,8 +139,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\material-kit.min.css" />
+    <Content Include="Content\css\theme.css" />
+    <Content Include="Content\imgs\boy.svg" />
+    <Content Include="Content\imgs\cart.svg" />
+    <Content Include="Content\imgs\email.svg" />
+    <Content Include="Content\imgs\facebook.svg" />
+    <Content Include="Content\imgs\favourite.svg" />
+    <Content Include="Content\imgs\fax.svg" />
+    <Content Include="Content\imgs\g-plus.svg" />
+    <Content Include="Content\imgs\instagram.svg" />
+    <Content Include="Content\imgs\language.svg" />
     <Content Include="Content\imgs\payment-methods.jpg" />
+    <Content Include="Content\imgs\search.svg" />
     <Content Include="Content\imgs\shopy-logo.jpg" />
+    <Content Include="Content\imgs\twitter.svg" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

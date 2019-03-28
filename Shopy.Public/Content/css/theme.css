@@ -1,0 +1,84 @@
+﻿    footer {
+        background-color: #ffffff;
+    }
+
+    .color-main {
+        color: #ff8332;
+    }
+
+    a:hover, a:focus {
+        color: #ff8332;
+    }
+
+   .logo a {
+        margin: auto;
+        height: 100px;
+        width: 150px;
+        display: block;
+        background-image: url("/Content/imgs/shopy-logo.jpg");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+   .main {
+        background-color: #f7f7f9;
+   }
+
+       .price {
+        color: #ff8332;
+    }
+    .news-letter-container {
+        margin-left: 2%;
+    }
+
+    .join-us {
+        color: #ffffff;
+        background-color: #ff8332 !important;
+        border-color: #ff8332 !important;
+    }
+
+    .news-letter {
+        color: #ff8332;
+        font-size: 20px;
+        font-weight: 900;
+    }
+
+    .news-letter-card {
+        padding: 3%;
+    }
+
+    .filters-title {
+        color: #ff8332;
+    }
+
+    .load-more {
+        color: #ff8332 !important;
+        background-color: #fff !important;
+        border-color: none #fff !important;
+        font-size: 4rem !important;
+        letter-spacing: -4px;
+    }
+
+    .logo-nav a {
+        height: 50px !important;
+    }
+
+    .navbar {
+        box-shadow: none;
+        margin-bottom: 0;
+    }
+
+    .navbar .navbar-brand {
+        height: auto;
+    }
+
+    .selected {
+        color: #ff8332 !important;
+        font-weight: 800 !important;
+    }
+	
+	.header-stickly {
+		height: 100px;
+        position: sticky;
+	}
