@@ -24,9 +24,9 @@
                     <h4 class="card-title filters-title">Sizes</h4>
                     <div class="list-group">
                         <!-- ko foreach: sizeFilters-->
-                        <div class="custom-control"> <!-- custom-checkbox -->
-                            <input type="checkbox" @*class="custom-control-input"*@ data-bind="checked: $parent.selectedSizes, checkedValue: caption">
-                            <label @*class="custom-control-label"*@ data-bind="text: caption"></label>
+                        <div class="custom-control custom-checkbox">
+                            <input data-bind="attr: {id: id}" type="checkbox" class="custom-control-input">
+                            <label data-bind="text: caption, attr: {for: id}" class="custom-control-label" for="defaultIndeterminate2">Default indeterminate</label>
                         </div>
                         <!-- /ko -->
                     </div>
@@ -39,9 +39,9 @@
                     <h4 class="card-title filters-title">Brands</h4>
                     <div class="list-group">
                         <!-- ko foreach: brandFilters -->
-                        <div class="custom-control"> <!-- custom-checkbox -->
-                            <input type="checkbox" @*class="custom-control-input"*@ data-bind="checked: $parent.selectedBrands, checkedValue: caption">
-                            <label @*class="custom-control-label"*@ data-bind="text: caption"></label>
+                        <div class="custom-control custom-checkbox">
+                            <input data-bind="attr: {id: id}"type="checkbox" class="custom-control-input">
+                            <label data-bind="text: caption, attr: {for: id}" class="custom-control-label" for="defaultIndeterminate2">Default indeterminate</label>
                         </div>
                         <!-- /ko -->
                     </div>
