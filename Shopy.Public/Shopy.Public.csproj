@@ -168,7 +168,8 @@
     <Content Include="Scripts\Common\knockout-3.5.0.js" />
     <Content Include="Scripts\Common\modernizr-2.6.2.js" />
     <Content Include="Scripts\Common\underscore.js" />
-    <Content Include="Scripts\ViewModels\Products.js" />
+    <Content Include="Scripts\Products\Details.js" />
+    <Content Include="Scripts\Products\List.js" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

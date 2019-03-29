@@ -13,7 +13,7 @@ namespace Shopy.Public
             var scripts = new ScriptBundle("~/Content/bundle/js");
             scripts.IncludeDirectory("~/Content/js", "*.js");
             scripts.IncludeDirectory("~/Scripts/Common", "*.js");
-            scripts.IncludeDirectory("~/Scripts/ViewModels", "*.js");
+            scripts.IncludeDirectory("~/Scripts/Products", "*.js");
 
             bundles.Add(scripts);
         }

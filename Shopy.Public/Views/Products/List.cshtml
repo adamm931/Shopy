@@ -58,15 +58,17 @@
 
                 <!-- ko foreach: items -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="card h-90">
-                        <a href="product.html"><img class="card-img-top" src="http://placehold.it/200x200" alt=""></a>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="product.html" data-bind="text: caption"></a>
-                            </h4>
-                            <h5 class="price font-weight-bold" data-bind="text: price"></h5>
+                    <a data-bind="attr: { href: detailsLink }">
+                        <div class="card h-90">
+                            <img class="card-img-top" src="http://placehold.it/200x200" alt="">
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <a href="product.html" data-bind="text: caption"></a>
+                                </h4>
+                                <h5 class="price font-weight-bold" data-bind="text: price"></h5>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <!-- /ko -->
                 <div class="col-lg-12">
@@ -81,13 +83,15 @@
         <div class="col-lg-12 card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-5">
                         <h5 class="text-uppercase news-letter">NEWS LETTER</h5>
                     </div>
                     <div class="col-lg-3 pt-4">
-                        <span class="font-italic" style="font-size: 15px">type your mail here</span>
+                        <span class="font-italic text-center">type your mail here</span>
                     </div>
-                    <div class="col-lg-3 pt-3"><button type="button" class="btn btn-deep-orange text-uppercase font-weight-bold join-us">join us</button></div>
+                    <div class="col-lg-3 pt-3">
+                        <button type="button" class="btn btn-deep-orange text-uppercase font-weight-bold float-md-right join-us">join us</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -104,12 +108,15 @@
 @section scripts {
  <script type="text/javascript">
 
-     var endpoint = {
+     var Products = Products || {};
+
+     const endpoints = {
          Search: "@Url.RouteUrl("Products", new { action = "Search"})",
          Filters: "@Url.RouteUrl("Products", new { action = "Filters" })",
+         Details: "@Url.RouteUrl("Products", new { action = "Details", id = "id" })"
      };
 
-     var products = new Products(endpoint);
+     var products = new Products.List();
      products.init();
      products.search();
 
