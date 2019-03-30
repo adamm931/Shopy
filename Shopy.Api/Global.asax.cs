@@ -9,7 +9,7 @@ namespace Sample_v1
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
-            DatabaseSeeder.Seed();
+            ShopyDBSeeder.Seed();
         }
     }
 }

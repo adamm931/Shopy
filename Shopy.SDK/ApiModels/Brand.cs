@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shopy.SDK.ApiModels
 {
-    public class SizeType
+    public class Brand
     {
         public Guid Uid { get; set; }
 

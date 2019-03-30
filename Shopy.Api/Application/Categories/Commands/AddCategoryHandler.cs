@@ -1,5 +1,6 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
+using Shopy.Api.Common;
 using Shopy.Api.Entities;
 using System;
 using System.Threading;
@@ -11,12 +12,13 @@ namespace Shopy.Api.Application.Categories.Commands
     {
         public async Task<AddCategoryResponse> Handle(ReceiveContext<AddCategoryRequest> context, CancellationToken cancellationToken)
         {
-            var dbContext = ShopContext.Current;
+            var dbContext = ShopyContext.Current;
             var request = context.Message;
 
             var category = dbContext.Categories.Add(new CategoryEF()
             {
                 Uid = Guid.NewGuid(),
+                CategoryID = dbContext.GetValueFromSequence(Constants.CategoriesSeq),
                 Caption = request.Caption
             });
 

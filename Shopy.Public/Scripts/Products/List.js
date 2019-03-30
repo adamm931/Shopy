@@ -17,14 +17,14 @@ var Products = Products || {};
             self.filter = filter;
         }
 
-        self.categoryFilters = ko.observableArray([]);
-        self.brandFilters = ko.observableArray([]);
-        self.sizeFilters = ko.observableArray([]);
+        self.categoryFilters = ko.observableArray();
+        self.brandFilters = ko.observableArray();
+        self.sizeFilters = ko.observableArray();
 
-        self.selectedSizes = ko.observableArray([]);
-        self.selectedBrands = ko.observableArray([]);
+        self.selectedSizes = ko.observableArray();
+        self.selectedBrands = ko.observableArray();
 
-        self.items = ko.observableArray([]);
+        self.items = ko.observableArray();
 
         self.search = function () {
 
@@ -33,12 +33,10 @@ var Products = Products || {};
                 data: self.filter,
                 type: 'POST',
                 success: function (response) {
-                    var projection = _.map(response.items, i => new Product(i));
-                    self.items(projection);
-
-                    console.log(self.items());
+                    var items = _.map(response.Items, i => new Product(i));
+                    self.items(items);
                 },
-                failure: function (data) {
+                failure: function (response) {
                     aler('Error');
                 }
             });

@@ -12,7 +12,7 @@ namespace Shopy.Api.Application.Products.Queries
     {
         public async Task<ListSizesResponse> Handle(ReceiveContext<ListSizesRequest> context, CancellationToken cancellationToken)
         {
-            var dbContext = new ShopContext();
+            var dbContext = new ShopyContext();
             var request = context.Message;
 
             var result = await dbContext.SizeTypes

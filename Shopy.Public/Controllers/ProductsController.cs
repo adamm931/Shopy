@@ -1,5 +1,6 @@
 ﻿using Shopy.SDK;
 using Shopy.SDK.ApiModels.Products;
+using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -12,7 +13,9 @@ namespace Shopy.Public.Controllers
         {
             get
             {
-                return shopy ?? (shopy = new ShopyDriveBuilder().WithBaseAddress("http://localhost:50253/api").Build());
+                return shopy ?? (shopy = new ShopyDriveBuilder()
+                        .WithBaseAddress("http://localhost:50253/api")
+                        .Build());
             }
         }
 
@@ -25,14 +28,14 @@ namespace Shopy.Public.Controllers
         [HttpGet]
         public async Task<ActionResult> Filters()
         {
-            var data = new
+            var response = new
             {
                 Categories = await Shopy.ListCategoriesWithProductsAsync(),
                 Sizes = await Shopy.ListSizesAsync(),
                 Brands = await Shopy.ListBrandsAsync(),
             };
 
-            return Json(data, JsonRequestBehavior.AllowGet);
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -40,18 +43,31 @@ namespace Shopy.Public.Controllers
         {
             var products = await Shopy.ListProductsAsync(filter);
 
-            var result = new
+            var response = new
             {
-                items = products
+                Items = products
             };
 
-            return Json(result);
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public ActionResult Details()
+        public ActionResult Details(Guid id)
         {
-            return View();
+            return View(id);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> LoadDetails(Guid id)
+        {
+            var productDetails = await Shopy.GetProductDetailsAsync(id);
+
+            var response = new
+            {
+                Details = productDetails
+            };
+
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
     }
 }

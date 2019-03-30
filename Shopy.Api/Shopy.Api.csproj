@@ -173,6 +173,7 @@
     <Compile Include="Application\Sizes\Queries\ListSizesHandler.cs" />
     <Compile Include="Application\Sizes\Queries\ListSizesRequest.cs" />
     <Compile Include="Application\Sizes\Queries\ListSizesResponse.cs" />
+    <Compile Include="Common\Constants.cs" />
     <Compile Include="Controllers\SizesController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Models\Brand.cs" />
@@ -208,12 +209,12 @@
     <Compile Include="Entities\Configurations\BrandTypeConfiguration.cs" />
     <Compile Include="Entities\Configurations\CategoryConfiguration.cs" />
     <Compile Include="Entities\Configurations\SizeTypeConfiguration.cs" />
-    <Compile Include="DatabaseSeeder.cs" />
+    <Compile Include="ShopyDBSeeder.cs" />
     <Compile Include="Entities\CategoryEF.cs" />
     <Compile Include="Entities\Configurations\ProductConfiguration.cs" />
     <Compile Include="Entities\ProductEF.cs" />
     <Compile Include="Entities\SizeTypeEF.cs" />
-    <Compile Include="ShopContext.cs" />
+    <Compile Include="ShopyContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

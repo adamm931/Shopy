@@ -65,8 +65,8 @@ namespace Shopy.Admin.Controllers
             var model = new ProductViewModel()
             {
                 Uid = uid,
-                Brand = productDetails.BrandType,
-                Size = productDetails.SizeType,
+                Brand = productDetails.Brand,
+                Size = productDetails.Size,
                 Caption = productDetails.Caption,
                 Description = productDetails.Description,
                 Price = productDetails.Price

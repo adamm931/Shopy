@@ -2,6 +2,10 @@
 @{
     ViewBag.Title = "Details";
 }
+
+@model Guid
+
+<!-- ko with: productDetails -->
 <div class="container">
     <div class="row">
         <div class="card">
@@ -11,13 +15,15 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h1 class="card-title">Product Name</h1>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
+                        <h1 class="card-title" data-bind="text: caption"></h1>
+                        <p class="card-text" data-bind="html: description"><p>
                         <h3 class="card-title">24.99 RSD</h3>
                         <div class="row mt-5">
                             <div class="col-md-6">
                                 Choose Size
-                                <span>s-m-l-xl</span>
+                                <!-- ko foreach: availableSizes -->
+                                    <span data-bind="text: Caption"></span>-
+                                <!-- /ko -->
                             </div>
                             <div class="col-md-6">
                                 <div class="float-md-right">
@@ -30,7 +36,7 @@
                         </div>
                         <hr />
                         <div class="row mt-5">
-                            <div class="col-md-6"><span class="font-weight-bold">Price:</span><span>$value$</span></div>
+                            <div class="col-md-6"><span class="font-weight-bold">Price:</span><span data-bind="text: price"></span></div>
                             <div class="col-md-6">
                                 <div class="float-md-right">
                                     <img src="~/Content/imgs/language.svg" />
@@ -116,3 +122,21 @@
     </div>
     <!-- /.row -->
 </div>
+
+<!-- /ko -->
+@section scripts {
+    <script type="text/javascript">
+
+     var Products = Products || {};
+
+     const endpoints = {
+         LoadDetails: "@Url.RouteUrl("Products", new { action = "LoadDetails", id = Model })"
+     };
+
+     var productDetails = new Products.Details();
+     productDetails.init();
+
+     ko.applyBindings(productDetails);
+
+    </script>
+}

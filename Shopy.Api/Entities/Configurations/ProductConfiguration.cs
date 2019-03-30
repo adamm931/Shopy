@@ -1,5 +1,4 @@
 ﻿using Shopy.Api.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
 namespace SShopy.Api.Entities.Configurations
@@ -16,8 +15,7 @@ namespace SShopy.Api.Entities.Configurations
 
             this.Property(p => p.ProductID)
                 .HasColumnName("product_id")
-                .IsRequired()
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+                .IsRequired();
 
             this.Property(p => p.Price)
                 .HasColumnName("price")

@@ -1,29 +1,27 @@
-﻿using Shopy.Api.Entities;
+﻿using Shopy.Api.Common;
+using Shopy.Api.Entities;
 using System;
 using System.Linq;
 
 namespace Shopy
 {
-    public class DatabaseSeeder
+    public class ShopyDBSeeder
     {
         public static void Seed()
         {
-            var dbContext = new ShopContext();
+            var dbContext = ShopyContext.Current;
 
-            //if (dbContext.Database.Exists())
-            //{
-            //    return;
-            //}
+            if (dbContext.Database.Exists())
+            {
+                return;
+            }
 
+            dbContext.AddSequence(Constants.ProductsSeq, 100000);
+            dbContext.AddSequence(Constants.CategoriesSeq, 100000);
 
-            //dbContext.Database.Delete();
-            //dbContext.Database.Create();
-
-            dbContext.Database.CreateIfNotExists();
-
-            //standlone models
-            var products = GetProducts();
-            var categoires = GetCategories();
+            //standalone models
+            var products = GetProducts(dbContext);
+            var categoires = GetCategories(dbContext);
             var brandTypes = GetBrandTypes();
             var sizeTypes = GetSizeTypes();
 
@@ -64,13 +62,14 @@ namespace Shopy
             dbContext.SaveChanges();
         }
 
-        private static ProductEF[] GetProducts()
+        private static ProductEF[] GetProducts(ShopyContext context)
         {
             return new[]
             {
                 new ProductEF()
                 {
                     Uid = Guid.NewGuid(),
+                    ProductID = context.GetValueFromSequence(Constants.ProductsSeq),
                     Caption = "test123",
                     Price = 12.5m,
                     Description = "Description 1"
@@ -78,6 +77,7 @@ namespace Shopy
                 new ProductEF()
                 {
                     Uid = Guid.NewGuid(),
+                    ProductID = context.GetValueFromSequence(Constants.ProductsSeq),
                     Caption = "test1234",
                     Price = 13.5m,
                     Description = "Description 2"
@@ -85,6 +85,7 @@ namespace Shopy
                 new ProductEF()
                 {
                     Uid = Guid.NewGuid(),
+                    ProductID = context.GetValueFromSequence(Constants.ProductsSeq),
                     Caption = "test1235",
                     Price = 14.5m,
                     Description = "Description 3",
@@ -92,23 +93,26 @@ namespace Shopy
             };
         }
 
-        private static CategoryEF[] GetCategories()
+        private static CategoryEF[] GetCategories(ShopyContext context)
         {
             return new[]
             {
                 new CategoryEF()
                 {
                     Uid = Guid.NewGuid(),
+                    CategoryID = context.GetValueFromSequence(Constants.CategoriesSeq),
                     Caption = "category1"
                 },
                 new CategoryEF()
                 {
                     Uid = Guid.NewGuid(),
+                    CategoryID = context.GetValueFromSequence(Constants.CategoriesSeq),
                     Caption = "category2"
                 },
                 new CategoryEF()
                 {
                     Uid = Guid.NewGuid(),
+                    CategoryID = context.GetValueFromSequence(Constants.CategoriesSeq),
                     Caption = "category3"
                 }
             };

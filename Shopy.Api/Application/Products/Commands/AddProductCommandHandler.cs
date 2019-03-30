@@ -1,5 +1,6 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
+using Shopy.Api.Common;
 using Shopy.Api.Entities;
 using System;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Shopy.Api.Application.Products.Commands
     {
         public async Task Handle(ReceiveContext<AddProductCommand> context, CancellationToken cancellationToken)
         {
-            var dbContext = ShopContext.Current;
+            var dbContext = ShopyContext.Current;
             var command = context.Message;
 
             var brand = dbContext.BrandTypes
@@ -24,6 +25,7 @@ namespace Shopy.Api.Application.Products.Commands
             dbContext.Products.Add(new ProductEF()
             {
                 Uid = Guid.NewGuid(),
+                ProductID = dbContext.GetValueFromSequence(Constants.ProductsSeq),
                 Caption = command.Caption,
                 Description = command.Description,
                 Price = command.Price,

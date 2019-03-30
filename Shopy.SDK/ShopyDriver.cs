@@ -78,12 +78,12 @@ namespace Shopy.SDK
             return await _categories.ListWithProductsAsync();
         }
 
-        public async Task<IEnumerable<SizeType>> ListSizesAsync()
+        public async Task<IEnumerable<Size>> ListSizesAsync()
         {
             return await _sizes.ListAsync();
         }
 
-        public async Task<IEnumerable<BrandType>> ListBrandsAsync()
+        public async Task<IEnumerable<Brand>> ListBrandsAsync()
         {
             return await _brands.ListAsync();
         }

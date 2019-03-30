@@ -9,7 +9,7 @@ namespace Shopy.Api.Application.Products.Commands
     {
         public async Task Handle(ReceiveContext<AddProductFromCategoryCommand> context, CancellationToken cancellationToken)
         {
-            var dbContext = ShopContext.Current;
+            var dbContext = ShopyContext.Current;
             var command = context.Message;
 
             var product = await dbContext.Products.FindAsync(command.ProductUid);

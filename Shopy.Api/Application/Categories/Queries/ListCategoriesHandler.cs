@@ -12,7 +12,7 @@ namespace Shopy.Api.Application.Products.Queries
     {
         public async Task<ListCategoriesResponse> Handle(ReceiveContext<ListCategoriesRequest> context, CancellationToken cancellationToken)
         {
-            var dbContext = new ShopContext();
+            var dbContext = new ShopyContext();
             var request = context.Message;
 
             var result = dbContext.Categories

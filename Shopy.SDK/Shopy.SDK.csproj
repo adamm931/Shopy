@@ -46,8 +46,8 @@
     <Compile Include="ApiModels\Categories\AddCategory.cs" />
     <Compile Include="ApiModels\Products\Filter.cs" />
     <Compile Include="ApiModels\Products\ProductFilter.cs" />
-    <Compile Include="ApiModels\BrandType.cs" />
-    <Compile Include="ApiModels\SizeType.cs" />
+    <Compile Include="ApiModels\Brand.cs" />
+    <Compile Include="ApiModels\Size.cs" />
     <Compile Include="Client\SizesClient.cs" />
     <Compile Include="Client\BrandsClient.cs" />
     <Compile Include="Client\CategoriesClient.cs" />

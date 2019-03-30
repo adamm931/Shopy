@@ -14,7 +14,7 @@ namespace Shopy.Api.Application.Products.Queries
     {
         public async Task<ListProductsResponse> Handle(ReceiveContext<ListProductsRequest> context, CancellationToken cancellationToken)
         {
-            var dbContext = ShopContext.Current;
+            var dbContext = ShopyContext.Current;
             var request = context.Message;
 
             var result = dbContext.Products

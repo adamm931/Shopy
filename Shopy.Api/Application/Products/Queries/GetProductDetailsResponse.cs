@@ -14,6 +14,8 @@ namespace Shopy.Api.Application.Products.Queries
         public decimal Price { get; set; }
         public string Brand { get; set; }
         public string Size { get; set; }
+        public IEnumerable<ProductLight> RelatedProducts { get; set; }
+        public IEnumerable<Size> AvailableSizes { get; set; }
         public IEnumerable<CategoryLight> AvailableCategories { get; set; }
         public IEnumerable<CategoryLight> AssignedCategories { get; set; }
     }

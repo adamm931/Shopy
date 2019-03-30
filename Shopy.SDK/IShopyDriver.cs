@@ -29,9 +29,9 @@ namespace Shopy.SDK
 
         Task DeleteProductAsync(Guid uid);
 
-        Task<IEnumerable<SizeType>> ListSizesAsync();
+        Task<IEnumerable<Size>> ListSizesAsync();
 
-        Task<IEnumerable<BrandType>> ListBrandsAsync();
+        Task<IEnumerable<Brand>> ListBrandsAsync();
 
     }
 }

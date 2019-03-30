@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using Newtonsoft.Json;
+using System.Net.Http.Headers;
 using System.Web.Http;
 
 namespace Sample_v1
@@ -19,8 +20,16 @@ namespace Sample_v1
                 }
             );
 
+            SetupJsonFormat(config);
+        }
+
+        private static void SetupJsonFormat(HttpConfiguration config)
+        {
             config.Formatters.JsonFormatter.SupportedMediaTypes
                 .Add(new MediaTypeHeaderValue("text/html"));
+
+            config.Formatters.JsonFormatter.SerializerSettings =
+                 new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
         }
     }
 }
