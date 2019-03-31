@@ -1,6 +1,7 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using Shopy.Api.Data.Entities;
+using System.Data.Entity.ModelConfiguration;
 
-namespace Shopy.Api.Entities.Configurations
+namespace Shopy.Api.Data.Configurations
 {
     public class SizeTypeConfiguration : EntityTypeConfiguration<SizeTypeEF>
     {
@@ -10,7 +11,7 @@ namespace Shopy.Api.Entities.Configurations
                 .HasKey(s => s.SizeTypeEID);
 
             this.Property(s => s.SizeTypeEID)
-                .HasColumnName("size_type_eid");
+                .HasColumnName("eid");
 
             this.Property(s => s.Caption)
                 .HasColumnName("caption")

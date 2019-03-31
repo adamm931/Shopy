@@ -1,14 +1,15 @@
 ﻿using Shopy.Api.Common;
-using Shopy.Api.Entities;
+using Shopy.Api.Data.Entities;
 using System;
 using System.Data.Entity;
 
-namespace Shopy
+namespace Shopy.Data
 {
     public class ShopyContext : DbContext
     {
         private static Lazy<ShopyContext> _current = new Lazy<ShopyContext>(
             () => new ShopyContext(), isThreadSafe: true);
+
         public static ShopyContext Current
         {
             get
@@ -21,11 +22,12 @@ namespace Shopy
         public virtual DbSet<CategoryEF> Categories { get; set; }
         public virtual DbSet<SizeTypeEF> SizeTypes { get; set; }
         public virtual DbSet<BrandTypeEF> BrandTypes { get; set; }
+        public virtual DbSet<ImageEF> Images { get; set; }
 
         public ShopyContext()
             : base(Constants.ConnectionStringName)
         {
-
+            System.Data.Entity.Database.SetInitializer(new ShopyContextSeeder());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -34,10 +36,6 @@ namespace Shopy
             modelBuilder.HasDefaultSchema(Constants.DefaultSchema);
             modelBuilder.Configurations.AddFromAssembly(GetType().Assembly);
 
-            //TODO
-            //Database.SetInitializer(new DbContext());
-
-            //add sequnces
             base.OnModelCreating(modelBuilder);
         }
 

@@ -2,7 +2,7 @@
 using System.Net.Http.Headers;
 using System.Web.Http;
 
-namespace Sample_v1
+namespace Shopy
 {
     public static class WebApiConfig
     {

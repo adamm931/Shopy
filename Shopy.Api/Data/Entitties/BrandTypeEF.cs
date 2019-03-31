@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Shopy.Api.Data.Entities.Enums;
 using System.Collections.Generic;
 
-namespace Shopy.Api.Entities
+namespace Shopy.Api.Data.Entities
 {
-    public class SizeTypeEF
+    public class BrandTypeEF
     {
         public string Caption { get; set; }
 
-        public Guid SizeTypeEID { get; set; }
+        public BrandType BrandTypeEId { get; set; }
 
         public List<ProductEF> Products { get; set; }
 
-        public SizeTypeEF()
+        public BrandTypeEF()
         {
             Products = new List<ProductEF>();
         }

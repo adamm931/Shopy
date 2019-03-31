@@ -1,6 +1,8 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using Shopy.Api.Data.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.ModelConfiguration;
 
-namespace Shopy.Api.Entities.Configurations
+namespace Shopy.Api.Data.Configurations
 {
     public class CategoryConfiguration : EntityTypeConfiguration<CategoryEF>
     {
@@ -12,10 +14,10 @@ namespace Shopy.Api.Entities.Configurations
             this.Property(p => p.Uid)
                 .HasColumnName("uid");
 
-            this.Property(p => p.CategoryID)
+            this.Property(p => p.CategoryId)
                 .HasColumnName("category_id")
-                .IsRequired();
-            //.HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+                .IsRequired()
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             this.Property(p => p.Caption)
                 .HasColumnName("caption")

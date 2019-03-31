@@ -1,15 +1,15 @@
-﻿using Shopy;
+﻿using System.Web;
 using System.Web.Http;
 
-namespace Sample_v1
+namespace Shopy
 {
-    public class WebApiApplication : System.Web.HttpApplication
+    public class WebApiApplication : HttpApplication
     {
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
-            ShopyDBSeeder.Seed();
+            //ShopyContextSeeder.Seed();
         }
     }
 }

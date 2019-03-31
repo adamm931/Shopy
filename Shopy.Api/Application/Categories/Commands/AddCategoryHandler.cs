@@ -1,7 +1,7 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Api.Common;
-using Shopy.Api.Entities;
+using Shopy.Api.Data.Entities;
+using Shopy.Data;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,7 +18,6 @@ namespace Shopy.Api.Application.Categories.Commands
             var category = dbContext.Categories.Add(new CategoryEF()
             {
                 Uid = Guid.NewGuid(),
-                CategoryID = dbContext.GetValueFromSequence(Constants.CategoriesSeq),
                 Caption = request.Caption
             });
 
@@ -28,7 +27,7 @@ namespace Shopy.Api.Application.Categories.Commands
             {
                 Uid = category.Uid,
                 Caption = category.Caption,
-                CategoryID = category.CategoryID
+                CategoryID = category.CategoryId
             };
         }
     }

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Shopy.Api.Data.Entities.Enums;
 
 namespace Shopy.Api.Models
 {
     public class Brand
     {
-        public Guid Uid { get; set; }
+        public BrandType EId { get; set; }
 
         public string Caption { get; set; }
     }

@@ -12,7 +12,7 @@ namespace Shopy.SDK.ApiModels.Products
 
         public string Description { get; set; }
 
-        public string ProductID { get; set; }
+        public string ProductId { get; set; }
 
         public decimal Price { get; set; }
 

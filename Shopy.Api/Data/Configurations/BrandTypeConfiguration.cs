@@ -1,6 +1,7 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using Shopy.Api.Data.Entities;
+using System.Data.Entity.ModelConfiguration;
 
-namespace Shopy.Api.Entities.Configurations
+namespace Shopy.Api.Data.Configurations
 {
     public class BrandTypeConfiguration : EntityTypeConfiguration<BrandTypeEF>
     {
@@ -10,7 +11,7 @@ namespace Shopy.Api.Entities.Configurations
                 .HasKey(b => b.BrandTypeEId);
 
             this.Property(b => b.BrandTypeEId)
-                .HasColumnName("brand_type_eid");
+                .HasColumnName("eid");
 
             this.Property(b => b.Caption)
                 .HasColumnName("caption")

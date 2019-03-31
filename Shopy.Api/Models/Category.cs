@@ -7,10 +7,10 @@ namespace Shopy.Api.Models
     {
         public Guid Uid { get; set; }
 
-        public long CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
         public string Caption { get; set; }
 
-        public List<ProductLight> Products { get; set; }
+        public List<Product> Products { get; set; }
     }
 }

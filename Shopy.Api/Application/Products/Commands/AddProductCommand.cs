@@ -1,4 +1,6 @@
 ﻿using Mediator.Net.Contracts;
+using Shopy.Api.Models;
+using System.Collections.Generic;
 
 namespace Shopy.Api.Application.Products.Commands
 {
@@ -13,5 +15,7 @@ namespace Shopy.Api.Application.Products.Commands
         public string SizeType { get; set; }
 
         public decimal Price { get; set; }
+
+        public IEnumerable<Image> Images { get; set; }
     }
 }

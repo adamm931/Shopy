@@ -9,16 +9,16 @@ namespace Shopy.Api.Models
 
         public string Caption { get; set; }
 
-        public long ProductID { get; set; }
+        public string Sku { get; set; }
 
         public decimal Price { get; set; }
 
         public string Description { get; set; }
 
-        public string Brand { get; set; }
+        public Brand Brand { get; set; }
 
-        public string Size { get; set; }
+        public Size Size { get; set; }
 
-        public List<CategoryLight> Categories { get; set; }
+        public List<Image> Images { get; set; }
     }
 }

@@ -1,7 +1,7 @@
-﻿using Shopy.Api.Entities;
+﻿using Shopy.Api.Data.Entities;
 using System.Data.Entity.ModelConfiguration;
 
-namespace SShopy.Api.Entities.Configurations
+namespace Shopy.Api.Data.Configurations
 {
     public class ProductConfiguration : EntityTypeConfiguration<ProductEF>
     {
@@ -13,8 +13,8 @@ namespace SShopy.Api.Entities.Configurations
             this.Property(p => p.Uid)
                 .HasColumnName("uid");
 
-            this.Property(p => p.ProductID)
-                .HasColumnName("product_id")
+            this.Property(p => p.Sku)
+                .HasColumnName("sku")
                 .IsRequired();
 
             this.Property(p => p.Price)
@@ -52,6 +52,15 @@ namespace SShopy.Api.Entities.Configurations
                     t.MapLeftKey("fk_product_id");
                     t.MapRightKey("fk_category_id");
                     t.ToTable("product_category");
+                });
+
+            this.HasMany(p => p.Images)
+                .WithMany(i => i.Products)
+                .Map(t =>
+                {
+                    t.MapLeftKey("fk_product_id");
+                    t.MapRightKey("fk_image_id");
+                    t.ToTable("product_image");
                 });
         }
     }

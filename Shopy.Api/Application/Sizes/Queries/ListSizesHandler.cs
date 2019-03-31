@@ -1,6 +1,7 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Api.Models;
+using Shopy.Api.Mappers;
+using Shopy.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;
@@ -12,18 +13,14 @@ namespace Shopy.Api.Application.Products.Queries
     {
         public async Task<ListSizesResponse> Handle(ReceiveContext<ListSizesRequest> context, CancellationToken cancellationToken)
         {
-            var dbContext = new ShopyContext();
+            var dbContext = ShopyContext.Current;
             var request = context.Message;
 
-            var result = await dbContext.SizeTypes
-                .Select(s => new Size()
-                {
-                    Uid = s.SizeTypeEID,
-                    Caption = s.Caption
-                })
-                .ToListAsync();
+            var mapper = new SizeMapper();
+            var sizes = await dbContext.SizeTypes.ToListAsync();
+            var projection = sizes.Select(s => mapper.FromEF(s));
 
-            return new ListSizesResponse(result);
+            return new ListSizesResponse(projection);
 
         }
     }

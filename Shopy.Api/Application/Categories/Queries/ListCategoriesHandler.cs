@@ -1,6 +1,7 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Api.Models;
+using Shopy.Api.Mappers;
+using Shopy.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;
@@ -12,32 +13,18 @@ namespace Shopy.Api.Application.Products.Queries
     {
         public async Task<ListCategoriesResponse> Handle(ReceiveContext<ListCategoriesRequest> context, CancellationToken cancellationToken)
         {
-            var dbContext = new ShopyContext();
+            var dbContext = ShopyContext.Current;
             var request = context.Message;
 
-            var result = dbContext.Categories
+            var categories = await dbContext.Categories
                 .Include(p => p.Products)
                 .Include("Products.Brand")
-                .Include("Products.Size");
+                .Include("Products.Size")
+                .Where(c => c.Products.Any())
+                .ToListAsync();
 
-            if (request.WithProductsOnly)
-            {
-                result = result.Where(c => c.Products.Any());
-            }
-
-            var projection = await result.Select(r => new Category()
-            {
-                Uid = r.Uid,
-                CategoryId = r.CategoryID,
-                Caption = r.Caption,
-                Products = r.Products.Select(p => new ProductLight()
-                {
-                    Brand = p.Brand.Caption,
-                    Uid = p.Uid,
-                    Size = p.Size.Caption
-                }).ToList()
-            }).ToListAsync();
-
+            var mapper = new CategoryMapper();
+            var projection = categories.Select(c => mapper.FromEF(c));
             return new ListCategoriesResponse(projection);
         }
     }

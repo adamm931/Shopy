@@ -1,8 +1,11 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Api.Entities;
+using Shopy.Api.Data.Entities;
+using Shopy.Api.Mappers;
 using Shopy.Api.Models;
+using Shopy.Data;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;
@@ -12,39 +15,28 @@ namespace Shopy.Api.Application.Products.Queries
 {
     public class ListProductsHandler : IRequestHandler<ListProductsRequest, ListProductsResponse>
     {
-        public async Task<ListProductsResponse> Handle(ReceiveContext<ListProductsRequest> context, CancellationToken cancellationToken)
+        public Task<ListProductsResponse> Handle(ReceiveContext<ListProductsRequest> context, CancellationToken cancellationToken)
         {
             var dbContext = ShopyContext.Current;
             var request = context.Message;
 
-            var result = dbContext.Products
+            var products = dbContext.Products
                 .Include(p => p.Brand)
                 .Include(p => p.Size)
-                .Include(p => p.Categories);
+                .Include(p => p.Categories)
+                .Include(p => p.Images)
+                .AsNoTracking()
+                .AsEnumerable();
 
-            result = FilterProducts(result, request.Filter);
+            products = FilterProducts(products, request.Filter);
 
-            var projection = await result.Select(r => new Product()
-            {
-                Caption = r.Caption,
-                Description = r.Description,
-                ProductID = r.ProductID,
-                Brand = r.Brand.Caption,
-                Price = r.Price,
-                Size = r.Size.Caption,
-                Uid = r.Uid,
-                Categories = r.Categories.Select(c => new CategoryLight()
-                {
-                    Uid = c.Uid,
-                    CategoryId = c.CategoryID,
-                    Caption = c.Caption
-                }).ToList()
-            }).ToListAsync();
+            var productMapper = new ProductMapper();
+            var result = products.Select(r => productMapper.FromEF(r));
 
-            return new ListProductsResponse(projection);
+            return Task.FromResult(new ListProductsResponse(result));
         }
 
-        private IQueryable<ProductEF> FilterProducts(IQueryable<ProductEF> products, ProductFilter productFilter)
+        private IEnumerable<ProductEF> FilterProducts(IEnumerable<ProductEF> products, ProductFilter productFilter)
         {
             //paging
             if (productFilter.PageSize.HasValue && productFilter.PageIndex.HasValue)
@@ -53,7 +45,6 @@ namespace Shopy.Api.Application.Products.Queries
                 var pageIndex = productFilter.PageIndex.Value;
 
                 products = products
-                    .OrderBy(p => p.Caption)
                     .Skip(pageIndex * pageSize)
                     .Take((pageIndex + 1) * pageSize);
             }

@@ -27,11 +27,11 @@ namespace Shopy.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> Get(Guid id)
+        public async Task<IHttpActionResult> Get(string sku)
         {
             var request = new GetProductDetailsRequest()
             {
-                Uid = id
+                Sku = sku
             };
 
             var product = await Mediator.RequestAsync<GetProductDetailsRequest, GetProductDetailsResponse>(request);

@@ -1,7 +1,7 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Api.Common;
-using Shopy.Api.Entities;
+using Shopy.Api.Data.Entities;
+using Shopy.Data;
 using System;
 using System.Linq;
 using System.Threading;
@@ -22,10 +22,10 @@ namespace Shopy.Api.Application.Products.Commands
             var size = dbContext.SizeTypes
                 .FirstOrDefault(b => b.Caption.Equals(command.SizeType, StringComparison.OrdinalIgnoreCase));
 
-            dbContext.Products.Add(new ProductEF()
+            var product = dbContext.Products.Add(new ProductEF()
             {
                 Uid = Guid.NewGuid(),
-                ProductID = dbContext.GetValueFromSequence(Constants.ProductsSeq),
+                Sku = GenerateSku(command, brand, size, dbContext.Products),
                 Caption = command.Caption,
                 Description = command.Description,
                 Price = command.Price,
@@ -33,7 +33,34 @@ namespace Shopy.Api.Application.Products.Commands
                 Size = size
             });
 
+            var images = command.Images.Select(c => new ImageEF()
+            {
+                Uid = new Guid(),
+                Name = c.Name
+            })
+            .ToList();
+
+            product.Images = images;
+
             await dbContext.SaveChangesAsync();
+        }
+
+        private string GenerateSku(AddProductCommand command, BrandTypeEF brand, SizeTypeEF size, IQueryable<ProductEF> products)
+        {
+            //TODO: sku generator somewhere else
+            var sku = $"{command.Caption.Substring(0, 3)}-"
+                + $"{command.Description.Substring(0, 3)}-"
+                + $"{brand.ToString().Substring(0, 3)}"
+                + $"{size.Caption.Substring(0, 3)}";
+
+            var skuCount = products.Count(p => p.Sku == sku);
+
+            if (skuCount == 0)
+            {
+                return sku;
+            }
+
+            return $"sku-{skuCount++}";
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Api.Models;
+using Shopy.Api.Mappers;
+using Shopy.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;
@@ -12,15 +13,12 @@ namespace Shopy.Api.Application.Products.Queries
     {
         public async Task<ListBrandsResponse> Handle(ReceiveContext<ListBrandsRequest> context, CancellationToken cancellationToken)
         {
-            var dbContext = new ShopyContext();
+            var dbContext = ShopyContext.Current;
             var request = context.Message;
 
+            var brandMapper = new BrandMapper();
             var result = await dbContext.BrandTypes
-                .Select(b => new Brand()
-                {
-                    Uid = b.BrandTypeEId,
-                    Caption = b.Caption
-                })
+                .Select(b => brandMapper.FromEF(b))
                 .ToListAsync();
 
             return new ListBrandsResponse(result);
