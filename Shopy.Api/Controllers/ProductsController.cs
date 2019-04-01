@@ -1,6 +1,6 @@
-﻿using Shopy.Api.Application.Products.Commands;
-using Shopy.Api.Application.Products.Queries;
-using Shopy.Api.Models;
+﻿using Shopy.Core.Application.Products.Commands;
+using Shopy.Core.Application.Products.Queries;
+using Shopy.Core.Models;
 using System;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -10,91 +10,88 @@ namespace Shopy.Api.Controllers
     //TODO: implement parameters validation
     //TODO: wrapp methods with try catch
 
+    [RoutePrefix("api/products")]
     public class ProductsController : BaseApiController
     {
         [HttpGet]
         public async Task<IHttpActionResult> List([FromUri]ProductFilter filter)
         {
-            var request = new ListProductsRequest()
-            {
-                Filter = filter
-            };
-
-            var items = await Mediator
-                .RequestAsync<ListProductsRequest, ListProductsResponse>(request);
-
-            return Ok(items);
+            return await ProcessRequest(
+                request: () => Mediator.RequestAsync<ListProductsRequest, ListProductsResponse>(
+                    new ListProductsRequest(filter)));
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> Get(string sku)
+        public async Task<IHttpActionResult> Get(Guid uid)
         {
-            var request = new GetProductDetailsRequest()
-            {
-                Sku = sku
-            };
+            return await ProcessRequest(
+                request: () => Mediator.RequestAsync<GetProductRequest, GetProductResponse>(new GetProductRequest(uid)),
+                paramValidators: new RequestParamValidator(() => uid != Guid.Empty, "Product Uid is empty"));
+        }
 
-            var product = await Mediator.RequestAsync<GetProductDetailsRequest, GetProductDetailsResponse>(request);
-
-            return Ok(product);
+        [HttpGet]
+        [Route("details/{uid}")]
+        public async Task<IHttpActionResult> Details(Guid uid)
+        {
+            return await ProcessRequest(
+                request: () => Mediator.RequestAsync<GetProductDetailsRequest, GetProductDetailsResponse>(new GetProductDetailsRequest(uid)),
+                paramValidators: new RequestParamValidator(() => uid != Guid.Empty, "Product Uid is empty"));
         }
 
         [HttpPost]
         public async Task<IHttpActionResult> Post([FromBody]AddProductCommand addProduct)
         {
-            await Mediator.SendAsync(addProduct);
-
-            return Ok();
+            return await ProcessCommand(
+                command: () => Mediator.SendAsync(addProduct),
+                paramValidators: new RequestParamValidator(() => addProduct != null, "Product is null"));
         }
 
         [HttpPut]
-        public async Task<IHttpActionResult> Put(Guid id, [FromBody]UpdateProductCommand updateProduct)
+        public async Task<IHttpActionResult> Put(Guid uid, [FromBody]UpdateProductCommand updateProduct)
         {
-            updateProduct.Uid = id;
+            updateProduct.Uid = uid;
 
-            await Mediator.SendAsync(updateProduct);
-
-            return Ok();
+            return await ProcessCommand(
+                command: () => Mediator.SendAsync(updateProduct),
+                paramValidators: new RequestParamValidator(() => uid != Guid.Empty, "Product Uid is empty"));
         }
 
         [HttpDelete]
-        public async Task<IHttpActionResult> Delete(Guid id)
+        public async Task<IHttpActionResult> Delete(Guid uid)
         {
-            var command = new DeleteProductCommand()
-            {
-                Uid = id
-            };
-
-            await Mediator.SendAsync(command);
-            return Ok();
+            return await ProcessCommand(
+                command: () => Mediator.SendAsync(new DeleteProductCommand(uid)),
+                paramValidators: new RequestParamValidator(() => uid != Guid.Empty, "Product Uid is empty"));
         }
 
         [HttpPost]
-        [Route("api/v1/products/{productid}/add-to-category/{categoryid}")]
+        [Route("{productid}/add-to-category/{categoryid}")]
         public async Task<IHttpActionResult> AddToCategory(Guid productid, Guid categoryid)
         {
-            var command = new AddProductFromCategoryCommand()
+            var paramValidators = new[]
             {
-                CategoryUid = categoryid,
-                ProductUid = productid
+                new RequestParamValidator(() => productid != Guid.Empty, "Product Uid is empty"),
+                new RequestParamValidator(() => categoryid != Guid.Empty, "Category Uid is empty")
             };
 
-            await Mediator.SendAsync(command);
-            return Ok();
+            return await ProcessCommand(
+                command: () => Mediator.SendAsync(new AddProductFromCategoryCommand(productid, categoryid)),
+                paramValidators: paramValidators);
         }
 
         [HttpPost]
-        [Route("api/v1/products/{productid}/remove-from-category/{categoryid}")]
+        [Route("{productid}/remove-from-category/{categoryid}")]
         public async Task<IHttpActionResult> RemoveFromCategory(Guid productid, Guid categoryid)
         {
-            var command = new RemoveProductFromCategoryCommand()
+            var paramValidators = new[]
             {
-                CategoryUid = categoryid,
-                ProductUid = productid
+                new RequestParamValidator(() => productid != Guid.Empty, "Product Uid is empty"),
+                new RequestParamValidator(() => categoryid != Guid.Empty, "Category Uid is empty")
             };
 
-            await Mediator.SendAsync(command);
-            return Ok();
+            return await ProcessCommand(
+                command: () => Mediator.SendAsync(new RemoveProductFromCategoryCommand(productid, categoryid)),
+                paramValidators: paramValidators);
         }
     }
 }

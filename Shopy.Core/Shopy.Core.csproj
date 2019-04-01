@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C035BDA9-4B4F-408D-8F96-1E87763B8F3C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Shopy.Core</RootNamespace>
+    <AssemblyName>Shopy.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\Shopy.Admin\Bin\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework6.Npgsql">
+      <HintPath>..\packages\EntityFramework6.Npgsql.3.2.0\lib\net45\EntityFramework6.Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="Mediator.Net">
+      <HintPath>..\packages\Mediator.Net.2.0.2\lib\net46\Mediator.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application\Brands\Queries\ListBrandsHandler.cs" />
+    <Compile Include="Application\Brands\Queries\ListBrandsRequest.cs" />
+    <Compile Include="Application\Brands\Queries\ListBrandsResponse.cs" />
+    <Compile Include="Application\Categories\Commands\AddCategoryHandler.cs" />
+    <Compile Include="Application\Categories\Commands\AddCategoryRequest.cs" />
+    <Compile Include="Application\Categories\Commands\AddCategoryResponse.cs" />
+    <Compile Include="Application\Categories\Queries\ListCategoriesHandler.cs" />
+    <Compile Include="Application\Categories\Queries\ListCategoriesRequest.cs" />
+    <Compile Include="Application\Categories\Queries\ListCategoriesResponse.cs" />
+    <Compile Include="Application\Categories\Queries\ProductPreview.cs" />
+    <Compile Include="Application\Products\Commands\AddProductCommand.cs" />
+    <Compile Include="Application\Products\Commands\AddProductCommandHandler.cs" />
+    <Compile Include="Application\Products\Commands\AddProductToCategoryCommand.cs" />
+    <Compile Include="Application\Products\Commands\AddProductToCategoryCommandHandler.cs" />
+    <Compile Include="Application\Products\Commands\DeleteProductCommand.cs" />
+    <Compile Include="Application\Products\Commands\DeleteProductCommandHandler.cs" />
+    <Compile Include="Application\Products\Commands\RemoveFromCategoryCommand.cs" />
+    <Compile Include="Application\Products\Commands\RemoveFromCategoryCommandHandler.cs" />
+    <Compile Include="Application\Products\Commands\UpdateProductCommand.cs" />
+    <Compile Include="Application\Products\Commands\UpdateProductCommandHandler.cs" />
+    <Compile Include="Application\Products\Queries\GetProductDetailsHandler.cs" />
+    <Compile Include="Application\Products\Queries\GetProductDetailsRequest.cs" />
+    <Compile Include="Application\Products\Queries\GetProductDetailsResponse.cs" />
+    <Compile Include="Application\Products\Queries\GetProductHandler.cs" />
+    <Compile Include="Application\Products\Queries\GetProductRequest.cs" />
+    <Compile Include="Application\Products\Queries\GetProductResponse.cs" />
+    <Compile Include="Application\Products\Queries\ListProductsHandler.cs" />
+    <Compile Include="Application\Products\Queries\ListProductsRequest.cs" />
+    <Compile Include="Application\Products\Queries\ListProductsResponse.cs" />
+    <Compile Include="Application\Sizes\Queries\ListSizesHandler.cs" />
+    <Compile Include="Application\Sizes\Queries\ListSizesRequest.cs" />
+    <Compile Include="Application\Sizes\Queries\ListSizesResponse.cs" />
+    <Compile Include="Common\Constants.cs" />
+    <Compile Include="Data\Configurations\BrandTypeConfiguration.cs" />
+    <Compile Include="Data\Configurations\CategoryConfiguration.cs" />
+    <Compile Include="Data\Configurations\ImageConfiguration.cs" />
+    <Compile Include="Data\Configurations\ProductConfiguration.cs" />
+    <Compile Include="Data\Configurations\SizeTypeConfiguration.cs" />
+    <Compile Include="Data\Entitties\BrandTypeEF.cs" />
+    <Compile Include="Data\Entitties\CategoryEF.cs" />
+    <Compile Include="Data\Entitties\ImageEF.cs" />
+    <Compile Include="Data\Entitties\ProductEF.cs" />
+    <Compile Include="Data\Entitties\SizeTypeEF.cs" />
+    <Compile Include="Data\Enums\BrandType.cs" />
+    <Compile Include="Data\Enums\SizeType.cs" />
+    <Compile Include="Data\Intilializer\ShopyContextSeeder.cs" />
+    <Compile Include="Data\ShopyContext.cs" />
+    <Compile Include="Factory\MediatorFactory.cs" />
+    <Compile Include="Mappers\BrandMapper.cs" />
+    <Compile Include="Mappers\CategoryMapper.cs" />
+    <Compile Include="Mappers\ImageMapper.cs" />
+    <Compile Include="Mappers\IMapper.cs" />
+    <Compile Include="Mappers\ProductMapper.cs" />
+    <Compile Include="Mappers\SizeMapper.cs" />
+    <Compile Include="Models\Brand.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductDetails.cs" />
+    <Compile Include="Models\ProductFilter.cs" />
+    <Compile Include="Models\RequestValidator.cs" />
+    <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\Size.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

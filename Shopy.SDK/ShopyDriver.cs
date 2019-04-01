@@ -1,12 +1,10 @@
-﻿using Shopy.SDK.ApiModels;
-using Shopy.SDK.ApiModels.Categories;
-using Shopy.SDK.ApiModels.Products;
-using Shopy.SDK.Client;
+﻿using Shopy.Sdk.Client;
+using Shopy.Sdk.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Shopy.SDK
+namespace Shopy.Sdk
 {
     public class ShopyDriver : IShopyDriver
     {
@@ -33,19 +31,19 @@ namespace Shopy.SDK
             return await _categories.ListAsync();
         }
 
-        public async Task GetProductAsycn(AddProduct addProduct)
+        public async Task<Product> GetProductAsync(Guid uid)
         {
-            await _products.AddAsync(addProduct);
+            return await _products.GetAsync(uid);
         }
 
-        public async Task AddProductAsync(AddProduct addProduct)
+        public async Task AddProductAsync(Product product)
         {
-            await _products.AddAsync(addProduct);
+            await _products.AddAsync(product);
         }
 
-        public async Task EditProductAsync(EditProduct editProduct)
+        public async Task EditProductAsync(Product product)
         {
-            await _products.EditAsync(editProduct);
+            await _products.EditAsync(product);
         }
 
         public async Task AddProductToCategoryAsync(Guid productUid, Guid categoryUid)
@@ -68,9 +66,9 @@ namespace Shopy.SDK
             return await _products.GetDetailsAsync(uid);
         }
 
-        public async Task AddCategoryAsync(AddCategory addCategory)
+        public async Task AddCategoryAsync(Category category)
         {
-            await _categories.AddAsync(addCategory);
+            await _categories.AddAsync(category);
         }
 
         public async Task<IEnumerable<Category>> ListCategoriesWithProductsAsync()

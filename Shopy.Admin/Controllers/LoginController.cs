@@ -30,7 +30,7 @@ namespace Shopy.Admin.Controllers
                 return View("Index");
             }
 
-            FormsAuthentication.SetAuthCookie(model.Username, false);
+            FormsAuthentication.SetAuthCookie(model.Username, true);
             var referrerQuery = HttpUtility.ParseQueryString(Request.UrlReferrer.Query);
             var redirectUrl = referrerQuery["ReturnUrl"];
 

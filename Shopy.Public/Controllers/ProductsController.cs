@@ -1,5 +1,5 @@
-﻿using Shopy.SDK;
-using Shopy.SDK.ApiModels.Products;
+﻿using Shopy.Sdk;
+using Shopy.Sdk.Models;
 using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;

@@ -1,10 +1,9 @@
-﻿using Shopy.SDK.ApiModels;
-using Shopy.SDK.ApiModels.Products;
+﻿using Shopy.Sdk.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Shopy.SDK.Client
+namespace Shopy.Sdk.Client
 {
     public class ProductsClient
     {
@@ -21,19 +20,24 @@ namespace Shopy.SDK.Client
             return list.Result;
         }
 
+        public async Task<Product> GetAsync(Guid uid)
+        {
+            return await _client.GetAsync<Product>($"products/{uid}");
+        }
+
         public async Task<ProductDetails> GetDetailsAsync(Guid uid)
         {
-            return await _client.GetAsync<ProductDetails>($"products/{uid}");
+            return await _client.GetAsync<ProductDetails>($"products/details/{uid}");
         }
 
-        public async Task<object> AddAsync(AddProduct addProduct)
+        public async Task<object> AddAsync(Product product)
         {
-            return await _client.PostAsync<AddProduct, object>("products", addProduct);
+            return await _client.PostAsync<Product, object>("products", product);
         }
 
-        public async Task<object> EditAsync(EditProduct editProduct)
+        public async Task<object> EditAsync(Product product)
         {
-            return await _client.PutAsync<EditProduct, object>($"products/{editProduct.Uid}", editProduct);
+            return await _client.PutAsync<Product, object>($"products/{product.Uid}", product);
         }
 
         public async Task<object> DeleteProductAsync(Guid uid)

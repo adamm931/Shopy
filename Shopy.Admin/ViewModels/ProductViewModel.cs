@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Shopy.Sdk.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Shopy.Admin.ViewModels
@@ -9,6 +10,7 @@ namespace Shopy.Admin.ViewModels
     public class ProductViewModel
     {
         //TODO: product images
+        //TODO: image size validation
 
         public Guid Uid { get; set; }
 
@@ -26,36 +28,20 @@ namespace Shopy.Admin.ViewModels
 
         [Required]
         [Display(Name = "Size")]
-        public string Size { get; set; }
+        public SizeType Size { get; set; }
 
         [Required]
         [Display(Name = "Brand")]
-        public string Brand { get; set; }
+        public BrandType Brand { get; set; }
 
-        private static string[] brands = new[] {
-            "Puma",
-            "Addiddas",
-            "Nike",
-            "Champion",
-            "Rebook"};
+        public HttpPostedFileBase Image1 { get; set; }
 
-        private static string[] sizes = new[] {
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL"};
+        public HttpPostedFileBase Image2 { get; set; }
 
-        public static IEnumerable<SelectListItem> Sizes = CreatSelectListItem(sizes);
-        public static IEnumerable<SelectListItem> Brands = CreatSelectListItem(brands);
+        public HttpPostedFileBase Image3 { get; set; }
 
-        private static IEnumerable<SelectListItem> CreatSelectListItem(string[] data)
-        {
-            return data.Select(d => new SelectListItem()
-            {
-                Text = d,
-                Value = d
-            });
-        }
+        public IEnumerable<SelectListItem> Brands { get; set; }
+
+        public IEnumerable<SelectListItem> Sizes { get; set; }
     }
 }

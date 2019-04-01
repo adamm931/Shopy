@@ -6,7 +6,7 @@
 @using Shopy.Admin.ViewModels;
 @model ProductViewModel
 
-<div class="col-md-6 order-md-1">
+<div class="col-md-12 order-md-1">
 
     <div class="col-md-6 mb-4">
         <h2>Add product</h2>
@@ -14,36 +14,82 @@
 
     @using (Html.BeginRouteForm("Products", new { controller = "Products", action = "Add" }))
     {
-        <div class="mb-3 col-md-12">
+        <div class="mb-3 col-md-6">
             @Html.LabelFor(m => m.Caption)
             @Html.TextBoxFor(m => m.Caption, "", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.Caption)
         </div>
-        <div class="mb-3 col-md-12">
+        <div class="mb-3 col-md-6">
 
             @Html.LabelFor(m => m.Description)
             @Html.TextArea("Description", "", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.Description)
         </div>
-        <div class="mb-3 col-md-6">
+        <div class="mb-3 col-md-3">
 
             @Html.LabelFor(m => m.Price)
             @Html.TextBoxFor(m => m.Price, "", new { @class = "form-control", @type = "number" })
             @Html.ValidationMessageFor(m => m.Price)
         </div>
-        <div class="mb-3 col-md-6">
+        <div class="mb-3 col-md-3">
             @Html.LabelFor(m => m.Size)
-            @Html.DropDownListFor(m => m.Size, ProductViewModel.Sizes , new { @class = "custom-select d-block" })
+            @Html.DropDownListFor(m => m.Size, Model.Sizes , new { @class = "custom-select d-block" })
             @Html.ValidationMessageFor(m => m.Size)
         </div>
-        <div class="mb-3 col-md-6">
+        <div class="mb-3 col-md-3">
 
             @Html.LabelFor(m => m.Brand)
-            @Html.DropDownListFor(m => m.Brand, ProductViewModel.Brands, new { @class = "custom-select d-block" })
+            @Html.DropDownListFor(m => m.Brand, Model.Brands, new { @class = "custom-select d-block" })
             @Html.ValidationMessageFor(m => m.Brand)
         </div>
-        <hr class="col-md-10 mb-4" />
-        <div class="col-md-9 row">
+        <!-- images -->
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="file-field">
+                    <label>Main image</label>
+                    <div class="z-depth-1-half mb-4">
+                        <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="img-fluid" alt="example placeholder">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="btn btn-mdb-color btn-rounded float-left">
+                            <span>Choose file</span>
+                            <input type="file">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 pt-5">
+                <div class="file-field">
+                    <div class="z-depth-1-half mb-4">
+                        <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="img-fluid" alt="example placeholder">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="btn btn-mdb-color btn-rounded float-left">
+                            <span>Choose file</span>
+                            <input type="file">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 pt-5">
+                <div class="file-field">
+                    <div class="z-depth-1-half mb-4">
+                        <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="img-fluid" alt="example placeholder">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="btn btn-mdb-color btn-rounded float-left">
+                            <span>Choose file</span>
+                            <input type="file">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /images -->
+        
+        <hr class="col-md-12 mb-4" />
+        <div class="col-md-6 row">
             <div class="col-md-6 mb-3"><button type="submit" class="btn btn-primary btn-lg btn-block">Save</button></div>
             <div class="col-md-6 mb-3"><a href="@Url.RouteUrl("Products", new { action = "List" })" class="btn btn-secondary btn-lg btn-block">Cancel</a></div>
         </div>

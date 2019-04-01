@@ -188,8 +188,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
@@ -207,9 +205,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Shopy.SDK\Shopy.SDK.csproj">
+    <ProjectReference Include="..\Shopy.SDK\Shopy.Sdk.csproj">
       <Project>{33a5c2eb-d1f5-4480-8bc7-ffcb3ac4fcb7}</Project>
-      <Name>Shopy.SDK</Name>
+      <Name>Shopy.Sdk</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

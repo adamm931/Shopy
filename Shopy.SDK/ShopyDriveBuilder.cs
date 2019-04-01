@@ -1,6 +1,6 @@
-﻿using Shopy.SDK.Client;
+﻿using Shopy.Sdk.Client;
 
-namespace Shopy.SDK
+namespace Shopy.Sdk
 {
     public class ShopyDriveBuilder
     {

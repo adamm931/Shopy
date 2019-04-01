@@ -1,5 +1,5 @@
 ﻿using Shopy.Admin.ViewModels;
-using Shopy.SDK.ApiModels.Categories;
+using Shopy.Sdk.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -40,7 +40,7 @@ namespace Shopy.Admin.Controllers
                 return View(model);
             }
 
-            var addCategory = new AddCategory()
+            var addCategory = new Category()
             {
                 Caption = model.Caption
             };

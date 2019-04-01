@@ -5,11 +5,13 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopy.Admin", "Shopy.Admin\Shopy.Admin.csproj", "{4E2D62FD-4734-4574-96A0-F376864D5DF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopy.Api", "Shopy.Api\Shopy.Api.csproj", "{7E0C22C6-E9A9-4026-AE08-B52142D19551}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopy.Public", "Shopy.Public\Shopy.Public.csproj", "{2E493185-FC80-4B33-9F16-BDFAF7BE795F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopy.SDK", "Shopy.SDK\Shopy.SDK.csproj", "{33A5C2EB-D1F5-4480-8BC7-FFCB3AC4FCB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopy.Sdk", "Shopy.SDK\Shopy.Sdk.csproj", "{33A5C2EB-D1F5-4480-8BC7-FFCB3AC4FCB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopy.Core", "Shopy.Core\Shopy.Core.csproj", "{C035BDA9-4B4F-408D-8F96-1E87763B8F3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopy.Api", "Shopy.Api\Shopy.Api.csproj", "{7E0C22C6-E9A9-4026-AE08-B52142D19551}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +23,6 @@ Global
 		{4E2D62FD-4734-4574-96A0-F376864D5DF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E2D62FD-4734-4574-96A0-F376864D5DF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E2D62FD-4734-4574-96A0-F376864D5DF7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7E0C22C6-E9A9-4026-AE08-B52142D19551}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E0C22C6-E9A9-4026-AE08-B52142D19551}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E0C22C6-E9A9-4026-AE08-B52142D19551}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E0C22C6-E9A9-4026-AE08-B52142D19551}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2E493185-FC80-4B33-9F16-BDFAF7BE795F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2E493185-FC80-4B33-9F16-BDFAF7BE795F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E493185-FC80-4B33-9F16-BDFAF7BE795F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +31,14 @@ Global
 		{33A5C2EB-D1F5-4480-8BC7-FFCB3AC4FCB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33A5C2EB-D1F5-4480-8BC7-FFCB3AC4FCB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33A5C2EB-D1F5-4480-8BC7-FFCB3AC4FCB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C035BDA9-4B4F-408D-8F96-1E87763B8F3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C035BDA9-4B4F-408D-8F96-1E87763B8F3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C035BDA9-4B4F-408D-8F96-1E87763B8F3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C035BDA9-4B4F-408D-8F96-1E87763B8F3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E0C22C6-E9A9-4026-AE08-B52142D19551}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E0C22C6-E9A9-4026-AE08-B52142D19551}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E0C22C6-E9A9-4026-AE08-B52142D19551}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E0C22C6-E9A9-4026-AE08-B52142D19551}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

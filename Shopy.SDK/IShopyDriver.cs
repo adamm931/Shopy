@@ -1,11 +1,9 @@
-﻿using Shopy.SDK.ApiModels;
-using Shopy.SDK.ApiModels.Categories;
-using Shopy.SDK.ApiModels.Products;
+﻿using Shopy.Sdk.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Shopy.SDK
+namespace Shopy.Sdk
 {
     public interface IShopyDriver
     {
@@ -17,11 +15,13 @@ namespace Shopy.SDK
 
         Task<ProductDetails> GetProductDetailsAsync(Guid uid);
 
-        Task AddProductAsync(AddProduct addProduct);
+        Task<Product> GetProductAsync(Guid uid);
 
-        Task AddCategoryAsync(AddCategory addProduct);
+        Task AddProductAsync(Product product);
 
-        Task EditProductAsync(EditProduct editProduct);
+        Task AddCategoryAsync(Category category);
+
+        Task EditProductAsync(Product product);
 
         Task AddProductToCategoryAsync(Guid productUid, Guid categoryUid);
 

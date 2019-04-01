@@ -9,7 +9,7 @@
 <div class="col-md-6 order-md-1">
 
     <div class="col-md-6 mb-4">
-        <h2>Add product</h2>
+        <h2>Edit product</h2>
     </div>
     @using (Html.BeginRouteForm("Products", new { controller = "Products", action = "Edit" }))
     {
@@ -34,12 +34,12 @@
         </div>
         <div class="mb-3 col-md-6">
             @Html.LabelFor(m => m.Size)
-            @Html.DropDownListFor(m => m.Size, ProductViewModel.Sizes, new { @class = "custom-select d-block" })
+            @Html.DropDownListFor(m => m.Size, Model.Sizes, new { @class = "custom-select d-block" })
             @Html.ValidationMessageFor(m => m.Size)
         </div>
         <div class="mb-3 col-md-6">
             @Html.LabelFor(m => m.Brand)
-            @Html.DropDownListFor(m => m.Brand, ProductViewModel.Brands, new { @class = "custom-select d-block" })
+            @Html.DropDownListFor(m => m.Brand, Model.Brands, new { @class = "custom-select d-block" })
             @Html.ValidationMessageFor(m => m.Brand)
         </div>
         <hr class="col-md-10 mb-4" />

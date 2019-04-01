@@ -1,4 +1,4 @@
-﻿using Shopy.Api.Application.Products.Queries;
+﻿using Shopy.Core.Application.Products.Queries;
 using System.Threading.Tasks;
 using System.Web.Http;
 

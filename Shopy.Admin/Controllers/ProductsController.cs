@@ -1,10 +1,9 @@
 ﻿using Shopy.Admin.ViewModels;
-using Shopy.SDK.ApiModels.Products;
+using Shopy.Sdk.Models;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-
 namespace Shopy.Admin.Controllers
 {
     [Authorize]
@@ -19,7 +18,7 @@ namespace Shopy.Admin.Controllers
                 Items = products.Select(p => new ProductListItemViewModel()
                 {
                     Uid = p.Uid,
-                    Number = p.ProductID,
+                    Number = p.ProductId,
                     Caption = p.Caption,
                     Price = p.Price
                 })
@@ -29,9 +28,11 @@ namespace Shopy.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Add()
+        public async Task<ActionResult> Add()
         {
-            return View();
+            var model = await PrepareSizeAndBrands();
+
+            return View(model);
         }
 
         [HttpPost]
@@ -42,13 +43,13 @@ namespace Shopy.Admin.Controllers
                 return View("Index", model);
             }
 
-            var addProduct = new AddProduct()
+            var addProduct = new Product()
             {
                 Caption = model.Caption,
                 Description = model.Description,
                 Price = model.Price,
-                BrandType = model.Brand,
-                SizeType = model.Size
+                Brand = model.Brand,
+                Size = model.Size
             };
 
             await this.Shopy.AddProductAsync(addProduct);
@@ -60,16 +61,19 @@ namespace Shopy.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(Guid uid)
         {
-            var productDetails = await Shopy.GetProductDetailsAsync(uid);
+            var product = await Shopy.GetProductAsync(uid);
+            var sizeBrands = await PrepareSizeAndBrands();
 
             var model = new ProductViewModel()
             {
                 Uid = uid,
-                Brand = productDetails.Brand,
-                Size = productDetails.Size,
-                Caption = productDetails.Caption,
-                Description = productDetails.Description,
-                Price = productDetails.Price
+                Caption = product.Caption,
+                Description = product.Description,
+                Price = product.Price,
+                Brand = product.Brand,
+                Size = product.Size,
+                Sizes = sizeBrands.Sizes,
+                Brands = sizeBrands.Brands
             };
 
             return View(model);
@@ -83,14 +87,15 @@ namespace Shopy.Admin.Controllers
                 return View("Index", model);
             }
 
-            var editProduct = new EditProduct()
+            var editProduct = new Product()
             {
                 Uid = model.Uid,
                 Caption = model.Caption,
                 Description = model.Description,
                 Price = model.Price,
-                BrandType = model.Brand,
-                SizeType = model.Size
+                Brand = model.Brand,
+                Size = model.Size
+
             };
 
             await this.Shopy.EditProductAsync(editProduct);
@@ -106,11 +111,13 @@ namespace Shopy.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult ChangeCategories(Guid uid)
+        public async Task<ActionResult> ChangeCategories(Guid uid)
         {
-            var model = new ChangeProductCategoiresViewModel()
+            var product = await Shopy.GetProductAsync(uid);
+            var model = new ChangeProductCategoriesViewModel()
             {
-                ProductUid = uid
+                ProductUid = uid,
+                Caption = product.Caption
             };
 
             return View(model);
@@ -119,22 +126,21 @@ namespace Shopy.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> LoadCategories(Guid uid)
         {
-            var product = await Shopy.GetProductDetailsAsync(uid);
+            var categories = await Shopy.ListCategoriesAsync();
 
-            var availableCategories = product.AvailableCategories
-                .Select(c => new SelectListItem()
-                {
-                    Text = c.Caption,
-                    Value = c.Uid.ToString()
-                });
+            var availableCategories = categories
+                .Where(c => !c.Products.Any(p => p.Uid == uid));
 
-            var model = new
+            var assignedCategories = categories
+                .Where(c => c.Products.Any(p => p.Uid == uid));
+
+            var response = new
             {
-                AssignedCategories = product.AssignedCategories,
-                AvailableCategories = product.AvailableCategories,
+                AssignedCategories = assignedCategories,
+                AvailableCategories = availableCategories,
             };
 
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -149,6 +155,25 @@ namespace Shopy.Admin.Controllers
         {
             await Shopy.RemoveProductFromCategoryAsync(uid, categoryUid);
             return Json(true);
+        }
+
+        private async Task<ProductViewModel> PrepareSizeAndBrands()
+        {
+            var sizes = await Shopy.ListSizesAsync();
+            var brands = await Shopy.ListBrandsAsync();
+
+            var sizesSelectList = SelectListItemConverter
+                .Convert(sizes, s => s.Caption, s => s.EId.ToString());
+            var brandsSelectList = SelectListItemConverter
+                .Convert(brands, s => s.Caption, s => s.EId.ToString());
+
+            var model = new ProductViewModel()
+            {
+                Sizes = sizesSelectList,
+                Brands = brandsSelectList
+            };
+
+            return model;
         }
     }
 }

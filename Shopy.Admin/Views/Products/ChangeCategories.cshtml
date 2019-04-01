@@ -4,17 +4,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using Shopy.Admin.ViewModels;
-@using System.Web.Mvc;
-@model ChangeProductCategoiresViewModel
+@model ChangeProductCategoriesViewModel
 
 
-<!-- ko with: productCategoires -->
+<!-- ko with: productCategoriesManager -->
 <h2>Add or remove categories for product @Model.Caption</h2>
 <div class="table-responsive">
     <table class="table table-striped table-sm">
         <thead>
             <tr>
-                <th>Number</th>
+                <th>ID</th>
                 <th colspan="2">Caption</th>
             </tr>
         </thead>
@@ -46,8 +45,9 @@
         removeFromCategory: '@Url.RouteUrl("ProductCategories", new { action = "RemoveFromCategory", uid = Model.ProductUid })',
     };
 
-    var productCategoires = new ProductCategories(endpoints);
-    productCategoires.load();
-    ko.applyBindings(productCategoires);
+    var Admin = Admin || {};
+    var productCategoriesManager = new Admin.ProductCategoriesManager();
+    productCategoriesManager.load();
+    ko.applyBindings(productCategoriesManager);
 </script>
 

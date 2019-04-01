@@ -1,8 +1,8 @@
-﻿using Shopy.SDK.ApiModels;
+﻿using Shopy.Sdk.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Shopy.SDK.Client
+namespace Shopy.Sdk.Client
 {
     public class BrandsClient
     {

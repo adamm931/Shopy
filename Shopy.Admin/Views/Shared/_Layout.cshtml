@@ -5,7 +5,6 @@
 </head>
 <body>
     @(ViewBag.IsAuthenticated ? Html.Partial("_HeaderLoged") : Html.Partial("_Header"))
-
     @Scripts.Render("~/Content/bundle/js")
     @RenderSection("scripts", required: false)
 

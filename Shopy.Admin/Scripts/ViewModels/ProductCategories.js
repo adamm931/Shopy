@@ -1,72 +1,72 @@
 ﻿
+var Admin = Admin || {};
 
-    function ProductCategories(endpoints) {
+(function ($, ko, ns) {
 
-    var self = this;
+    function ProductCategoriesManager() {
 
-    self.availableCategories = ko.observableArray([]);
-    self.assignedCategories = ko.observableArray([]);
+        var self = this;
 
-    self.loading = ko.observable(false);
-    self.selectedCategoryToAdd = ko.observable();
+        self.availableCategories = ko.observableArray([]);
+        self.assignedCategories = ko.observableArray([]);
 
-    self.load = function () {
+        self.selectedCategoryToAdd = ko.observable();
 
-        self.loading(true);
+        self.load = function () {
 
-        jQuery.ajax({
-            url: endpoints.loadCategories,
-            type: 'GET',
-            success: function (data) {
-                self.availableCategories(data.AvailableCategories);
-                self.assignedCategories(data.AssignedCategories);
-                self.loading(false)
-            },
-            failure: function (data) {
-                alert('Something went wrong!');
-                self.loading(false)
-            }
-        });
-    }
-
-    self.addToCategory = function () {
-
-        var category = self.selectedCategoryToAdd();
-        if (category === undefined) {
-            return;
+            $.ajax({
+                url: endpoints.loadCategories,
+                type: 'GET',
+                success: function (data) {
+                    self.availableCategories(data.AvailableCategories);
+                    self.assignedCategories(data.AssignedCategories);
+                    self.loading(false)
+                },
+                failure: function (data) {
+                    alert('Something went wrong!');
+                    self.loading(false)
+                }
+            });
         }
-        self.manageCategory(endpoints.addToCategory, category.Uid);
-    }
 
-    self.removeFromCategory = function (item, event) {
-        self.manageCategory(endpoints.removeFromCategory, item.Uid);
-    }
+        self.addToCategory = function () {
 
-    self.manageCategory = function(endpoint, categoryUid) {
-
-        self.loading(true);
-
-        jQuery.ajax({
-            url: endpoint,
-            data: {
-                categoryUid: categoryUid
-            },
-            type: 'POST',
-            success: function (data) {
-                self.load();
-                self.loading(false)
-            },
-            failure: function (data) {
-                alert('Something went wrong!');
-                self.loading(false)
+            var category = self.selectedCategoryToAdd();
+            if (category === undefined) {
+                return;
             }
-        });
+            self.manageCategory(endpoints.addToCategory, category.Uid);
+        }
 
+        self.removeFromCategory = function (item, event) {
+            self.manageCategory(endpoints.removeFromCategory, item.Uid);
+        }
+
+        self.manageCategory = function (endpoint, categoryUid) {
+
+
+            $.ajax({
+                url: endpoint,
+                data: {
+                    categoryUid: categoryUid
+                },
+                type: 'POST',
+                success: function (data) {
+                    self.load();
+                },
+                failure: function (data) {
+                    alert('Something went wrong!');
+                }
+            });
+
+        }
     }
-}
 
-//    $.extend(ns, { ProductCategories: ProductCategories });
+    $.extend(Admin, {
+        ProductCategoriesManager: ProductCategoriesManager
+    });
 
-//})(Shopy.Admin.ViewModels, jQuery, ko);
+})(jQuery, ko, Admin);
+
 
 

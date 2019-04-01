@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shopy.SDK.Client
+namespace Shopy.Sdk.Client
 {
     public class ShopyHttpClient
     {

@@ -7,8 +7,8 @@
     <ProjectGuid>{33A5C2EB-D1F5-4480-8BC7-FFCB3AC4FCB7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Shopy.SDK</RootNamespace>
-    <AssemblyName>Shopy.SDK</AssemblyName>
+    <RootNamespace>Shopy.Sdk</RootNamespace>
+    <AssemblyName>Shopy.Sdk</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,21 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiModels\Categories\AddCategory.cs" />
-    <Compile Include="ApiModels\Products\Filter.cs" />
-    <Compile Include="ApiModels\Products\ProductFilter.cs" />
-    <Compile Include="ApiModels\Brand.cs" />
-    <Compile Include="ApiModels\Size.cs" />
+    <Compile Include="Models\Brand.cs" />
+    <Compile Include="Models\BrandType.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\ListResult.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductDetails.cs" />
+    <Compile Include="Models\ProductFilter.cs" />
+    <Compile Include="Models\Size.cs" />
+    <Compile Include="Models\SizeType.cs" />
     <Compile Include="Client\SizesClient.cs" />
     <Compile Include="Client\BrandsClient.cs" />
     <Compile Include="Client\CategoriesClient.cs" />
-    <Compile Include="ApiModels\ErrorResponse.cs" />
-    <Compile Include="ApiModels\Products\AddProduct.cs" />
-    <Compile Include="ApiModels\Categories\Category.cs" />
-    <Compile Include="ApiModels\ListResult.cs" />
-    <Compile Include="ApiModels\Products\EditProduct.cs" />
-    <Compile Include="ApiModels\Products\Product.cs" />
-    <Compile Include="ApiModels\Products\ProductDetails.cs" />
     <Compile Include="Client\ProductsClient.cs" />
     <Compile Include="Client\ShopyHttpClient.cs" />
     <Compile Include="IShopyDriver.cs" />
@@ -65,7 +62,6 @@
     <Compile Include="ShopyDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
