@@ -1,5 +1,6 @@
 ﻿using Shopy.Core.Data.Entities.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace Shopy.Core.Models
 {
@@ -19,6 +20,6 @@ namespace Shopy.Core.Models
 
         public BrandType Brand { get; set; }
 
-        public SizeType Size { get; set; }
+        public IEnumerable<Size> Sizes { get; set; }
     }
 }

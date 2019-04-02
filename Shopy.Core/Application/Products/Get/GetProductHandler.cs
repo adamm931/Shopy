@@ -12,13 +12,16 @@ namespace Shopy.Core.Application.Products.Get
     {
         public async Task<GetProductResponse> Handle(ReceiveContext<GetProductRequest> context, CancellationToken cancellationToken)
         {
-            var dbContext = ShopyContext.Current;
-            var request = context.Message;
-            var product = await dbContext.Products
-                .SingleOrDefaultAsync(p => p.Uid == request.Uid);
+            using (var dbContext = new ShopyContext())
+            {
+                var request = context.Message;
+                var product = await dbContext.Products
+                    .Include(p => p.Sizes)
+                    .SingleAsync(p => p.Uid == request.Uid);
 
-            var productMapper = new ProductMapper();
-            return new GetProductResponse(productMapper.FromEF(product));
+                var productMapper = new ProductMapper();
+                return new GetProductResponse(productMapper.FromEF(product));
+            }
         }
     }
 }

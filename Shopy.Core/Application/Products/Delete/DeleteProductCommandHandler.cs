@@ -10,12 +10,14 @@ namespace Shopy.Core.Application.Products.Commands
     {
         public async Task Handle(ReceiveContext<DeleteProductCommand> context, CancellationToken cancellationToken)
         {
-            var dbContext = ShopyContext.Current;
-            var command = context.Message;
+            using (var dbContext = new ShopyContext())
+            {
+                var command = context.Message;
 
-            var toRemove = await dbContext.Products.FindAsync(command.Uid);
-            dbContext.Products.Remove(toRemove);
-            await dbContext.SaveChangesAsync();
+                var toRemove = await dbContext.Products.FindAsync(command.Uid);
+                dbContext.Products.Remove(toRemove);
+                await dbContext.SaveChangesAsync();
+            }
         }
     }
 }

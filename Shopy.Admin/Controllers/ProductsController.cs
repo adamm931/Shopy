@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 namespace Shopy.Admin.Controllers
 {
+    //TODO: remove image when product is deleted
     [Authorize]
     public class ProductsController : BaseController
     {
@@ -51,8 +52,8 @@ namespace Shopy.Admin.Controllers
         {
             var model = new ProductViewModel()
             {
-                Brands = await SelectListItemUtils.GetBrandsSLI(),
-                Sizes = await SelectListItemUtils.GetSizesSLI(),
+                BrandsSelectList = await SelectListItemUtils.GetBrandsSLI(),
+                //SizesSelectList = await SelectListItemUtils.GetSizesSLI(),
                 Image1 = ImageViewModel.Empty,
                 Image2 = ImageViewModel.Empty,
                 Image3 = ImageViewModel.Empty,
@@ -66,7 +67,7 @@ namespace Shopy.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("Index", model);
+                return View(model);
             }
 
             var addProduct = new Product()
@@ -75,7 +76,7 @@ namespace Shopy.Admin.Controllers
                 Description = model.Description,
                 Price = model.Price,
                 Brand = model.Brand,
-                Size = model.Size
+                Sizes = model.Sizes
             };
 
             var product = await Shopy.AddProductAsync(addProduct);
@@ -102,9 +103,9 @@ namespace Shopy.Admin.Controllers
                 Description = product.Description,
                 Price = product.Price,
                 Brand = product.Brand,
-                Size = product.Size,
-                Sizes = await SelectListItemUtils.GetSizesSLI(),
-                Brands = await SelectListItemUtils.GetBrandsSLI(),
+                Sizes = product.Sizes,
+                SizesSelectList = await SelectListItemUtils.GetSizesSLI(),
+                BrandsSelectList = await SelectListItemUtils.GetBrandsSLI(),
                 Image1 = new ImageViewModel(image1Url1),
                 Image2 = new ImageViewModel(image1Url2),
                 Image3 = new ImageViewModel(image1Url3),
@@ -118,7 +119,7 @@ namespace Shopy.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("Index", model);
+                return View(model);
             }
 
             var editProduct = new Product()
@@ -128,7 +129,7 @@ namespace Shopy.Admin.Controllers
                 Description = model.Description,
                 Price = model.Price,
                 Brand = model.Brand,
-                Size = model.Size
+                Sizes = model.Sizes
             };
 
             await Shopy.EditProductAsync(editProduct);

@@ -8,7 +8,6 @@ namespace Shopy.Admin.ViewModels
 {
     public class ProductViewModel
     {
-        //TODO: product images
         //TODO: image size validation
 
         public Guid Uid { get; set; }
@@ -27,7 +26,7 @@ namespace Shopy.Admin.ViewModels
 
         [Required]
         [Display(Name = "Size")]
-        public SizeType Size { get; set; }
+        public IEnumerable<Size> Sizes { get; set; }
 
         [Required]
         [Display(Name = "Brand")]
@@ -42,8 +41,8 @@ namespace Shopy.Admin.ViewModels
         [Display(Name = "Optional")]
         public ImageViewModel Image3 { get; set; }
 
-        public IEnumerable<SelectListItem> Brands { get; set; }
+        public IEnumerable<SelectListItem> BrandsSelectList { get; set; }
 
-        public IEnumerable<SelectListItem> Sizes { get; set; }
+        public IEnumerable<SelectListItem> SizesSelectList { get; set; }
     }
 }

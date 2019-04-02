@@ -6,12 +6,7 @@ namespace Shopy.Core.Mappers
 {
     public class CategoryMapper : IMapper<Category, CategoryEF>
     {
-        private ProductMapper _productMapper;
-
-        public CategoryMapper()
-        {
-            _productMapper = new ProductMapper();
-        }
+        private ProductMapper _productMapper = new ProductMapper();
 
         public Category FromEF(CategoryEF efEntity)
         {

@@ -13,23 +13,25 @@ namespace Shopy.Core.Application.Categories.Get
     {
         public async Task<ListCategoriesResponse> Handle(ReceiveContext<ListCategoriesRequest> context, CancellationToken cancellationToken)
         {
-            var dbContext = ShopyContext.Current;
-            var request = context.Message;
-
-            var categories = dbContext.Categories
-                .Include(p => p.Products)
-                .Include("Products.Brand")
-                .Include("Products.Size");
-
-            if (request.WithProductsOnly)
+            using (var dbContext = new ShopyContext())
             {
-                categories = categories.Where(c => c.Products.Any());
-            }
+                var request = context.Message;
 
-            var categoryList = await categories.ToListAsync();
-            var mapper = new CategoryMapper();
-            var projection = categoryList.Select(c => mapper.FromEF(c));
-            return new ListCategoriesResponse(projection);
+                var categories = dbContext.Categories
+                    .Include(p => p.Products)
+                    .Include("Products.Brand")
+                    .Include("Products.Sizes");
+
+                if (request.WithProductsOnly)
+                {
+                    categories = categories.Where(c => c.Products.Any());
+                }
+
+                var categoryList = await categories.ToListAsync();
+                var mapper = new CategoryMapper();
+                var projection = categoryList.Select(c => mapper.FromEF(c));
+                return new ListCategoriesResponse(projection);
+            }
         }
     }
 }

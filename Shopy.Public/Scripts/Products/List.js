@@ -13,10 +13,6 @@ var Products = Products || {};
             loadFilters();
         }
 
-        self.setFilter = function (filter) {
-            self.filter = filter;
-        }
-
         self.categoryFilters = ko.observableArray();
         self.brandFilters = ko.observableArray();
         self.sizeFilters = ko.observableArray();
@@ -25,21 +21,39 @@ var Products = Products || {};
         self.selectedBrands = ko.observableArray();
 
         self.items = ko.observableArray();
+        self.filters = new SearchFilters();
 
         self.search = function () {
 
             $.ajax({
                 url: endpoints.Search,
-                data: self.filter,
+                data: self.filters.data(),
                 type: 'POST',
                 success: function (response) {
-                    var items = _.map(response.Items, i => new Product(i));
-                    self.items(items);
+                    //_.each(response.Items, i => self.items.push(new Product(i)));
+                    self.items(_.map(response.Items, i => new Product(i)));
                 },
                 failure: function (response) {
                     aler('Error');
                 }
             });
+        }
+
+        self.selectedSizes.subscribe(function (value) {
+            var pure = _.map(value, v => v.replace("s", ""));
+            self.filters.setSizes(pure);
+            self.search();
+        });
+
+        self.selectedBrands.subscribe(function (value) {
+            var pure = _.map(value, v => v.replace("b", ""));
+            self.filters.setBrands(pure);
+            self.search();
+        });
+
+        self.loadMoreProducts = function () {
+            self.filters.nextPage();
+            self.search();
         }
 
         var loadFilters = function () {
@@ -50,11 +64,9 @@ var Products = Products || {};
 
                     //load brands
                     self.brandFilters(_.map(response.Brands, b => new BrandFilter(b)));
-                    self.selectedBrands.push(response.Brands[0].Caption);
 
                     //load sizes
                     self.sizeFilters(_.map(response.Sizes, s => new SizeFilter(s)));
-                    self.selectedSizes.push(response.Sizes[0].Caption);
 
                     //load categories
                     self.categoryFilters(_.map(response.Categories, c => new CategoryFilter(c)));
@@ -64,27 +76,25 @@ var Products = Products || {};
                 }
             });
         }
-
-        self.selectedSizes.subscribe(function (value) { console.log('selectedSizes.subscribe' + value); });
-        self.selectedBrands.subscribe(function (value) { console.log('selectedBrands.subscribe' + value); });
     }
 
     function Product(item) {
-        
+
         var self = this;
 
         self.price = item.Price;
         self.caption = item.Caption;
         self.detailsLink = endpoints.Details.replace("id", item.Uid);
-
-        //here size, brands, categories
+        self.image1Url = productImage1UrlTemplate.replace("{{id}}", item.Uid);
+        self.size = item.Size;
+        self.brand = item.Brand;
     }
 
     function SizeFilter(size) {
 
         var self = this;
 
-        self.id = size.Uid;
+        self.id = "s" + size.EId;
         self.caption = size.Caption;
         self.checked = ko.observable(false);
     }
@@ -93,7 +103,7 @@ var Products = Products || {};
 
         var self = this;
 
-        self.id = brand.Uid;
+        self.id = "b" + brand.EId;
         self.caption = brand.Caption;
         self.checked = ko.observable(false);
     }
@@ -104,6 +114,50 @@ var Products = Products || {};
 
         self.id = category.Uid;
         self.caption = category.Caption;
+    }
+
+    function SearchFilters() {
+
+        var self = this;
+
+        //make this configurabile
+        self.pageIndex = 0;
+        self.pageSize = 9;
+
+        self.categories = [];
+        self.brands = [];
+        self.sizes = [];
+        self.minPrice = 0;
+        self.maxPrice = Number.MAX_SAFE_INTEGER;
+
+        self.nextPage = function () {
+            self.pageIndex += 1;
+            self.pageSize += self.pageSize;
+        }
+
+        self.setBrands = function (brands) {
+            self.brands = brands;
+        }
+
+        self.setSizes = function (sizes) {
+            self.sizes = sizes;
+        }
+
+        self.setPrices = function (max, min) {
+            self.maxPrice = max;
+            self.minPrice = minPrice;
+        }
+
+        self.data = function () {
+            return  {
+                PageIndex: self.pageIndex,
+                PageSize: self.pageSize,
+                Brands: self.brands,
+                Sizes: self.sizes,
+                MinPrice: self.minPrice,
+                MaxPrice: self.maxPrice
+            }
+        }
     }
 
     $.extend(ns, {List: List});

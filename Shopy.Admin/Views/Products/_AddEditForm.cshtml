@@ -18,14 +18,19 @@
     @Html.ValidationMessageFor(m => m.Price)
 </div>
 <div class="mb-3 col-md-3">
-    @Html.LabelFor(m => m.Size)
-    @Html.DropDownListFor(m => m.Size, Model.Sizes, new { @class = "custom-select d-block" })
-    @Html.ValidationMessageFor(m => m.Size)
+    @Html.LabelFor(m => m.Sizes)
+
+    @foreach (var size in Model.Sizes)
+    {
+        @Html.CheckBox("Sizes", true, new { @class = "form-check-input" })
+    }
+        @*@Html.DropDownListFor(m => m.Size, Model.Sizes, new { @class = "custom-select d-block" })
+    @Html.ValidationMessageFor(m => m.Size)*@
 </div>
 <div class="mb-3 col-md-3">
 
     @Html.LabelFor(m => m.Brand)
-    @Html.DropDownListFor(m => m.Brand, Model.Brands, new { @class = "custom-select d-block" })
+    @Html.DropDownListFor(m => m.Brand, Model.BrandsSelectList, new { @class = "custom-select d-block" })
     @Html.ValidationMessageFor(m => m.Brand)
 </div>
 <!-- images -->

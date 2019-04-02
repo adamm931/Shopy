@@ -13,20 +13,22 @@ namespace Shopy.Core.Application.Categories.Add
     {
         public async Task<AddCategoryResponse> Handle(ReceiveContext<AddCategoryRequest> context, CancellationToken cancellationToken)
         {
-            var dbContext = ShopyContext.Current;
-            var request = context.Message;
-
-            var category = dbContext.Categories.Add(new CategoryEF()
+            using (var dbContext = new ShopyContext())
             {
-                Uid = Guid.NewGuid(),
-                Caption = request.Caption
-            });
+                var request = context.Message;
 
-            await dbContext.SaveChangesAsync();
+                var category = dbContext.Categories.Add(new CategoryEF()
+                {
+                    Uid = Guid.NewGuid(),
+                    Caption = request.Caption
+                });
 
-            var categoryMapper = new CategoryMapper();
+                await dbContext.SaveChangesAsync();
 
-            return new AddCategoryResponse(categoryMapper.FromEF(category));
+                var categoryMapper = new CategoryMapper();
+
+                return new AddCategoryResponse(categoryMapper.FromEF(category));
+            }
         }
     }
 }

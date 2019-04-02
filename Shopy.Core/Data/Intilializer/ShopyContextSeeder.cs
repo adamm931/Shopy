@@ -1,10 +1,8 @@
-﻿using Shopy.Core.Common;
-using Shopy.Core.Data.Entities;
+﻿using Shopy.Core.Data.Entities;
 using Shopy.Core.Data.Entities.Enums;
 using Shopy.Data;
 using System;
 using System.Data.Entity;
-using System.Linq;
 
 namespace Shopy.Core
 {
@@ -28,8 +26,6 @@ namespace Shopy.Core
             var brandTypes = GetBrandTypes();
             var sizeTypes = GetSizeTypes();
 
-            dbContext.AddSequence(Constants.ProductsSerial, 1);
-
             //products
             products[0].Categories.Add(categoires[0]);
             products[1].Categories.Add(categoires[2]);
@@ -49,20 +45,21 @@ namespace Shopy.Core
 
             //products sizes
             sizeTypes[0].Products.AddRange(new[] { products[0], products[7] });
-            products[0].Size = sizeTypes[0];
-            products[7].Size = sizeTypes[0];
+            products[0].Sizes.AddRange(new[] { sizeTypes[0], sizeTypes[2] });
+            products[7].Sizes.AddRange(new[] { sizeTypes[1], sizeTypes[3] });
 
             sizeTypes[1].Products.AddRange(new[] { products[1], products[2] });
-            products[1].Size = sizeTypes[1];
-            products[2].Size = sizeTypes[1];
+            products[1].Sizes.AddRange(new[] { sizeTypes[1], sizeTypes[2] });
+            products[2].Sizes.AddRange(new[] { sizeTypes[1], sizeTypes[2] });
+
 
             sizeTypes[2].Products.AddRange(new[] { products[3], products[5] });
-            products[3].Size = sizeTypes[2];
-            products[5].Size = sizeTypes[2];
+            products[3].Sizes.AddRange(new[] { sizeTypes[0], sizeTypes[2] });
+            products[5].Sizes.AddRange(new[] { sizeTypes[1], sizeTypes[0] });
 
             sizeTypes[3].Products.AddRange(new[] { products[4], products[6] });
-            products[4].Size = sizeTypes[3];
-            products[6].Size = sizeTypes[3];
+            products[4].Sizes.AddRange(new[] { sizeTypes[1], sizeTypes[3] });
+            products[6].Sizes.AddRange(new[] { sizeTypes[3], sizeTypes[2] });
 
 
             //products brands
@@ -237,19 +234,19 @@ namespace Shopy.Core
             return size;
         }
 
-        private SizeTypeEF GetSize(SizeType type)
-        {
-            return Sizes.Single(s => s.SizeTypeEID == type);
-        }
+        //private SizeTypeEF GetSize(SizeType type)
+        //{
+        //    return Sizes.Single(s => s.SizeTypeEID == type);
+        //}
 
-        private BrandTypeEF GetBrand(BrandType type)
-        {
-            return Brands.Single(s => s.BrandTypeEId == type);
-        }
+        //private BrandTypeEF GetBrand(BrandType type)
+        //{
+        //    return Brands.Single(s => s.BrandTypeEId == type);
+        //}
 
-        private CategoryEF GetCategory(string caption)
-        {
-            return Categories.Single(c => c.Caption == caption);
-        }
+        //private CategoryEF GetCategory(string caption)
+        //{
+        //    return Categories.Single(c => c.Caption == caption);
+        //}
     }
 }

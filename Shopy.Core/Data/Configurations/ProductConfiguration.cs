@@ -30,14 +30,6 @@ namespace Shopy.Core.Data.Configurations
                 .HasColumnName("caption")
                 .IsRequired();
 
-            this.Property(p => p.SizeEId)
-                .HasColumnName("size_eid")
-                .IsRequired();
-
-            this.HasRequired(p => p.Size)
-                .WithMany(p => p.Products)
-                .HasForeignKey(p => p.SizeEId);
-
             this.Property(p => p.BrandEId)
                 .HasColumnName("brand_eid")
                 .IsRequired();
@@ -53,6 +45,15 @@ namespace Shopy.Core.Data.Configurations
                     t.MapLeftKey("fk_product_id");
                     t.MapRightKey("fk_category_id");
                     t.ToTable("product_category");
+                });
+
+            this.HasMany(p => p.Sizes)
+                .WithMany(c => c.Products)
+                .Map(t =>
+                {
+                    t.MapLeftKey("fk_product_id");
+                    t.MapRightKey("fk_size_eid");
+                    t.ToTable("product_sizes");
                 });
         }
     }

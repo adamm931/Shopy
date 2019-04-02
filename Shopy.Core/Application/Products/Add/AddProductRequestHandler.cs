@@ -14,33 +14,36 @@ namespace Shopy.Core.Application.Products.Add
     {
         public async Task<AddProductResponse> Handle(ReceiveContext<AddProductRequest> context, CancellationToken cancellationToken)
         {
-            var dbContext = ShopyContext.Current;
-            var command = context.Message;
-
-            var brand = dbContext.BrandTypes
-                .FirstOrDefault(b => b.BrandTypeEId == command.Brand);
-
-            var size = dbContext.SizeTypes
-                .FirstOrDefault(s => s.SizeTypeEID == command.Size);
-
-            var uid = Guid.NewGuid();
-            var productEf = dbContext.Products.Add(new ProductEF()
+            using (var dbContext = new ShopyContext())
             {
-                Uid = uid,
-                Caption = command.Caption,
-                Description = command.Description,
-                Price = command.Price,
-                Brand = brand,
-                Size = size
-            });
+                var command = context.Message;
 
-            await dbContext.SaveChangesAsync();
+                var brand = dbContext.BrandTypes
+                    .Single(b => b.BrandTypeEId == command.Brand);
 
-            productEf = await dbContext.Products.FindAsync(uid);
+                var sizes = dbContext.SizeTypes
+                    .Where(s => command.Sizes.Any(cs => cs.EId == s.SizeTypeEID))
+                    .ToList();
 
-            var productMapper = new ProductMapper();
+                var uid = Guid.NewGuid();
+                var productEf = dbContext.Products.Add(new ProductEF()
+                {
+                    Uid = uid,
+                    Caption = command.Caption,
+                    Description = command.Description,
+                    Price = command.Price,
+                    Brand = brand,
+                    Sizes = sizes
+                });
 
-            return new AddProductResponse(productMapper.FromEF(productEf));
+                await dbContext.SaveChangesAsync();
+
+                productEf = await dbContext.Products.FindAsync(uid);
+
+                var productMapper = new ProductMapper();
+
+                return new AddProductResponse(productMapper.FromEF(productEf));
+            }
         }
     }
 }

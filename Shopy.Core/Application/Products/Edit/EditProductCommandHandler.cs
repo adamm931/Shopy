@@ -2,6 +2,7 @@
 using Mediator.Net.Contracts;
 using Shopy.Data;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,24 +12,27 @@ namespace Shopy.Core.Application.Products.Edit
     {
         public async Task Handle(ReceiveContext<EditProductCommand> context, CancellationToken cancellationToken)
         {
-            var dbContext = ShopyContext.Current;
-            var command = context.Message;
+            using (var dbContext = new ShopyContext())
+            {
+                var command = context.Message;
 
-            var product = await dbContext.Products.FindAsync(command.Uid);
+                var product = await dbContext.Products.FindAsync(command.Uid);
 
-            var brand = await dbContext.BrandTypes
-                .FirstOrDefaultAsync(b => b.BrandTypeEId == command.Brand);
+                var brand = await dbContext.BrandTypes
+                    .SingleAsync(b => b.BrandTypeEId == command.Brand);
 
-            var size = await dbContext.SizeTypes
-                .FirstOrDefaultAsync(s => s.SizeTypeEID == command.Size);
+                var sizes = await dbContext.SizeTypes
+                    .Where(s => command.Sizes.Any(cs => cs.EId == s.SizeTypeEID))
+                    .ToListAsync();
 
-            product.Price = command.Price;
-            product.Caption = command.Caption;
-            product.Size = size;
-            product.Brand = brand;
-            product.Description = command.Description;
+                product.Price = command.Price;
+                product.Caption = command.Caption;
+                product.Sizes = sizes;
+                product.Brand = brand;
+                product.Description = command.Description;
 
-            await dbContext.SaveChangesAsync();
+                await dbContext.SaveChangesAsync();
+            }
         }
     }
 }

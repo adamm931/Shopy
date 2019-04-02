@@ -10,16 +10,18 @@ namespace Shopy.Core.Application.Products.RemoveFromCategory
     {
         public async Task Handle(ReceiveContext<RemoveProductFromCategoryCommand> context, CancellationToken cancellationToken)
         {
-            var dbContext = ShopyContext.Current;
-            var command = context.Message;
+            using (var dbContext = new ShopyContext())
+            {
+                var command = context.Message;
 
-            var product = await dbContext.Products.FindAsync(command.ProductUid);
-            var category = await dbContext.Categories.FindAsync(command.CategoryUid);
+                var product = await dbContext.Products.FindAsync(command.ProductUid);
+                var category = await dbContext.Categories.FindAsync(command.CategoryUid);
 
-            product.Categories.Remove(category);
-            category.Products.Remove(product);
+                product.Categories.Remove(category);
+                category.Products.Remove(product);
 
-            await dbContext.SaveChangesAsync();
+                await dbContext.SaveChangesAsync();
+            }
         }
     }
 }

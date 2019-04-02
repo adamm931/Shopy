@@ -13,14 +13,16 @@ namespace Shopy.Core.Application.Brands.Get
     {
         public async Task<ListBrandsResponse> Handle(ReceiveContext<ListBrandsRequest> context, CancellationToken cancellationToken)
         {
-            var dbContext = ShopyContext.Current;
-            var request = context.Message;
+            using (var dbContext = new ShopyContext())
+            {
+                var request = context.Message;
 
-            var brandMapper = new BrandMapper();
-            var brands = await dbContext.BrandTypes.ToListAsync();
-            var projection = brands.Select(b => brandMapper.FromEF(b));
+                var brandMapper = new BrandMapper();
+                var brands = await dbContext.BrandTypes.ToListAsync();
+                var projection = brands.Select(b => brandMapper.FromEF(b));
 
-            return new ListBrandsResponse(projection);
+                return new ListBrandsResponse(projection);
+            }
         }
     }
 }

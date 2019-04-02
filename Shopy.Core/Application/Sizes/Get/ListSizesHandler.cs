@@ -13,27 +13,16 @@ namespace Shopy.Core.Application.Sizes.Get
     {
         public async Task<ListSizesResponse> Handle(ReceiveContext<ListSizesRequest> context, CancellationToken cancellationToken)
         {
-            var dbContext = ShopyContext.Current;
-            var request = context.Message;
+            using (var dbContext = new ShopyContext())
+            {
+                var request = context.Message;
 
-            var mapper = new SizeMapper();
-            var sizes = await dbContext.SizeTypes.ToListAsync();
+                var mapper = new SizeMapper();
+                var sizes = await dbContext.SizeTypes.ToListAsync();
+                var projection = sizes.Select(s => mapper.FromEF(s));
 
-            //var config = new MapperConfiguration(cfg =>
-            //{
-            //    cfg.CreateMap<SizeTypeEF, Size>();
-            //    cfg.CreateMap<ProductEF, Product>();
-            //    cfg.CreateMap<CategoryEF, Size>();
-            //    cfg.CreateMap<Brand, Size>();
-            //    cfg.CreateMap<SizeTypeEF, Size>();
-
-            //});
-
-            ////var mapper = config.CreateMapper();
-            var projection = sizes.Select(s => mapper.FromEF(s));
-
-            return new ListSizesResponse(projection);
-
+                return new ListSizesResponse(projection);
+            }
         }
     }
 }

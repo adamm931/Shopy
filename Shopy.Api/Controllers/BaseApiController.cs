@@ -1,4 +1,5 @@
 ﻿using Mediator.Net;
+using Shopy.Api.Logging;
 using Shopy.Core.Factory;
 using System;
 using System.Linq;
@@ -15,6 +16,16 @@ namespace Shopy.Api.Controllers
             get
             {
                 return _mediator ?? (_mediator = MediatorFactory.GetMediator());
+            }
+        }
+
+        private ILogger _logger;
+        protected ILogger Logger
+        {
+            get
+            {
+                return _logger ?? (
+                    _logger = Logging.Logger.Create(@"C:\DEV\DotNet\Web\Shopy\logs.txt"));
             }
         }
 
@@ -38,6 +49,7 @@ namespace Shopy.Api.Controllers
 
             catch (Exception e)
             {
+                Logger.LogMessage(e.ToString());
                 return InternalServerError(e);
             }
         }
@@ -68,6 +80,7 @@ namespace Shopy.Api.Controllers
 
             catch (Exception e)
             {
+                Logger.LogMessage(e.ToString());
                 return InternalServerError(e);
             }
         }

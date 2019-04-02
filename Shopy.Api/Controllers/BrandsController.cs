@@ -9,10 +9,8 @@ namespace Shopy.Api.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> Get()
         {
-            var items = await Mediator
-                .RequestAsync<ListBrandsRequest, ListBrandsResponse>(new ListBrandsRequest());
-
-            return Ok(items);
+            return await ProcessRequest(
+                request: () => Mediator.RequestAsync<ListBrandsRequest, ListBrandsResponse>(new ListBrandsRequest()));
         }
     }
 }

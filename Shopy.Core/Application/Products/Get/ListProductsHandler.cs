@@ -15,27 +15,26 @@ namespace Shopy.Core.Application.Products.Get
 {
     public class ListProductsHandler : IRequestHandler<ListProductsRequest, ListProductsResponse>
     {
-        public Task<ListProductsResponse> Handle(ReceiveContext<ListProductsRequest> context, CancellationToken cancellationToken)
+        public async Task<ListProductsResponse> Handle(ReceiveContext<ListProductsRequest> context, CancellationToken cancellationToken)
         {
-            var dbContext = ShopyContext.Current;
-            var request = context.Message;
+            using (var dbContext = new ShopyContext())
+            {
+                var request = context.Message;
 
-            var products = dbContext.Products
-                .Include(p => p.Brand)
-                .Include(p => p.Size)
-                .Include(p => p.Categories)
-                .AsNoTracking()
-                .AsEnumerable();
+                var products = dbContext.Products
+                    .Include(p => p.Brand)
+                    .Include(p => p.Sizes)
+                    .Include(p => p.Categories);
 
-            products = FilterProducts(products, request.Filter);
+                var filteredProducts = await FilterProducts(products, request.Filter);
+                var productMapper = new ProductMapper();
+                var result = filteredProducts.Select(r => productMapper.FromEF(r));
 
-            var productMapper = new ProductMapper();
-            var result = products.Select(r => productMapper.FromEF(r));
-
-            return Task.FromResult(new ListProductsResponse(result));
+                return new ListProductsResponse(result);
+            }
         }
 
-        private IEnumerable<ProductEF> FilterProducts(IEnumerable<ProductEF> products, ProductFilter productFilter)
+        private async Task<List<ProductEF>> FilterProducts(IQueryable<ProductEF> products, ProductFilter productFilter)
         {
             //paging
             if (productFilter.PageSize.HasValue && productFilter.PageIndex.HasValue)
@@ -44,6 +43,7 @@ namespace Shopy.Core.Application.Products.Get
                 var pageIndex = productFilter.PageIndex.Value;
 
                 products = products
+                    .OrderBy(p => p.ProductId)
                     .Skip(pageIndex * pageSize)
                     .Take((pageIndex + 1) * pageSize);
             }
@@ -64,10 +64,10 @@ namespace Shopy.Core.Application.Products.Get
             //size
             if (!string.IsNullOrWhiteSpace(productFilter.Sizes))
             {
-                var sizes = productFilter.Sizes.Split(',');
+                var filterSizes = productFilter.Sizes.Split(',');
 
                 products = products
-                    .Where(p => sizes.Any(s => p.Size.Caption.Equals(s, StringComparison.OrdinalIgnoreCase)));
+                    .Where(p => filterSizes.Any(fs => p.Sizes.Any(s => (int)s.SizeTypeEID == Convert.ToInt32(fs))));
             }
 
             //brand
@@ -76,10 +76,10 @@ namespace Shopy.Core.Application.Products.Get
                 var brands = productFilter.Brands.Split(',');
 
                 products = products
-                    .Where(p => brands.Any(b => p.Brand.Caption.Equals(b, StringComparison.OrdinalIgnoreCase)));
+                    .Where(p => brands.Any(b => (int)p.Brand.BrandTypeEId == Convert.ToInt32(b)));
             }
 
-            return products;
+            return await products.ToListAsync();
         }
     }
 }

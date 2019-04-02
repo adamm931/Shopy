@@ -11,9 +11,6 @@ using System.Web.Http;
 
 namespace Shopy.Api.Controllers
 {
-    //TODO: implement parameters validation
-    //TODO: wrapp methods with try catch
-
     [RoutePrefix("api/products")]
     public class ProductsController : BaseApiController
     {

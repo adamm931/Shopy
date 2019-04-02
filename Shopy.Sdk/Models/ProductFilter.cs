@@ -5,9 +5,9 @@ namespace Shopy.Sdk.Models
 {
     public class ProductFilter
     {
-        public string Sizes { get; set; }
+        public BrandType[] Sizes { get; set; }
 
-        public string Brands { get; set; }
+        public BrandType[] Brands { get; set; }
 
         public int? PageIndex { get; set; }
 
@@ -21,14 +21,14 @@ namespace Shopy.Sdk.Models
         {
             var @params = new Dictionary<string, object>();
 
-            if (!string.IsNullOrEmpty(Brands))
+            if (Brands.Any())
             {
-                @params.Add("brands", Brands);
+                @params.Add("brands", string.Join(",", Brands));
             }
 
-            if (!string.IsNullOrEmpty(Sizes))
+            if (Sizes.Any())
             {
-                @params.Add("sizes", Sizes);
+                @params.Add("sizes", string.Join(",", Sizes));
             }
 
             if (MinPrice.HasValue)

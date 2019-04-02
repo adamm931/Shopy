@@ -10,23 +10,19 @@ namespace Shopy.Api.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> Get(bool withProductsOnly = false)
         {
-            var request = new ListCategoriesRequest()
-            {
-                WithProductsOnly = withProductsOnly
-            };
-
-            var items = await Mediator
-                .RequestAsync<ListCategoriesRequest, ListCategoriesResponse>(request);
-
-            return Ok(items);
+            return await ProcessRequest(
+                request: () => Mediator.RequestAsync<ListCategoriesRequest, ListCategoriesResponse>(
+                    new ListCategoriesRequest(withProductsOnly)));
         }
 
         [HttpPost]
         public async Task<IHttpActionResult> Post([FromBody]AddCategoryRequest addCategory)
         {
-            var category = await Mediator.RequestAsync<AddCategoryRequest, AddCategoryResponse>(addCategory);
-
-            return Ok(category);
+            return await ProcessRequest(
+                request: () => Mediator.RequestAsync<AddCategoryRequest, AddCategoryResponse>(addCategory),
+                paramValidators: new RequestParamValidator(
+                    rule: () => !string.IsNullOrEmpty(addCategory?.Caption),
+                    message: "Category caption is null or empty"));
         }
     }
 }
