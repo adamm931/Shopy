@@ -19,7 +19,7 @@ namespace Shopy.Core.Mappers
                 Description = efEntity.Description,
                 Price = efEntity.Price,
                 Brand = efEntity.BrandEId,
-                Sizes = efEntity.Sizes.Select(s => sizeMapper.FromEF(s))
+                Sizes = efEntity.Sizes.Select(s => s.SizeTypeEID)
             };
         }
 

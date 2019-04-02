@@ -153,10 +153,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\0f6cd671-764b-4dce-92ff-29e8e6bdb0d2\main.png" />
+    <Content Include="Resources\287b5dd4-cbc1-4cb0-8888-a8efe57e2d4b\main.png" />
+    <Content Include="Resources\287b5dd4-cbc1-4cb0-8888-a8efe57e2d4b\second.png" />
+    <Content Include="Resources\287b5dd4-cbc1-4cb0-8888-a8efe57e2d4b\third.png" />
     <Content Include="Resources\39378dff-3c84-46fc-be7b-147547b8baa0\main.png" />
     <Content Include="Resources\bf42e815-af47-4779-8bd6-b61807c7fa1d\main.png" />
+    <Content Include="Resources\e2c08690-b70d-44e2-906c-b3a6843881f8\main.png" />
     <Content Include="Resources\empty-img.png" />
     <Content Include="Scripts\Bindings\ImagePreview.js" />
+    <Content Include="Scripts\ViewModels\ProductAddEdit.js" />
     <Content Include="Scripts\ViewModels\ProductCategories.js" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -212,7 +217,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Utils\SelectListItemUtils.cs" />
+    <Compile Include="Utils\SelectListUtils.cs" />
     <Compile Include="Utils\ImageUtils.cs" />
     <Compile Include="ViewModels\AddCategoryViewModel.cs" />
     <Compile Include="ViewModels\CategoryListItemViewModel.cs" />

@@ -25,8 +25,8 @@ namespace Shopy.Admin.ViewModels
         public decimal Price { get; set; }
 
         [Required]
-        [Display(Name = "Size")]
-        public IEnumerable<Size> Sizes { get; set; }
+        [Display(Name = "Sizes")]
+        public IEnumerable<SizeType> Sizes { get; set; }
 
         [Required]
         [Display(Name = "Brand")]
@@ -43,6 +43,6 @@ namespace Shopy.Admin.ViewModels
 
         public IEnumerable<SelectListItem> BrandsSelectList { get; set; }
 
-        public IEnumerable<SelectListItem> SizesSelectList { get; set; }
+        public MultiSelectList SelectedSizesML { get; set; }
     }
 }

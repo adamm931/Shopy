@@ -1,5 +1,6 @@
 ﻿using Shopy.Core.Data.Entities;
 using Shopy.Core.Models;
+using System;
 
 namespace Shopy.Core.Mappers
 {
@@ -16,11 +17,7 @@ namespace Shopy.Core.Mappers
 
         public SizeTypeEF ToEF<TSoure>(Size model)
         {
-            return new SizeTypeEF()
-            {
-                Caption = model.Caption,
-                SizeTypeEID = model.EId
-            };
+            throw new NotImplementedException();
         }
     }
 }

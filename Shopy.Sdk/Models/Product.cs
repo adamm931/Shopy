@@ -11,6 +11,6 @@ namespace Shopy.Sdk.Models
         public decimal Price { get; set; }
         public string Description { get; set; }
         public BrandType Brand { get; set; }
-        public IEnumerable<Size> Sizes { get; set; }
+        public IEnumerable<SizeType> Sizes { get; set; }
     }
 }

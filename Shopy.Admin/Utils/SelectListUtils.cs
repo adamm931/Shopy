@@ -16,16 +16,23 @@ namespace Shopy.Admin
             _shopyDriver = shopyDriver;
         }
 
-        public async Task<IEnumerable<SelectListItem>> GetBrandsSLI()
+        public async Task<IEnumerable<SelectListItem>> GetBrandsSL()
         {
             var brands = await _shopyDriver.ListBrandsAsync();
             return Convert(brands, b => b.Caption, b => b.EId.ToString());
         }
 
-        public async Task<IEnumerable<SelectListItem>> GetSizesSLI()
+        public async Task<IEnumerable<SelectListItem>> GetSizesSL()
         {
             var sizes = await _shopyDriver.ListSizesAsync();
             return Convert(sizes, b => b.Caption, b => b.EId.ToString());
+        }
+
+        public async Task<MultiSelectList> GetSizesMSL()
+        {
+            var sizes = await _shopyDriver.ListSizesAsync();
+            //var selectList = Convert(sizes, b => b.Caption, b => b.EId.ToString());
+            return new MultiSelectList(sizes, "EId", "Caption");
         }
 
         public IEnumerable<SelectListItem> Convert<T>(

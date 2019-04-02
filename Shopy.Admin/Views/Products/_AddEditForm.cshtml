@@ -19,13 +19,7 @@
 </div>
 <div class="mb-3 col-md-3">
     @Html.LabelFor(m => m.Sizes)
-
-    @foreach (var size in Model.Sizes)
-    {
-        @Html.CheckBox("Sizes", true, new { @class = "form-check-input" })
-    }
-        @*@Html.DropDownListFor(m => m.Size, Model.Sizes, new { @class = "custom-select d-block" })
-    @Html.ValidationMessageFor(m => m.Size)*@
+    @Html.ListBoxFor(m => m.Sizes, Model.SelectedSizesML, new { size = 4, @class = "custom-select d-block" })
 </div>
 <div class="mb-3 col-md-3">
 

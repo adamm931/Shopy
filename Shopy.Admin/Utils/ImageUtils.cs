@@ -1,6 +1,7 @@
 ﻿using Shopy.Admin.ViewModels;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace Shopy.Admin.Utils
@@ -14,48 +15,64 @@ namespace Shopy.Admin.Utils
             _httpContext = httpContext;
         }
 
-        public void SavePostedImages(ProductViewModel model, Guid productUid)
+        public async Task SavePostedImagesAsync(ProductViewModel model, Guid productUid)
         {
-            var relativePath =
-                $@"~/{Constants.ProductImageRootTemplate.Replace("{{productUid}}", productUid.ToString())}";
-
-            var serverPath = _httpContext.Server.MapPath(relativePath);
-
-            if (!Directory.Exists(serverPath))
+            await Task.Run(() =>
             {
-                Directory.CreateDirectory(serverPath);
-            }
 
-            if (model.Image1.File != null)
-            {
-                model.Image1.File.SaveAs(Path.Combine(serverPath, Constants.Image1));
-            }
+                var directoryPath = GetImageDirectoryPath(productUid);
+                var serverPath = _httpContext.Server.MapPath($"~/{directoryPath}");
 
-            if (model.Image2.File != null)
-            {
-                model.Image2.File.SaveAs(Path.Combine(serverPath, Constants.Image2));
-            }
+                if (!Directory.Exists(serverPath))
+                {
+                    Directory.CreateDirectory(serverPath);
+                }
 
-            if (model.Image3.File != null)
-            {
-                model.Image3.File.SaveAs(Path.Combine(serverPath, Constants.Image3));
+                if (model.Image1.File != null)
+                {
+                    model.Image1.File.SaveAs(Path.Combine(serverPath, Constants.Image1));
+                }
 
-            }
+                if (model.Image2.File != null)
+                {
+                    model.Image2.File.SaveAs(Path.Combine(serverPath, Constants.Image2));
+                }
+
+                if (model.Image3.File != null)
+                {
+                    model.Image3.File.SaveAs(Path.Combine(serverPath, Constants.Image3));
+                }
+            });
         }
 
-        public string GetImageUrl(Guid productUid, string name)
+        public async Task<string> GetImageUrl(Guid productUid, string name)
         {
-            var productImageDir = Constants.ProductImageRootTemplate
-                .Replace("{{productUid}}", productUid.ToString());
+            return await Task.Run(() =>
+            {
+                var productImageDir = GetImageDirectoryPath(productUid);
 
-            var relativePath = $@"{productImageDir}/{name}";
-            var serverPath = _httpContext.Server.MapPath("~/" + relativePath);
+                var relativePath = $"{productImageDir}/{name}";
+                var serverPath = _httpContext.Server.MapPath("~/" + relativePath);
 
-            var url = File.Exists(serverPath)
-                ? relativePath
-                : Constants.ProductImageEmptytUrl;
+                return File.Exists(serverPath)
+                    ? relativePath
+                    : Constants.ProductImageEmptytUrl;
+            });
+        }
 
-            return url;
+        public async Task DeleteImagesAsync(Guid productUid)
+        {
+            await Task.Run(() =>
+            {
+                var directoryPath = GetImageDirectoryPath(productUid);
+                Directory.Delete(directoryPath);
+            });
+        }
+
+        private string GetImageDirectoryPath(Guid uid)
+        {
+            return Constants.ProductImageRootTemplate
+                     .Replace("{{productUid}}", uid.ToString());
         }
     }
 }

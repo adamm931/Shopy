@@ -4,6 +4,7 @@ using Shopy.Core.Data.Entities;
 using Shopy.Core.Mappers;
 using Shopy.Data;
 using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,14 +19,17 @@ namespace Shopy.Core.Application.Products.Add
             {
                 var command = context.Message;
 
-                var brand = dbContext.BrandTypes
-                    .Single(b => b.BrandTypeEId == command.Brand);
+                var brand = await dbContext.BrandTypes
+                    .SingleAsync(b => b.BrandTypeEId == command.Brand);
 
-                var sizes = dbContext.SizeTypes
-                    .Where(s => command.Sizes.Any(cs => cs.EId == s.SizeTypeEID))
-                    .ToList();
+                var sizes = await dbContext.SizeTypes
+                    .Where(s => command.Sizes.Any(cs => cs == s.SizeTypeEID))
+                    .ToListAsync();
+
+
 
                 var uid = Guid.NewGuid();
+
                 var productEf = dbContext.Products.Add(new ProductEF()
                 {
                     Uid = uid,
@@ -35,6 +39,11 @@ namespace Shopy.Core.Application.Products.Add
                     Brand = brand,
                     Sizes = sizes
                 });
+
+                foreach (var size in sizes)
+                {
+                    size.Products.Add(productEf);
+                }
 
                 await dbContext.SaveChangesAsync();
 

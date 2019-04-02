@@ -20,12 +20,12 @@ namespace Shopy.Admin.Controllers
             }
         }
 
-        private SelectListItemUtils selectListItemUtils;
-        protected SelectListItemUtils SelectListItemUtils
+        private SelectListItemUtils selectListUtils;
+        protected SelectListItemUtils SelectListUtils
         {
             get
             {
-                return selectListItemUtils ?? (selectListItemUtils = new SelectListItemUtils(Shopy));
+                return selectListUtils ?? (selectListUtils = new SelectListItemUtils(Shopy));
             }
         }
 
@@ -52,8 +52,8 @@ namespace Shopy.Admin.Controllers
         {
             var model = new ProductViewModel()
             {
-                BrandsSelectList = await SelectListItemUtils.GetBrandsSLI(),
-                //SizesSelectList = await SelectListItemUtils.GetSizesSLI(),
+                BrandsSelectList = await SelectListUtils.GetBrandsSL(),
+                SelectedSizesML = await SelectListUtils.GetSizesMSL(),
                 Image1 = ImageViewModel.Empty,
                 Image2 = ImageViewModel.Empty,
                 Image3 = ImageViewModel.Empty,
@@ -81,7 +81,7 @@ namespace Shopy.Admin.Controllers
 
             var product = await Shopy.AddProductAsync(addProduct);
 
-            ImageUtlis.SavePostedImages(model, product.Uid);
+            await ImageUtlis.SavePostedImagesAsync(model, product.Uid);
 
             return RedirectToAction("List");
         }
@@ -92,9 +92,9 @@ namespace Shopy.Admin.Controllers
         {
             var product = await Shopy.GetProductAsync(uid);
 
-            var image1Url1 = ImageUtlis.GetImageUrl(uid, Constants.Image1);
-            var image1Url2 = ImageUtlis.GetImageUrl(uid, Constants.Image2);
-            var image1Url3 = ImageUtlis.GetImageUrl(uid, Constants.Image3);
+            var image1Url1 = await ImageUtlis.GetImageUrl(uid, Constants.Image1);
+            var image1Url2 = await ImageUtlis.GetImageUrl(uid, Constants.Image2);
+            var image1Url3 = await ImageUtlis.GetImageUrl(uid, Constants.Image3);
 
             var model = new ProductViewModel()
             {
@@ -104,8 +104,8 @@ namespace Shopy.Admin.Controllers
                 Price = product.Price,
                 Brand = product.Brand,
                 Sizes = product.Sizes,
-                SizesSelectList = await SelectListItemUtils.GetSizesSLI(),
-                BrandsSelectList = await SelectListItemUtils.GetBrandsSLI(),
+                SelectedSizesML = await SelectListUtils.GetSizesMSL(),
+                BrandsSelectList = await SelectListUtils.GetBrandsSL(),
                 Image1 = new ImageViewModel(image1Url1),
                 Image2 = new ImageViewModel(image1Url2),
                 Image3 = new ImageViewModel(image1Url3),
@@ -133,8 +133,7 @@ namespace Shopy.Admin.Controllers
             };
 
             await Shopy.EditProductAsync(editProduct);
-
-            ImageUtlis.SavePostedImages(model, model.Uid);
+            await ImageUtlis.SavePostedImagesAsync(model, model.Uid);
 
             return RedirectToAction("List");
         }
@@ -143,6 +142,7 @@ namespace Shopy.Admin.Controllers
         public async Task<ActionResult> Delete(Guid uid)
         {
             await Shopy.DeleteProductAsync(uid);
+            await ImageUtlis.DeleteImagesAsync(uid);
             return RedirectToAction("List");
         }
 
