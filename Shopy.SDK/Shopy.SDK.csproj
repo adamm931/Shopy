@@ -46,10 +46,11 @@
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\BrandType.cs" />
     <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\ListResult.cs" />
+    <Compile Include="Models\ListResponse.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductDetails.cs" />
     <Compile Include="Models\ProductFilter.cs" />
+    <Compile Include="Models\Response.cs" />
     <Compile Include="Models\Size.cs" />
     <Compile Include="Models\SizeType.cs" />
     <Compile Include="Client\SizesClient.cs" />

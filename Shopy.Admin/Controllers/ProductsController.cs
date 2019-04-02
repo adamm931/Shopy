@@ -1,4 +1,5 @@
-﻿using Shopy.Admin.ViewModels;
+﻿using Shopy.Admin.Utils;
+using Shopy.Admin.ViewModels;
 using Shopy.Sdk.Models;
 using System;
 using System.Linq;
@@ -9,6 +10,24 @@ namespace Shopy.Admin.Controllers
     [Authorize]
     public class ProductsController : BaseController
     {
+        private ImageUtlis imageUtils;
+        protected ImageUtlis ImageUtlis
+        {
+            get
+            {
+                return imageUtils ?? (imageUtils = new ImageUtlis(HttpContext));
+            }
+        }
+
+        private SelectListItemUtils selectListItemUtils;
+        protected SelectListItemUtils SelectListItemUtils
+        {
+            get
+            {
+                return selectListItemUtils ?? (selectListItemUtils = new SelectListItemUtils(Shopy));
+            }
+        }
+
         [HttpGet]
         public async Task<ActionResult> List()
         {
@@ -18,7 +37,7 @@ namespace Shopy.Admin.Controllers
                 Items = products.Select(p => new ProductListItemViewModel()
                 {
                     Uid = p.Uid,
-                    Number = p.ProductId,
+                    ProductId = p.ProductId,
                     Caption = p.Caption,
                     Price = p.Price
                 })
@@ -30,7 +49,14 @@ namespace Shopy.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> Add()
         {
-            var model = await PrepareSizeAndBrands();
+            var model = new ProductViewModel()
+            {
+                Brands = await SelectListItemUtils.GetBrandsSLI(),
+                Sizes = await SelectListItemUtils.GetSizesSLI(),
+                Image1 = ImageViewModel.Empty,
+                Image2 = ImageViewModel.Empty,
+                Image3 = ImageViewModel.Empty,
+            };
 
             return View(model);
         }
@@ -52,7 +78,9 @@ namespace Shopy.Admin.Controllers
                 Size = model.Size
             };
 
-            await this.Shopy.AddProductAsync(addProduct);
+            var product = await Shopy.AddProductAsync(addProduct);
+
+            ImageUtlis.SavePostedImages(model, product.Uid);
 
             return RedirectToAction("List");
         }
@@ -62,7 +90,10 @@ namespace Shopy.Admin.Controllers
         public async Task<ActionResult> Edit(Guid uid)
         {
             var product = await Shopy.GetProductAsync(uid);
-            var sizeBrands = await PrepareSizeAndBrands();
+
+            var image1Url1 = ImageUtlis.GetImageUrl(uid, Constants.Image1);
+            var image1Url2 = ImageUtlis.GetImageUrl(uid, Constants.Image2);
+            var image1Url3 = ImageUtlis.GetImageUrl(uid, Constants.Image3);
 
             var model = new ProductViewModel()
             {
@@ -72,8 +103,11 @@ namespace Shopy.Admin.Controllers
                 Price = product.Price,
                 Brand = product.Brand,
                 Size = product.Size,
-                Sizes = sizeBrands.Sizes,
-                Brands = sizeBrands.Brands
+                Sizes = await SelectListItemUtils.GetSizesSLI(),
+                Brands = await SelectListItemUtils.GetBrandsSLI(),
+                Image1 = new ImageViewModel(image1Url1),
+                Image2 = new ImageViewModel(image1Url2),
+                Image3 = new ImageViewModel(image1Url3),
             };
 
             return View(model);
@@ -95,10 +129,11 @@ namespace Shopy.Admin.Controllers
                 Price = model.Price,
                 Brand = model.Brand,
                 Size = model.Size
-
             };
 
-            await this.Shopy.EditProductAsync(editProduct);
+            await Shopy.EditProductAsync(editProduct);
+
+            ImageUtlis.SavePostedImages(model, model.Uid);
 
             return RedirectToAction("List");
         }
@@ -155,25 +190,6 @@ namespace Shopy.Admin.Controllers
         {
             await Shopy.RemoveProductFromCategoryAsync(uid, categoryUid);
             return Json(true);
-        }
-
-        private async Task<ProductViewModel> PrepareSizeAndBrands()
-        {
-            var sizes = await Shopy.ListSizesAsync();
-            var brands = await Shopy.ListBrandsAsync();
-
-            var sizesSelectList = SelectListItemConverter
-                .Convert(sizes, s => s.Caption, s => s.EId.ToString());
-            var brandsSelectList = SelectListItemConverter
-                .Convert(brands, s => s.Caption, s => s.EId.ToString());
-
-            var model = new ProductViewModel()
-            {
-                Sizes = sizesSelectList,
-                Brands = brandsSelectList
-            };
-
-            return model;
         }
     }
 }

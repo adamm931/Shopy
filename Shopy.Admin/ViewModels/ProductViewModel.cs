@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Shopy.Admin.ViewModels
@@ -34,11 +33,14 @@ namespace Shopy.Admin.ViewModels
         [Display(Name = "Brand")]
         public BrandType Brand { get; set; }
 
-        public HttpPostedFileBase Image1 { get; set; }
+        [Display(Name = "Main")]
+        public ImageViewModel Image1 { get; set; }
 
-        public HttpPostedFileBase Image2 { get; set; }
+        [Display(Name = "Optional")]
+        public ImageViewModel Image2 { get; set; }
 
-        public HttpPostedFileBase Image3 { get; set; }
+        [Display(Name = "Optional")]
+        public ImageViewModel Image3 { get; set; }
 
         public IEnumerable<SelectListItem> Brands { get; set; }
 

@@ -1,5 +1,5 @@
-﻿using Shopy.Core.Application.Categories.Commands;
-using Shopy.Core.Application.Products.Queries;
+﻿using Shopy.Core.Application.Categories.Add;
+using Shopy.Core.Application.Categories.Get;
 using System.Threading.Tasks;
 using System.Web.Http;
 

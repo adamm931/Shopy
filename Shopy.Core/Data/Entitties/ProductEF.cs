@@ -26,12 +26,9 @@ namespace Shopy.Core.Data.Entities
 
         public List<CategoryEF> Categories { get; set; }
 
-        public List<ImageEF> Images { get; set; }
-
         public ProductEF()
         {
             Categories = new List<CategoryEF>();
-            Images = new List<ImageEF>();
         }
     }
 }

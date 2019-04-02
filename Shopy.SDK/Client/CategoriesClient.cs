@@ -15,13 +15,13 @@ namespace Shopy.Sdk.Client
 
         public async Task<IEnumerable<Category>> ListAsync()
         {
-            var list = await _client.GetAsync<ListResult<Category>>("categories");
+            var list = await _client.GetAsync<ListResponse<Category>>("categories");
             return list.Result;
         }
 
         public async Task<IEnumerable<Category>> ListWithProductsAsync()
         {
-            var list = await _client.GetAsync<ListResult<Category>>($"categories/?withProductsOnly={true}");
+            var list = await _client.GetAsync<ListResponse<Category>>($"categories/?withProductsOnly={true}");
             return list.Result;
         }
 

@@ -54,15 +54,6 @@ namespace Shopy.Core.Data.Configurations
                     t.MapRightKey("fk_category_id");
                     t.ToTable("product_category");
                 });
-
-            this.HasMany(p => p.Images)
-                .WithMany(i => i.Products)
-                .Map(t =>
-                {
-                    t.MapLeftKey("fk_product_id");
-                    t.MapRightKey("fk_image_id");
-                    t.ToTable("product_image");
-                });
         }
     }
 }

@@ -23,7 +23,6 @@ namespace Shopy.Data
         public virtual DbSet<CategoryEF> Categories { get; set; }
         public virtual DbSet<SizeTypeEF> SizeTypes { get; set; }
         public virtual DbSet<BrandTypeEF> BrandTypes { get; set; }
-        public virtual DbSet<ImageEF> Images { get; set; }
 
         public ShopyContext()
             : base(Constants.ConnectionStringName)

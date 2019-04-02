@@ -15,7 +15,7 @@ namespace Shopy.Sdk.Client
 
         public async Task<IEnumerable<Brand>> ListAsync()
         {
-            var list = await _client.GetAsync<ListResult<Brand>>("brands");
+            var list = await _client.GetAsync<ListResponse<Brand>>("brands");
             return list.Result;
         }
     }

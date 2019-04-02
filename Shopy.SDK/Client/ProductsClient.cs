@@ -16,13 +16,14 @@ namespace Shopy.Sdk.Client
 
         public async Task<IEnumerable<Product>> ListAsync(ProductFilter filter = null)
         {
-            var list = await _client.GetAsync<ListResult<Product>>($"products/{filter?.GetQueryString()}");
+            var list = await _client.GetAsync<ListResponse<Product>>($"products/{filter?.GetQueryString()}");
             return list.Result;
         }
 
         public async Task<Product> GetAsync(Guid uid)
         {
-            return await _client.GetAsync<Product>($"products/{uid}");
+            var product = await _client.GetAsync<Response<Product>>($"products/{uid}");
+            return product.Result;
         }
 
         public async Task<ProductDetails> GetDetailsAsync(Guid uid)
@@ -30,9 +31,10 @@ namespace Shopy.Sdk.Client
             return await _client.GetAsync<ProductDetails>($"products/details/{uid}");
         }
 
-        public async Task<object> AddAsync(Product product)
+        public async Task<Product> AddAsync(Product product)
         {
-            return await _client.PostAsync<Product, object>("products", product);
+            var addProduct = await _client.PostAsync<Product, Response<Product>>("products", product);
+            return addProduct.Result;
         }
 
         public async Task<object> EditAsync(Product product)

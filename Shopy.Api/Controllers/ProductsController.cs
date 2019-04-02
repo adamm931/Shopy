@@ -1,5 +1,9 @@
-﻿using Shopy.Core.Application.Products.Commands;
-using Shopy.Core.Application.Products.Queries;
+﻿using Shopy.Core.Application.Products.Add;
+using Shopy.Core.Application.Products.AddToCategory;
+using Shopy.Core.Application.Products.Commands;
+using Shopy.Core.Application.Products.Edit;
+using Shopy.Core.Application.Products.Get;
+using Shopy.Core.Application.Products.RemoveFromCategory;
 using Shopy.Core.Models;
 using System;
 using System.Threading.Tasks;
@@ -39,15 +43,15 @@ namespace Shopy.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IHttpActionResult> Post([FromBody]AddProductCommand addProduct)
+        public async Task<IHttpActionResult> Post([FromBody]AddProductRequest addProduct)
         {
-            return await ProcessCommand(
-                command: () => Mediator.SendAsync(addProduct),
+            return await ProcessRequest(
+                request: () => Mediator.RequestAsync<AddProductRequest, AddProductResponse>(addProduct),
                 paramValidators: new RequestParamValidator(() => addProduct != null, "Product is null"));
         }
 
         [HttpPut]
-        public async Task<IHttpActionResult> Put(Guid uid, [FromBody]UpdateProductCommand updateProduct)
+        public async Task<IHttpActionResult> Put(Guid uid, [FromBody]EditProductCommand updateProduct)
         {
             updateProduct.Uid = uid;
 

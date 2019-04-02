@@ -1,0 +1,65 @@
+﻿@model Shopy.Admin.ViewModels.ProductViewModel
+
+<div class="mb-3 col-md-6">
+    @Html.LabelFor(m => m.Caption)
+    @Html.TextBoxFor(m => m.Caption, "", new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Caption)
+</div>
+<div class="mb-3 col-md-6">
+
+    @Html.LabelFor(m => m.Description)
+    @Html.TextArea("Description", Model.Description, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Description)
+</div>
+<div class="mb-3 col-md-3">
+
+    @Html.LabelFor(m => m.Price)
+    @Html.TextBoxFor(m => m.Price, "", new { @class = "form-control", @type = "number" })
+    @Html.ValidationMessageFor(m => m.Price)
+</div>
+<div class="mb-3 col-md-3">
+    @Html.LabelFor(m => m.Size)
+    @Html.DropDownListFor(m => m.Size, Model.Sizes, new { @class = "custom-select d-block" })
+    @Html.ValidationMessageFor(m => m.Size)
+</div>
+<div class="mb-3 col-md-3">
+
+    @Html.LabelFor(m => m.Brand)
+    @Html.DropDownListFor(m => m.Brand, Model.Brands, new { @class = "custom-select d-block" })
+    @Html.ValidationMessageFor(m => m.Brand)
+</div>
+<!-- images -->
+<div class="ml-3 row">
+
+    <!-- 1. -->
+    <div class="col-md-2 mr-2 border">
+        @Html.LabelFor(m => m.Image1, new { @class = "custom-file-label" })
+        @Html.TextBoxFor(m => m.Image1.File, new Dictionary<string, object> { { "type", "file" }, { "accept", "image/*" }, { "class", "custom-file-input" }, { "data-bind", "imagePreview" } })
+        <img class="ml-3 mt-2 mb-2" width="100" height="100" src="@Model.Image1.Url" alt="" />
+    </div>
+
+    <!-- 2. -->
+    <div class="col-md-2 mr-2 border">
+        @Html.LabelFor(m => m.Image2, new { @class = "custom-file-label" })
+        @Html.TextBoxFor(m => m.Image2.File, new Dictionary<string, object> { { "type", "file" }, { "accept", "image/*" }, { "class", "custom-file-input" }, { "data-bind", "imagePreview" } })
+        <img class="ml-3 mt-2 mb-2" width="100" height="100" src="@Model.Image2.Url" alt="" />
+    </div>
+
+    <!-- 3.-->
+    <div class="col-md-2 mr-2 border">
+        @Html.LabelFor(m => m.Image3, new { @class = "custom-file-label" })
+        @Html.TextBoxFor(m => m.Image3.File, new Dictionary<string, object> { { "type", "file" }, { "accept", "image/*" }, { "class", "custom-file-input" }, { "data-bind", "imagePreview" } })
+        <img class="ml-2 mt-2 mb-2" width="100" height="100" src="@Model.Image3.Url" alt="" />
+    </div>
+
+</div>
+
+<!-- /images -->
+
+<hr class="col-md-12 mb-4" />
+<div class="col-md-6 row">
+    <div class="col-md-6 mb-3"><button type="submit" class="btn btn-primary btn-lg btn-block">Save</button></div>
+    <div class="col-md-6 mb-3"><a href="@Url.RouteUrl("Products", new { action = "List" })" class="btn btn-secondary btn-lg btn-block">Cancel</a></div>
+</div>
+
+

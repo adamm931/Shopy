@@ -14,7 +14,6 @@ namespace Shopy.Core
         private static ProductEF[] Products = GetProducts();
         private static CategoryEF[] Categories = GetCategories();
         private static BrandTypeEF[] Brands = GetBrandTypes();
-        private static ImageEF[] Images = GetImages();
 
         public void InitializeDatabase(ShopyContext dbContext)
         {
@@ -28,7 +27,6 @@ namespace Shopy.Core
             var categoires = GetCategories();
             var brandTypes = GetBrandTypes();
             var sizeTypes = GetSizeTypes();
-            var images = GetImages();
 
             dbContext.AddSequence(Constants.ProductsSerial, 1);
 
@@ -83,18 +81,6 @@ namespace Shopy.Core
             brandTypes[3].Products.AddRange(new[] { products[3], products[7] });
             products[3].Brand = brandTypes[3];
             products[7].Brand = brandTypes[3];
-
-
-            //product images
-            products[0].Images.Add(images[0]);
-            products[0].Images.Add(images[1]);
-            products[1].Images.Add(images[2]);
-            products[2].Images.Add(images[3]);
-            products[3].Images.Add(images[0]);
-            products[4].Images.Add(images[2]);
-            products[5].Images.Add(images[3]);
-            products[6].Images.Add(images[1]);
-            products[7].Images.Add(images[1]);
 
             //save
             dbContext.SaveChanges();
@@ -249,39 +235,6 @@ namespace Shopy.Core
             };
 
             return size;
-        }
-
-        private static ImageEF[] GetImages()
-        {
-            return new[] {
-                new ImageEF()
-                {
-                    Uid = Guid.NewGuid(),
-                    Name = "jacket.png",
-                    Url = "test"
-                },
-
-                new ImageEF()
-                {
-                    Uid = Guid.NewGuid(),
-                    Name = "shoes.png",
-                    Url = "test"
-                },
-
-                new ImageEF()
-                {
-                    Uid = Guid.NewGuid(),
-                    Name = "t-shirt.png",
-                    Url = "test"
-                },
-
-                new ImageEF()
-                {
-                    Uid = Guid.NewGuid(),
-                    Name = "jeans.png",
-                    Url = "test"
-                }
-            };
         }
 
         private SizeTypeEF GetSize(SizeType type)

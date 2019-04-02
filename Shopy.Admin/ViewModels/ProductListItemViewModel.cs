@@ -6,7 +6,7 @@ namespace Shopy.Admin.ViewModels
     {
         public Guid Uid { get; set; }
 
-        public long Number { get; set; }
+        public long ProductId { get; set; }
 
         public string Caption { get; set; }
 

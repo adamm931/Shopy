@@ -1,4 +1,4 @@
-﻿using Shopy.Core.Application.Products.Queries;
+﻿using Shopy.Core.Application.Sizes.Get;
 using System.Threading.Tasks;
 using System.Web.Http;
 

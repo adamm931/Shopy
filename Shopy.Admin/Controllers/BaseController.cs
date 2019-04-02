@@ -12,7 +12,7 @@ namespace Shopy.Admin.Controllers
             get
             {
                 return shopy ?? (shopy = new ShopyDriveBuilder()
-                    .WithBaseAddress("http://localhost:50253/api")
+                    .WithBaseAddress(Constants.ApiEndpoint)
                     .Build()
                     );
             }
