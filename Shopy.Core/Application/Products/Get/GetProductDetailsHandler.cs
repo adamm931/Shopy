@@ -1,6 +1,7 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
 using Shopy.Core.Mappers;
+using Shopy.Core.Models;
 using Shopy.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -24,17 +25,24 @@ namespace Shopy.Core.Application.Products.Get
                     .ToListAsync();
 
                 var product = products.Single(p => p.Uid == request.Uid);
-                var productCategories = product.Categories.ToList();
                 var productMapper = new ProductMapper();
                 var relatedProducts = products
-                    .Where(p => productCategories.Any(pc => p.Categories.Any(c => c.Uid == pc.Uid)))
+                    .Where(p => product.Categories.Any(pc => p.Categories.Any(c => c.Uid == pc.Uid)))
                     .Select(p => productMapper.FromEF(p));
 
-                return new GetProductDetailsResponse()
+                var productDetails = new ProductDetails()
                 {
-                    Product = productMapper.FromEF(product),
-                    RelatedProducts = relatedProducts
+                    Uid = product.Uid,
+                    ProductId = product.ProductId,
+                    Caption = product.Caption,
+                    Description = product.Description,
+                    Price = product.Price,
+                    Brand = product.BrandEId,
+                    Sizes = product.Sizes.Select(s => s.SizeTypeEID),
+                    RelatedProducts = relatedProducts,
                 };
+
+                return new GetProductDetailsResponse(productDetails);
             }
         }
     }

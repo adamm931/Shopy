@@ -11,26 +11,37 @@
         <div class="card">
             <div class="row no-gutters">
                 <div class="col-md-4">
-                    <img class="card-img" src="http://placehold.it/400x400" alt="">
+                    <img data-bind="attr: {src: { mainImage }}"class="card-img">
+                    <div class="row mt-2 mb-2">
+
+                        <!-- ko foreach: images -->
+                        <div class="col-md-4">
+                            <img data-bind="attr: {src: $data}, click: $root.setAsMain"class="card-img">
+                        </div>
+                        <!-- /ko -->
+                    </div>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
                         <h1 class="card-title" data-bind="text: caption"></h1>
                         <p class="card-text" data-bind="html: description"><p>
-                        <h3 class="card-title">24.99 RSD</h3>
+                        <h3 class="card-title" data-bind="text: price"></h3>
                         <div class="row mt-5">
                             <div class="col-md-6">
-                                Choose Size
-                                <!-- ko foreach: availableSizes -->
-                                    <span data-bind="text: Caption"></span>-
+                                Choose Size 
+                                <!-- ko foreach: sizes -->
+                                    <!-- ko if: $index() > 0 -->
+                                    <span> - </span>
+                                    <!-- /ko -->
+                                    <span data-bind="text: $data"></span>
                                 <!-- /ko -->
                             </div>
                             <div class="col-md-6">
                                 <div class="float-md-right">
                                     Choose Quantity
-                                    <a href="javascript:void(0)">-</a>
-                                    <span style="color: orange">$value$</span>
-                                    <a href="javascript:void(0)">+</a>
+                                    <a data-bind="click: decreaseQty" href="javascript:void(0)">-</a>
+                                    <span data-bind="quantity" style="color: orange"></span>
+                                    <a data-bind="click: increaseQty" href="javascript:void(0)">+</a>
                                 </div>
                             </div>
                         </div>
@@ -55,50 +66,19 @@
             <div class="card-body text-center ">
                 <h3 class="title">Related produts</h3>
                 <div class="row">
+                    <!-- ko foreach: relatedProducts -->
                     <div class="col-3">
                         <div class="card h-90">
-                            <a href="product.html"><img class="card-img-top" src="http://placehold.it/200x200" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="product.html">Item One</a>
-                                </h4>
-                                <h5>24.99 RSD</h5>
-                            </div>
+                            <a href="javascript:void(0);" data-bind="click: detailsLink">
+                                <img data-bind="attr: { src: imageUrl1 }" class="card-img-top" src="" alt="">
+                                <div class="card-body">
+                                    <h4 data-bind="text: caption" class="card-title"></h4>
+                                    <h5 data-bind="text: price"></h5>
+                                </div>
+                            </a>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <div class="card h-90">
-                            <a href="product.html"><img class="card-img-top" src="http://placehold.it/200x200" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="product.html">Item Two</a>
-                                </h4>
-                                <h5>24.99 RSD</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card h-90">
-                            <a href="product.html"><img class="card-img-top" src="http://placehold.it/200x200" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item Three</a>
-                                </h4>
-                                <h5>24.99 RSD</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card h-90">
-                            <a href="product.html"><img class="card-img-top" src="http://placehold.it/200x200" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="shop-item.html">Item Four</a>
-                                </h4>
-                                <h5>24.99 RSD</h5>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- /ko -->
                 </div>
             </div>
         <!-- </div> -->
@@ -132,6 +112,10 @@
      const endpoints = {
          LoadDetails: "@Url.RouteUrl("Products", new { action = "LoadDetails", id = Model })"
      };
+
+     const productImage1UrlTemplate = "@SettingsHelper.ProductImage1TemplateUrl";
+     const productImage2UrlTemplate = "@SettingsHelper.ProductImage2TemplateUrl";
+     const productImage3UrlTemplate = "@SettingsHelper.ProductImage3TemplateUrl";
 
      var productDetails = new Products.Details();
      productDetails.init();

@@ -41,12 +41,25 @@ namespace Shopy.Public.Controllers
         [HttpPost]
         public async Task<ActionResult> Search(ProductFilter filter)
         {
-            var products = await Shopy.ListProductsAsync(filter);
+            object response = null;
 
-            var response = new
+            try
             {
-                Items = products
-            };
+                response = new
+                {
+                    Success = true,
+                    Items = await Shopy.ListProductsAsync(filter)
+                };
+            }
+
+            catch (Exception e)
+            {
+                response = new
+                {
+                    Success = false,
+                    Message = e.Message
+                };
+            }
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
@@ -60,12 +73,27 @@ namespace Shopy.Public.Controllers
         [HttpGet]
         public async Task<ActionResult> LoadDetails(Guid id)
         {
-            var productDetails = await Shopy.GetProductDetailsAsync(id);
+            object response = null;
 
-            var response = new
+            try
             {
-                Details = productDetails
-            };
+                var productDetails = await Shopy.GetProductDetailsAsync(id);
+
+                response = new
+                {
+                    Success = true,
+                    Details = productDetails
+                };
+            }
+
+            catch (Exception e)
+            {
+                response = new
+                {
+                    Success = false,
+                    Message = e.Message
+                };
+            }
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }

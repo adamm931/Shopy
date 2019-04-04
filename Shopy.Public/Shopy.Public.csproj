@@ -153,6 +153,12 @@
     <Content Include="Content\imgs\search.svg" />
     <Content Include="Content\imgs\shopy-logo.jpg" />
     <Content Include="Content\imgs\twitter.svg" />
+    <Content Include="Content\js\core\bootstrap-material-design.min.js" />
+    <Content Include="Content\js\core\jquery.min.js" />
+    <Content Include="Content\js\core\popper.min.js" />
+    <Content Include="Content\js\material-kit.js" />
+    <Content Include="Content\js\plugins\moment.min.js" />
+    <Content Include="Content\js\plugins\nouislider.min.js" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -168,8 +174,10 @@
     <Content Include="Scripts\Common\knockout-3.5.0.js" />
     <Content Include="Scripts\Common\modernizr-2.6.2.js" />
     <Content Include="Scripts\Common\underscore.js" />
-    <Content Include="Scripts\Products\Details.js" />
-    <Content Include="Scripts\Products\List.js" />
+    <Content Include="Scripts\ViewModels\Category.js" />
+    <Content Include="Scripts\ViewModels\Details.js" />
+    <Content Include="Scripts\ViewModels\List.js" />
+    <Content Include="Scripts\ViewModels\Product.js" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -189,8 +197,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Content\js\bootstrap.js" />
-    <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -28,7 +28,8 @@ namespace Shopy.Sdk.Client
 
         public async Task<ProductDetails> GetDetailsAsync(Guid uid)
         {
-            return await _client.GetAsync<ProductDetails>($"products/details/{uid}");
+            var details = await _client.GetAsync<Response<ProductDetails>>($"products/details/{uid}");
+            return details.Result;
         }
 
         public async Task<Product> AddAsync(Product product)

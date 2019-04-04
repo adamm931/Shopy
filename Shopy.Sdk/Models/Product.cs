@@ -12,5 +12,6 @@ namespace Shopy.Sdk.Models
         public string Description { get; set; }
         public BrandType Brand { get; set; }
         public IEnumerable<SizeType> Sizes { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
     }
 }

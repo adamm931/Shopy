@@ -5,9 +5,9 @@ namespace Shopy.Sdk.Models
 {
     public class ProductFilter
     {
-        public BrandType[] Sizes { get; set; }
+        public IEnumerable<SizeType> Sizes { get; set; }
 
-        public BrandType[] Brands { get; set; }
+        public IEnumerable<BrandType> Brands { get; set; }
 
         public int? PageIndex { get; set; }
 
@@ -16,6 +16,12 @@ namespace Shopy.Sdk.Models
         public decimal? MaxPrice { get; set; }
 
         public decimal? MinPrice { get; set; }
+
+        public ProductFilter()
+        {
+            Sizes = Enumerable.Empty<SizeType>();
+            Brands = Enumerable.Empty<BrandType>();
+        }
 
         public string GetQueryString()
         {

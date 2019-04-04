@@ -28,7 +28,7 @@ namespace Shopy.Core.Application.Categories.Get
                 }
 
                 var categoryList = await categories.ToListAsync();
-                var mapper = new CategoryMapper();
+                var mapper = new CategoryMapper(new ProductMapper());
                 var projection = categoryList.Select(c => mapper.FromEF(c));
                 return new ListCategoriesResponse(projection);
             }

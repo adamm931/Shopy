@@ -1,12 +1,25 @@
 ﻿using Shopy.Core.Data.Entities.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace Shopy.Core.Models
 {
-    public class ProductDetails : Product
+    public class ProductDetails
     {
-        public List<SizeType> AllSizes { get; set; }
+        public Guid Uid { get; set; }
 
-        public List<Product> RelatedProducts { get; set; }
+        public long ProductId { get; set; }
+
+        public string Caption { get; set; }
+
+        public decimal Price { get; set; }
+
+        public string Description { get; set; }
+
+        public BrandType Brand { get; set; }
+
+        public IEnumerable<SizeType> Sizes { get; set; }
+
+        public IEnumerable<Product> RelatedProducts { get; set; }
     }
 }

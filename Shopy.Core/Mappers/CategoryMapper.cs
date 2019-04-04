@@ -6,17 +6,28 @@ namespace Shopy.Core.Mappers
 {
     public class CategoryMapper : IMapper<Category, CategoryEF>
     {
-        private ProductMapper _productMapper = new ProductMapper();
+        private ProductMapper _productMapper;
+
+        public CategoryMapper(ProductMapper productMapper = null)
+        {
+            _productMapper = productMapper;
+        }
 
         public Category FromEF(CategoryEF efEntity)
         {
-            return new Category()
+            var category = new Category()
             {
                 Uid = efEntity.Uid,
                 Caption = efEntity.Caption,
-                CategoryId = efEntity.CategoryId,
-                Products = efEntity.Products.Select(p => _productMapper.FromEF(p)).ToList()
+                CategoryId = efEntity.CategoryId
             };
+
+            if (_productMapper != null)
+            {
+                category.Products = efEntity.Products.Select(p => _productMapper.FromEF(p)).ToList();
+            }
+
+            return category;
         }
 
         public CategoryEF ToEF<TSoure>(Category model)

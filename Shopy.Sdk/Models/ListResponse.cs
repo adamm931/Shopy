@@ -1,7 +1,15 @@
-﻿namespace Shopy.Sdk.Models
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Shopy.Sdk.Models
 {
     public class ListResponse<T>
     {
-        public T[] Result { get; set; }
+        public IEnumerable<T> Result { get; set; }
+
+        public ListResponse()
+        {
+            Result = Enumerable.Empty<T>();
+        }
     }
 }

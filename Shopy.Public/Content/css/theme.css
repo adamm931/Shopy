@@ -89,3 +89,7 @@
         background-image: none;
         background-color: #f7f7f9;
     }
+
+    .list-group-item :first-child {
+        margin-right: 0 !important;
+    }

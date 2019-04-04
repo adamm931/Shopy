@@ -27,7 +27,7 @@ namespace Shopy.Core.Application.Products.Get
                     .Include(p => p.Categories);
 
                 var filteredProducts = await FilterProducts(products, request.Filter);
-                var productMapper = new ProductMapper();
+                var productMapper = new ProductMapper(new CategoryMapper());
                 var result = filteredProducts.Select(r => productMapper.FromEF(r));
 
                 return new ListProductsResponse(result);

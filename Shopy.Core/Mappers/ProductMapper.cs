@@ -7,11 +7,16 @@ namespace Shopy.Core.Mappers
 {
     public class ProductMapper : IMapper<Product, ProductEF>
     {
-        private SizeMapper sizeMapper = new SizeMapper();
+        private CategoryMapper _categoryMapper;
+
+        public ProductMapper(CategoryMapper categoryMapper = null)
+        {
+            _categoryMapper = categoryMapper;
+        }
 
         public Product FromEF(ProductEF efEntity)
         {
-            return new Product()
+            var product = new Product()
             {
                 Uid = efEntity.Uid,
                 ProductId = efEntity.ProductId,
@@ -21,6 +26,13 @@ namespace Shopy.Core.Mappers
                 Brand = efEntity.BrandEId,
                 Sizes = efEntity.Sizes.Select(s => s.SizeTypeEID)
             };
+
+            if (_categoryMapper != null)
+            {
+                product.Categories = efEntity.Categories.Select(c => _categoryMapper.FromEF(c));
+            }
+
+            return product;
         }
 
         public ProductEF ToEF<TSoure>(Product model)

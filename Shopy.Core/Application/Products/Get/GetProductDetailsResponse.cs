@@ -1,13 +1,10 @@
-﻿using Mediator.Net.Contracts;
-using Shopy.Core.Models;
-using System.Collections.Generic;
+﻿using Shopy.Core.Models;
 
 namespace Shopy.Core.Application.Products.Get
 {
-    public class GetProductDetailsResponse : IResponse
+    public class GetProductDetailsResponse : Response<ProductDetails>
     {
-        public Product Product { get; set; }
-        public IEnumerable<Product> RelatedProducts { get; set; }
-        public IEnumerable<Product> OtherSizeProducts { get; set; }
+        public GetProductDetailsResponse(ProductDetails result) : base(result)
+        { }
     }
 }

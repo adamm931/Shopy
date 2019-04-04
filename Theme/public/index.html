@@ -102,16 +102,32 @@
 
                 <div class="col-lg-4 col-md-6">
                   <div class="card h-90">
-                    <a href="product.html"><img class="card-img-top" src="http://placehold.it/200x200" alt=""></a>
+                    <a href="product.html">
+					<img class="card-img-top w-50" src="http://placehold.it/50x50" alt=""></a>
                     <div class="card-body">
                       <h4 class="card-title">
                         <a href="product.html">Item One</a>
                       </h4>
-                      <h5>24.99 RSD</h5>
+                      <!-- <h5>24.99 RSD</h5> -->
+					  <ul class="list-group list-group-flush">
+						<li class="list-group-item">Cras justo odio</li>
+						<li class="list-group-item">Dapibus ac facilisis in</li>
+						<li class="list-group-item">Vestibulum at eros</li>
+					  </ul>
                     </div>
                   </div>
                 </div>
-
+				
+				<!--
+				
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">Cras justo odio</li>
+					<li class="list-group-item">Dapibus ac facilisis in</li>
+					<li class="list-group-item">Vestibulum at eros</li>
+				</ul>
+				
+				-->
+				
                 <div class="col-lg-4 col-md-6">
                   <div class="card h-90">
                     <a href="product.html"><img class="card-img-top" src="http://placehold.it/200x200" alt=""></a>
@@ -311,7 +327,10 @@
   <script src="./js/plugins/moment.min.js"></script> 
   <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
   <script src="./js/material-kit.js" type="text/javascript"></script>
-
+	
+<style>
+	.card h-90:hover {
+	}
+</style>
   </body>
-
 </html>

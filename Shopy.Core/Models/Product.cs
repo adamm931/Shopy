@@ -21,5 +21,8 @@ namespace Shopy.Core.Models
         public BrandType Brand { get; set; }
 
         public IEnumerable<SizeType> Sizes { get; set; }
+
+        public IEnumerable<Category> Categories { get; set; }
+
     }
 }
