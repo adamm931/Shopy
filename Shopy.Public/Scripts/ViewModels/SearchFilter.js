@@ -1,4 +1,4 @@
-﻿function SearchFilters() {
+﻿function SearchFilters(minPrice, mixPrice) {
 
     var self = this;
 
@@ -9,8 +9,8 @@
     self.category = null;
     self.brands = [];
     self.sizes = [];
-    self.minPrice = 0;
-    self.maxPrice = Number.MAX_SAFE_INTEGER;
+    self.minPrice = minPrice;
+    self.maxPrice = mixPrice;
 
     self.nextPage = function () {
         self.pageIndex += 1;

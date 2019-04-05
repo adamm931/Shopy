@@ -5,23 +5,27 @@
     self.create = function (products) {
 
         var slider = document.getElementById('sliderDouble');
+        var sliderStart = products.iniMinPrice();
+        var sliderEnd = products.iniMaxPrice();
+
+        //TODO: slider range make configurabile
 
         noUiSlider.create(slider, {
-            start: [10, 800],
+            start: [sliderStart, sliderEnd],
             margin: 100,
             step: 10,
             connect: true,
             range: {
-                min: 0,
-                max: 1000
+                min: 10,
+                max: 800
             }
         });
 
         var minInput = document.getElementById('minInput');
         var maxInput = document.getElementById('maxInput');
 
-        minInput.value = 10;
-        maxInput.value = 800;
+        minInput.value = products.iniMinPrice();
+        maxInput.value = products.iniMaxPrice();
           
         slider.noUiSlider.on('end', function (values, handle) {
             if (handle == 0) {

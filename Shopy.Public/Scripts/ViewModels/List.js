@@ -16,9 +16,9 @@ var Products = Products || {};
         self.requestInProgress = ko.observable(false);
 
         //filters
-        self.categoryFilters = ko.observableArray();
-        self.brandFilters = ko.observableArray();
-        self.sizeFilters = ko.observableArray();
+        self.categories = ko.observableArray();
+        self.brands = ko.observableArray();
+        self.sizes = ko.observableArray();
 
         //items
         //self.sourceItems = ko.observableArray([]);
@@ -28,6 +28,8 @@ var Products = Products || {};
         self.selectedSizes = ko.observableArray();
         self.selectedBrands = ko.observableArray();
         self.selectedCategory = ko.observable();
+        self.iniMinPrice = ko.observable(100);
+        self.iniMaxPrice = ko.observable(500);
 
         //filter object
         self.filters = new SearchFilters();
@@ -130,13 +132,13 @@ var Products = Products || {};
                 success: function (response) {
 
                     //load brands
-                    self.brandFilters(_.map(response.Brands, b => new Brand(b)));
+                    self.brands(_.map(response.Brands, b => new Brand(b)));
 
                     //load sizes
-                    self.sizeFilters(_.map(response.Sizes, s => new Size(s)));
+                    self.sizes(_.map(response.Sizes, s => new Size(s)));
 
                     //load categories
-                    self.categoryFilters(_.map(response.Categories, c => new Category(c)));
+                    self.categories(_.map(response.Categories, c => new Category(c)));
                 },
                 failure: function (data) {
                     alert(data);

@@ -16,7 +16,7 @@
                         <a class="price" data-bind="click: unsetSelectedCategory" href="javascript:void(0);">Categories</a>
                      </h4>
                     <div class="list-group">
-                        <!-- ko foreach: categoryFilters-->
+                        <!-- ko foreach: categories-->
                         <a href="javascript:void(0);" 
                            class="list-group-item category-filter"
                            data-bind="css: { price: selected }, text: caption, click: $root.setSelectedCategory">
@@ -52,7 +52,7 @@
                         <a data-bind="click: unsetSizeFilters" href="javascript:void(0);">Sizes</a>
                     </h4>
                     <div class="list-group">
-                        <!-- ko foreach: sizeFilters-->
+                        <!-- ko foreach: sizes-->
                         <div class="custom-control custom-checkbox">
                             <input data-bind="attr: {id: id}, checked: $parent.selectedSizes, checkedValue: id" type="checkbox" class="custom-control-input">
                             <label data-bind="text: caption, attr: {for: id}" class="custom-control-label"></label>
@@ -70,7 +70,7 @@
                         <a data-bind="click: unsetBrandFilters" href="javascript:void(0);">Brands</a>
                     </h4>
                     <div class="list-group">
-                        <!-- ko foreach: brandFilters -->
+                        <!-- ko foreach: brands -->
                         <div class="custom-control custom-checkbox">
                             <input data-bind="attr: {id: id}, checked: $parent.selectedBrands, checkedValue: id"type="checkbox" class="custom-control-input">
                             <label data-bind="text: caption, attr: {for: id}" class="custom-control-label"></label>
