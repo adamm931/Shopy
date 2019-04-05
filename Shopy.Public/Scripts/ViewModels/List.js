@@ -13,9 +13,7 @@ var Products = Products || {};
             loadFilters();
         }
 
-        //toogle filters
-        //self.selectAllBrandFilters = ko.observable(false);
-        //self.selectAllSizeFilters = ko.observable(false);
+        self.requestInProgress = ko.observable(false);
 
         //filters
         self.categoryFilters = ko.observableArray();
@@ -23,7 +21,7 @@ var Products = Products || {};
         self.sizeFilters = ko.observableArray();
 
         //items
-        self.sourceItems = ko.observableArray([]);
+        //self.sourceItems = ko.observableArray([]);
         self.items = ko.observableArray();
 
         //selected filters
@@ -38,6 +36,12 @@ var Products = Products || {};
 
         self.search = function () {
 
+            if (self.requestInProgress()) {
+                return;
+            }
+
+            self.requestInProgress(true);
+
             $.ajax({
                 url: endpoints.Search,
                 data: self.filters.data(),
@@ -46,15 +50,20 @@ var Products = Products || {};
 
                     if (response.Success) {
                         var responseItems = _.map(response.Items, i => new Product(i));
-                        _.each(responseItems, ri => self.items.push(ri));
-                        _.each(responseItems, ri => self.sourceItems.push(ri));
+                        //_.each(responseItems, ri => self.items.push(ri));
+                        //_.each(responseItems, ri => self.sourceItems.push(ri));
+
+                        self.items(responseItems);
                     }
                     else {
                         console.error(response.Message);
                     }
+
+                    self.requestInProgress(false);
                 },
                 failure: function (response) {
                     alert(response);
+                    self.requestInProgress(false);
                 }
             });
         }
@@ -67,7 +76,7 @@ var Products = Products || {};
 
             self.filters.setCategory(selectedCategory);
 
-            filterProductsLocally();
+            self.search();
         }
 
         self.unsetSelectedCategory = function () {
@@ -79,19 +88,22 @@ var Products = Products || {};
             }
 
             self.filters.setCategory(undefined);
-            filterProductsLocally();
+            self.search();
         }
 
         self.selectedSizes.subscribe(function (value) {
-            var pure = _.map(value, v => v.replace("s", ""));
-            self.filters.setSizes(pure);
-            filterProductsLocally();
+            self.filters.setSizes(value);
+            self.search();
         });
 
         self.selectedBrands.subscribe(function (value) {
-            var pure = _.map(value, v => v.replace("b", ""));
-            self.filters.setBrands(pure);
-            filterProductsLocally();
+            self.filters.setBrands(value);
+            self.search();
+        });
+
+        self.selectedBrands.subscribe(function (value) {
+            self.filters.setBrands(value);
+            self.search();
         });
 
         self.unsetSizeFilters = function () {
@@ -101,34 +113,6 @@ var Products = Products || {};
         self.unsetBrandFilters = function () {
             self.selectedBrands([]);
         }
-
-        //self.selectAllBrandFilters.subscribe(function (value) {
-        //    if (value) {
-        //        self.selectedBrands(_.map(self.brandFilters(), b => b.id));
-        //    }
-
-        //    else {
-        //        self.selectedBrands([]);
-        //    }
-        //});
-
-        //self.toogleBrandFilters = function () {
-        //    self.selectAllBrandFilters(!self.selectAllBrandFilters());
-        //}
-
-        //self.selectAllSizeFilters.subscribe(function (value) {
-        //    if (value) {
-        //        self.selectedSizes(_.map(self.sizeFilters(), s => s.id));
-        //    }
-
-        //    else {
-        //        self.selectedSizes([]);
-        //    }
-        //});
-
-        //self.toogleSizeFilters = function () {
-        //    self.selectAllSizeFilters(!self.selectAllSizeFilters());
-        //}
 
         self.loadMoreProducts = function () {
             self.filters.nextPage();
@@ -158,113 +142,6 @@ var Products = Products || {};
                     alert(data);
                 }
             });
-        }
-
-        var filterProductsLocally = function () {
-            self.filters.filterItems(self.sourceItems(), self.items);
-        }
-
-        //
-    }
-
-    function Size(size) {
-
-        var self = this;
-
-        self.id = "s" + size.EId;
-        self.caption = size.Caption;
-        self.checked = ko.observable(false);
-    }
-
-    function Brand(brand) {
-
-        var self = this;
-
-        self.id = "b" + brand.EId;
-        self.caption = brand.Caption;
-        self.checked = ko.observable(false);
-    }
-
-    function SearchFilters() {
-
-        var self = this;
-
-        //make this configurabile
-        self.pageIndex = 0;
-        self.pageSize = 9;
-
-        self.category = null;
-        self.brands = [];
-        self.sizes = [];
-        self.minPrice = 0;
-        self.maxPrice = Number.MAX_SAFE_INTEGER;
-
-        self.nextPage = function () {
-            self.pageIndex += 1;
-            self.pageSize += self.pageSize;
-        }
-
-        self.setBrands = function (brands) {
-            self.brands = brands;
-        }
-
-        self.setSizes = function (sizes) {
-            self.sizes = sizes;
-        }
-
-        self.setPrices = function (max, min) {
-            self.maxPrice = max;
-            self.minPrice = minPrice;
-        }
-
-        self.setCategory = function (category) {
-            self.category = category;
-        }
-
-        self.filterItems = function (source, items) {
-
-            var retByBrand = source;
-            var retBySizes = source;
-            var retByCategory = source;
-
-            //brands
-            if (_.some(self.brands)) {
-                retByBrand = _.filter(source,
-                    i => _.some(self.brands, b => b == i.brand));
-            }
-
-            //sizes
-            if (_.some(self.sizes)) {
-                retBySizes = _.filter(source,
-                    r => _.some(r.sizes,
-                        rs => _.some(self.sizes, s => s == rs)));
-            }
-
-            //category
-            if (self.category != null) {
-                retByCategory = _.filter(source,
-                   i => _.some(i.categories, ic => ic.id == self.category.id));
-            }
-
-            //prices
-            var ret = _.intersection(
-                source,
-                retByBrand,
-                retBySizes,
-                retByCategory);
-
-            items(ret);
-        }
-
-        self.data = function () {
-            return  {
-                PageIndex: self.pageIndex,
-                PageSize: self.pageSize,
-                Brands: self.brands,
-                Sizes: self.sizes,
-                MinPrice: self.minPrice,
-                MaxPrice: self.maxPrice
-            }
         }
     }
 

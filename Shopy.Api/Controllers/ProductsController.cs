@@ -31,7 +31,7 @@ namespace Shopy.Api.Controllers
         }
 
         [HttpGet]
-        [Route("details/{uid}")]
+        [Route("{uid}/details")]
         public async Task<IHttpActionResult> Details(Guid uid)
         {
             return await ProcessRequest(

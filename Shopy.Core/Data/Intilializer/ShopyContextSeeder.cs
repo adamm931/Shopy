@@ -1,5 +1,4 @@
 ﻿using Shopy.Core.Data.Entities;
-using Shopy.Core.Data.Entities.Enums;
 using Shopy.Data;
 using System;
 using System.Data.Entity;
@@ -184,22 +183,22 @@ namespace Shopy.Core
 
                 new BrandTypeEF()
                 {
-                    BrandTypeEId = BrandType.Active,
+                    BrandTypeEId = "AC",
                     Caption = "Active"
                 },
                 new BrandTypeEF()
                 {
-                    BrandTypeEId = BrandType.Addidas,
+                    BrandTypeEId = "AD",
                     Caption = "Addidas"
                 },
                 new BrandTypeEF()
                 {
-                    BrandTypeEId = BrandType.Nike,
+                    BrandTypeEId = "NK",
                     Caption = "Nike"
                 },
                 new BrandTypeEF()
                 {
-                    BrandTypeEId = BrandType.Rebook,
+                    BrandTypeEId = "RB",
                     Caption = "Rebook"
                 }
             };
@@ -211,22 +210,22 @@ namespace Shopy.Core
 
                 new SizeTypeEF()
                 {
-                    SizeTypeEID = SizeType.S,
+                    SizeTypeEID = "S",
                     Caption = "Small"
                 },
                 new SizeTypeEF()
                 {
-                    SizeTypeEID = SizeType.M,
+                    SizeTypeEID = "M",
                     Caption = "Medium"
                 },
                 new SizeTypeEF()
                 {
-                    SizeTypeEID = SizeType.L,
+                    SizeTypeEID = "L",
                     Caption = "Large"
                 },
                 new SizeTypeEF()
                 {
-                    SizeTypeEID = SizeType.XL,
+                    SizeTypeEID = "XL",
                     Caption = "X Large"
                 }
             };

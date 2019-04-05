@@ -6,10 +6,6 @@
         color: #ff8332;
     }
 
-    a:hover, a:focus {
-        color: #ff8332;
-    }
-
    .logo a {
         margin: auto;
         height: 100px;
@@ -48,17 +44,13 @@
         padding: 3%;
     }
 
-    .filters-title {
-        color: #ff8332;
-    }
-
-    .load-more {
+    /*.load-more {
         color: #ff8332 !important;
         background-color: #fff !important;
         border-color: none #fff !important;
         font-size: 4rem !important;
         letter-spacing: -4px;
-    }
+    }*/
 
     .logo-nav a {
         height: 50px !important;
@@ -67,6 +59,11 @@
     .navbar {
         box-shadow: none;
         margin-bottom: 0;
+    }
+
+    .list-group a:hover, 
+    .list-group a:focus {
+        color: #ff8332 !important;
     }
 
     .navbar .navbar-brand {
@@ -93,3 +90,106 @@
     .list-group-item :first-child {
         margin-right: 0 !important;
     }
+
+    .category-filter {
+        color: #3C4858; 
+        font-weight: 700; 
+        font-family: 'Roboto Slab', 'Times New Roman', serif;
+    }
+
+    .serif {
+        font-weight: 700; 
+        color: #3C4858 !important; 
+        font-family: 'Roboto Slab', 'Times New Roman', serif;
+    }
+
+    .card-title > a {
+        color: #ff8332;
+    }
+
+    .btn-order {
+        background-color: #ff8332 !important;
+        border-radius: 20px;
+    }
+
+    .opt-img:hover,
+    .opt-img:focus {
+        opacity: 0.5;
+    }
+
+    .serif a {
+        color: #3C4858 !important; 
+    }
+
+    a:hover, a:focus {
+        color: #ff8332;
+    }
+
+    .card-img-top {
+        width: 250px;
+        height: 250px;
+        max-height: 250px;
+        max-width: 250px;
+    }
+
+    .main-img {
+        width: 400px;
+        height: 400px;
+        max-height: 400px;
+        max-width: 400px;
+    }
+
+    .opt-img {
+        width: 100px;
+        height: 100px;
+        max-height: 100px;
+        max-width: 100px;
+    }
+
+    .cart-img-small {
+        width: 129px;
+        height: 129px;
+        max-height: 129px;
+        max-width: 129px;
+    }
+
+    .price-filter-rng {
+        background-color: #f7f7f9;
+        color: black;
+        border: none;
+        width: 50%;
+    }
+
+    .load-more {
+        background-color: #ffffff !important;
+    }
+
+    .slider.slider-info .noUi-connect {
+        background-color: #000;
+    }
+
+    .slider.slider-info .noUi-handle {
+        border-color: #000;
+        background-color: #000;
+    }
+
+    .form-control, .is-focused .form-control {
+        background-image: none;
+    }
+
+    .dot {
+      height: 15px;
+      width: 15px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .dot-sm {
+      height: 5px;
+      width: 5px;
+      background-color: #ff8332;
+      border-radius: 50%;
+      display: inline-block;
+    }
+ 

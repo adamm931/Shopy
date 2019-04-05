@@ -77,12 +77,11 @@ namespace Shopy.Public.Controllers
 
             try
             {
-                var productDetails = await Shopy.GetProductDetailsAsync(id);
 
                 response = new
                 {
                     Success = true,
-                    Details = productDetails
+                    Details = await Shopy.GetProductDetailsAsync(id)
                 };
             }
 

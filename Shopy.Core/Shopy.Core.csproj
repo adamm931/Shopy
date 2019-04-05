@@ -94,8 +94,6 @@
     <Compile Include="Data\Entitties\CategoryEF.cs" />
     <Compile Include="Data\Entitties\ProductEF.cs" />
     <Compile Include="Data\Entitties\SizeTypeEF.cs" />
-    <Compile Include="Data\Enums\BrandType.cs" />
-    <Compile Include="Data\Enums\SizeType.cs" />
     <Compile Include="Data\Intilializer\ShopyContextSeeder.cs" />
     <Compile Include="Data\ShopyContext.cs" />
     <Compile Include="Factory\MediatorFactory.cs" />

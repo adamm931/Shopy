@@ -12,19 +12,11 @@ namespace Shopy
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{uid}",
+                routeTemplate: "api/{controller}/{uid}/{action}",
                 defaults: new
                 {
-                    uid = RouteParameter.Optional
-                }
-            );
-
-            config.Routes.MapHttpRoute(
-                name: "Default",
-                routeTemplate: "api/{controller}/{action}/{uid}",
-                defaults: new
-                {
-                    uid = RouteParameter.Optional
+                    uid = RouteParameter.Optional,
+                    action = RouteParameter.Optional
                 }
             );
 

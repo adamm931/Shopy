@@ -1,10 +1,14 @@
-﻿namespace Shopy.Core.Models
+﻿using System;
+
+namespace Shopy.Core.Models
 {
     public class ProductFilter
     {
         public string Sizes { get; set; }
 
         public string Brands { get; set; }
+
+        public Guid? CategoryUid { get; set; }
 
         public int? PageIndex { get; set; }
 

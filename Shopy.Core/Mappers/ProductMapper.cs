@@ -8,6 +8,8 @@ namespace Shopy.Core.Mappers
     public class ProductMapper : IMapper<Product, ProductEF>
     {
         private CategoryMapper _categoryMapper;
+        private BrandMapper _brandMapper = new BrandMapper();
+        private SizeMapper _sizeMapper = new SizeMapper();
 
         public ProductMapper(CategoryMapper categoryMapper = null)
         {
@@ -23,8 +25,8 @@ namespace Shopy.Core.Mappers
                 Caption = efEntity.Caption,
                 Description = efEntity.Description,
                 Price = efEntity.Price,
-                Brand = efEntity.BrandEId,
-                Sizes = efEntity.Sizes.Select(s => s.SizeTypeEID)
+                Brand = _brandMapper.FromEF(efEntity.Brand),
+                Sizes = efEntity.Sizes.Select(s => _sizeMapper.FromEF(s))
             };
 
             if (_categoryMapper != null)

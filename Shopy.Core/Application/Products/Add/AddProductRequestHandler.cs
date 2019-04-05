@@ -26,8 +26,6 @@ namespace Shopy.Core.Application.Products.Add
                     .Where(s => command.Sizes.Any(cs => cs == s.SizeTypeEID))
                     .ToListAsync();
 
-
-
                 var uid = Guid.NewGuid();
 
                 var productEf = dbContext.Products.Add(new ProductEF()

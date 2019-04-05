@@ -26,20 +26,19 @@ namespace Shopy.Core.Application.Products.Get
 
                 var product = products.Single(p => p.Uid == request.Uid);
                 var productMapper = new ProductMapper();
+                var productMapperWithCategories = new ProductMapper(new CategoryMapper());
+
                 var relatedProducts = products
-                    .Where(p => product.Categories.Any(pc => p.Categories.Any(c => c.Uid == pc.Uid)))
-                    .Select(p => productMapper.FromEF(p));
+                   .Where(p => product.Categories
+                        .Any(pc => p.Categories
+                            .Any(c => c.Uid == pc.Uid)))
+                   .Where(p => p.Uid != request.Uid)
+                   .Select(p => productMapper.FromEF(p));
 
                 var productDetails = new ProductDetails()
                 {
-                    Uid = product.Uid,
-                    ProductId = product.ProductId,
-                    Caption = product.Caption,
-                    Description = product.Description,
-                    Price = product.Price,
-                    Brand = product.BrandEId,
-                    Sizes = product.Sizes.Select(s => s.SizeTypeEID),
-                    RelatedProducts = relatedProducts,
+                    Product = productMapperWithCategories.FromEF(product),
+                    RelatedProducts = relatedProducts
                 };
 
                 return new GetProductDetailsResponse(productDetails);

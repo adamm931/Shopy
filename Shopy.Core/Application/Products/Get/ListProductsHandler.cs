@@ -4,7 +4,6 @@ using Shopy.Core.Data.Entities;
 using Shopy.Core.Mappers;
 using Shopy.Core.Models;
 using Shopy.Data;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -67,7 +66,7 @@ namespace Shopy.Core.Application.Products.Get
                 var filterSizes = productFilter.Sizes.Split(',');
 
                 products = products
-                    .Where(p => filterSizes.Any(fs => p.Sizes.Any(s => (int)s.SizeTypeEID == Convert.ToInt32(fs))));
+                    .Where(p => filterSizes.Any(fs => p.Sizes.Any(s => s.SizeTypeEID == fs)));
             }
 
             //brand
@@ -76,7 +75,14 @@ namespace Shopy.Core.Application.Products.Get
                 var brands = productFilter.Brands.Split(',');
 
                 products = products
-                    .Where(p => brands.Any(b => (int)p.Brand.BrandTypeEId == Convert.ToInt32(b)));
+                    .Where(p => brands.Any(b => p.Brand.BrandTypeEId == b));
+            }
+
+            //category
+            if (productFilter.CategoryUid.HasValue)
+            {
+                products = products
+                    .Where(p => p.Categories.Any(c => c.Uid == productFilter.CategoryUid.Value));
             }
 
             return await products.ToListAsync();

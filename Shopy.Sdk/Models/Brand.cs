@@ -2,7 +2,7 @@
 {
     public class Brand
     {
-        public BrandType EId { get; set; }
+        public string EId { get; set; }
 
         public string Caption { get; set; }
     }

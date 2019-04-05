@@ -28,19 +28,19 @@ namespace Shopy.Sdk.Client
 
         public async Task<ProductDetails> GetDetailsAsync(Guid uid)
         {
-            var details = await _client.GetAsync<Response<ProductDetails>>($"products/details/{uid}");
+            var details = await _client.GetAsync<Response<ProductDetails>>($"products/{uid}/details");
             return details.Result;
         }
 
-        public async Task<Product> AddAsync(Product product)
+        public async Task<Product> AddAsync(AddEditProduct product)
         {
-            var addProduct = await _client.PostAsync<Product, Response<Product>>("products", product);
+            var addProduct = await _client.PostAsync<AddEditProduct, Response<Product>>("products", product);
             return addProduct.Result;
         }
 
-        public async Task<object> EditAsync(Product product)
+        public async Task<object> EditAsync(AddEditProduct product)
         {
-            return await _client.PutAsync<Product, object>($"products/{product.Uid}", product);
+            return await _client.PutAsync<AddEditProduct, object>($"products/{product.Uid}", product);
         }
 
         public async Task<object> DeleteProductAsync(Guid uid)

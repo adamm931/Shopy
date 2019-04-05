@@ -252,3 +252,37 @@
    at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
    at Shopy.Api.Controllers.BaseApiController.<ProcessCommand>d__6.MoveNext() in C:\DEV\DotNet\Web\Shopy\Shopy.Api\Controllers\BaseApiController.cs:line 46
 ----------------------------------------------------------------------------------------------------
+4/4/2019 11:03:50 PMSystem.NullReferenceException: Object reference not set to an instance of an object.
+   at Mediator.Net.Pipeline.EmptyPipeSpecification`1.OnException(Exception ex, TContext context)
+   at Mediator.Net.Pipeline.GlobalReceivePipe`1.<Connect>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendMessage>d__10`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<RequestAsync>d__9`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Shopy.Api.Controllers.BaseApiController.<ProcessRequest>d__7`1.MoveNext() in C:\DEV\DotNet\Web\Shopy\Shopy.Api\Controllers\BaseApiController.cs:line 71
+----------------------------------------------------------------------------------------------------
+4/4/2019 11:05:10 PMSystem.NullReferenceException: Object reference not set to an instance of an object.
+   at Mediator.Net.Pipeline.EmptyPipeSpecification`1.OnException(Exception ex, TContext context)
+   at Mediator.Net.Pipeline.GlobalReceivePipe`1.<Connect>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendMessage>d__10`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<RequestAsync>d__9`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Shopy.Api.Controllers.BaseApiController.<ProcessRequest>d__7`1.MoveNext() in C:\DEV\DotNet\Web\Shopy\Shopy.Api\Controllers\BaseApiController.cs:line 71
+----------------------------------------------------------------------------------------------------

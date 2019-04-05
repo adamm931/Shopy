@@ -70,7 +70,7 @@ namespace Shopy.Admin.Controllers
                 return View(model);
             }
 
-            var addProduct = new Product()
+            var addProduct = new AddEditProduct()
             {
                 Caption = model.Caption,
                 Description = model.Description,
@@ -102,8 +102,8 @@ namespace Shopy.Admin.Controllers
                 Caption = product.Caption,
                 Description = product.Description,
                 Price = product.Price,
-                Brand = product.Brand,
-                Sizes = product.Sizes,
+                Brand = product.Brand.EId,
+                Sizes = product.Sizes.Select(s => s.EId),
                 SelectedSizesML = await SelectListUtils.GetSizesMSL(),
                 BrandsSelectList = await SelectListUtils.GetBrandsSL(),
                 Image1 = new ImageViewModel(image1Url1),
@@ -122,7 +122,7 @@ namespace Shopy.Admin.Controllers
                 return View(model);
             }
 
-            var editProduct = new Product()
+            var editProduct = new AddEditProduct()
             {
                 Uid = model.Uid,
                 Caption = model.Caption,

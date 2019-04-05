@@ -8,8 +8,6 @@ namespace Shopy
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
-
-            //ShopyContextSeeder.Seed();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "ProductDetails";
 }
 
 @model Guid
@@ -11,12 +11,12 @@
         <div class="card">
             <div class="row no-gutters">
                 <div class="col-md-4">
-                    <img data-bind="attr: {src: { mainImage }}"class="card-img">
+                    <img data-bind="attr: {src: mainImage }" class="card-img main-img mt-3">
                     <div class="row mt-2 mb-2">
 
                         <!-- ko foreach: images -->
                         <div class="col-md-4">
-                            <img data-bind="attr: {src: $data}, click: $root.setAsMain"class="card-img">
+                            <img data-bind="attr: {src: $data}, click: $root.setAsMain" class="card-img opt-img">
                         </div>
                         <!-- /ko -->
                     </div>
@@ -24,36 +24,38 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h1 class="card-title" data-bind="text: caption"></h1>
-                        <p class="card-text" data-bind="html: description"><p>
-                        <h3 class="card-title" data-bind="text: price"></h3>
+                        <p class="card-text serif" data-bind="html: description"><p>
+                        <hr />
                         <div class="row mt-5">
                             <div class="col-md-6">
-                                Choose Size 
+                                <span class="mr-4 serif">Choose Size</span> 
                                 <!-- ko foreach: sizes -->
                                     <!-- ko if: $index() > 0 -->
                                     <span> - </span>
                                     <!-- /ko -->
-                                    <span data-bind="text: $data"></span>
+                                    <span class="my-3" data-bind="text: $data.EId"></span>
                                 <!-- /ko -->
                             </div>
                             <div class="col-md-6">
-                                <div class="float-md-right">
-                                    Choose Quantity
-                                    <a data-bind="click: decreaseQty" href="javascript:void(0)">-</a>
-                                    <span data-bind="quantity" style="color: orange"></span>
-                                    <a data-bind="click: increaseQty" href="javascript:void(0)">+</a>
+                                <div class="row float-md-right serif mr-3">
+                                    <div class="mr-4">Choose Quantity</div>
+                                    <a class="mr-3" data-bind="click: increaseQty" href="javascript:void(0)"> + </a>
+                                    <span class="mr-3 price" data-bind="text: quantity"></span>
+                                    <a data-bind="click: decreaseQty" href="javascript:void(0)"> - </a>
                                 </div>
                             </div>
                         </div>
                         <hr />
                         <div class="row mt-5">
-                            <div class="col-md-6"><span class="font-weight-bold">Price:</span><span data-bind="text: price"></span></div>
+                            <div class="col-md-6 serif"><span class="font-weight-bold">Price : </span>
+                                <span data-bind="text: displayPrice"></span>
+                            </div>
                             <div class="col-md-6">
                                 <div class="float-md-right">
-                                    <img src="~/Content/imgs/language.svg" />
-                                    <img src="~/Content/imgs/cart.svg" />
-                                    <img src="~/Content/imgs/favourite.svg" />
-                                    <a href="javascript:void(0)" role="button" class="btn btn-warning">Order now</a>
+                                    <img class="mr-3" src="~/Content/imgs/language.svg" />
+                                    <img class="mr-3" src="~/Content/imgs/cart.svg" />
+                                    <img class="mr-3" src="~/Content/imgs/favourite.svg" />
+                                    <button type="button" class="btn btn-rounded btn-order">Order now</button>
                                 </div>
                             </div>
                         </div>
@@ -62,26 +64,48 @@
             </div>
         </div>
         <!-- /.card -->
-        <!-- <div class="card card-outline-secondary"> -->
             <div class="card-body text-center ">
                 <h3 class="title">Related produts</h3>
                 <div class="row">
                     <!-- ko foreach: relatedProducts -->
-                    <div class="col-3">
-                        <div class="card h-90">
-                            <a href="javascript:void(0);" data-bind="click: detailsLink">
-                                <img data-bind="attr: { src: imageUrl1 }" class="card-img-top" src="" alt="">
+                    <div class="col-lg-4 col-md-6">
+                        <a data-bind="attr: { href: detailsLink }">
+                            <div class="card h-90" data-bind="event: { mouseover: toogleDetails, mouseout: toogleDetails }">
+                                <img data-bind="attr: { src: image1Url }, css: { 'cart-img-small': detailsVisible, 'm-auto': detailsVisible }" class="card-img-top" alt="">
                                 <div class="card-body">
-                                    <h4 data-bind="text: caption" class="card-title"></h4>
-                                    <h5 data-bind="text: price"></h5>
+                                    <h4 data-bind="text: caption, css: { price: detailsVisible }" class="card-title"></h4>
+                                    <h5 data-bind="text: price, visible: !detailsVisible()" class="price font-weight-bold"></h5>
+                                    <div data-bind="visible: detailsVisible">
+                                        <div class="pt-3 m-auto">
+                                            <span class="mr-2 serif">sizes: </span>
+                                            <!-- ko foreach: $data.sizes -->
+                                            <!-- ko if: $index() > 0 -->
+                                            <span> - </span>
+                                            <!-- /ko -->
+                                            <span class="my-2" data-bind="text: $data.id"></span>
+                                            <!-- /ko -->
+                                        </div>
+                                        <div class="pt-3 border-bottom mx-auto mb-3">
+                                            <div class="mb-4">
+                                                <span class="dot bg-danger"></span>
+                                                <span class="dot bg-primary"></span>
+                                                <span class="dot bg-info"></span>
+                                                <span class="dot bg-success"></span>
+                                            </div>
+                                        </div>
+                                        <div class="pt-3 mx-auto">
+                                            <img src="~/Content/imgs/language.svg" />
+                                            <img class="ml-4 mr-4" src="~/Content/imgs/cart.svg" />
+                                            <img src="~/Content/imgs/favourite.svg" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </a>
-                        </div>
+                            </div>
+                        </a>
                     </div>
                     <!-- /ko -->
                 </div>
             </div>
-        <!-- </div> -->
         <!-- /.card -->
         <div class="col-lg-12 card">
             <div class="card-body">
@@ -110,7 +134,8 @@
      var Products = Products || {};
 
      const endpoints = {
-         LoadDetails: "@Url.RouteUrl("Products", new { action = "LoadDetails", id = Model })"
+         LoadDetails: "@Url.RouteUrl("Products", new { action = "LoadDetails", id = Model })",
+         Details: "@Url.RouteUrl("Products", new { action = "Details", id = "id" })"
      };
 
      const productImage1UrlTemplate = "@SettingsHelper.ProductImage1TemplateUrl";

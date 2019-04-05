@@ -174,10 +174,14 @@
     <Content Include="Scripts\Common\knockout-3.5.0.js" />
     <Content Include="Scripts\Common\modernizr-2.6.2.js" />
     <Content Include="Scripts\Common\underscore.js" />
+    <Content Include="Scripts\ViewModels\SearchFilter.js" />
+    <Content Include="Scripts\ViewModels\Brand.js" />
+    <Content Include="Scripts\ViewModels\Size.js" />
     <Content Include="Scripts\ViewModels\Category.js" />
     <Content Include="Scripts\ViewModels\Details.js" />
     <Content Include="Scripts\ViewModels\List.js" />
     <Content Include="Scripts\ViewModels\Product.js" />
+    <Content Include="Scripts\ViewModels\Slider.js" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

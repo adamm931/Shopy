@@ -17,11 +17,11 @@ namespace Shopy.Sdk
 
         Task<Product> GetProductAsync(Guid uid);
 
-        Task<Product> AddProductAsync(Product product);
+        Task<Product> AddProductAsync(AddEditProduct product);
 
         Task AddCategoryAsync(Category category);
 
-        Task EditProductAsync(Product product);
+        Task EditProductAsync(AddEditProduct product);
 
         Task AddProductToCategoryAsync(Guid productUid, Guid categoryUid);
 

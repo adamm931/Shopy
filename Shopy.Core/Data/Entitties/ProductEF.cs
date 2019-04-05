@@ -1,5 +1,4 @@
-﻿using Shopy.Core.Data.Entities.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Shopy.Core.Data.Entities
@@ -16,7 +15,7 @@ namespace Shopy.Core.Data.Entities
 
         public decimal Price { get; set; }
 
-        public BrandType BrandEId { get; set; }
+        public string BrandEId { get; set; }
 
         public BrandTypeEF Brand { get; set; }
 

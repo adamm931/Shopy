@@ -1,5 +1,4 @@
-﻿using Shopy.Core.Data.Entities.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Shopy.Core.Models
@@ -18,9 +17,9 @@ namespace Shopy.Core.Models
 
         public string Description { get; set; }
 
-        public BrandType Brand { get; set; }
+        public Brand Brand { get; set; }
 
-        public IEnumerable<SizeType> Sizes { get; set; }
+        public IEnumerable<Size> Sizes { get; set; }
 
         public IEnumerable<Category> Categories { get; set; }
 

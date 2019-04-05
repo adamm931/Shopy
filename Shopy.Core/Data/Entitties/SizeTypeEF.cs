@@ -1,5 +1,4 @@
-﻿using Shopy.Core.Data.Entities.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Shopy.Core.Data.Entities
 {
@@ -7,7 +6,7 @@ namespace Shopy.Core.Data.Entities
     {
         public string Caption { get; set; }
 
-        public SizeType SizeTypeEID { get; set; }
+        public string SizeTypeEID { get; set; }
 
         public List<ProductEF> Products { get; set; }
 

@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Shopy.Sdk.Models
 {
     public class ProductFilter
     {
-        public IEnumerable<SizeType> Sizes { get; set; }
+        public IEnumerable<string> Sizes { get; set; }
 
-        public IEnumerable<BrandType> Brands { get; set; }
+        public IEnumerable<string> Brands { get; set; }
 
         public int? PageIndex { get; set; }
 
@@ -17,10 +18,12 @@ namespace Shopy.Sdk.Models
 
         public decimal? MinPrice { get; set; }
 
+        public Guid? CategoryUid { get; set; }
+
         public ProductFilter()
         {
-            Sizes = Enumerable.Empty<SizeType>();
-            Brands = Enumerable.Empty<BrandType>();
+            Sizes = Enumerable.Empty<string>();
+            Brands = Enumerable.Empty<string>();
         }
 
         public string GetQueryString()
@@ -51,6 +54,11 @@ namespace Shopy.Sdk.Models
             {
                 @params.Add("pageIndex", PageIndex.Value);
                 @params.Add("pageSize", PageSize.Value);
+            }
+
+            if (CategoryUid.HasValue)
+            {
+                @params.Add("categoryUid", CategoryUid.Value);
             }
 
             if (!@params.Any())

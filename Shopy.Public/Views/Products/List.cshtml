@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Shopy";
 }
 
 <!-- ko with: products -->
@@ -12,13 +12,15 @@
             <!-- category filters -->
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title filters-title">
-                        <a data-bind="click: unsetSelectedCategory" href="javascript:void(0);">Categories</a></h4>
+                    <h4 class="card-title">
+                        <a class="price" data-bind="click: unsetSelectedCategory" href="javascript:void(0);">Categories</a>
+                     </h4>
                     <div class="list-group">
                         <!-- ko foreach: categoryFilters-->
                         <a href="javascript:void(0);" 
-                           class="list-group-item" 
-                           data-bind="css: { price: selected }, text: caption, click: $root.setSelectedCategory"></a>
+                           class="list-group-item category-filter"
+                           data-bind="css: { price: selected }, text: caption, click: $root.setSelectedCategory">
+                        </a>
                         <!-- /ko -->
                     </div>
                 </div>
@@ -27,17 +29,18 @@
             <!-- price filers -->
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Price filter</h4>
+                    <h4 class="card-title selected">Prices</h4>
                     <div id="sliderDouble" class="slider slider-info"></div>
                     <div class="row">
                         <div class="col-sm-6">
-                            <label for="minInput">Min</label>
-                            <input type="number" class="form-control" id="minInput" value="200">
+                            <label for="minInput">From</label>
+                            <input type="number" class="form-control" id="minInput">
                         </div>
                         <div class="col-sm-6">
-                            <label for="maxInput">Max</label>
-                            <input type="number" class="form-control" id="maxInput" value="1000">
+                            <label for="maxInput">To</label>
+                            <input type="number" class="form-control" id="maxInput">
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -45,7 +48,7 @@
             <!-- size filters -->
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title filters-title">
+                    <h4 class="card-title">
                         <a data-bind="click: unsetSizeFilters" href="javascript:void(0);">Sizes</a>
                     </h4>
                     <div class="list-group">
@@ -63,7 +66,7 @@
             <!-- brand filters -->
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title filters-title">
+                    <h4 class="card-title selected">
                         <a data-bind="click: unsetBrandFilters" href="javascript:void(0);">Brands</a>
                     </h4>
                     <div class="list-group">
@@ -89,19 +92,27 @@
                 <div class="col-lg-4 col-md-6">
                     <a data-bind="attr: { href: detailsLink }">
                         <div class="card h-90" data-bind="event: { mouseover: toogleDetails, mouseout: toogleDetails }">
-                            <img data-bind="attr: { src: image1Url }, css: { 'w-50': detailsVisible, 'm-auto': detailsVisible }" class="card-img-top" alt="">
+                            <img data-bind="attr: { src: image1Url }, css: { 'cart-img-small': detailsVisible, 'm-auto': detailsVisible }" class="card-img-top" alt="">
                             <div class="card-body">
                                 <h4 data-bind="text: caption, css: { price: detailsVisible }" class="card-title"></h4>
                                 <h5 data-bind="text: price, visible: !detailsVisible()" class="price font-weight-bold"></h5>
-                                <div style="display: block" data-bind="visible: detailsVisible" class="">
+                                <div data-bind="visible: detailsVisible">
                                     <div class="pt-3 m-auto">
-                                        sizes : <span data-bind="text: prettySizes"></span>
+                                        <span class="mr-2 serif">sizes: </span>
+                                        <!-- ko foreach: $data.sizes -->
+                                            <!-- ko if: $index() > 0 -->
+                                            <span> - </span>
+                                            <!-- /ko -->
+                                        <span class="my-2" data-bind="text: $data.id"></span>
+                                        <!-- /ko -->
                                     </div>
-                                    <div class="pt-3 border-bottom mx-auto">
-                                        <i class="fas fa-circle"></i>
-                                        <i class="fas fa-circle"></i>
-                                        <i class="fas fa-circle"></i>
-                                        <i class="fas fa-circle"></i>
+                                    <div class="pt-3 border-bottom mx-auto mb-3">
+                                        <div class="mb-4">
+                                            <span class="dot bg-danger"></span>
+                                            <span class="dot bg-primary"></span>
+                                            <span class="dot bg-info"></span>
+                                            <span class="dot bg-success"></span>
+                                        </div>
                                     </div>
                                     <div class="pt-3 mx-auto">
                                         <img src="~/Content/imgs/language.svg" />
@@ -115,7 +126,11 @@
                 </div>
                 <!-- /ko -->
                 <div class="col-lg-12">
-                    <a class="btn btn-lg btn-block load-more">...</a>
+                    <a data-bind="click: loadMoreProducts" href="javascript:void(0);" class="btn btn-lg btn-block load-more">
+                        <span class="dot-sm mr-1"></span>
+                        <span class="dot-sm mr-1"></span>
+                        <span class="dot-sm"></span>
+                    </a>
                 </div>
             <!-- /.row -->
         </div>
@@ -175,55 +190,11 @@
 
      ko.applyBindings(products);
 
-     //slider
-     $(document).ready(function () {
-         // Sliders Init
-         // materialKit.initSliders();
-
-         var slider = document.getElementById('sliderDouble');
-
-         noUiSlider.create(slider, {
-             start: [200, 1000],
-             margin: 100,
-             step: 10,
-             connect: true,
-             range: {
-                 min: 0,
-                 max: 1200
-             }
-         });
-
-         // When the slider value changes, update the inputs
-         var minInput = document.getElementById('minInput'), maxInput = document.getElementById('maxInput');
-         slider.noUiSlider.on('update', function (values, handle) {
-             if (handle == 0) {
-                 minInput.value = values[handle];
-             } else {
-                 maxInput.value = values[handle];
-             }
-         });
-         // When the input changes, set the slider value
-         minInput.addEventListener('change', function () {
-             slider.noUiSlider.set([this.value, null]);
-         });
-         maxInput.addEventListener('change', function () {
-             slider.noUiSlider.set([null, this.value]);
-         });
-     });
-
 </script>
-<style>
-    .slider.slider-info .noUi-connect {
-        background-color: #000;
-    }
-
-    .slider.slider-info .noUi-handle {
-        border-color: #000;
-        background-color: #000;
-    }
-
-    .form-control, .is-focused .form-control {
-        background-image: none;
-    }
-</style>
+<script>
+    $(document).ready(function() {
+        var slider = new Slider();
+        slider.create(products);
+    })
+</script>
 }

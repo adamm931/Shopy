@@ -1,7 +1,6 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
 using Shopy.Core.Data.Entities;
-using Shopy.Core.Data.Entities.Enums;
 using Shopy.Data;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -35,9 +34,8 @@ namespace Shopy.Core.Application.Products.Edit
 
                 if (command.Brand != null)
                 {
-                    int commandBrandEId = (int)command.Brand.Value;
                     brand = await dbContext.BrandTypes
-                        .SingleAsync(b => commandBrandEId == (int)b.BrandTypeEId);
+                        .SingleAsync(b => b.BrandTypeEId == command.Brand);
                 }
 
                 product.Price = command.Price ?? product.Price;
@@ -50,7 +48,7 @@ namespace Shopy.Core.Application.Products.Edit
             }
         }
 
-        private async Task<List<SizeTypeEF>> EditSizesAsync(ShopyContext dbContext, ProductEF product, IEnumerable<SizeType> commandSizesEIds)
+        private async Task<List<SizeTypeEF>> EditSizesAsync(ShopyContext dbContext, ProductEF product, IEnumerable<string> commandSizesEIds)
         {
             var sizeForProductSet = await dbContext.SizeTypes
                    .Where(s => commandSizesEIds.Any(cs => cs == s.SizeTypeEID))

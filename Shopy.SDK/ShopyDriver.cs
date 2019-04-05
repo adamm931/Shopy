@@ -36,13 +36,13 @@ namespace Shopy.Sdk
             return await _products.GetAsync(uid);
         }
 
-        public async Task<Product> AddProductAsync(Product product)
+        public async Task<Product> AddProductAsync(AddEditProduct product)
         {
             var result = await _products.AddAsync(product);
             return result;
         }
 
-        public async Task EditProductAsync(Product product)
+        public async Task EditProductAsync(AddEditProduct product)
         {
             await _products.EditAsync(product);
         }
