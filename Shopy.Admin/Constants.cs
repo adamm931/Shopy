@@ -10,6 +10,7 @@
         public const string Image3 = "third.png";
 
         public const string ApiEndpoint = "http://localhost:50253/api";
+        public const string ReturnUrl = "ReturnUrl";
 
     }
 }

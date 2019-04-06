@@ -18,7 +18,12 @@ namespace Shopy.Core.Application.Products.Get
                 var product = await dbContext.Products
                     .Include(p => p.Sizes)
                     .Include(p => p.Brand)
-                    .SingleAsync(p => p.Uid == request.Uid);
+                    .FirstOrDefaultAsync(p => p.Uid == request.Uid);
+
+                if (product == null)
+                {
+                    return null;
+                }
 
                 var productMapper = new ProductMapper();
                 return new GetProductResponse(productMapper.FromEF(product));

@@ -15,6 +15,9 @@ var Products = Products || {};
         self.price = ko.observable();
         self.description = ko.observable();
         self.sizes = ko.observable();
+        self.hasRelatedProducts = ko.pureComputed(function () {
+            return _.some(self.relatedProducts());
+        }, self);
 
         self.displayPrice = ko.pureComputed(function () {
 

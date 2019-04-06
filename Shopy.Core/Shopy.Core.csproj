@@ -96,6 +96,8 @@
     <Compile Include="Data\Entitties\SizeTypeEF.cs" />
     <Compile Include="Data\Intilializer\ShopyContextSeeder.cs" />
     <Compile Include="Data\ShopyContext.cs" />
+    <Compile Include="Exceptions\CategoryNotFoundException.cs" />
+    <Compile Include="Exceptions\ProductNotFoundException.cs" />
     <Compile Include="Factory\MediatorFactory.cs" />
     <Compile Include="Mappers\BrandMapper.cs" />
     <Compile Include="Mappers\CategoryMapper.cs" />

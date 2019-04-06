@@ -142,8 +142,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\bootstrap-grid.css" />
-    <Content Include="Content\css\bootstrap-reboot.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\js\bootstrap.bundle.js" />
@@ -154,7 +152,6 @@
     </Content>
     <Content Include="Resources\empty-img.png" />
     <Content Include="Scripts\Bindings\ImagePreview.js" />
-    <Content Include="Scripts\ViewModels\ProductAddEdit.js" />
     <Content Include="Scripts\ViewModels\ProductCategories.js" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -207,9 +204,12 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Filters\LogedInCheck.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="UserLogedInResult.cs" />
+    <Compile Include="Utils\AuthenticationUtils.cs" />
     <Compile Include="Utils\SelectListUtils.cs" />
     <Compile Include="Utils\ImageUtils.cs" />
     <Compile Include="ViewModels\AddCategoryViewModel.cs" />

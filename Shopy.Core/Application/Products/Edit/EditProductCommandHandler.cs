@@ -1,6 +1,7 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
 using Shopy.Core.Data.Entities;
+using Shopy.Core.Exceptions;
 using Shopy.Data;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -21,7 +22,12 @@ namespace Shopy.Core.Application.Products.Edit
                 var product = await dbContext.Products
                     .Include(p => p.Sizes)
                     .Include(p => p.Brand)
-                    .SingleAsync(p => p.Uid == command.Uid);
+                    .FirstOrDefaultAsync(p => p.Uid == command.Uid);
+
+                if (product == null)
+                {
+                    throw new ProductNotFoundException(command.Uid);
+                }
 
                 var sizes = product.Sizes;
 

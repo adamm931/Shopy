@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 namespace Shopy.Admin.Controllers
 {
-    //TODO: remove image when product is deleted
     [Authorize]
     public class ProductsController : BaseController
     {

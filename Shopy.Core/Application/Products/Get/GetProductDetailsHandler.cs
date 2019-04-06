@@ -24,7 +24,13 @@ namespace Shopy.Core.Application.Products.Get
                     .Include(p => p.Sizes)
                     .ToListAsync();
 
-                var product = products.Single(p => p.Uid == request.Uid);
+                var product = products.FirstOrDefault(p => p.Uid == request.Uid);
+
+                if (product == null)
+                {
+                    return null;
+                }
+
                 var productMapper = new ProductMapper();
                 var productMapperWithCategories = new ProductMapper(new CategoryMapper());
 

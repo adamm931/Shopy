@@ -11,6 +11,7 @@ var Products = Products || {};
 
         self.init = function () {
             loadFilters();
+            search();
         }
 
         self.requestInProgress = ko.observable(false);
@@ -28,7 +29,7 @@ var Products = Products || {};
         self.selectedSizes = ko.observableArray();
         self.selectedBrands = ko.observableArray();
         self.selectedCategory = ko.observable();
-        self.iniMinPrice = ko.observable(100);
+        self.iniMinPrice = ko.observable(10);
         self.iniMaxPrice = ko.observable(500);
 
         //filter object
@@ -36,7 +37,7 @@ var Products = Products || {};
         
         //public func
 
-        self.search = function () {
+        self.search = function (callback) {
 
             if (self.requestInProgress()) {
                 return;
@@ -55,7 +56,9 @@ var Products = Products || {};
                         //_.each(responseItems, ri => self.items.push(ri));
                         //_.each(responseItems, ri => self.sourceItems.push(ri));
 
-                        self.items(responseItems);
+                        //self.items(responseItems);
+
+                        callback(responseItems);
                     }
                     else {
                         console.error(response.Message);
@@ -72,9 +75,9 @@ var Products = Products || {};
 
         self.setSelectedCategory = function (item, callback) {
 
-            _.each(self.categoryFilters(), cf => cf.selected(cf.id == item.id));
+            _.each(self.categories(), cf => cf.selected(cf.id == item.id));
 
-            var selectedCategory = _.find(self.categoryFilters(), cf => cf.selected() == true);
+            var selectedCategory = _.find(self.categories(), cf => cf.selected() == true);
 
             self.filters.setCategory(selectedCategory);
 
@@ -83,7 +86,7 @@ var Products = Products || {};
 
         self.unsetSelectedCategory = function () {
 
-            var selectedCategory = _.find(self.categoryFilters(), cf => cf.selected() == true);
+            var selectedCategory = _.find(self.categories(), cf => cf.selected() == true);
 
             if(selectedCategory !== undefined) {
                 selectedCategory.selected(false);
@@ -126,6 +129,11 @@ var Products = Products || {};
         //private func 
 
         var loadFilters = function () {
+
+
+            self.filters.setPriceRange(
+                self.iniMinPrice(), self.iniMaxPrice());
+
             $.ajax({
                 url: endpoints.Filters,
                 type: 'GET',

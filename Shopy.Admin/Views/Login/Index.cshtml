@@ -7,17 +7,16 @@
 @using Shopy.Admin.ViewModels;
 @model LoginViewModel
 
-   @using (Html.BeginRouteForm("Login", new { action = "Login" }, FormMethod.Post, new { @class = "form-signin"  }))
-   {
+    @using (Html.BeginRouteForm("Login", new { action = "Login" }, FormMethod.Post, new { @class = "form-signin" }))
+    {
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        @Html.LabelFor(m => m.Username, new { @class = "sr-only" })
-        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @placeholder = "Enter username" })
-        @Html.LabelFor(m => m.Password, new { @class = "sr-only" })
-        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter Password" })
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
-        <button class="btn btn-primary" type="submit">Login</button>
-   }
+        @Html.TextBoxFor(m => m.Username, new { @class = "form-control mb-2", @placeholder = "Enter username" })
+        @Html.ValidationMessageFor(m => m.Username)
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control mb-2", @placeholder = "Enter Password" })
+        @Html.ValidationMessageFor(m => m.Password)
+        <span class="mr-2">Remember: </span>
+        @Html.CheckBoxFor(m => m.Remember, new { @class = "checkbox mb-3" })
+    
+        <button class="btn btn-primary form-control w-75" type="submit">Login</button>
+    }
+   

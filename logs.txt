@@ -286,3 +286,88 @@
    at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
    at Shopy.Api.Controllers.BaseApiController.<ProcessRequest>d__7`1.MoveNext() in C:\DEV\DotNet\Web\Shopy\Shopy.Api\Controllers\BaseApiController.cs:line 71
 ----------------------------------------------------------------------------------------------------
+6/4/2019 12:19:49 System.NullReferenceException: Object reference not set to an instance of an object.
+   at Mediator.Net.Pipeline.EmptyPipeSpecification`1.OnException(Exception ex, TContext context)
+   at Mediator.Net.Pipeline.GlobalReceivePipe`1.<Connect>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendMessage>d__10`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendAsync>d__7`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Shopy.Api.Controllers.BaseApiController.<ProcessCommand>d__6.MoveNext() in C:\DEV\DotNet\Web\Shopy\Shopy.Api\Controllers\BaseApiController.cs:line 46
+----------------------------------------------------------------------------------------------------
+6/4/2019 12:24:27 System.Exception: There is no product with id: 1bc0dae4-b4f1-4144-b2f5-607f5e685760
+   at Mediator.Net.Pipeline.EmptyPipeSpecification`1.OnException(Exception ex, TContext context)
+   at Mediator.Net.Pipeline.GlobalReceivePipe`1.<Connect>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendMessage>d__10`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendAsync>d__7`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Shopy.Api.Controllers.BaseApiController.<ProcessCommand>d__6.MoveNext() in C:\DEV\DotNet\Web\Shopy\Shopy.Api\Controllers\BaseApiController.cs:line 46
+----------------------------------------------------------------------------------------------------
+6/4/2019 12:25:09 System.Exception: There is no product with id: 1bc0dae4-b4f1-4144-b2f5-607f5e685760
+   at Mediator.Net.Pipeline.EmptyPipeSpecification`1.OnException(Exception ex, TContext context)
+   at Mediator.Net.Pipeline.GlobalReceivePipe`1.<Connect>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendMessage>d__10`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendAsync>d__7`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Shopy.Api.Controllers.BaseApiController.<ProcessCommand>d__6.MoveNext() in C:\DEV\DotNet\Web\Shopy\Shopy.Api\Controllers\BaseApiController.cs:line 46
+----------------------------------------------------------------------------------------------------
+6/4/2019 12:36:01 Shopy.Core.Exceptions.ProductNotFoundException: There is no product with id: 1bc0dae4-b4f1-4144-b2f5-607f5e685760
+   at Mediator.Net.Pipeline.EmptyPipeSpecification`1.OnException(Exception ex, TContext context)
+   at Mediator.Net.Pipeline.GlobalReceivePipe`1.<Connect>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendMessage>d__10`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendAsync>d__7`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Shopy.Api.Controllers.BaseApiController.<ProcessCommand>d__6.MoveNext() in C:\DEV\DotNet\Web\Shopy\Shopy.Api\Controllers\BaseApiController.cs:line 46
+----------------------------------------------------------------------------------------------------
+6/4/2019 12:36:46 Shopy.Core.Exceptions.ProductNotFoundException: There is no product with id: 1bc0dae4-b4f1-4144-b2f5-607f5e685760
+   at Mediator.Net.Pipeline.EmptyPipeSpecification`1.OnException(Exception ex, TContext context)
+   at Mediator.Net.Pipeline.GlobalReceivePipe`1.<Connect>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendMessage>d__10`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendAsync>d__7`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at Shopy.Api.Controllers.BaseApiController.<ProcessCommand>d__6.MoveNext() in C:\DEV\DotNet\Web\Shopy\Shopy.Api\Controllers\BaseApiController.cs:line 46
+----------------------------------------------------------------------------------------------------

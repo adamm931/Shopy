@@ -11,7 +11,10 @@
     <div class="container-fluid main-container">
         <div class="row">
 
-            @Html.Partial("_Sidebar")
+            @if (ViewBag.IsAuthenticated)
+            {
+                @Html.Partial("_Sidebar")
+            }
 
             <main id="content-wrap" role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 ">
                 @RenderBody()
