@@ -5,17 +5,9 @@ using System.Web;
 
 namespace Shopy.Admin.Validation
 {
-    public class ImageFile : ValidationAttribute
+    public class ImageFileValidationAttribute : ValidationAttribute
     {
-        public string Formats { get; set; }
-
         public int SizeMB { get; set; }
-
-        public ImageFile(string formats, int sizeMB)
-        {
-            Formats = formats;
-            SizeMB = sizeMB;
-        }
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
@@ -33,7 +25,8 @@ namespace Shopy.Admin.Validation
 
             if (!HasImageFormat(imageFile))
             {
-                return new ValidationResult($"Image file is not in valid format. The valid formats are {Formats}");
+                var validFormats = "jpg, png, bmp, gif, jpeg";
+                return new ValidationResult($"Image file is not in valid format. The valid formats are {validFormats}");
             }
 
             return ValidationResult.Success;

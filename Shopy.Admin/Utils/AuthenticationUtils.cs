@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using Shopy.Admin.Models;
+using System.Web;
 using System.Web.Security;
 
 namespace Shopy.Admin.Utils

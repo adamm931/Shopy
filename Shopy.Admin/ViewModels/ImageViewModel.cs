@@ -5,7 +5,7 @@ namespace Shopy.Admin.ViewModels
 {
     public class ImageViewModel
     {
-        [ImageFile("jpg,png,jpeg", 2)]
+        [ImageFileValidation(SizeMB = 2)]
         public HttpPostedFileBase File { get; set; }
 
         public string Url { get; set; }

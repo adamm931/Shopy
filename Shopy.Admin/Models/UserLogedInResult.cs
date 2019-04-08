@@ -1,4 +1,4 @@
-﻿namespace Shopy.Admin
+﻿namespace Shopy.Admin.Models
 {
     public class UserLogedInResult
     {
