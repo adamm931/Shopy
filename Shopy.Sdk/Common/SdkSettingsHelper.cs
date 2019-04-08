@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Configuration;
+using System.IO;
+using System.Reflection;
 
 namespace Shopy.Sdk.Common
 {
@@ -82,8 +84,11 @@ namespace Shopy.Sdk.Common
 
         private static KeyValueConfigurationCollection GetAppSettings()
         {
-            var config = ConfigurationManager.OpenExeConfiguration(
-                @"C:\DEV\DotNet\Web\Shopy\Shopy.SDK\bin\Debug\Shopy.Sdk.dll");
+            var assembly = Assembly.GetExecutingAssembly().GetName();
+            var binPath = Path.GetDirectoryName(assembly.CodeBase).Substring(6);
+            var exeConfigPath = Path.Combine(binPath, $"{assembly.Name}.dll");
+
+            var config = ConfigurationManager.OpenExeConfiguration(exeConfigPath);
 
             if (config == null)
             {

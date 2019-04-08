@@ -60,7 +60,7 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductDetails.cs" />
     <Compile Include="Models\ProductFilter.cs" />
-    <Compile Include="Models\IResponse.cs" />
+    <Compile Include="Models\Response.cs" />
     <Compile Include="Models\Size.cs" />
     <Compile Include="Client\SizesClient.cs" />
     <Compile Include="Client\BrandsClient.cs" />
