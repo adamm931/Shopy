@@ -37,6 +37,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -78,6 +79,11 @@
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /s /e /d /y "$(SolutionDir)Shopy.Sdk\bin\Debug\Shopy.Sdk.dll.config" "$(SolutionDir)Shopy.Admin\bin\Shopy.Sdk.dll.config*"
+xcopy /s /e /d /y "$(SolutionDir)Shopy.Sdk\bin\Debug\Shopy.Sdk.dll.config" "$(SolutionDir)Shopy.Public\bin\Shopy.Sdk.dll.config*"
+</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

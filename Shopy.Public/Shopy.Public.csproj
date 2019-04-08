@@ -220,9 +220,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Shopy.SDK\Shopy.Sdk.csproj">
+    <ProjectReference Include="..\Shopy.Sdk\Shopy.Sdk.csproj">
       <Project>{33a5c2eb-d1f5-4480-8bc7-ffcb3ac4fcb7}</Project>
       <Name>Shopy.Sdk</Name>
     </ProjectReference>
