@@ -165,8 +165,16 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\PublishProfiles\123.pubxml" />
+    <None Include="Scripts\Common\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Common\jquery-1.10.2.js" />
+    <Content Include="Scripts\Common\jquery-1.10.2.min.js" />
+    <None Include="Scripts\Common\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\Common\jquery.validate.js" />
+    <Content Include="Scripts\Common\jquery.validate.min.js" />
+    <Content Include="Scripts\Common\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\Common\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Common\knockout-3.5.0.js" />
+    <Content Include="Scripts\Common\modernizr-2.6.2.js" />
     <Content Include="Scripts\Common\underscore.js" />
     <Content Include="Scripts\StickyHeader.js" />
     <Content Include="Scripts\ViewModels\SearchFilter.js" />
@@ -186,6 +194,7 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Head.cshtml" />
+    <Content Include="Scripts\Common\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_NewsLetter.cshtml" />
     <Content Include="Views\Shared\_Endpoints.cshtml" />
     <None Include="Web.Debug.config">
