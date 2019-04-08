@@ -13,9 +13,7 @@ namespace Shopy.Public.Controllers
         {
             get
             {
-                return shopy ?? (shopy = new ShopyDriveBuilder()
-                        .WithBaseAddress("http://localhost:50253/api")
-                        .Build());
+                return shopy ?? (shopy = new ShopyDriveBuilder().Configure());
             }
         }
 
@@ -30,7 +28,7 @@ namespace Shopy.Public.Controllers
         {
             var response = new
             {
-                Categories = await Shopy.ListCategoriesWithProductsAsync(),
+                Categories = await Shopy.ListCategoriesAsync(),
                 Sizes = await Shopy.ListSizesAsync(),
                 Brands = await Shopy.ListBrandsAsync(),
             };
@@ -48,7 +46,7 @@ namespace Shopy.Public.Controllers
                 response = new
                 {
                     Success = true,
-                    Items = await Shopy.ListProductsAsync(filter)
+                    Data = await Shopy.ListProductsAsync(filter)
                 };
             }
 
@@ -77,11 +75,17 @@ namespace Shopy.Public.Controllers
 
             try
             {
+                var details = await Shopy.GetProductDetailsAsync(id);
+
+                if (details == null)
+                {
+                    throw new Exception($"Product not found with id: {id}");
+                }
 
                 response = new
                 {
                     Success = true,
-                    Details = await Shopy.GetProductDetailsAsync(id)
+                    Details = details
                 };
             }
 

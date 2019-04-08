@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Shopy.Sdk.ErrorHandler;
 using System;
 using System.Net.Http;
 using System.Text;
@@ -14,7 +15,7 @@ namespace Shopy.Sdk.Client
 
         public ShopyHttpClient(string baseAddres)
         {
-            _httpClient = new HttpClient()
+            _httpClient = new HttpClient(new ResponseMessageHandler())
             {
                 BaseAddress = new Uri(baseAddres)
             };
@@ -55,13 +56,13 @@ namespace Shopy.Sdk.Client
             }
 
             var response = await _httpClient.SendAsync(request);
-            var stream = await response.Content.ReadAsStringAsync();
 
-            if (!response.IsSuccessStatusCode)
+            if (response == null)
             {
-                throw new Exception(stream);
+                return default(TResult);
             }
 
+            var stream = await response.Content.ReadAsStringAsync();
             return await DeserializeAsync<TResult>(stream);
 
         }

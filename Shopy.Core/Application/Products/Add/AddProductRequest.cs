@@ -9,7 +9,7 @@ namespace Shopy.Core.Application.Products.Add
 
         public string Description { get; set; }
 
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
         public string Brand { get; set; }
 

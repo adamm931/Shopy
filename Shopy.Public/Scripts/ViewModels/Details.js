@@ -64,19 +64,17 @@ var Products = Products || {};
 
                     self.relatedProducts(_.map(details.RelatedProducts, rp => new Product(rp)));
 
-                    setImages();
-
+                    setImages(product);
                 }
             });
         }
 
-        var setImages = function () {
+        var setImages = function (product) {
 
-            var id = self.id();
             var images = [
-                productImage1UrlTemplate.replace("{{id}}", id),
-                productImage2UrlTemplate.replace("{{id}}", id),
-                productImage3UrlTemplate.replace("{{id}}", id)
+                product.Image1.Url,
+                product.Image2.Url,
+                product.Image3.Url
             ];
 
             self.mainImage(images[0]);

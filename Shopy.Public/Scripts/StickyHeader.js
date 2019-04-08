@@ -8,5 +8,4 @@
     else {
         $('.nav-2nd').removeClass('sticky-top');
     }
-
 }, 300));

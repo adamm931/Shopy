@@ -5,10 +5,8 @@
     self.create = function (products) {
 
         var slider = document.getElementById('sliderDouble');
-        var sliderStart = products.iniMinPrice();
-        var sliderEnd = products.iniMaxPrice();
-
-        //TODO: slider range make configurabile
+        var sliderStart = products.filters.minPrice;
+        var sliderEnd = products.filters.maxPrice;
 
         noUiSlider.create(slider, {
             start: [sliderStart, sliderEnd],
@@ -24,8 +22,8 @@
         var minInput = document.getElementById('minInput');
         var maxInput = document.getElementById('maxInput');
 
-        minInput.value = products.iniMinPrice();
-        maxInput.value = products.iniMaxPrice();
+        minInput.value = sliderStart;
+        maxInput.value = sliderEnd;
           
         slider.noUiSlider.on('end', function (values, handle) {
             if (handle == 0) {
@@ -48,7 +46,8 @@
     }
 
     var callSearch = function () {
-        products.filters.setPriceRange(minInput.value, maxInput.value);
+        products.filters.setMinPrice(minInput.value);
+        products.filters.setMaxPrice(maxInput.value);
         products.search();
     }
 }

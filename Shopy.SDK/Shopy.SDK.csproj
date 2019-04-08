@@ -34,7 +34,9 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,14 +45,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Images\IHasImageSetup.cs" />
+    <Compile Include="Common\SdkSettingsHelper.cs" />
+    <Compile Include="Common\SettingKeys.cs" />
+    <Compile Include="Images\ImageProvider.cs" />
+    <Compile Include="Images\ISavesImage.cs" />
+    <Compile Include="Models\ListResponse.cs" />
+    <Compile Include="Models\Image.cs" />
+    <Compile Include="ResponseHandler\ResponseMessageHandler.cs" />
     <Compile Include="Models\AddEditProduct.cs" />
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\ListResponse.cs" />
+    <Compile Include="Models\ProductListResponse.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductDetails.cs" />
     <Compile Include="Models\ProductFilter.cs" />
-    <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\IResponse.cs" />
     <Compile Include="Models\Size.cs" />
     <Compile Include="Client\SizesClient.cs" />
     <Compile Include="Client\BrandsClient.cs" />
@@ -61,6 +71,11 @@
     <Compile Include="ShopyDriveBuilder.cs" />
     <Compile Include="ShopyDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

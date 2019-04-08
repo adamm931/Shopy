@@ -4,7 +4,6 @@ using Shopy.Core.Data.Entities;
 using Shopy.Core.Mappers;
 using Shopy.Core.Models;
 using Shopy.Data;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;
@@ -25,28 +24,12 @@ namespace Shopy.Core.Application.Products.Get
                     .Include(p => p.Sizes)
                     .Include(p => p.Categories);
 
-                var filteredProducts = await FilterProducts(products, request.Filter);
-                var productMapper = new ProductMapper(new CategoryMapper());
-                var result = filteredProducts.Select(r => productMapper.FromEF(r));
-
-                return new ListProductsResponse(result);
+                return await FilterProducts(products, request.Filter);
             }
         }
 
-        private async Task<List<ProductEF>> FilterProducts(IQueryable<ProductEF> products, ProductFilter productFilter)
+        private async Task<ListProductsResponse> FilterProducts(IQueryable<ProductEF> products, ProductFilter productFilter)
         {
-            //paging
-            if (productFilter.PageSize.HasValue && productFilter.PageIndex.HasValue)
-            {
-                var pageSize = productFilter.PageSize.Value;
-                var pageIndex = productFilter.PageIndex.Value;
-
-                products = products
-                    .OrderBy(p => p.ProductId)
-                    .Skip(pageIndex * pageSize)
-                    .Take((pageIndex + 1) * pageSize);
-            }
-
             //price
             if (productFilter.MinPrice.HasValue)
             {
@@ -85,7 +68,26 @@ namespace Shopy.Core.Application.Products.Get
                     .Where(p => p.Categories.Any(c => c.Uid == productFilter.CategoryUid.Value));
             }
 
-            return await products.ToListAsync();
+            var totalRecords = await products.CountAsync();
+
+            //paging
+            if (productFilter.PageSize.HasValue && productFilter.PageIndex.HasValue)
+            {
+                var pageSize = productFilter.PageSize.Value;
+                var pageIndex = productFilter.PageIndex.Value;
+
+                products = products
+                    .OrderBy(p => p.ProductId)
+                    .Skip(pageIndex * pageSize)
+                    .Take((pageIndex + 1) * pageSize);
+            }
+
+            var filteredProducts = await products.ToListAsync();
+            var productMapper = new ProductMapper(new CategoryMapper());
+            var projection = filteredProducts.Select(r => productMapper.FromEF(r));
+            var response = new ListProductsResponse(projection, totalRecords);
+
+            return response;
         }
     }
 }

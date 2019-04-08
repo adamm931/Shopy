@@ -144,6 +144,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\a5779a04-5fa6-42e3-8793-8f8569922bbc\main.png" />
+    <Content Include="Images\empty-img.png" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

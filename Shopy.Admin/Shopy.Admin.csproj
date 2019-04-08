@@ -211,7 +211,7 @@
     <Compile Include="UserLogedInResult.cs" />
     <Compile Include="Utils\AuthenticationUtils.cs" />
     <Compile Include="Utils\SelectListUtils.cs" />
-    <Compile Include="Utils\ImageUtils.cs" />
+    <Compile Include="Validation\ImageFile.cs" />
     <Compile Include="ViewModels\AddCategoryViewModel.cs" />
     <Compile Include="ViewModels\CategoryListItemViewModel.cs" />
     <Compile Include="ViewModels\CategoryListViewModel.cs" />

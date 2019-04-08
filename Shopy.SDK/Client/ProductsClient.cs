@@ -1,6 +1,5 @@
 ﻿using Shopy.Sdk.Models;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Shopy.Sdk.Client
@@ -14,22 +13,21 @@ namespace Shopy.Sdk.Client
             _client = client;
         }
 
-        public async Task<IEnumerable<Product>> ListAsync(ProductFilter filter = null)
+        public async Task<ProductListResponse> ListAsync(ProductFilter filter = null)
         {
-            var list = await _client.GetAsync<ListResponse<Product>>($"products/{filter?.GetQueryString()}");
-            return list.Result;
+            return await _client.GetAsync<ProductListResponse>($"products/{filter?.GetQueryString()}");
         }
 
         public async Task<Product> GetAsync(Guid uid)
         {
             var product = await _client.GetAsync<Response<Product>>($"products/{uid}");
-            return product.Result;
+            return product?.Result;
         }
 
         public async Task<ProductDetails> GetDetailsAsync(Guid uid)
         {
             var details = await _client.GetAsync<Response<ProductDetails>>($"products/{uid}/details");
-            return details.Result;
+            return details?.Result;
         }
 
         public async Task<Product> AddAsync(AddEditProduct product)

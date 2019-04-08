@@ -20,6 +20,10 @@
         background-size: contain;
     }
 
+   /*.logo-nav a {
+        height: 50px !important;
+    }*/
+
    .price {
         color: #ff8332;
     }
@@ -40,10 +44,6 @@
         display: flex;
         align-items: center;
         text-align: center;
-    }
-
-    .logo-nav a {
-        height: 50px !important;
     }
 
     .navbar {
@@ -70,9 +70,9 @@
     }
 	
 	.sticky-top {
-		position: fixed;
+		position: sticky;
         top: 0px;
-        transition: box-shadow 500ms ease, height 500ms ease;
+        transition: box-shadow 300ms ease, height 300ms ease;
         width: 100%;
         box-shadow: 0 4px 18px 0px rgba(0, 0, 0, 0.12), 0 7px 10px -5px rgba(0, 0, 0, 0.15);
         height: 60px !important;
@@ -193,6 +193,17 @@
     .nav-2nd {
         height: 80px;
     }
-   
 
+    @media only screen and (max-width: 567px) {
+        .nav-1st {
+            display: none !important;
+        }
+        footer {
+            display: none !important;
+        }
+
+        .join-us {
+            width: 100%;
+        }
+    }
  

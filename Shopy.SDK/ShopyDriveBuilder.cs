@@ -1,25 +1,13 @@
 ﻿using Shopy.Sdk.Client;
+using Shopy.Sdk.Common;
 
 namespace Shopy.Sdk
 {
     public class ShopyDriveBuilder
     {
-        private string baseAddress;
-
-        public ShopyDriveBuilder WithBaseAddress(string baseAddress)
+        public IShopyDriver Configure()
         {
-            if (string.IsNullOrWhiteSpace(baseAddress))
-            {
-                throw new System.ArgumentNullException(baseAddress);
-            }
-
-            this.baseAddress = baseAddress.EndsWith("/") ? baseAddress : $"{baseAddress}/";
-            return this;
-        }
-
-        public IShopyDriver Build()
-        {
-            var httpClient = new ShopyHttpClient(this.baseAddress);
+            var httpClient = new ShopyHttpClient(SdkSettingsHelper.ApiBaseAddress);
             return new ShopyDriver(httpClient);
         }
     }

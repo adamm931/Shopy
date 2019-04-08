@@ -17,12 +17,11 @@
             </div>
         </div>
         @Html.Partial("_Footer")
+        @Html.Partial("_Endpoints")
 
         @Scripts.Render("~/Content/bundle/js-lib")
         @Scripts.Render("~/Content/bundle/material-kit-js")
 
         @RenderSection("scripts", required: false)
     </body>
-
-    
 </html>

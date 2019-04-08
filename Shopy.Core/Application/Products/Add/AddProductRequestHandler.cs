@@ -1,6 +1,7 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
 using Shopy.Core.Data.Entities;
+using Shopy.Core.Exceptions;
 using Shopy.Core.Mappers;
 using Shopy.Data;
 using System;
@@ -20,11 +21,21 @@ namespace Shopy.Core.Application.Products.Add
                 var command = context.Message;
 
                 var brand = await dbContext.BrandTypes
-                    .SingleAsync(b => b.BrandTypeEId == command.Brand);
+                    .FirstOrDefaultAsync(b => b.BrandTypeEId == command.Brand);
+
+                if (brand == null)
+                {
+                    throw new BrandNotFoundException();
+                }
 
                 var sizes = await dbContext.SizeTypes
                     .Where(s => command.Sizes.Any(cs => cs == s.SizeTypeEID))
                     .ToListAsync();
+
+                if (!sizes.Any())
+                {
+                    throw new SizesNotFoundException();
+                }
 
                 var uid = Guid.NewGuid();
 
@@ -33,7 +44,7 @@ namespace Shopy.Core.Application.Products.Add
                     Uid = uid,
                     Caption = command.Caption,
                     Description = command.Description,
-                    Price = command.Price,
+                    Price = command.Price.Value,
                     Brand = brand,
                     Sizes = sizes
                 });

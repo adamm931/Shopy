@@ -66,13 +66,15 @@
         <!-- ko if: hasRelatedProducts -->
             <div class="card-body text-center">
                 <h3 class="title text-uppercase"><span class="price">Related</span> products</h3>
-                <p class="font-weight-normal">Lorem ipsulum is simply dummy text of the printing and typesetting industry</p>
+                <p class="font-weight-normal">
+                    Lorem ipsulum is simply dummy text of the printing and typesetting industry
+                </p>
                 <div class="row">
                     <!-- ko foreach: relatedProducts -->
                     <div class="col-lg-4 col-md-6">
                         <a data-bind="attr: { href: detailsLink }">
                             <div class="card h-90" data-bind="event: { mouseover: toogleDetails, mouseout: toogleDetails }">
-                                <img data-bind="attr: { src: image1Url }, css: { 'cart-img-small': detailsVisible, 'm-auto': detailsVisible }" class="card-img-top" alt="">
+                                <img data-bind="attr: { src: image1Url }, css: { 'cart-img-small': detailsVisible }" class="card-img-top m-auto" alt="">
                                 <div class="card-body">
                                     <h4 data-bind="text: caption, css: { price: detailsVisible }" class="card-title"></h4>
                                     <h5 data-bind="text: price, visible: !detailsVisible()" class="price font-weight-bold"></h5>
@@ -83,7 +85,7 @@
                                             <!-- ko if: $index() > 0 -->
                                             <span> - </span>
                                             <!-- /ko -->
-                                            <span class="my-2" data-bind="text: $data.id"></span>
+                                            <span class="my-2 serif text-lowercase" data-bind="text: $data.id"></span>
                                             <!-- /ko -->
                                         </div>
                                         <div class="pt-3 border-bottom mx-auto mb-3">
@@ -113,15 +115,6 @@
     <script type="text/javascript">
 
      var Products = Products || {};
-
-     const endpoints = {
-         LoadDetails: "@Url.RouteUrl("Products", new { action = "LoadDetails", id = Model })",
-         Details: "@Url.RouteUrl("Products", new { action = "Details", id = "id" })"
-     };
-
-     const productImage1UrlTemplate = "@SettingsHelper.ProductImage1TemplateUrl";
-     const productImage2UrlTemplate = "@SettingsHelper.ProductImage2TemplateUrl";
-     const productImage3UrlTemplate = "@SettingsHelper.ProductImage3TemplateUrl";
 
      var productDetails = new Products.Details();
      productDetails.init();

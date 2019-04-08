@@ -1,37 +1,49 @@
-﻿function SearchFilters(minPrice, mixPrice) {
+﻿function SearchFilters(minPrice, maxPrice) {
 
     var self = this;
 
-    //make this configurabile
     self.pageIndex = 0;
     self.pageSize = 9;
 
-    self.category = null;
-    self.brands = [];
-    self.sizes = [];
-    self.minPrice = minPrice;
-    self.maxPrice = mixPrice;
+    self.categoryId = null;
+    self.brands = '';
+    self.sizes = '';
+    self.minPrice = 10;
+    self.maxPrice = 500;
 
     self.nextPage = function () {
-        self.pageIndex += 1;
+        //self.pageIndex += 1;
         self.pageSize += self.pageSize;
+        setToCache('pageSize', self.pageSize);
     }
 
     self.setBrands = function (brands) {
-        self.brands = brands;
+        self.brands = setToCache('brands', brands);
+    }
+
+    self.getBrands = function () {
+        return self.brands.split(',');
     }
 
     self.setSizes = function (sizes) {
-        self.sizes = sizes;
+        self.sizes = setToCache('sizes', sizes);
     }
 
-    self.setPriceRange = function (min, max) {
-        self.maxPrice = max;
-        self.minPrice = min;
+    self.getSizes = function () {
+        return self.sizes.split(',');
     }
 
-    self.setCategory = function (category) {
-        self.category = category;
+    self.setMinPrice = function (min) {
+        self.minPrice = setToCache('minPrice', min);
+    }
+
+    self.setMaxPrice = function (max) {
+        self.maxPrice = setToCache('maxPrice', max);
+    }
+
+    self.setCategory = function (categoryId) {
+        //self.categoryId = setToCache('categoryId', categoryId);
+        self.categoryId = categoryId;
     }
     
     self.data = function () {
@@ -42,7 +54,26 @@
             Sizes: self.sizes,
             MinPrice: self.minPrice,
             MaxPrice: self.maxPrice,
-            CategoryUid: self.category == null ? null : self.category.id
+            CategoryUid: self.categoryId
         }
+    }
+
+    self.init = function () {
+
+        self.pageSize = self.getFromCache('pageSize') || self.pageSize;
+        //self.categoryId = self.getFromCache('categoryId') || self.categoryId;
+        self.brands = self.getFromCache('brands') || self.brands;
+        self.sizes = self.getFromCache('sizes') || self.sizes;
+        self.minPrice = self.getFromCache('minPrice') || self.minPrice;
+        self.maxPrice = self.getFromCache('maxPrice') || self.maxPrice;
+    }
+
+    self.getFromCache = function(key) {
+        return sessionStorage.getItem(key);
+    }
+
+    var setToCache = function (key, value) {
+        sessionStorage.setItem(key, value);
+        return value;
     }
 }

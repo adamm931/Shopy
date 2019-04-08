@@ -26,7 +26,9 @@ namespace Shopy.Core.Mappers
                 Description = efEntity.Description,
                 Price = efEntity.Price,
                 Brand = _brandMapper.FromEF(efEntity.Brand),
-                Sizes = efEntity.Sizes.Select(s => _sizeMapper.FromEF(s))
+                Sizes = efEntity.Sizes
+                    .OrderBy(s => SizeOrder.GetOrderForEid(s.SizeTypeEID))
+                    .Select(s => _sizeMapper.FromEF(s))
             };
 
             if (_categoryMapper != null)

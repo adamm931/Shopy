@@ -97,6 +97,8 @@
     <Compile Include="Data\Intilializer\ShopyContextSeeder.cs" />
     <Compile Include="Data\ShopyContext.cs" />
     <Compile Include="Exceptions\CategoryNotFoundException.cs" />
+    <Compile Include="Exceptions\BrandNotFoundException.cs" />
+    <Compile Include="Exceptions\SizesNotFoundException.cs" />
     <Compile Include="Exceptions\ProductNotFoundException.cs" />
     <Compile Include="Factory\MediatorFactory.cs" />
     <Compile Include="Mappers\BrandMapper.cs" />
@@ -106,12 +108,14 @@
     <Compile Include="Mappers\SizeMapper.cs" />
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\ListResponse.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductDetails.cs" />
     <Compile Include="Models\ProductFilter.cs" />
     <Compile Include="Models\RequestValidator.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\Size.cs" />
+    <Compile Include="Models\SizeOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

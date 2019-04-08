@@ -41,7 +41,12 @@ namespace Shopy.Core.Application.Products.Edit
                 if (command.Brand != null)
                 {
                     brand = await dbContext.BrandTypes
-                        .SingleAsync(b => b.BrandTypeEId == command.Brand);
+                        .FirstOrDefaultAsync(b => b.BrandTypeEId == command.Brand);
+                }
+
+                if (brand == null)
+                {
+                    throw new BrandNotFoundException();
                 }
 
                 product.Price = command.Price ?? product.Price;
@@ -59,6 +64,11 @@ namespace Shopy.Core.Application.Products.Edit
             var sizeForProductSet = await dbContext.SizeTypes
                    .Where(s => commandSizesEIds.Any(cs => cs == s.SizeTypeEID))
                    .ToListAsync();
+
+            if (!sizeForProductSet.Any())
+            {
+                throw new SizesNotFoundException();
+            }
 
             var removedSizes = product.Sizes.Except(sizeForProductSet);
             var newSizes = sizeForProductSet.Except(product.Sizes);

@@ -12,15 +12,18 @@ namespace Shopy.Admin.ViewModels
         public Guid Uid { get; set; }
 
         [Required]
+        [StringLength(100)]
         [Display(Name = "Caption")]
         public string Caption { get; set; }
 
         [Required]
+        [StringLength(300)]
         [Display(Name = "Description")]
         public string Description { get; set; }
 
         [Required]
         [Range(typeof(decimal), "0.01", "999999999")]
+        [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Price can't exceed 2 decimal points")]
         [Display(Name = "Price")]
         public decimal Price { get; set; }
 

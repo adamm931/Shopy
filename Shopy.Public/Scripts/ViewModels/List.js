@@ -11,10 +11,9 @@ var Products = Products || {};
 
         self.init = function () {
             loadFilters();
-            search();
+            setFilters();
+            self.search();
         }
-
-        self.requestInProgress = ko.observable(false);
 
         //filters
         self.categories = ko.observableArray();
@@ -22,28 +21,20 @@ var Products = Products || {};
         self.sizes = ko.observableArray();
 
         //items
-        //self.sourceItems = ko.observableArray([]);
+        self.hasMoreRecords = ko.observable(true);
         self.items = ko.observableArray();
 
         //selected filters
         self.selectedSizes = ko.observableArray();
         self.selectedBrands = ko.observableArray();
         self.selectedCategory = ko.observable();
-        self.iniMinPrice = ko.observable(10);
-        self.iniMaxPrice = ko.observable(500);
 
         //filter object
         self.filters = new SearchFilters();
         
         //public func
 
-        self.search = function (callback) {
-
-            if (self.requestInProgress()) {
-                return;
-            }
-
-            self.requestInProgress(true);
+        self.search = _.throttle(function () {
 
             $.ajax({
                 url: endpoints.Search,
@@ -52,34 +43,29 @@ var Products = Products || {};
                 success: function (response) {
 
                     if (response.Success) {
-                        var responseItems = _.map(response.Items, i => new Product(i));
-                        //_.each(responseItems, ri => self.items.push(ri));
-                        //_.each(responseItems, ri => self.sourceItems.push(ri));
-
-                        //self.items(responseItems);
-
-                        callback(responseItems);
+                        var responseData= response.Data;
+                        var items = _.map(responseData.Result, i => new Product(i));
+                        self.items(items);
+                        self.hasMoreRecords(self.filters.pageSize < responseData.TotalRecords)
                     }
                     else {
                         console.error(response.Message);
                     }
-
-                    self.requestInProgress(false);
                 },
                 failure: function (response) {
                     alert(response);
-                    self.requestInProgress(false);
                 }
             });
-        }
 
-        self.setSelectedCategory = function (item, callback) {
+        }, 500);
 
-            _.each(self.categories(), cf => cf.selected(cf.id == item.id));
+        self.setSelectedCategory = function (category, callback) {
+
+            _.each(self.categories(), cf => cf.selected(cf.id == category.id));
 
             var selectedCategory = _.find(self.categories(), cf => cf.selected() == true);
 
-            self.filters.setCategory(selectedCategory);
+            self.filters.setCategory(selectedCategory.id);
 
             self.search();
         }
@@ -128,11 +114,15 @@ var Products = Products || {};
 
         //private func 
 
+        var setFilters = function () {
+
+            self.filters.init();
+
+            self.selectedBrands(self.filters.getBrands());
+            self.selectedSizes(self.filters.getSizes());
+        }
+
         var loadFilters = function () {
-
-
-            self.filters.setPriceRange(
-                self.iniMinPrice(), self.iniMaxPrice());
 
             $.ajax({
                 url: endpoints.Filters,

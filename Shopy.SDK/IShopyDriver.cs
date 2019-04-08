@@ -7,7 +7,7 @@ namespace Shopy.Sdk
 {
     public interface IShopyDriver
     {
-        Task<IEnumerable<Product>> ListProductsAsync(ProductFilter filter = null);
+        Task<ProductListResponse> ListProductsAsync(ProductFilter filter = null);
 
         Task<IEnumerable<Category>> ListCategoriesAsync();
 
@@ -32,6 +32,5 @@ namespace Shopy.Sdk
         Task<IEnumerable<Size>> ListSizesAsync();
 
         Task<IEnumerable<Brand>> ListBrandsAsync();
-
     }
 }

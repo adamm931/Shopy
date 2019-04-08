@@ -1,4 +1,5 @@
 ﻿using Shopy.Sdk.Client;
+using Shopy.Sdk.Images;
 using Shopy.Sdk.Models;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Shopy.Sdk
         private CategoriesClient _categories;
         private SizesClient _sizes;
         private BrandsClient _brands;
+        private ImageProvider _imageProvider;
 
         public ShopyDriver(ShopyHttpClient client)
         {
@@ -19,11 +21,15 @@ namespace Shopy.Sdk
             _categories = new CategoriesClient(client);
             _sizes = new SizesClient(client);
             _brands = new BrandsClient(client);
+            _imageProvider = new ImageProvider();
         }
 
-        public async Task<IEnumerable<Product>> ListProductsAsync(ProductFilter filter = null)
+        public async Task<ProductListResponse> ListProductsAsync(ProductFilter filter = null)
         {
-            return await _products.ListAsync(filter);
+            var list = await _products.ListAsync(filter);
+            await list.SetUpImages(_imageProvider);
+
+            return list;
         }
 
         public async Task<IEnumerable<Category>> ListCategoriesAsync()
@@ -33,18 +39,22 @@ namespace Shopy.Sdk
 
         public async Task<Product> GetProductAsync(Guid uid)
         {
-            return await _products.GetAsync(uid);
+            var product = await _products.GetAsync(uid);
+            return await product.SetUpImages(_imageProvider);
         }
 
         public async Task<Product> AddProductAsync(AddEditProduct product)
         {
             var result = await _products.AddAsync(product);
-            return result;
+            product.Uid = result.Uid;
+            await product.SaveImageAsync(_imageProvider);
+            return await result.SetUpImages(_imageProvider);
         }
 
         public async Task EditProductAsync(AddEditProduct product)
         {
             await _products.EditAsync(product);
+            await product.SaveImageAsync(_imageProvider);
         }
 
         public async Task AddProductToCategoryAsync(Guid productUid, Guid categoryUid)
@@ -60,11 +70,13 @@ namespace Shopy.Sdk
         public async Task DeleteProductAsync(Guid uid)
         {
             await _products.DeleteProductAsync(uid);
+            await _imageProvider.DeleteImagesAsync(uid);
         }
 
         public async Task<ProductDetails> GetProductDetailsAsync(Guid uid)
         {
-            return await _products.GetDetailsAsync(uid);
+            var details = await _products.GetDetailsAsync(uid);
+            return await details.SetUpImages(_imageProvider);
         }
 
         public async Task AddCategoryAsync(Category category)

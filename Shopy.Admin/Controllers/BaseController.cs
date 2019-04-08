@@ -11,10 +11,7 @@ namespace Shopy.Admin.Controllers
         {
             get
             {
-                return shopy ?? (shopy = new ShopyDriveBuilder()
-                    .WithBaseAddress(Constants.ApiEndpoint)
-                    .Build()
-                    );
+                return shopy ?? (shopy = new ShopyDriveBuilder().Configure());
             }
         }
 

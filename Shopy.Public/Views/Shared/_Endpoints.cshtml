@@ -1,0 +1,8 @@
+﻿<script>
+    const endpoints = {
+        Search: "@Url.RouteUrl("Products", new { action = "Search"})",
+        Filters: "@Url.RouteUrl("Products", new { action = "Filters" })",
+        LoadDetails: "@Url.RouteUrl("Products", new { action = "LoadDetails", id = Model })",
+        Details: "@Url.RouteUrl("Products", new { action = "Details", id = "id" })"
+    };
+</script>

@@ -33,12 +33,14 @@ namespace Shopy.Api.Controllers
             Func<Task> command,
             params RequestParamValidator[] paramValidators)
         {
-            var invalidParam = paramValidators?
-                .FirstOrDefault(pv => !pv.Rule());
+            var invalidParams = paramValidators?
+                .Where(pv => pv.Rule());
 
-            if (invalidParam != null)
+            if (invalidParams.Any())
             {
-                return BadRequest(invalidParam.Message);
+                var message = string.Join(
+                    ". ", invalidParams.Select(s => s.Message));
+                return BadRequest(message);
             }
 
             try
@@ -58,12 +60,14 @@ namespace Shopy.Api.Controllers
             Func<Task<T>> request,
             params RequestParamValidator[] paramValidators)
         {
-            var invalidParam = paramValidators?
-                .FirstOrDefault(pv => !pv.Rule());
+            var invalidParams = paramValidators?
+                .Where(pv => pv.Rule());
 
-            if (invalidParam != null)
+            if (invalidParams.Any())
             {
-                return BadRequest(invalidParam.Message);
+                var message = string.Join(
+                    ". ", invalidParams.Select(s => s.Message));
+                return BadRequest(message);
             }
 
             try

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 namespace Shopy.Core.Application.Products.Get
 {
-    public class ListProductsResponse : Response<IEnumerable<Product>>
+    public class ListProductsResponse : ListResponse<Product>
     {
-        public ListProductsResponse(IEnumerable<Product> result) : base(result)
+        public ListProductsResponse(IEnumerable<Product> result, int totalRecords)
+            : base(result, totalRecords)
         { }
     }
 }

@@ -28,6 +28,12 @@ namespace Shopy.Admin
             return new MultiSelectList(sizes, "EId", "Caption");
         }
 
+        public async Task<IEnumerable<SelectListItem>> GetSizesSL()
+        {
+            var sizes = await _shopyDriver.ListSizesAsync();
+            return Convert(sizes, b => b.Caption, b => b.EId.ToString());
+        }
+
         public IEnumerable<SelectListItem> Convert<T>(
             IEnumerable<T> source,
             Func<T, string> textProvider,
