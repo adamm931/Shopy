@@ -2,7 +2,7 @@
 {
     public class SettingKeys
     {
-        public const string ImagesDirectory = "ImagesDirectory";
+        public const string ImagesRootDirectoryName = "ImagesRootDirectoryName";
         public const string ImagesDirectoryUrl = "ImagesDirectoryUrl";
         public const string ApiBaseAddress = "ApiBaseAddress";
         public const string Image1Name = "Image1Name";

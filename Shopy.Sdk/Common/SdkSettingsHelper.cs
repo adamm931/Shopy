@@ -24,16 +24,22 @@ namespace Shopy.Sdk.Common
             }
         }
 
+
+        private static string imageDirectory;
         public static string ImageDirectory
         {
             get
             {
-                if (appSettings[SettingKeys.ImagesDirectory] == null)
+                if (imageDirectory == null)
                 {
-                    throw new Exception("Product image directory is not set in sdk configuration file.");
+                    var assembly = Assembly.GetExecutingAssembly().GetName();
+                    var binPath = Path.GetDirectoryName(assembly.CodeBase).Substring(6);
+                    string directoryName = appSettings[SettingKeys.ImagesRootDirectoryName]?.Value ?? "Images";
+                    imageDirectory = Path.GetFullPath(
+                        Path.Combine(binPath, $@"..\..\Shopy.Api\{directoryName}"));
                 }
 
-                return appSettings[SettingKeys.ImagesDirectory]?.Value;
+                return imageDirectory;
             }
         }
 
