@@ -1,4 +1,5 @@
-﻿using Shopy.Sdk;
+﻿using Shopy.Admin.Utils;
+using Shopy.Sdk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,11 @@ using System.Web.Mvc;
 
 namespace Shopy.Admin
 {
-    public class SelectListItemUtils
+    public class SelectListUtils : ISelectListUtils
     {
         private IShopyDriver _shopyDriver;
 
-        public SelectListItemUtils(IShopyDriver shopyDriver)
+        public SelectListUtils(IShopyDriver shopyDriver)
         {
             _shopyDriver = shopyDriver;
         }
@@ -28,13 +29,7 @@ namespace Shopy.Admin
             return new MultiSelectList(sizes, "EId", "Caption");
         }
 
-        public async Task<IEnumerable<SelectListItem>> GetSizesSL()
-        {
-            var sizes = await _shopyDriver.ListSizesAsync();
-            return Convert(sizes, b => b.Caption, b => b.EId.ToString());
-        }
-
-        public IEnumerable<SelectListItem> Convert<T>(
+        private IEnumerable<SelectListItem> Convert<T>(
             IEnumerable<T> source,
             Func<T, string> textProvider,
             Func<T, string> valueProvider)

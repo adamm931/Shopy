@@ -1,37 +1,24 @@
-﻿using Shopy.Admin.ViewModels;
-using Shopy.Sdk.Models;
+﻿using Shopy.Admin.ModelBuilder;
+using Shopy.Admin.ViewModels;
+using Shopy.Sdk;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+
 namespace Shopy.Admin.Controllers
 {
     [Authorize]
     public class ProductsController : BaseController
     {
-        private SelectListItemUtils selectListUtils;
-        protected SelectListItemUtils SelectListUtils
-        {
-            get
-            {
-                return selectListUtils ?? (selectListUtils = new SelectListItemUtils(Shopy));
-            }
-        }
+        public ProductsController(IShopyDriver shopy) : base(shopy)
+        { }
 
         [HttpGet]
         public async Task<ActionResult> List()
         {
-            var products = await Shopy.ListProductsAsync();
-            var model = new ProductListViewModel()
-            {
-                Items = products.Result.Select(p => new ProductListItemViewModel()
-                {
-                    Uid = p.Uid,
-                    ProductId = p.ProductId,
-                    Caption = p.Caption,
-                    Price = p.Price
-                })
-            };
+            var model = await DiC.GetService<ProductListModelBuilder>()
+                .BuildAsync();
 
             return View(model);
         }
@@ -39,14 +26,8 @@ namespace Shopy.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> Add()
         {
-            var model = new ProductViewModel()
-            {
-                BrandsSelectList = await SelectListUtils.GetBrandsSL(),
-                SelectedSizesML = await SelectListUtils.GetSizesMSL(),
-                Image1 = ImageViewModel.Empty,
-                Image2 = ImageViewModel.Empty,
-                Image3 = ImageViewModel.Empty,
-            };
+            var model = await DiC.GetService<DefaultProductModelBuilder>()
+                .BuildAsync();
 
             return View(model);
         }
@@ -56,26 +37,16 @@ namespace Shopy.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.BrandsSelectList = await SelectListUtils.GetBrandsSL();
-                model.SelectedSizesML = await SelectListUtils.GetSizesMSL();
-                model.Image1 = new ImageViewModel(model.Image1.Url);
-                model.Image2 = new ImageViewModel(model.Image2.Url);
-                model.Image3 = new ImageViewModel(model.Image3.Url);
+                var resultModel = await DiC.GetService<DefaultProductModelBuilder>()
+                    .WithInner(model)
+                    .BuildAsync();
 
-                return View(model);
+                return View(resultModel);
             }
 
-            var addProduct = new AddEditProduct()
-            {
-                Caption = model.Caption,
-                Description = model.Description,
-                Price = model.Price,
-                Brand = model.Brand,
-                Sizes = model.Sizes,
-                Image1 = model.Image1.File,
-                Image2 = model.Image2.File,
-                Image3 = model.Image3.File
-            };
+            var addProduct = await DiC.GetService<AddEditProductModelBuidler>()
+                .FromViewModel(model)
+                .BuildAsync();
 
             var product = await Shopy.AddProductAsync(addProduct);
             return RedirectToAction("List");
@@ -85,27 +56,9 @@ namespace Shopy.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(Guid uid)
         {
-            var product = await Shopy.GetProductAsync(uid);
-
-            if (product == null)
-            {
-                throw new Exception($"Product not found with id: {uid}");
-            }
-
-            var model = new ProductViewModel()
-            {
-                Uid = uid,
-                Caption = product.Caption,
-                Description = product.Description,
-                Price = product.Price,
-                Brand = product.Brand.EId,
-                Sizes = product.Sizes.Select(s => s.EId),
-                SelectedSizesML = await SelectListUtils.GetSizesMSL(),
-                BrandsSelectList = await SelectListUtils.GetBrandsSL(),
-                Image1 = new ImageViewModel(product.Image1.Url),
-                Image2 = new ImageViewModel(product.Image2.Url),
-                Image3 = new ImageViewModel(product.Image3.Url),
-            };
+            var model = await DiC.GetService<ProductModelBuilder>()
+                .WithUid(uid)
+                .BuildAsync();
 
             return View(model);
         }
@@ -115,29 +68,18 @@ namespace Shopy.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.BrandsSelectList = await SelectListUtils.GetBrandsSL();
-                model.SelectedSizesML = await SelectListUtils.GetSizesMSL();
-                model.Image1 = new ImageViewModel(model.Image1.Url);
-                model.Image2 = new ImageViewModel(model.Image2.Url);
-                model.Image3 = new ImageViewModel(model.Image3.Url);
+                var resultModel = await DiC.GetService<DefaultProductModelBuilder>()
+                    .WithInner(model)
+                    .BuildAsync();
 
-                return View(model);
+                return View(resultModel);
             }
 
-            var editProduct = new AddEditProduct()
-            {
-                Uid = model.Uid,
-                Caption = model.Caption,
-                Description = model.Description,
-                Price = model.Price,
-                Brand = model.Brand,
-                Sizes = model.Sizes,
-                Image1 = model.Image1.File,
-                Image2 = model.Image2.File,
-                Image3 = model.Image3.File
-            };
+            var product = await DiC.GetService<AddEditProductModelBuidler>()
+                .FromViewModel(model)
+                .BuildAsync();
 
-            await Shopy.EditProductAsync(editProduct);
+            await Shopy.EditProductAsync(product);
 
             return RedirectToAction("List");
         }
@@ -194,21 +136,6 @@ namespace Shopy.Admin.Controllers
         {
             await Shopy.RemoveProductFromCategoryAsync(uid, categoryUid);
             return Json(true);
-        }
-
-
-        private async Task<ProductViewModel> GetModelWithDefaultSetup()
-        {
-            var model = new ProductViewModel()
-            {
-                BrandsSelectList = await SelectListUtils.GetBrandsSL(),
-                SelectedSizesML = await SelectListUtils.GetSizesMSL(),
-                Image1 = ImageViewModel.Empty,
-                Image2 = ImageViewModel.Empty,
-                Image3 = ImageViewModel.Empty,
-            };
-
-            return model;
         }
     }
 }

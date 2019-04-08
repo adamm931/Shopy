@@ -1,6 +1,7 @@
 ﻿using Shopy.Admin.Filters;
 using Shopy.Admin.Utils;
 using Shopy.Admin.ViewModels;
+using Shopy.Sdk;
 using System.Web;
 using System.Web.Mvc;
 
@@ -8,7 +9,14 @@ namespace Shopy.Admin.Controllers
 {
     public class LoginController : BaseController
     {
-        private AuthenticationUtils _authenticationUtils = new AuthenticationUtils();
+        private IAuthenticationUtils _authenticationUtils;
+
+        public LoginController(
+            IAuthenticationUtils authenticationUtils,
+            IShopyDriver shopy) : base(shopy)
+        {
+            _authenticationUtils = authenticationUtils;
+        }
 
         [HttpGet]
         [LoginCheck]

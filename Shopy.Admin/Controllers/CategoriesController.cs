@@ -1,4 +1,5 @@
 ﻿using Shopy.Admin.ViewModels;
+using Shopy.Sdk;
 using Shopy.Sdk.Models;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +10,10 @@ namespace Shopy.Admin.Controllers
     [Authorize]
     public class CategoriesController : BaseController
     {
+        public CategoriesController(IShopyDriver shopy) : base(shopy)
+        {
+        }
+
         [HttpGet]
         public async Task<ActionResult> List()
         {

@@ -7,8 +7,6 @@ namespace Shopy.Admin.ViewModels
 {
     public class ProductViewModel
     {
-        //TODO: image size validation
-
         public Guid Uid { get; set; }
 
         [Required]

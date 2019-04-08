@@ -5,14 +5,12 @@ namespace Shopy.Admin.Controllers
 {
     public class BaseController : Controller
     {
-        private IShopyDriver shopy;
+        protected IShopyDriver Shopy { get; }
+        protected IDependencyResolver DiC { get; } = DependencyResolver.Current;
 
-        protected IShopyDriver Shopy
+        public BaseController(IShopyDriver shopy)
         {
-            get
-            {
-                return shopy ?? (shopy = new ShopyDriveBuilder().Configure());
-            }
+            Shopy = shopy;
         }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

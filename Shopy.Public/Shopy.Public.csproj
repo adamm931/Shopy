@@ -177,7 +177,6 @@
     <Content Include="Scripts\ViewModels\List.js" />
     <Content Include="Scripts\ViewModels\Product.js" />
     <Content Include="Scripts\ViewModels\Slider.js" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\web.config" />
@@ -188,6 +187,7 @@
     <Content Include="Views\Shared\_Head.cshtml" />
     <Content Include="Views\Shared\_NewsLetter.cshtml" />
     <Content Include="Views\Shared\_Endpoints.cshtml" />
+    <Content Include="Views\Shared\_Spinner.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

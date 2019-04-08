@@ -4,7 +4,7 @@ using System.Web.Security;
 
 namespace Shopy.Admin.Utils
 {
-    public class AuthenticationUtils
+    public class AuthenticationUtils : IAuthenticationUtils
     {
         public string DefaultUrl
         {
