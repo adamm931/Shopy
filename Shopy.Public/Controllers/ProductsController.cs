@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Shopy.Public.Controllers
 {
+    [HandleError]
     public class ProductsController : Controller
     {
         private IShopyDriver shopy;
@@ -18,7 +19,7 @@ namespace Shopy.Public.Controllers
         }
 
         [HttpGet]
-        public ActionResult List()
+        public ActionResult Index()
         {
             return View();
         }

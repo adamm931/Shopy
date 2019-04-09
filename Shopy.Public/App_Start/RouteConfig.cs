@@ -11,11 +11,11 @@ namespace Shopy.Public
 
             routes.MapRoute(
                 name: "Products",
-                url: "{controller}/{action}/{id}",
+                url: "Products/{action}/{id}",
                 defaults: new
                 {
                     controller = "Products",
-                    action = "List",
+                    action = "Index",
                     id = UrlParameter.Optional
                 }
             );
@@ -23,7 +23,12 @@ namespace Shopy.Public
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { action = "Index", id = UrlParameter.Optional }
+                defaults: new
+                {
+                    controller = "Products",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                }
             );
         }
     }

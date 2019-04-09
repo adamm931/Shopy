@@ -144,8 +144,47 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\0f485e38-92d5-49f0-8ed3-b2550f2f04f5\main.png" />
+    <Content Include="Images\0f485e38-92d5-49f0-8ed3-b2550f2f04f5\second.png" />
+    <Content Include="Images\0f485e38-92d5-49f0-8ed3-b2550f2f04f5\third.png" />
+    <Content Include="Images\1bc0dae4-b4f1-4144-b2f5-607f5e685767\main.png" />
+    <Content Include="Images\1bc0dae4-b4f1-4144-b2f5-607f5e685767\second.png" />
+    <Content Include="Images\1bc0dae4-b4f1-4144-b2f5-607f5e685767\third.png" />
+    <Content Include="Images\1e01864c-79a4-4af2-a99f-0398e583349e\main.png" />
+    <Content Include="Images\1e01864c-79a4-4af2-a99f-0398e583349e\second.png" />
+    <Content Include="Images\1e01864c-79a4-4af2-a99f-0398e583349e\third.png" />
+    <Content Include="Images\41ec1d4a-372b-4774-af20-21be451a2c99\main.png" />
+    <Content Include="Images\41ec1d4a-372b-4774-af20-21be451a2c99\second.png" />
+    <Content Include="Images\41ec1d4a-372b-4774-af20-21be451a2c99\third.png" />
+    <Content Include="Images\47aa7d6a-a178-4c2d-8812-9218db301f39\main.png" />
+    <Content Include="Images\47aa7d6a-a178-4c2d-8812-9218db301f39\second.png" />
+    <Content Include="Images\47aa7d6a-a178-4c2d-8812-9218db301f39\third.png" />
+    <Content Include="Images\57066b95-3265-47f3-91bd-bbbb26d8359c\main.png" />
+    <Content Include="Images\57066b95-3265-47f3-91bd-bbbb26d8359c\second.png" />
+    <Content Include="Images\57066b95-3265-47f3-91bd-bbbb26d8359c\third.png" />
+    <Content Include="Images\67542922-4b0c-4e5a-9a0f-753798747815\main.png" />
+    <Content Include="Images\67542922-4b0c-4e5a-9a0f-753798747815\second.png" />
+    <Content Include="Images\67542922-4b0c-4e5a-9a0f-753798747815\third.png" />
     <Content Include="Images\a5779a04-5fa6-42e3-8793-8f8569922bbc\main.png" />
+    <Content Include="Images\ab52ab5b-3dea-4b4b-8436-2de9ef8eb346\main.png" />
+    <Content Include="Images\ab52ab5b-3dea-4b4b-8436-2de9ef8eb346\second.png" />
+    <Content Include="Images\ab52ab5b-3dea-4b4b-8436-2de9ef8eb346\third.png" />
+    <Content Include="Images\c4791738-9b3f-4828-9303-f50d9e1dde01\main.png" />
+    <Content Include="Images\c4791738-9b3f-4828-9303-f50d9e1dde01\second.png" />
+    <Content Include="Images\c4791738-9b3f-4828-9303-f50d9e1dde01\third.png" />
+    <Content Include="Images\e5f5d746-6c5d-4f3d-8e72-d25265e48b5b\main.png" />
+    <Content Include="Images\e5f5d746-6c5d-4f3d-8e72-d25265e48b5b\second.png" />
+    <Content Include="Images\e5f5d746-6c5d-4f3d-8e72-d25265e48b5b\third.png" />
+    <Content Include="Images\ec59112c-71bf-429d-9036-110c640bc9e5\main.png" />
+    <Content Include="Images\ec59112c-71bf-429d-9036-110c640bc9e5\second.png" />
+    <Content Include="Images\ec59112c-71bf-429d-9036-110c640bc9e5\third.png" />
     <Content Include="Images\empty-img.png" />
+    <Content Include="Images\f562c840-cc8d-414a-aeeb-eec8a2602db6\main.png" />
+    <Content Include="Images\f562c840-cc8d-414a-aeeb-eec8a2602db6\second.png" />
+    <Content Include="Images\f562c840-cc8d-414a-aeeb-eec8a2602db6\third.png" />
+    <Content Include="Images\fe384831-ef32-483f-a4b2-6d8796949a1d\main.png" />
+    <Content Include="Images\fe384831-ef32-483f-a4b2-6d8796949a1d\second.png" />
+    <Content Include="Images\fe384831-ef32-483f-a4b2-6d8796949a1d\third.png" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

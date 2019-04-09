@@ -93,7 +93,7 @@
                         <div class="card h-90" data-bind="event: { mouseover: toogleDetails, mouseout: toogleDetails }">
                             <img data-bind="attr: { src: image1Url }, css: { 'cart-img-small': detailsVisible }" class="card-img-top m-auto" alt="">
                             <div class="card-body">
-                                <h4 data-bind="text: caption, css: { price: detailsVisible }" class="card-title"></h4>
+                                <h4 class="ellipsis serif" data-bind="text: caption, css: { price: detailsVisible }" class="card-title"></h4>
                                 <h5 data-bind="text: price, visible: !detailsVisible()" class="price font-weight-bold"></h5>
                                 <div data-bind="visible: detailsVisible">
                                     <div class="pt-3 m-auto">

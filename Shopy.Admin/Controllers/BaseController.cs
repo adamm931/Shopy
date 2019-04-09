@@ -3,6 +3,7 @@ using System.Web.Mvc;
 
 namespace Shopy.Admin.Controllers
 {
+    [HandleError]
     public class BaseController : Controller
     {
         protected IShopyDriver Shopy { get; }

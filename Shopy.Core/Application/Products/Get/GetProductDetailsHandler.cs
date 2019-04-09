@@ -3,6 +3,7 @@ using Mediator.Net.Contracts;
 using Shopy.Core.Mappers;
 using Shopy.Core.Models;
 using Shopy.Data;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;
@@ -39,7 +40,13 @@ namespace Shopy.Core.Application.Products.Get
                         .Any(pc => p.Categories
                             .Any(c => c.Uid == pc.Uid)))
                    .Where(p => p.Uid != request.Uid)
-                   .Select(p => productMapper.FromEF(p));
+                   .Select(p => productMapper.FromEF(p))
+
+                   //randomize the related products in case that 
+                   //and usually will be more than 4
+
+                   .OrderBy(o => Guid.NewGuid())
+                   .Take(4);
 
                 var productDetails = new ProductDetails()
                 {
