@@ -98,5 +98,10 @@ namespace Shopy.Sdk
         {
             return await _brands.ListAsync();
         }
+
+        public async Task DeleteCategoryAsync(Guid uid)
+        {
+            await _categories.DeleteAsync(uid);
+        }
     }
 }

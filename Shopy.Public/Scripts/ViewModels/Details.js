@@ -1,5 +1,4 @@
-﻿//import { Product } from 'Product';
-var Products = Products || {};
+﻿var Public = Public || {};
 
 (function ($, ns, ko) {
 
@@ -87,4 +86,4 @@ var Products = Products || {};
         Details: Details
     });
 
-})(jQuery, Products, ko);
+})(jQuery, Public, ko);

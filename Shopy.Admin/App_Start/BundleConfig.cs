@@ -11,11 +11,16 @@ namespace Shopy.Admin
 
             bundles.Add(styles);
 
-            var scripts = new ScriptBundle("~/Content/bundle/js");
-            scripts.IncludeDirectory("~/Scripts", "*.js");
+            var scirptBundle = new ScriptBundle("~/Content/bundle/js");
+            scirptBundle.IncludeDirectory("~/Content/js", "*.css");
+
+            bundles.Add(scirptBundle);
+
+            var scripts = new ScriptBundle("~/Scripts");
             scripts.IncludeDirectory("~/Scripts", "*.js");
             scripts.IncludeDirectory("~/Scripts/ViewModels", "*.js");
             scripts.IncludeDirectory("~/Scripts/Bindings", "*.js");
+            scripts.IncludeDirectory("~/Scripts/Validators", "*.js");
 
             bundles.Add(scripts);
         }

@@ -1,4 +1,5 @@
-﻿using Shopy.Core.Application.Products.Add;
+﻿using Shopy.Core.Application.Categories.Add;
+using Shopy.Core.Application.Products.Add;
 using System;
 using System.Linq;
 
@@ -26,6 +27,14 @@ namespace Shopy.Api
         {
             return new RequestParamValidator(
                 () => uid == null, "Category uid is not valid Guid or its empty");
+        }
+
+        public static RequestParamValidator[] CategoryAddValidator(AddCategoryRequest addRequest)
+        {
+            return new[] {
+                new RequestParamValidator(() => addRequest == null, "Request has to be set"),
+                new RequestParamValidator(() => string.IsNullOrEmpty(addRequest.Caption), "Caption has to be set for category")
+            };
         }
 
         public static RequestParamValidator[] ProductAddValidator(AddProductRequest addRequest)

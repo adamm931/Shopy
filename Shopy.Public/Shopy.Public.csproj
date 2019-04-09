@@ -187,7 +187,6 @@
     <Content Include="Views\Shared\_Head.cshtml" />
     <Content Include="Views\Shared\_NewsLetter.cshtml" />
     <Content Include="Views\Shared\_Endpoints.cshtml" />
-    <Content Include="Views\Shared\_Spinner.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

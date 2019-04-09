@@ -7,11 +7,18 @@ namespace Shopy.Sdk
 {
     public interface IShopyDriver
     {
-        Task<ProductListResponse> ListProductsAsync(ProductFilter filter = null);
+        #region Categories
 
         Task<IEnumerable<Category>> ListCategoriesAsync();
 
         Task<IEnumerable<Category>> ListCategoriesWithProductsAsync();
+
+        Task DeleteCategoryAsync(Guid uid);
+
+        #endregion
+
+        #region Products
+        Task<ProductListResponse> ListProductsAsync(ProductFilter filter = null);
 
         Task<ProductDetails> GetProductDetailsAsync(Guid uid);
 
@@ -29,8 +36,14 @@ namespace Shopy.Sdk
 
         Task DeleteProductAsync(Guid uid);
 
+        #endregion
+
+        #region Brands and Sizes
+
         Task<IEnumerable<Size>> ListSizesAsync();
 
         Task<IEnumerable<Brand>> ListBrandsAsync();
+
+        #endregion
     }
 }

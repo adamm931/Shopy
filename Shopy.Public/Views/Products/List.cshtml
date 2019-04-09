@@ -4,6 +4,8 @@
 }
 
 <!-- ko with: products -->
+
+        @*<div style="display: none" class="loader" data-bind="visible: loading"></div>*@
         <div class="col-lg-3">
 
             <!-- category filters -->
@@ -142,8 +144,8 @@
 
  <script type="text/javascript">
 
-     var Products = Products || {};
-     var products = new Products.List();
+     var Public = Public || {};
+     var products = new Public.List();
      products.init();
 
      ko.applyBindings(products);

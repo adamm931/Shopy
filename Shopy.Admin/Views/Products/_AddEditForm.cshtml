@@ -58,9 +58,9 @@
 
 </div>
 
-@Html.ValidationMessageFor(m => m.Image1.File)
-@Html.ValidationMessageFor(m => m.Image2.File)
-@Html.ValidationMessageFor(m => m.Image3.File)
+<p>@Html.ValidationMessageFor(m => m.Image1.File)</p>
+<p>@Html.ValidationMessageFor(m => m.Image2.File)</p>
+<p>@Html.ValidationMessageFor(m => m.Image3.File)</p>
 
 <!-- /images -->
 
@@ -69,5 +69,8 @@
     <div class="col-md-6 mb-3"><button type="submit" class="btn btn-primary btn-lg btn-block">Save</button></div>
     <div class="col-md-6 mb-3"><a href="@Url.RouteUrl("Products", new { action = "List" })" class="btn btn-secondary btn-lg btn-block">Cancel</a></div>
 </div>
+<script>
+    ko.applyBindings();
+</script>
 
 

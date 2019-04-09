@@ -6,6 +6,7 @@
 <body>
     @(ViewBag.IsAuthenticated ? Html.Partial("_HeaderLoged") : Html.Partial("_Header"))
     @Scripts.Render("~/Content/bundle/js")
+    @Scripts.Render("~/Scripts")
     @RenderSection("scripts", required: false)
 
     <div class="container-fluid main-container">
@@ -23,8 +24,5 @@
         </div>
     @Html.Partial("_Footer")
     </div>
-    <script>
-        ko.applyBindings();
-    </script>
 </body>
 </html>

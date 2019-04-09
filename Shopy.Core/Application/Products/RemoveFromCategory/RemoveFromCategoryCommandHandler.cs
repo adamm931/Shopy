@@ -2,6 +2,7 @@
 using Mediator.Net.Contracts;
 using Shopy.Core.Exceptions;
 using Shopy.Data;
+using System.Data.Entity;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,14 +16,18 @@ namespace Shopy.Core.Application.Products.RemoveFromCategory
             {
                 var command = context.Message;
 
-                var product = await dbContext.Products.FindAsync(command.ProductUid);
+                var product = await dbContext.Products
+                    .Include(p => p.Categories)
+                    .FirstOrDefaultAsync(p => p.Uid == command.ProductUid);
 
                 if (product == null)
                 {
                     throw new ProductNotFoundException(command.ProductUid);
                 }
 
-                var category = await dbContext.Categories.FindAsync(command.CategoryUid);
+                var category = await dbContext.Categories
+                    .Include(p => p.Products)
+                    .FirstOrDefaultAsync(c => c.Uid == command.CategoryUid);
 
                 if (category == null)
                 {

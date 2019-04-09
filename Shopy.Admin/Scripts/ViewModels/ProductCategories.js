@@ -20,11 +20,9 @@ var Admin = Admin || {};
                 success: function (data) {
                     self.availableCategories(data.AvailableCategories);
                     self.assignedCategories(data.AssignedCategories);
-                    self.loading(false)
                 },
                 failure: function (data) {
                     alert('Something went wrong!');
-                    self.loading(false)
                 }
             });
         }

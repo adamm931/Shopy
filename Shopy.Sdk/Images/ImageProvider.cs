@@ -45,7 +45,7 @@ namespace Shopy.Sdk.Images
             await Task.Run(() =>
             {
                 var directoryPath = GetImageDirectoryPath(productUid);
-                Directory.Delete(directoryPath);
+                Directory.Delete(directoryPath, recursive: true);
             });
         }
 

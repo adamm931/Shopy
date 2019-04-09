@@ -1,7 +1,8 @@
-﻿using Shopy.Admin.ViewModels;
+﻿using Shopy.Admin.ModelBuilder;
+using Shopy.Admin.ViewModels;
 using Shopy.Sdk;
 using Shopy.Sdk.Models;
-using System.Linq;
+using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -17,16 +18,8 @@ namespace Shopy.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> List()
         {
-            var categories = await Shopy.ListCategoriesAsync();
-
-            var model = new CategoryListViewModel()
-            {
-                Items = categories.Select(c => new CategoryListItemViewModel()
-                {
-                    CategoryId = c.CategoryId,
-                    Caption = c.Caption
-                })
-            };
+            var model = await DiC.GetService<CategoryListModelBuilder>()
+                .BuildAsync();
 
             return View(model);
         }
@@ -52,6 +45,13 @@ namespace Shopy.Admin.Controllers
 
             await Shopy.AddCategoryAsync(addCategory);
 
+            return RedirectToAction("List");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Delete(Guid uid)
+        {
+            await Shopy.DeleteCategoryAsync(uid);
             return RedirectToAction("List");
         }
     }

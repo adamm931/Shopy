@@ -2,7 +2,6 @@
 using Shopy.Admin.ViewModels;
 using Shopy.Sdk;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -107,19 +106,9 @@ namespace Shopy.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> LoadCategories(Guid uid)
         {
-            var categories = await Shopy.ListCategoriesAsync();
-
-            var availableCategories = categories
-                .Where(c => !c.Products.Any(p => p.Uid == uid));
-
-            var assignedCategories = categories
-                .Where(c => c.Products.Any(p => p.Uid == uid));
-
-            var response = new
-            {
-                AssignedCategories = assignedCategories,
-                AvailableCategories = availableCategories,
-            };
+            var response = await DiC.GetService<ProductCategoriesModelBuidler>()
+                .ForProduct(uid)
+                .BuildAsync();
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }

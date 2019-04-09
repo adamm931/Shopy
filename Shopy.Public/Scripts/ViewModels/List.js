@@ -1,12 +1,8 @@
-﻿// ## IDEA ## 
-// when brands and size filter is changed filter the local products
-// on button click load more product from api with setted filters localy
-
-var Products = Products || {};
+﻿var Public = Public || {};
 
 (function ($, ko, ns) {
     
-    function List() {
+    function List(spinner) {
         var self = this;
 
         self.init = function () {
@@ -14,6 +10,8 @@ var Products = Products || {};
             setFilters();
             self.search();
         }
+        
+        self.loading = ko.observable(false);
 
         //filters
         self.categories = ko.observableArray();
@@ -34,7 +32,9 @@ var Products = Products || {};
         
         //public func
 
-        self.search = _.throttle(function () {
+        self.search = function () {
+
+            loadingOn();
 
             $.ajax({
                 url: endpoints.Search,
@@ -51,13 +51,16 @@ var Products = Products || {};
                     else {
                         console.error(response.Message);
                     }
+
+                    loadingOff();
                 },
                 failure: function (response) {
                     alert(response);
+                    loadingOff();
                 }
             });
 
-        }, 500);
+        }
 
         self.setSelectedCategory = function (category, callback) {
 
@@ -143,8 +146,16 @@ var Products = Products || {};
                 }
             });
         }
+
+        var loadingOn = function () {
+            self.loading(true);
+        }
+
+        var loadingOff = function () {
+            self.loading(false);
+        }
     }
 
     $.extend(ns, {List: List});
 
-}(jQuery, ko, Products));
+}(jQuery, ko, Public));
