@@ -2,7 +2,7 @@
 
 (function ($, ko, ns) {
     
-    function List(spinner) {
+    function Index(spinner) {
         var self = this;
 
         self.init = function () {
@@ -156,6 +156,6 @@
         }
     }
 
-    $.extend(ns, {List: List});
+    $.extend(ns, { Index: Index });
 
 }(jQuery, ko, Public));

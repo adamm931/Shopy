@@ -174,7 +174,7 @@
     <Content Include="Scripts\ViewModels\Size.js" />
     <Content Include="Scripts\ViewModels\Category.js" />
     <Content Include="Scripts\ViewModels\Details.js" />
-    <Content Include="Scripts\ViewModels\List.js" />
+    <Content Include="Scripts\ViewModels\Index.js" />
     <Content Include="Scripts\ViewModels\Product.js" />
     <Content Include="Scripts\ViewModels\Slider.js" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -186,7 +186,7 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Head.cshtml" />
     <Content Include="Views\Shared\_NewsLetter.cshtml" />
-    <Content Include="Views\Shared\_Endpoints.cshtml" />
+    <Content Include="Views\Shared\_Configuration.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <None Include="Web.Debug.config">
@@ -206,11 +206,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common\PublicSettings.cs" />
+    <Compile Include="Common\PublicSettingsKeys.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Common\PriceSliderOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

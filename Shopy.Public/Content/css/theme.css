@@ -67,11 +67,11 @@
 	
 	.sticky-top {
 		position: sticky;
-        top: 0px;
+        top: 0;
+        left: 0;
         transition: box-shadow 300ms ease, height 300ms ease;
         width: 100%;
         box-shadow: 0 4px 18px 0px rgba(0, 0, 0, 0.12), 0 7px 10px -5px rgba(0, 0, 0, 0.15);
-        height: 60px !important;
 	}
 
     .custom-checkbox
@@ -187,23 +187,7 @@
     }
 
     .nav-2nd {
-        height: 80px;
-    }
-
-    .loader {
-        border: 16px solid #000000;
-        border-radius: 50%;
-        border-top: 16px solid #ff8332;
-        width: 100px;
-        height: 100px;
-        -webkit-animation: spin 2s linear infinite;
-        animation: spin 1.5s linear infinite;
-        margin: auto;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        z-index: 9999;
-        /*display: none;*/
+        height: 70px;
     }
 
     .ellipsis {

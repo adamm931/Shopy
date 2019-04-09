@@ -14,8 +14,8 @@
             step: 10,
             connect: true,
             range: {
-                min: 10,
-                max: 800
+                min: sliderOptions.minEnd,
+                max: sliderOptions.maxEnd
             }
         });
 

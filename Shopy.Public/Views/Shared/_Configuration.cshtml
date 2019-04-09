@@ -1,8 +1,22 @@
-﻿<script>
+﻿@using Shopy.Public.Common;
+
+<script>
     const endpoints = {
         Search: "@Url.RouteUrl("Products", new { action = "Search"})",
         Filters: "@Url.RouteUrl("Products", new { action = "Filters" })",
         LoadDetails: "@Url.RouteUrl("Products", new { action = "LoadDetails", id = Model })",
         Details: "@Url.RouteUrl("Products", new { action = "Details", id = "id" })"
     };
+
+    const sliderOptions = {
+        minEnd: @PriceSliderOptions.MinEnd,
+        minInitial: @PriceSliderOptions.MinInitial,
+        maxEnd: @PriceSliderOptions.MaxEnd,
+        maxInitial: @PriceSliderOptions.MaxInitial,
+    };
+
+    const publicOptions = {
+        pageSize: @PublicSettings.PageSize,
+    };
+
 </script>

@@ -1,11 +1,13 @@
-﻿$(window).scroll(_.throttle(() => {
+﻿
+//$(window).scroll(_.throttle(() => {
 
-    var scrollPosition = Math.round(window.scrollY);
-
-    if (scrollPosition > 100) {
+$(window).scroll(function () {
+    if ($(window).scroll > 100) {
         $('.nav-2nd').addClass('sticky-top');
     }
     else {
         $('.nav-2nd').removeClass('sticky-top');
     }
-}, 300));
+})
+
+//}, 300));

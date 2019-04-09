@@ -5,11 +5,11 @@
     self.pageIndex = 0;
     self.pageSize = 9;
 
-    self.categoryId = null;
-    self.brands = '';
-    self.sizes = '';
-    self.minPrice = 10;
-    self.maxPrice = 500;
+    self.categoryId;
+    self.brands;
+    self.sizes;
+    self.minPrice = sliderOptions.minInitial;
+    self.maxPrice = sliderOptions.maxInitial;
 
     self.nextPage = function () {
         //self.pageIndex += 1;
@@ -60,12 +60,12 @@
 
     self.init = function () {
 
-        self.pageSize = self.getFromCache('pageSize') || self.pageSize;
+        self.pageSize = self.getFromCache('pageSize') || publicOptions.pageSize;
         //self.categoryId = self.getFromCache('categoryId') || self.categoryId;
-        self.brands = self.getFromCache('brands') || self.brands;
-        self.sizes = self.getFromCache('sizes') || self.sizes;
-        self.minPrice = self.getFromCache('minPrice') || self.minPrice;
-        self.maxPrice = self.getFromCache('maxPrice') || self.maxPrice;
+        self.brands = self.getFromCache('brands') || '';
+        self.sizes = self.getFromCache('sizes') || '';
+        self.minPrice = self.getFromCache('minPrice') || sliderOptions.minInitial;
+        self.maxPrice = self.getFromCache('maxPrice') || sliderOptions.maxInitial;
     }
 
     self.getFromCache = function(key) {
