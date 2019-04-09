@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopy.Core", "Shopy.Core\Sh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopy.Api", "Shopy.Api\Shopy.Api.csproj", "{7E0C22C6-E9A9-4026-AE08-B52142D19551}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopy.SDK", "Shopy.Sdk\Shopy.SDK.csproj", "{EE5B36A8-3408-4291-AC6A-4CC197F01CE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopy.Proto", "Shopy.Proto\Shopy.Proto.csproj", "{EE5B36A8-3408-4291-AC6A-4CC197F01CE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

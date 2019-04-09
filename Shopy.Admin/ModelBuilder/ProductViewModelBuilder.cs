@@ -1,6 +1,6 @@
 ﻿using Shopy.Admin.Utils;
 using Shopy.Admin.ViewModels;
-using Shopy.SDK;
+using Shopy.Proto;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

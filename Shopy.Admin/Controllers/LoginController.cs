@@ -1,7 +1,7 @@
 ﻿using Shopy.Admin.Filters;
 using Shopy.Admin.Utils;
 using Shopy.Admin.ViewModels;
-using Shopy.SDK;
+using Shopy.Proto;
 using System.Web;
 using System.Web.Mvc;
 

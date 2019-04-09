@@ -1,5 +1,5 @@
 ﻿using Shopy.Admin.Utils;
-using Shopy.SDK;
+using Shopy.Proto;
 using System;
 using System.Collections.Generic;
 using System.Linq;

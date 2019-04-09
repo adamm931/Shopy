@@ -1,4 +1,4 @@
-﻿using Shopy.SDK;
+﻿using Shopy.Proto;
 using System.Web.Mvc;
 
 namespace Shopy.Admin.Controllers

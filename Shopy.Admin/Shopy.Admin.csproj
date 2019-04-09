@@ -269,9 +269,9 @@
     <Analyzer Include="..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shopy.Sdk\Shopy.SDK.csproj">
+    <ProjectReference Include="..\Shopy.Proto\Shopy.Proto.csproj">
       <Project>{ee5b36a8-3408-4291-ac6a-4cc197f01ce7}</Project>
-      <Name>Shopy.SDK</Name>
+      <Name>Shopy.Proto</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
