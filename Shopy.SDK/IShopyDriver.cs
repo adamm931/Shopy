@@ -1,9 +1,9 @@
-﻿using Shopy.Sdk.Models;
+﻿using Shopy.SDK.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Shopy.Sdk
+namespace Shopy.SDK
 {
     public interface IShopyDriver
     {

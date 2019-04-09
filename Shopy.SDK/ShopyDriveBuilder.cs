@@ -1,13 +1,13 @@
-﻿using Shopy.Sdk.Client;
-using Shopy.Sdk.Common;
+﻿using Shopy.SDK.Client;
+using Shopy.SDK.Common;
 
-namespace Shopy.Sdk
+namespace Shopy.SDK
 {
     public class ShopyDriveBuilder
     {
         public IShopyDriver Configure()
         {
-            var httpClient = new ShopyHttpClient(SdkSettingsHelper.ApiBaseAddress);
+            var httpClient = new ShopyHttpClient(SDKSettingsHelper.ApiBaseAddress);
             return new ShopyDriver(httpClient);
         }
     }

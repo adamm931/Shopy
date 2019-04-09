@@ -1,5 +1,5 @@
 ﻿using Shopy.Admin.ViewModels;
-using Shopy.Sdk;
+using Shopy.SDK;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

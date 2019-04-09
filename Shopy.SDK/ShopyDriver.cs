@@ -1,11 +1,11 @@
-﻿using Shopy.Sdk.Client;
-using Shopy.Sdk.Images;
-using Shopy.Sdk.Models;
+﻿using Shopy.SDK.Client;
+using Shopy.SDK.Images;
+using Shopy.SDK.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Shopy.Sdk
+namespace Shopy.SDK
 {
     public class ShopyDriver : IShopyDriver
     {

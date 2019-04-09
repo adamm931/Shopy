@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Shopy.Sdk.Models
+namespace Shopy.SDK.Models
 {
     public class ListResponse<T>
     {

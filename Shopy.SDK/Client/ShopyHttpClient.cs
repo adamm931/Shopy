@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
-using Shopy.Sdk.ErrorHandler;
+using Shopy.SDK.ErrorHandler;
 using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shopy.Sdk.Client
+namespace Shopy.SDK.Client
 {
     public class ShopyHttpClient
     {

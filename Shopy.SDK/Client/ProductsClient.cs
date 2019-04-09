@@ -1,8 +1,8 @@
-﻿using Shopy.Sdk.Models;
+﻿using Shopy.SDK.Models;
 using System;
 using System.Threading.Tasks;
 
-namespace Shopy.Sdk.Client
+namespace Shopy.SDK.Client
 {
     public class ProductsClient
     {

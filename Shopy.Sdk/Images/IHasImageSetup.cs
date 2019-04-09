@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Shopy.Sdk.Images
+namespace Shopy.SDK.Images
 {
     public interface IHasImageSetup<T>
     {

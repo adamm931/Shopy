@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
-using Shopy.Sdk.Common;
-using Shopy.Sdk.Images;
+using Shopy.SDK.Common;
+using Shopy.SDK.Images;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Shopy.Sdk.Models
+namespace Shopy.SDK.Models
 {
     public class AddEditProduct : ISavesImage
     {
@@ -29,9 +29,9 @@ namespace Shopy.Sdk.Models
 
         public async Task SaveImageAsync(ImageProvider imageProvider)
         {
-            await imageProvider.SaveImageAsync(Image1, Uid, SdkSettingsHelper.Image1Name);
-            await imageProvider.SaveImageAsync(Image2, Uid, SdkSettingsHelper.Image2Name);
-            await imageProvider.SaveImageAsync(Image3, Uid, SdkSettingsHelper.Image3Name);
+            await imageProvider.SaveImageAsync(Image1, Uid, SDKSettingsHelper.Image1Name);
+            await imageProvider.SaveImageAsync(Image2, Uid, SDKSettingsHelper.Image2Name);
+            await imageProvider.SaveImageAsync(Image3, Uid, SDKSettingsHelper.Image3Name);
         }
     }
 }

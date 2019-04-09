@@ -269,12 +269,11 @@
     <Analyzer Include="..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shopy.Sdk\Shopy.Sdk.csproj">
-      <Project>{33a5c2eb-d1f5-4480-8bc7-ffcb3ac4fcb7}</Project>
-      <Name>Shopy.Sdk</Name>
+    <ProjectReference Include="..\Shopy.Sdk\Shopy.SDK.csproj">
+      <Project>{ee5b36a8-3408-4291-ac6a-4cc197f01ce7}</Project>
+      <Name>Shopy.SDK</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

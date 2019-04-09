@@ -1,10 +1,10 @@
-﻿using Shopy.Sdk.Common;
+﻿using Shopy.SDK.Common;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Shopy.Sdk.Images
+namespace Shopy.SDK.Images
 {
     public class ImageProvider
     {
@@ -51,17 +51,17 @@ namespace Shopy.Sdk.Images
 
         private string GetImageDirectoryPath(Guid productUid)
         {
-            return Path.Combine(SdkSettingsHelper.ImageDirectory, productUid.ToString());
+            return Path.Combine(SDKSettingsHelper.ImageDirectory, productUid.ToString());
         }
 
         private string GetImageUrlForName(Guid productUid, string name)
         {
-            return $"{SdkSettingsHelper.ImageDirectoryUrl}/{productUid}/{name}";
+            return $"{SDKSettingsHelper.ImageDirectoryUrl}/{productUid}/{name}";
         }
 
         private string GetEmptyImageUrl()
         {
-            return $"{SdkSettingsHelper.ImageDirectoryUrl}/{SdkSettingsHelper.EmptyImageName}";
+            return $"{SDKSettingsHelper.ImageDirectoryUrl}/{SDKSettingsHelper.EmptyImageName}";
         }
     }
 }

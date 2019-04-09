@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Shopy.Sdk.Models
+namespace Shopy.SDK.Models
 {
     public class Category
     {

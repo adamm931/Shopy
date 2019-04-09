@@ -1,6 +1,6 @@
 using Shopy.Admin.ModelBuilder;
 using Shopy.Admin.Utils;
-using Shopy.Sdk;
+using Shopy.SDK;
 using System.Web.Mvc;
 using Unity;
 using Unity.Mvc5;

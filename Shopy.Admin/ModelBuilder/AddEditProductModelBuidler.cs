@@ -1,5 +1,5 @@
 ﻿using Shopy.Admin.ViewModels;
-using Shopy.Sdk.Models;
+using Shopy.SDK.Models;
 using System.Threading.Tasks;
 
 namespace Shopy.Admin.ModelBuilder

@@ -1,7 +1,7 @@
-﻿using Shopy.Sdk.Images;
+﻿using Shopy.SDK.Images;
 using System.Threading.Tasks;
 
-namespace Shopy.Sdk.Models
+namespace Shopy.SDK.Models
 {
     public class ProductListResponse : ListResponse<Product>, IHasImageSetup<ProductListResponse>
     {

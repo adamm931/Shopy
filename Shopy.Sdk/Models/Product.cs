@@ -1,10 +1,10 @@
-﻿using Shopy.Sdk.Common;
-using Shopy.Sdk.Images;
+﻿using Shopy.SDK.Common;
+using Shopy.SDK.Images;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Shopy.Sdk.Models
+namespace Shopy.SDK.Models
 {
     public class Product : IHasImageSetup<Product>
     {
@@ -22,9 +22,9 @@ namespace Shopy.Sdk.Models
 
         public async Task<Product> SetUpImages(ImageProvider imageProvider)
         {
-            Image1 = new Image(await imageProvider.GetImageUrl(Uid, SdkSettingsHelper.Image1Name));
-            Image2 = new Image(await imageProvider.GetImageUrl(Uid, SdkSettingsHelper.Image2Name));
-            Image3 = new Image(await imageProvider.GetImageUrl(Uid, SdkSettingsHelper.Image3Name));
+            Image1 = new Image(await imageProvider.GetImageUrl(Uid, SDKSettingsHelper.Image1Name));
+            Image2 = new Image(await imageProvider.GetImageUrl(Uid, SDKSettingsHelper.Image2Name));
+            Image3 = new Image(await imageProvider.GetImageUrl(Uid, SDKSettingsHelper.Image3Name));
             return this;
         }
     }

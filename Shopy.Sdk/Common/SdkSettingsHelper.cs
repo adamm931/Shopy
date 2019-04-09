@@ -3,9 +3,9 @@ using System.Configuration;
 using System.IO;
 using System.Reflection;
 
-namespace Shopy.Sdk.Common
+namespace Shopy.SDK.Common
 {
-    public class SdkSettingsHelper
+    public class SDKSettingsHelper
     {
         private static KeyValueConfigurationCollection appSettings = GetAppSettings();
 
@@ -15,7 +15,7 @@ namespace Shopy.Sdk.Common
             {
                 if (appSettings[SettingKeys.ApiBaseAddress] == null)
                 {
-                    throw new Exception("Api base address is not in sdk configuration file.");
+                    throw new Exception("Api base address is not in SDK configuration file.");
                 }
 
                 var baseAddress = appSettings[SettingKeys.ApiBaseAddress]?.Value;
@@ -49,7 +49,7 @@ namespace Shopy.Sdk.Common
             {
                 if (appSettings[SettingKeys.ImagesDirectoryUrl] == null)
                 {
-                    throw new Exception("Product image directory url is not set in sdk configuration file.");
+                    throw new Exception("Product image directory url is not set in SDK configuration file.");
                 }
 
                 return appSettings[SettingKeys.ImagesDirectoryUrl]?.Value;
@@ -98,7 +98,7 @@ namespace Shopy.Sdk.Common
 
             if (config == null)
             {
-                throw new Exception("Error occurred when opening sdk configuration file");
+                throw new Exception("Error occurred when opening SDK configuration file");
             }
 
             return config.AppSettings.Settings;

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Shop.Sdk")]
+[assembly: AssemblyTitle("Shopy.SDK")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Shop.Sdk")]
+[assembly: AssemblyProduct("Shopy.SDK")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("33a5c2eb-d1f5-4480-8bc7-ffcb3ac4fcb7")]
+[assembly: Guid("ee5b36a8-3408-4291-ac6a-4cc197f01ce7")]
 
 // Version information for an assembly consists of the following four values:
 //

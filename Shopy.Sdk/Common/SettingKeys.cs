@@ -1,4 +1,4 @@
-﻿namespace Shopy.Sdk.Common
+﻿namespace Shopy.SDK.Common
 {
     public class SettingKeys
     {
