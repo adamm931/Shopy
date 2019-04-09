@@ -4,4 +4,4 @@
 
 ## Setup
 
-* Locate the Shopy.Proto -> App.config -> set the key **ApiBaseAddress** (eg. http://localhost:50253)
+* Locate the Shopy.Proto -> App.config -> set the key **ApiBaseAddress** (eg. http://localhost:50253/api)
