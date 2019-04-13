@@ -79,11 +79,6 @@ namespace Shopy.Proto
             return await details.SetUpImages(_imageProvider);
         }
 
-        public async Task AddCategoryAsync(Category category)
-        {
-            await _categories.AddAsync(category);
-        }
-
         public async Task<IEnumerable<Category>> ListCategoriesWithProductsAsync()
         {
             return await _categories.ListWithProductsAsync();
@@ -102,6 +97,21 @@ namespace Shopy.Proto
         public async Task DeleteCategoryAsync(Guid uid)
         {
             await _categories.DeleteAsync(uid);
+        }
+
+        public async Task<Category> GetCategoryAsync(Guid uid)
+        {
+            return await _categories.GetAsync(uid);
+        }
+
+        public async Task<Category> AddCategoryAsync(Category category)
+        {
+            return await _categories.AddAsync(category);
+        }
+
+        public async Task EditCategoryAsync(Category category)
+        {
+            await _categories.EditAsync(category);
         }
     }
 }

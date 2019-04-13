@@ -204,6 +204,8 @@
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Categories\Add.cshtml" />
     <Content Include="Views\Products\_AddEditForm.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\_AddEditForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -255,7 +257,7 @@
     <Compile Include="ModelBuilder\DefaultProductViewModelBuilder.cs" />
     <Compile Include="ModelBuilder\IViewModelBuilder.cs" />
     <Compile Include="ModelBuilder\ProductListViewModelBuilder.cs" />
-    <Compile Include="ViewModels\AddCategoryViewModel.cs" />
+    <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\CategoryListItemViewModel.cs" />
     <Compile Include="ViewModels\CategoryListViewModel.cs" />
     <Compile Include="ViewModels\ChangeProductCategoriesViewModel.cs" />

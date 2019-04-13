@@ -13,11 +13,18 @@ namespace Shopy.Proto
 
         Task<IEnumerable<Category>> ListCategoriesWithProductsAsync();
 
+        Task<Category> GetCategoryAsync(Guid uid);
+
+        Task<Category> AddCategoryAsync(Category category);
+
+        Task EditCategoryAsync(Category category);
+
         Task DeleteCategoryAsync(Guid uid);
 
         #endregion
 
         #region Products
+
         Task<ProductListResponse> ListProductsAsync(ProductFilter filter = null);
 
         Task<ProductDetails> GetProductDetailsAsync(Guid uid);
@@ -25,9 +32,7 @@ namespace Shopy.Proto
         Task<Product> GetProductAsync(Guid uid);
 
         Task<Product> AddProductAsync(AddEditProduct product);
-
-        Task AddCategoryAsync(Category category);
-
+    
         Task EditProductAsync(AddEditProduct product);
 
         Task AddProductToCategoryAsync(Guid productUid, Guid categoryUid);

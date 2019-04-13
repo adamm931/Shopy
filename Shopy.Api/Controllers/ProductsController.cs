@@ -48,13 +48,13 @@ namespace Shopy.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IHttpActionResult> Put(Guid? uid, [FromBody]EditProductCommand updateProduct)
+        public async Task<IHttpActionResult> Put(Guid? uid, [FromBody]EditProductCommand editProduct)
         {
-            updateProduct.Uid = uid.Value;
+            editProduct.Uid = uid.Value;
 
             return await ProcessCommand(
-                command: () => Mediator.SendAsync(updateProduct),
-                paramValidators: RequestParamValidator.CategoryUidValidator(uid));
+                command: () => Mediator.SendAsync(editProduct),
+                paramValidators: RequestParamValidator.ProductEditValidator(editProduct));
         }
 
         [HttpDelete]

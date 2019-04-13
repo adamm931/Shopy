@@ -58,6 +58,11 @@
     <Compile Include="Application\Categories\Add\AddCategoryResponse.cs" />
     <Compile Include="Application\Categories\Delete\DeleteCategoryCommand.cs" />
     <Compile Include="Application\Categories\Delete\DeleteCategoryCommandHandler.cs" />
+    <Compile Include="Application\Categories\Edit\EditCategoryCommand.cs" />
+    <Compile Include="Application\Categories\Edit\EditCategorytCommandHandler.cs" />
+    <Compile Include="Application\Categories\Get\GetCategoryHandler.cs" />
+    <Compile Include="Application\Categories\Get\GetCategoryRequest.cs" />
+    <Compile Include="Application\Categories\Get\GetCategoryResponse.cs" />
     <Compile Include="Application\Categories\Get\ListCategoriesHandler.cs" />
     <Compile Include="Application\Categories\Get\ListCategoriesRequest.cs" />
     <Compile Include="Application\Categories\Get\ListCategoriesResponse.cs" />

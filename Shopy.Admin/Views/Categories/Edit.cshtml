@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Shopy.Admin.ViewModels;
+@model CategoryViewModel
+<div class="col-md-6 order-md-1">
+    <div class="col-md-6 mb-4">
+        <h2>Edit category</h2>
+    </div>
+    @using (Html.BeginRouteForm("Categories", new { action = "Edit" }))
+    {
+        @Html.HiddenFor(m => m.Uid);
+
+        @Html.Partial("_AddEditForm", Model)
+    }
+</div>

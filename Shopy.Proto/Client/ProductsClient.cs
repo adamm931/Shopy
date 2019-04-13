@@ -36,14 +36,14 @@ namespace Shopy.Proto.Client
             return addProduct.Result;
         }
 
-        public async Task<object> EditAsync(AddEditProduct product)
+        public async Task EditAsync(AddEditProduct product)
         {
-            return await _client.PutAsync<AddEditProduct, object>($"products/{product.Uid}", product);
+            await _client.PutAsync($"products/{product.Uid}", product);
         }
 
-        public async Task<object> DeleteProductAsync(Guid uid)
+        public async Task DeleteProductAsync(Guid uid)
         {
-            return await _client.DeleteAsync<object>($"products/{uid}");
+            await _client.DeleteAsync($"products/{uid}");
         }
 
         public async Task<object> RemoveFromCategoryAsync(Guid productUid, Guid categoryUid)

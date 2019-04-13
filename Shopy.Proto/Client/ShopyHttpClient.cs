@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Shopy.Proto.ErrorHandler;
+using Shopy.Proto.ResponseHandler;
 using System;
 using System.Net.Http;
 using System.Text;
@@ -32,16 +32,15 @@ namespace Shopy.Proto.Client
             return await SendAsync<TRequest, TResult>(requestPath, HttpMethod.Post, content);
         }
 
-        public async Task<TResult> PutAsync<TRequest, TResult>(string requestPath, TRequest content)
+        public async Task PutAsync<TRequest>(string requestPath, TRequest content)
             where TRequest : class
         {
-            return await SendAsync<TRequest, TResult>(requestPath, HttpMethod.Put, content);
+            await SendAsync<TRequest, object>(requestPath, HttpMethod.Put, content);
         }
 
-        public async Task<TResult> DeleteAsync<TResult>(string requestPath)
-            where TResult : class
+        public async Task DeleteAsync(string requestPath)
         {
-            return await SendAsync<object, TResult>(requestPath, HttpMethod.Delete);
+            await SendAsync<object, object>(requestPath, HttpMethod.Delete);
         }
 
         private async Task<TResult> SendAsync<TRequest, TResult>(

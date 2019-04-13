@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Shopy.Proto.ErrorHandler
+namespace Shopy.Proto.ResponseHandler
 {
     public class ResponseMessageHandler : DelegatingHandler
     {

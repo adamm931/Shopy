@@ -31,7 +31,7 @@ namespace Shopy.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add(AddCategoryViewModel model)
+        public async Task<ActionResult> Add(CategoryViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -44,6 +44,38 @@ namespace Shopy.Admin.Controllers
             };
 
             await Shopy.AddCategoryAsync(addCategory);
+
+            return RedirectToAction("List");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Edit(Guid uid)
+        {
+            var category = await Shopy.GetCategoryAsync(uid);
+
+            var model = new CategoryViewModel()
+            {
+                Caption = category.Caption
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(CategoryViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var editCategory = new Category()
+            {
+                Uid = model.Uid,
+                Caption = model.Caption
+            };
+
+            await Shopy.EditCategoryAsync(editCategory);
 
             return RedirectToAction("List");
         }

@@ -26,14 +26,26 @@ namespace Shopy.Proto.Client
             return list.Result;
         }
 
-        public async Task AddAsync(Category category)
+        public async Task<Category> GetAsync(Guid uid)
         {
-            await _client.PostAsync<Category, object>("categories", category);
+            var response = await _client.GetAsync<Response<Category>>($"categories/{uid}");
+            return response.Result;
+        }
+
+        public async Task<Category> AddAsync(Category category)
+        {
+           var response = await _client.PostAsync<Category, Response<Category>>("categories", category);
+            return response.Result;
+        }
+
+        public async Task EditAsync(Category category)
+        {
+            await _client.PutAsync($"categories/{category.Uid}", category);
         }
 
         public async Task DeleteAsync(Guid uid)
         {
-            await _client.DeleteAsync<Category>($"categories/{uid}");
+            await _client.DeleteAsync($"categories/{uid}");
         }
     }
 }
