@@ -1,4 +1,4 @@
-## Prequirements
+## Prerequisites
 
 * Install PostgreSQL >= 9.6
 * Database user
