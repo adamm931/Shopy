@@ -52,7 +52,7 @@ namespace Shopy.Api
         {
             return new[] {
                 new RequestParamValidator(() => addRequest == null, "Request has to be set"),
-                new RequestParamValidator(() => string.IsNullOrEmpty(addRequest?.Brand), "Brand has to been set for product"),
+                //new RequestParamValidator(() => string.IsNullOrEmpty(addRequest?.Brand), "Brand has to been set for product"),
                 new RequestParamValidator(() => addRequest?.Sizes == null || !addRequest.Sizes.Any(), "Sizes have to be set for product"),
                 new RequestParamValidator(() => addRequest?.Price == null, "Price has to be set for product"),
                 new RequestParamValidator(() => string.IsNullOrEmpty(addRequest?.Caption), "Caption has to be set for product"),

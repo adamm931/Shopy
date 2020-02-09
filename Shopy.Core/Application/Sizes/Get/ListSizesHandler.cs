@@ -1,8 +1,9 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Core.Mappers;
+using Shopy.Core.Extensions;
 using Shopy.Core.Models;
 using Shopy.Data;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;
@@ -18,11 +19,11 @@ namespace Shopy.Core.Application.Sizes.Get
             {
                 var request = context.Message;
 
-                var mapper = new SizeMapper();
                 var sizes = await dbContext.SizeTypes.ToListAsync();
+
                 var projection = sizes
-                    .OrderBy(s => SizeOrder.GetOrderForEid(s.SizeTypeEID))
-                    .Select(s => mapper.FromEF(s));
+                    .OrderBy(s => s.Id)
+                    .MapTo<IEnumerable<SizeResponse>>();
 
                 return new ListSizesResponse(projection);
             }

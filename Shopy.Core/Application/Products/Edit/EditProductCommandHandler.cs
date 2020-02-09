@@ -1,11 +1,8 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Core.Data.Entities;
 using Shopy.Core.Exceptions;
 using Shopy.Data;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,7 +18,7 @@ namespace Shopy.Core.Application.Products.Edit
 
                 var product = await dbContext.Products
                     .Include(p => p.Sizes)
-                    .Include(p => p.Brand)
+                    .Include(p => p.BrandType)
                     .FirstOrDefaultAsync(p => p.Uid == command.Uid);
 
                 if (product == null)
@@ -29,61 +26,10 @@ namespace Shopy.Core.Application.Products.Edit
                     throw new ProductNotFoundException(command.Uid);
                 }
 
-                var sizes = product.Sizes;
-
-                if (command.Sizes != null && command.Sizes.Any())
-                {
-                    sizes = await EditSizesAsync(dbContext, product, command.Sizes);
-                }
-
-                var brand = product.Brand;
-
-                if (command.Brand != null)
-                {
-                    brand = await dbContext.BrandTypes
-                        .FirstOrDefaultAsync(b => b.BrandTypeEId == command.Brand);
-                }
-
-                if (brand == null)
-                {
-                    throw new BrandNotFoundException();
-                }
-
-                product.Price = command.Price ?? product.Price;
-                product.Caption = command.Caption ?? product.Caption;
-                product.Sizes = sizes;
-                product.Brand = brand;
-                product.Description = command.Description ?? product.Description;
+                product.Update(command.Caption, command.Description, command.Price, null, null/*command.Brand, command.Sizes*/);
 
                 await dbContext.SaveChangesAsync();
             }
-        }
-
-        private async Task<List<SizeTypeEF>> EditSizesAsync(ShopyContext dbContext, ProductEF product, IEnumerable<string> commandSizesEIds)
-        {
-            var sizeForProductSet = await dbContext.SizeTypes
-                   .Where(s => commandSizesEIds.Any(cs => cs == s.SizeTypeEID))
-                   .ToListAsync();
-
-            if (!sizeForProductSet.Any())
-            {
-                throw new SizesNotFoundException();
-            }
-
-            var removedSizes = product.Sizes.Except(sizeForProductSet);
-            var newSizes = sizeForProductSet.Except(product.Sizes);
-
-            foreach (var size in newSizes)
-            {
-                size.Products.Add(product);
-            }
-
-            foreach (var size in removedSizes)
-            {
-                size.Products.Remove(product);
-            }
-
-            return sizeForProductSet;
         }
     }
 }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Shopy.Core.Application.Products.Get
 {
-    public class ListProductsResponse : ListResponse<Product>
+    public class ListProductsResponse : ListResponse<ProductReponse>
     {
-        public ListProductsResponse(IEnumerable<Product> result, int totalRecords)
+        public ListProductsResponse(IEnumerable<ProductReponse> result, int totalRecords)
             : base(result, totalRecords)
         { }
     }

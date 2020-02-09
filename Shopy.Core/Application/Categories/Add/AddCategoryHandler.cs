@@ -1,9 +1,9 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Core.Data.Entities;
-using Shopy.Core.Mappers;
+using Shopy.Core.Domain.Entitties;
+using Shopy.Core.Extensions;
+using Shopy.Core.Models;
 using Shopy.Data;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,17 +17,11 @@ namespace Shopy.Core.Application.Categories.Add
             {
                 var request = context.Message;
 
-                var category = dbContext.Categories.Add(new CategoryEF()
-                {
-                    Uid = Guid.NewGuid(),
-                    Caption = request.Caption
-                });
+                var category = dbContext.Categories.Add(new Category(request.Caption));
 
                 await dbContext.SaveChangesAsync();
 
-                var categoryMapper = new CategoryMapper();
-
-                return new AddCategoryResponse(categoryMapper.FromEF(category));
+                return new AddCategoryResponse(category.MapTo<CategoryReponse>());
             }
         }
     }

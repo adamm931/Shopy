@@ -1,0 +1,169 @@
+2/9/2020 12:48:35 PMSystem.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.InvalidOperationException: The class 'Shopy.Core.Domain.Entitties.SizeType' has no parameterless constructor.
+   at System.Data.Entity.Core.Objects.DelegateFactory.GetConstructorForType(Type type)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Translator.TranslatorVisitor.Emit_ConstructEntity(EntityType oSpaceType, IEnumerable`1 propertyBindings, Expression entityKeyReader, Expression entitySetReader, TranslatorArg arg, EntityProxyTypeInfo proxyTypeInfo)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Translator.TranslatorVisitor.Visit(EntityColumnMap columnMap, TranslatorArg arg)
+   at System.Data.Entity.Core.Query.InternalTrees.EntityColumnMap.Accept[TResultType,TArgType](ColumnMapVisitorWithResults`2 visitor, TArgType arg)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Translator.TranslatorVisitor.ProcessCollectionColumnMap(CollectionColumnMap columnMap, TranslatorArg arg, ColumnMap discriminatorColumnMap, Object discriminatorValue)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Translator.TranslatorVisitor.Visit(SimpleCollectionColumnMap columnMap, TranslatorArg arg)
+   at System.Data.Entity.Core.Query.InternalTrees.SimpleCollectionColumnMap.Accept[TResultType,TArgType](ColumnMapVisitorWithResults`2 visitor, TArgType arg)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Translator.TranslateColumnMap[T](ColumnMap columnMap, MetadataWorkspace workspace, SpanIndex spanIndex, MergeOption mergeOption, Boolean streaming, Boolean valueLayer)
+   --- End of inner exception stack trace ---
+   at Mediator.Net.Pipeline.EmptyPipeSpecification`1.OnException(Exception ex, TContext context)
+   at Mediator.Net.Pipeline.GlobalReceivePipe`1.<Connect>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendMessage>d__10`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<RequestAsync>d__9`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Shopy.Api.Controllers.BaseApiController.<ProcessRequest>d__4`1.MoveNext() in C:\Dev\Shopy\Shopy.Api\Controllers\BaseApiController.cs:line 59
+----------------------------------------------------------------------------------------------------
+2/9/2020 12:51:19 PMSystem.MissingMethodException: Cannot create an abstract class.
+   at Mediator.Net.Pipeline.EmptyPipeSpecification`1.OnException(Exception ex, TContext context)
+   at Mediator.Net.Pipeline.GlobalReceivePipe`1.<Connect>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendMessage>d__10`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<RequestAsync>d__9`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Shopy.Api.Controllers.BaseApiController.<ProcessRequest>d__4`1.MoveNext() in C:\Dev\Shopy\Shopy.Api\Controllers\BaseApiController.cs:line 59
+----------------------------------------------------------------------------------------------------
+2/9/2020 1:00:24 PMSystem.MissingMethodException: Cannot create an abstract class.
+   at Mediator.Net.Pipeline.EmptyPipeSpecification`1.OnException(Exception ex, TContext context)
+   at Mediator.Net.Pipeline.GlobalReceivePipe`1.<Connect>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendMessage>d__10`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<RequestAsync>d__9`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Shopy.Api.Controllers.BaseApiController.<ProcessRequest>d__4`1.MoveNext() in C:\Dev\Shopy\Shopy.Api\Controllers\BaseApiController.cs:line 59
+----------------------------------------------------------------------------------------------------
+2/9/2020 1:01:40 PMSystem.MissingMethodException: Cannot create an abstract class.
+   at Mediator.Net.Pipeline.EmptyPipeSpecification`1.OnException(Exception ex, TContext context)
+   at Mediator.Net.Pipeline.GlobalReceivePipe`1.<Connect>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendMessage>d__10`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<RequestAsync>d__9`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Shopy.Api.Controllers.BaseApiController.<ProcessRequest>d__4`1.MoveNext() in C:\Dev\Shopy\Shopy.Api\Controllers\BaseApiController.cs:line 59
+----------------------------------------------------------------------------------------------------
+2/9/2020 1:02:15 PMSystem.MissingMethodException: Cannot create an abstract class.
+   at Mediator.Net.Pipeline.EmptyPipeSpecification`1.OnException(Exception ex, TContext context)
+   at Mediator.Net.Pipeline.GlobalReceivePipe`1.<Connect>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendMessage>d__10`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<RequestAsync>d__9`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Shopy.Api.Controllers.BaseApiController.<ProcessRequest>d__4`1.MoveNext() in C:\Dev\Shopy\Shopy.Api\Controllers\BaseApiController.cs:line 59
+----------------------------------------------------------------------------------------------------
+2/9/2020 1:05:58 PMSystem.MissingMethodException: Cannot create an abstract class.
+   at Mediator.Net.Pipeline.EmptyPipeSpecification`1.OnException(Exception ex, TContext context)
+   at Mediator.Net.Pipeline.GlobalReceivePipe`1.<Connect>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendMessage>d__10`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<RequestAsync>d__9`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Shopy.Api.Controllers.BaseApiController.<ProcessRequest>d__4`1.MoveNext() in C:\Dev\Shopy\Shopy.Api\Controllers\BaseApiController.cs:line 59
+----------------------------------------------------------------------------------------------------
+2/9/2020 1:12:08 PMSystem.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.InvalidOperationException: The class 'Shopy.Core.Domain.Entitties.Product' has no parameterless constructor.
+   at System.Data.Entity.Core.Objects.DelegateFactory.GetConstructorForType(Type type)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Translator.TranslatorVisitor.Emit_ConstructEntity(EntityType oSpaceType, IEnumerable`1 propertyBindings, Expression entityKeyReader, Expression entitySetReader, TranslatorArg arg, EntityProxyTypeInfo proxyTypeInfo)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Translator.TranslatorVisitor.Visit(EntityColumnMap columnMap, TranslatorArg arg)
+   at System.Data.Entity.Core.Query.InternalTrees.EntityColumnMap.Accept[TResultType,TArgType](ColumnMapVisitorWithResults`2 visitor, TArgType arg)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Translator.TranslatorVisitor.HandleSpandexRecord(RecordColumnMap columnMap, TranslatorArg arg, RowType spanRowType)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Translator.TranslatorVisitor.Visit(RecordColumnMap columnMap, TranslatorArg arg)
+   at System.Data.Entity.Core.Query.InternalTrees.RecordColumnMap.Accept[TResultType,TArgType](ColumnMapVisitorWithResults`2 visitor, TArgType arg)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Translator.TranslatorVisitor.ProcessCollectionColumnMap(CollectionColumnMap columnMap, TranslatorArg arg, ColumnMap discriminatorColumnMap, Object discriminatorValue)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Translator.TranslatorVisitor.Visit(SimpleCollectionColumnMap columnMap, TranslatorArg arg)
+   at System.Data.Entity.Core.Query.InternalTrees.SimpleCollectionColumnMap.Accept[TResultType,TArgType](ColumnMapVisitorWithResults`2 visitor, TArgType arg)
+   at System.Data.Entity.Core.Common.Internal.Materialization.Translator.TranslateColumnMap[T](ColumnMap columnMap, MetadataWorkspace workspace, SpanIndex spanIndex, MergeOption mergeOption, Boolean streaming, Boolean valueLayer)
+   --- End of inner exception stack trace ---
+   at Mediator.Net.Pipeline.EmptyPipeSpecification`1.OnException(Exception ex, TContext context)
+   at Mediator.Net.Pipeline.GlobalReceivePipe`1.<Connect>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendMessage>d__10`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<RequestAsync>d__9`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Shopy.Api.Controllers.BaseApiController.<ProcessRequest>d__4`1.MoveNext() in C:\Dev\Shopy\Shopy.Api\Controllers\BaseApiController.cs:line 59
+----------------------------------------------------------------------------------------------------
+2/9/2020 1:16:58 PMAutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+List`1 -> IEnumerable`1
+System.Collections.Generic.List`1[[Shopy.Core.Domain.Entitties.Product, Shopy.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.IEnumerable`1[[Shopy.Core.Models.ProductReponse, Shopy.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] ---> AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Product -> ProductReponse
+Shopy.Core.Domain.Entitties.Product -> Shopy.Core.Models.ProductReponse
+   at lambda_method(Closure , Product , ProductReponse , ResolutionContext )
+   at AutoMapper.Mapper.Map[TSource,TDestination](TSource source, TDestination destination, ResolutionContext context, IMemberMap memberMap)
+   at lambda_method(Closure , List`1 , IEnumerable`1 , ResolutionContext )
+   --- End of inner exception stack trace ---
+   at Mediator.Net.Pipeline.EmptyPipeSpecification`1.OnException(Exception ex, TContext context)
+   at Mediator.Net.Pipeline.GlobalReceivePipe`1.<Connect>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<SendMessage>d__10`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Mediator.Net.Mediator.<RequestAsync>d__9`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Shopy.Api.Controllers.BaseApiController.<ProcessRequest>d__4`1.MoveNext() in C:\Dev\Shopy\Shopy.Api\Controllers\BaseApiController.cs:line 59
+----------------------------------------------------------------------------------------------------

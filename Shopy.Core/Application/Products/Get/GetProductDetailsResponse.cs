@@ -2,9 +2,9 @@
 
 namespace Shopy.Core.Application.Products.Get
 {
-    public class GetProductDetailsResponse : Response<ProductDetails>
+    public class GetProductDetailsResponse : Response<ProductDetailsResponse>
     {
-        public GetProductDetailsResponse(ProductDetails result) : base(result)
+        public GetProductDetailsResponse(ProductDetailsResponse result) : base(result)
         { }
     }
 }

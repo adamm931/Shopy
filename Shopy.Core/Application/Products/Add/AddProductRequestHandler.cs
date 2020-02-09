@@ -1,12 +1,10 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Core.Data.Entities;
-using Shopy.Core.Exceptions;
-using Shopy.Core.Mappers;
+using Shopy.Core.Domain.Entitties;
+using Shopy.Core.Extensions;
+using Shopy.Core.Models;
 using Shopy.Data;
 using System;
-using System.Data.Entity;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,47 +18,25 @@ namespace Shopy.Core.Application.Products.Add
             {
                 var command = context.Message;
 
-                var brand = await dbContext.BrandTypes
-                    .FirstOrDefaultAsync(b => b.BrandTypeEId == command.Brand);
+                var product = new Product(
+                    Guid.NewGuid(),
+                    command.Caption,
+                    command.Description,
+                    command.Price.Value);
 
-                if (brand == null)
+                var brand = await dbContext.BrandTypes.FindAsync(command.Brand);
+
+                product.SetBrand(brand);
+
+                foreach (var size in command.Sizes)
                 {
-                    throw new BrandNotFoundException();
-                }
-
-                var sizes = await dbContext.SizeTypes
-                    .Where(s => command.Sizes.Any(cs => cs == s.SizeTypeEID))
-                    .ToListAsync();
-
-                if (!sizes.Any())
-                {
-                    throw new SizesNotFoundException();
-                }
-
-                var uid = Guid.NewGuid();
-
-                var productEf = dbContext.Products.Add(new ProductEF()
-                {
-                    Uid = uid,
-                    Caption = command.Caption,
-                    Description = command.Description,
-                    Price = command.Price.Value,
-                    Brand = brand,
-                    Sizes = sizes
-                });
-
-                foreach (var size in sizes)
-                {
-                    size.Products.Add(productEf);
+                    var sizeType = await dbContext.SizeTypes.FindAsync(size);
+                    product.AddSize(sizeType);
                 }
 
                 await dbContext.SaveChangesAsync();
 
-                productEf = await dbContext.Products.FindAsync(uid);
-
-                var productMapper = new ProductMapper();
-
-                return new AddProductResponse(productMapper.FromEF(productEf));
+                return new AddProductResponse(product.MapTo<ProductReponse>());
             }
         }
     }

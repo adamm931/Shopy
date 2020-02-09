@@ -2,9 +2,9 @@
 
 namespace Shopy.Core.Application.Categories.Add
 {
-    public class GetCategoryResponse : Response<Category>
+    public class GetCategoryResponse : Response<CategoryReponse>
     {
-        public GetCategoryResponse(Category result) : base(result)
+        public GetCategoryResponse(CategoryReponse result) : base(result)
         { }
     }
 }

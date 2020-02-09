@@ -1,9 +1,10 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Core.Mappers;
+using Shopy.Core.Common;
+using Shopy.Core.Extensions;
 using Shopy.Core.Models;
 using Shopy.Data;
-using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;
@@ -21,7 +22,7 @@ namespace Shopy.Core.Application.Products.Get
 
                 var products = await dbContext.Products
                     .Include(p => p.Categories)
-                    .Include(p => p.Brand)
+                    .Include(p => p.BrandType)
                     .Include(p => p.Sizes)
                     .ToListAsync();
 
@@ -32,26 +33,18 @@ namespace Shopy.Core.Application.Products.Get
                     return null;
                 }
 
-                var productMapper = new ProductMapper();
-                var productMapperWithCategories = new ProductMapper(new CategoryMapper());
-
                 var relatedProducts = products
                    .Where(p => product.Categories
                         .Any(pc => p.Categories
                             .Any(c => c.Uid == pc.Uid)))
                    .Where(p => p.Uid != request.Uid)
-                   .Select(p => productMapper.FromEF(p))
-
-                   //randomize the related products in case that 
-                   //and usually will be more than 4
-
-                   .OrderBy(o => Guid.NewGuid())
+                   .Randomize()
                    .Take(4);
 
-                var productDetails = new ProductDetails()
+                var productDetails = new ProductDetailsResponse
                 {
-                    Product = productMapperWithCategories.FromEF(product),
-                    RelatedProducts = relatedProducts
+                    Product = product.MapTo<ProductReponse>(),
+                    RelatedProducts = relatedProducts.MapTo<IEnumerable<ProductReponse>>()
                 };
 
                 return new GetProductDetailsResponse(productDetails);

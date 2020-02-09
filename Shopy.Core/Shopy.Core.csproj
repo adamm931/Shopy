@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Shopy.Core</RootNamespace>
     <AssemblyName>Shopy.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,11 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework6.Npgsql">
-      <HintPath>..\packages\EntityFramework6.Npgsql.3.2.0\lib\net45\EntityFramework6.Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="Mediator.Net">
       <HintPath>..\packages\Mediator.Net.2.0.2\lib\net46\Mediator.Net.dll</HintPath>
@@ -90,37 +91,61 @@
     <Compile Include="Application\Sizes\Get\ListSizesRequest.cs" />
     <Compile Include="Application\Sizes\Get\ListSizesResponse.cs" />
     <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\EnumProvider.cs" />
+    <Compile Include="Common\Extensions.cs" />
     <Compile Include="Data\Configurations\BrandTypeConfiguration.cs" />
     <Compile Include="Data\Configurations\CategoryConfiguration.cs" />
+    <Compile Include="Data\Configurations\EnumEntityConfiguration.cs" />
     <Compile Include="Data\Configurations\ProductConfiguration.cs" />
     <Compile Include="Data\Configurations\SizeTypeConfiguration.cs" />
-    <Compile Include="Data\Entitties\BrandTypeEF.cs" />
-    <Compile Include="Data\Entitties\CategoryEF.cs" />
-    <Compile Include="Data\Entitties\ProductEF.cs" />
-    <Compile Include="Data\Entitties\SizeTypeEF.cs" />
+    <Compile Include="Domain\Entitties\Base\Entity.cs" />
+    <Compile Include="Domain\Entitties\Base\EnumEntity.cs" />
+    <Compile Include="Domain\Entitties\Base\NameEntity.cs" />
+    <Compile Include="Domain\Entitties\BrandType.cs" />
+    <Compile Include="Domain\Entitties\Category.cs" />
+    <Compile Include="Domain\Entitties\Enumerations\BrandTypeId.cs" />
+    <Compile Include="Domain\Entitties\Enumerations\SizeTypeId.cs" />
+    <Compile Include="Domain\Entitties\Interfaces\IId.cs" />
+    <Compile Include="Domain\Entitties\Interfaces\IName.cs" />
+    <Compile Include="Domain\Entitties\Interfaces\IUid.cs" />
+    <Compile Include="Domain\Entitties\Product.cs" />
+    <Compile Include="Domain\Entitties\SizeType.cs" />
     <Compile Include="Data\Intilializer\ShopyContextSeeder.cs" />
     <Compile Include="Data\ShopyContext.cs" />
+    <Compile Include="Domain\Exceptions\ExceptionsLocalization.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExceptionsLocalization.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Exceptions\NameIsEmptyException.cs" />
     <Compile Include="Exceptions\CategoryNotFoundException.cs" />
     <Compile Include="Exceptions\BrandNotFoundException.cs" />
     <Compile Include="Exceptions\SizesNotFoundException.cs" />
     <Compile Include="Exceptions\ProductNotFoundException.cs" />
+    <Compile Include="Extensions\AutoMapperExtensions.cs" />
+    <Compile Include="Factory\AutoMapperFactory.cs" />
     <Compile Include="Factory\MediatorFactory.cs" />
-    <Compile Include="Mappers\BrandMapper.cs" />
-    <Compile Include="Mappers\CategoryMapper.cs" />
-    <Compile Include="Mappers\IMapper.cs" />
-    <Compile Include="Mappers\ProductMapper.cs" />
-    <Compile Include="Mappers\SizeMapper.cs" />
-    <Compile Include="Models\Brand.cs" />
-    <Compile Include="Models\Category.cs" />
+    <Compile Include="Mappings\EnumerationProfiles.cs" />
+    <Compile Include="Models\BrandResponse.cs" />
+    <Compile Include="Models\CategoryReponse.cs" />
+    <Compile Include="Models\EnumResponse.cs" />
     <Compile Include="Models\ListResponse.cs" />
-    <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\ProductDetails.cs" />
+    <Compile Include="Models\ProductReponse.cs" />
+    <Compile Include="Models\ProductDetailsResponse.cs" />
     <Compile Include="Models\ProductFilter.cs" />
     <Compile Include="Models\RequestValidator.cs" />
     <Compile Include="Models\Response.cs" />
-    <Compile Include="Models\Size.cs" />
-    <Compile Include="Models\SizeOrder.cs" />
+    <Compile Include="Models\SizeResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Domain\Exceptions\ExceptionsLocalization.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExceptionsLocalization.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

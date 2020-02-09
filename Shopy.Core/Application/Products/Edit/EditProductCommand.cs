@@ -1,4 +1,5 @@
 ﻿using Mediator.Net.Contracts;
+using Shopy.Core.Domain.Entitties.Enumerations;
 using System;
 using System.Collections.Generic;
 
@@ -10,7 +11,7 @@ namespace Shopy.Core.Application.Products.Edit
         public decimal? Price { get; set; }
         public string Caption { get; set; }
         public string Description { get; set; }
-        public string Brand { get; set; }
-        public IEnumerable<string> Sizes { get; set; }
+        public BrandTypeId Brand { get; set; }
+        public IEnumerable<SizeTypeId> Sizes { get; set; }
     }
 }

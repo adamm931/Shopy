@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Shopy.Core.Application.Categories.Get
 {
-    public class ListCategoriesResponse : Response<IEnumerable<Category>>
+    public class ListCategoriesResponse : Response<IEnumerable<CategoryReponse>>
     {
-        public ListCategoriesResponse(IEnumerable<Category> result) : base(result)
+        public ListCategoriesResponse(IEnumerable<CategoryReponse> result) : base(result)
         { }
     }
 }

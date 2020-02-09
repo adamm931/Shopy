@@ -1,6 +1,7 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Core.Mappers;
+using Shopy.Core.Extensions;
+using Shopy.Core.Models;
 using Shopy.Data;
 using System.Data.Entity;
 using System.Threading;
@@ -17,7 +18,7 @@ namespace Shopy.Core.Application.Products.Get
                 var request = context.Message;
                 var product = await dbContext.Products
                     .Include(p => p.Sizes)
-                    .Include(p => p.Brand)
+                    .Include(p => p.BrandType)
                     .FirstOrDefaultAsync(p => p.Uid == request.Uid);
 
                 if (product == null)
@@ -25,8 +26,7 @@ namespace Shopy.Core.Application.Products.Get
                     return null;
                 }
 
-                var productMapper = new ProductMapper();
-                return new GetProductResponse(productMapper.FromEF(product));
+                return new GetProductResponse(product.MapTo<ProductReponse>());
             }
         }
     }

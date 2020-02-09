@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Shopy.Core.Application.Sizes.Get
 {
-    public class ListSizesResponse : Response<IEnumerable<Size>>
+    public class ListSizesResponse : Response<IEnumerable<SizeResponse>>
     {
-        public ListSizesResponse(IEnumerable<Size> result) : base(result)
+        public ListSizesResponse(IEnumerable<SizeResponse> result) : base(result)
         { }
     }
 }

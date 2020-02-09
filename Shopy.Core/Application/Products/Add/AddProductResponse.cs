@@ -2,9 +2,9 @@
 
 namespace Shopy.Core.Application.Products.Add
 {
-    public class AddProductResponse : Response<Product>
+    public class AddProductResponse : Response<ProductReponse>
     {
-        public AddProductResponse(Product result) : base(result)
+        public AddProductResponse(ProductReponse result) : base(result)
         { }
     }
 }

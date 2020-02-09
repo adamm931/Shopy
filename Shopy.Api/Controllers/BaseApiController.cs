@@ -11,23 +11,7 @@ namespace Shopy.Api.Controllers
     public class BaseApiController : ApiController
     {
         private IMediator _mediator;
-        protected IMediator Mediator
-        {
-            get
-            {
-                return _mediator ?? (_mediator = MediatorFactory.GetMediator());
-            }
-        }
-
-        private ILogger _logger;
-        protected ILogger Logger
-        {
-            get
-            {
-                return _logger ?? (
-                    _logger = Logging.Logger.Create(@"C:\DEV\DotNet\Web\Shopy\logs.txt"));
-            }
-        }
+        protected IMediator Mediator => _mediator ??= MediatorFactory.GetMediator();
 
         protected async Task<IHttpActionResult> ProcessCommand(
             Func<Task> command,
@@ -51,7 +35,7 @@ namespace Shopy.Api.Controllers
 
             catch (Exception e)
             {
-                Logger.LogMessage(e.ToString());
+                Logger.Instance.LogMessage(e.ToString());
                 return InternalServerError(e);
             }
         }
@@ -84,7 +68,7 @@ namespace Shopy.Api.Controllers
 
             catch (Exception e)
             {
-                Logger.LogMessage(e.ToString());
+                Logger.Instance.LogMessage(e.ToString());
                 return InternalServerError(e);
             }
         }

@@ -1,36 +1,56 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 
 namespace Shopy.Api.Logging
 {
     public class Logger : ILogger
     {
+        private const string DirectoryPathKey = "Logger.Directory";
+
+        private const string LogFileName = "Shopy-Logs.txt";
+
         private static ILogger _instance = null;
 
-        private string logFilePath;
+        public static ILogger Instance => _instance ??= new Logger();
 
-        public static ILogger Create(string logFilePath)
+        private Logger()
         {
-            if (_instance == null)
-            {
-                _instance = new Logger(logFilePath);
-            }
-
-            return _instance;
-        }
-
-        private Logger(string logFilePath)
-        {
-            this.logFilePath = logFilePath;
         }
 
         public void LogMessage(string message)
         {
-            using (var stream = File.AppendText(this.logFilePath))
+            var path = EnsureLogFilePath();
+
+            using var stream = File.AppendText(path);
+
+            stream.WriteLine(DateTime.Now.ToString() + message);
+            stream.WriteLine(new string('-', 100));
+        }
+
+        public string EnsureLogFilePath()
+        {
+            var directoryPath = ConfigurationManager.AppSettings[DirectoryPathKey];
+
+            if (directoryPath == null)
             {
-                stream.WriteLine(DateTime.Now.ToString() + message);
-                stream.WriteLine(new string('-', 100));
+                throw new Exception("Directory path is not in configuration");
             }
+
+            var filePath = @$"{directoryPath}\{LogFileName}";
+
+
+            if (File.Exists(filePath))
+            {
+                return filePath;
+            }
+
+            Directory.CreateDirectory(directoryPath);
+
+            var file = File.Create(filePath);
+            file.Close();
+
+            return filePath;
         }
     }
 }

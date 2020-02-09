@@ -25,17 +25,16 @@ namespace Shopy.Core.Application.Products.RemoveFromCategory
                     throw new ProductNotFoundException(command.ProductUid);
                 }
 
-                var category = await dbContext.Categories
-                    .Include(p => p.Products)
-                    .FirstOrDefaultAsync(c => c.Uid == command.CategoryUid);
+                //var category = await dbContext.Categories
+                //    .Include(p => p.Products)
+                //    .FirstOrDefaultAsync(c => c.Uid == command.CategoryUid);
 
-                if (category == null)
-                {
-                    throw new CategoryNotFoundException(command.CategoryUid);
-                }
+                //if (category == null)
+                //{
+                //    throw new CategoryNotFoundException(command.CategoryUid);
+                //}
 
-                product.Categories.Remove(category);
-                category.Products.Remove(product);
+                product.RemoveCategory(command.CategoryUid);
 
                 await dbContext.SaveChangesAsync();
             }

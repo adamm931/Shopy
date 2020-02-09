@@ -1,7 +1,9 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Core.Mappers;
+using Shopy.Core.Extensions;
+using Shopy.Core.Models;
 using Shopy.Data;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;
@@ -27,10 +29,10 @@ namespace Shopy.Core.Application.Categories.Get
                     categories = categories.Where(c => c.Products.Any());
                 }
 
-                var categoryList = await categories.ToListAsync();
-                var mapper = new CategoryMapper(new ProductMapper());
-                var projection = categoryList.Select(c => mapper.FromEF(c));
-                return new ListCategoriesResponse(projection);
+                var categoriesReponse = (await categories.ToListAsync())
+                    .MapTo<IEnumerable<CategoryReponse>>();
+
+                return new ListCategoriesResponse(categoriesReponse);
             }
         }
     }

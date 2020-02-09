@@ -1,9 +1,10 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Core.Mappers;
+using Shopy.Core.Extensions;
+using Shopy.Core.Models;
 using Shopy.Data;
+using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,12 +17,9 @@ namespace Shopy.Core.Application.Brands.Get
             using (var dbContext = new ShopyContext())
             {
                 var request = context.Message;
-
-                var brandMapper = new BrandMapper();
                 var brands = await dbContext.BrandTypes.ToListAsync();
-                var projection = brands.Select(b => brandMapper.FromEF(b));
 
-                return new ListBrandsResponse(projection);
+                return new ListBrandsResponse(brands.MapTo<IEnumerable<BrandResponse>>());
             }
         }
     }

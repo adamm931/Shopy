@@ -29,8 +29,7 @@ namespace Shopy.Core.Application.Products.AddToCategory
                     throw new CategoryNotFoundException(command.CategoryUid);
                 }
 
-                product.Categories.Add(category);
-                category.Products.Add(product);
+                product.AddCategory(category);
 
                 await dbContext.SaveChangesAsync();
             }

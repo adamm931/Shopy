@@ -1,9 +1,9 @@
 ﻿using Mediator.Net.Context;
 using Mediator.Net.Contracts;
-using Shopy.Core.Data.Entities;
-using Shopy.Core.Mappers;
+using Shopy.Core.Extensions;
 using Shopy.Core.Models;
 using Shopy.Data;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;
@@ -20,7 +20,7 @@ namespace Shopy.Core.Application.Products.Get
                 var request = context.Message;
 
                 var products = dbContext.Products
-                    .Include(p => p.Brand)
+                    .Include(p => p.BrandType)
                     .Include(p => p.Sizes)
                     .Include(p => p.Categories);
 
@@ -28,7 +28,7 @@ namespace Shopy.Core.Application.Products.Get
             }
         }
 
-        private async Task<ListProductsResponse> FilterProducts(IQueryable<ProductEF> products, ProductFilter productFilter)
+        private async Task<ListProductsResponse> FilterProducts(IQueryable<Domain.Entitties.Product> products, ProductFilter productFilter)
         {
             //price
             if (productFilter.MinPrice.HasValue)
@@ -49,7 +49,7 @@ namespace Shopy.Core.Application.Products.Get
                 var filterSizes = productFilter.Sizes.Split(',');
 
                 products = products
-                    .Where(p => filterSizes.Any(fs => p.Sizes.Any(s => s.SizeTypeEID == fs)));
+                    .Where(p => filterSizes.Any(fs => p.Sizes.Any(s => s.Name == fs)));
             }
 
             //brand
@@ -58,7 +58,7 @@ namespace Shopy.Core.Application.Products.Get
                 var brands = productFilter.Brands.Split(',');
 
                 products = products
-                    .Where(p => brands.Any(b => p.Brand.BrandTypeEId == b));
+                    .Where(p => brands.Any(b => p.Name == b));
             }
 
             //category
@@ -77,14 +77,13 @@ namespace Shopy.Core.Application.Products.Get
                 var pageIndex = productFilter.PageIndex.Value;
 
                 products = products
-                    .OrderBy(p => p.ProductId)
+                    .OrderBy(p => p.Id)
                     .Skip(pageIndex * pageSize)
                     .Take((pageIndex + 1) * pageSize);
             }
 
             var filteredProducts = await products.ToListAsync();
-            var productMapper = new ProductMapper(new CategoryMapper());
-            var projection = filteredProducts.Select(r => productMapper.FromEF(r));
+            var projection = filteredProducts.MapTo<IEnumerable<ProductReponse>>();
             var response = new ListProductsResponse(projection, totalRecords);
 
             return response;
