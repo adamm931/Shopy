@@ -1,9 +1,10 @@
 ﻿using Shopy.Core.Domain.Entitties.Interfaces;
+using System;
 
 namespace Shopy.Core.Domain.Entitties.Base
 {
     public abstract class EnumEntity<TEnum> : Entity<TEnum>, IName
-        where TEnum : struct
+        where TEnum : Enum
     {
         public string Name { get; private set; }
 
