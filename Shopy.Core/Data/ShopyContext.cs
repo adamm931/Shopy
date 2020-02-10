@@ -1,19 +1,23 @@
 ﻿using Shopy.Core;
 using Shopy.Core.Common;
+using Shopy.Core.Data;
 using Shopy.Core.Domain.Entitties;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace Shopy.Data
 {
-    public class ShopyContext : DbContext
+    internal class ShopyContext : DbContext, IShopyContext
     {
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<SizeType> SizeTypes { get; set; }
-        public virtual DbSet<BrandType> BrandTypes { get; set; }
+        public IDbSet<Product> Products { get; set; }
 
-        public ShopyContext()
-            : base(Constants.ConnectionStringName)
+        public IDbSet<Category> Categories { get; set; }
+
+        public IDbSet<SizeType> SizeTypes { get; set; }
+
+        public IDbSet<BrandType> BrandTypes { get; set; }
+
+        public ShopyContext() : base(Constants.ConnectionStringName)
         {
             Database.SetInitializer(new ShopyContextSeeder());
         }
@@ -24,6 +28,11 @@ namespace Shopy.Data
             modelBuilder.Configurations.AddFromAssembly(GetType().Assembly);
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        public async Task Save()
+        {
+            await SaveChangesAsync();
         }
     }
 }

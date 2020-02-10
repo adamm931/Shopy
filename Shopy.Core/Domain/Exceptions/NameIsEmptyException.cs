@@ -1,11 +1,10 @@
 ﻿using Shopy.Core.Domain.Exceptions;
-using System;
 
 namespace Shopy.Core.Domain
 {
-    public class NameIsEmptyException : Exception
+    public class NameIsEmptyException : LocalizedException
     {
-        public NameIsEmptyException() : base(ExceptionsLocalization.NameIsEmpty)
+        public NameIsEmptyException() : base("NameIsEmpty")
         {
         }
     }

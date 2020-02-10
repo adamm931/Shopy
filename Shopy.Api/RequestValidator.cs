@@ -1,7 +1,7 @@
-﻿using Shopy.Core.Application.Categories.Add;
-using Shopy.Core.Application.Categories.Edit;
-using Shopy.Core.Application.Products.Add;
-using Shopy.Core.Application.Products.Edit;
+﻿using Shopy.Application.Categories.Add;
+using Shopy.Application.Categories.Edit;
+using Shopy.Application.Products.Add;
+using Shopy.Application.Products.Edit;
 using System;
 using System.Linq;
 

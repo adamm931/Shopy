@@ -1,6 +1,5 @@
-﻿using Mediator.Net;
-using Shopy.Api.Logging;
-using Shopy.Core.Factory;
+﻿using MediatR;
+using Shopy.Core.Logging;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,13 +9,22 @@ namespace Shopy.Api.Controllers
 {
     public class BaseApiController : ApiController
     {
-        private IMediator _mediator;
-        protected IMediator Mediator => _mediator ??= MediatorFactory.GetMediator();
+        protected IMediator Mediator { get; }
+
+        private ILogger Logger { get; }
+
+        public BaseApiController(IMediator mediator, ILogger logger)
+        {
+            Mediator = mediator;
+            Logger = logger;
+        }
 
         protected async Task<IHttpActionResult> ProcessCommand(
             Func<Task> command,
             params RequestParamValidator[] paramValidators)
         {
+            // Refactor this method into some pipeline
+
             var invalidParams = paramValidators?
                 .Where(pv => pv.Rule());
 
@@ -35,7 +43,7 @@ namespace Shopy.Api.Controllers
 
             catch (Exception e)
             {
-                Logger.Instance.LogMessage(e.ToString());
+                Logger.Error(e);
                 return InternalServerError(e);
             }
         }
@@ -68,7 +76,7 @@ namespace Shopy.Api.Controllers
 
             catch (Exception e)
             {
-                Logger.Instance.LogMessage(e.ToString());
+                Logger.Error(e);
                 return InternalServerError(e);
             }
         }

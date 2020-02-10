@@ -1,11 +1,11 @@
-﻿using Mediator.Net;
+﻿using MediatR;
 using System;
 
 namespace Shopy.Core.Factory
 {
     public class MediatorFactory
     {
-        private static Lazy<IMediator> _current =
+        private static readonly Lazy<IMediator> _current =
             new Lazy<IMediator>(() => CreateMediator(), isThreadSafe: true);
 
         public static IMediator GetMediator()
@@ -15,9 +15,7 @@ namespace Shopy.Core.Factory
 
         private static IMediator CreateMediator()
         {
-            return new MediatorBuilder()
-                .RegisterHandlers(typeof(MediatorFactory).Assembly)
-                .Build();
+            return new Mediator((type) => new { });
         }
     }
 }

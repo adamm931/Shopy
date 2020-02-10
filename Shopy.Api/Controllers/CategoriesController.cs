@@ -1,7 +1,9 @@
-﻿using Shopy.Core.Application.Categories.Add;
-using Shopy.Core.Application.Categories.Delete;
-using Shopy.Core.Application.Categories.Edit;
-using Shopy.Core.Application.Categories.Get;
+﻿using MediatR;
+using Shopy.Application.Categories.Add;
+using Shopy.Application.Categories.Delete;
+using Shopy.Application.Categories.Edit;
+using Shopy.Application.Categories.Get;
+using Shopy.Core.Logging;
 using System;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -10,20 +12,22 @@ namespace Shopy.Api.Controllers
 {
     public class CategoriesController : BaseApiController
     {
+        public CategoriesController(IMediator mediator, ILogger logger) : base(mediator, logger)
+        {
+        }
+
         [HttpGet]
         public async Task<IHttpActionResult> Get(bool withProductsOnly = false)
         {
             return await ProcessRequest(
-                request: () => Mediator.RequestAsync<ListCategoriesRequest, ListCategoriesResponse>(
-                    new ListCategoriesRequest(withProductsOnly)));
+                request: () => Mediator.Send(new ListCategoriesRequest(withProductsOnly)));
         }
 
         [HttpGet]
         public async Task<IHttpActionResult> Get(Guid? uid)
         {
             return await ProcessRequest(
-                request: () => Mediator.RequestAsync<GetCategoryRequest, GetCategoryResponse>(
-                    new GetCategoryRequest(uid.Value)),
+                request: () => Mediator.Send(new GetCategoryRequest(uid.Value)),
                 paramValidators: RequestParamValidator.ProductUidValidator(uid));
         }
 
@@ -31,7 +35,7 @@ namespace Shopy.Api.Controllers
         public async Task<IHttpActionResult> Post([FromBody]AddCategoryRequest addCategory)
         {
             return await ProcessRequest(
-                request: () => Mediator.RequestAsync<AddCategoryRequest, AddCategoryResponse>(addCategory),
+                request: () => Mediator.Send(addCategory),
                 paramValidators: RequestParamValidator.CategoryAddValidator(addCategory));
         }
 
@@ -41,7 +45,7 @@ namespace Shopy.Api.Controllers
             editCategory.Uid = uid;
 
             return await ProcessCommand(
-                command: () => Mediator.SendAsync(editCategory),
+                command: () => Mediator.Send(editCategory),
                 paramValidators: RequestParamValidator.CategoryEditValidator(editCategory));
         }
 
@@ -49,7 +53,7 @@ namespace Shopy.Api.Controllers
         public async Task<IHttpActionResult> Delete(Guid? uid)
         {
             return await ProcessCommand(
-                command: () => Mediator.SendAsync(new DeleteCategoryCommand(uid.Value)),
+                command: () => Mediator.Send(new DeleteCategoryCommand(uid.Value)),
                 paramValidators: RequestParamValidator.CategoryUidValidator(uid));
         }
     }

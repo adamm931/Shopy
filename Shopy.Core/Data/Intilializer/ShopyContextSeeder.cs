@@ -1,26 +1,25 @@
-﻿using Shopy.Core.Domain.Entitties;
+﻿using Shopy.Core.Data.Extensions;
+using Shopy.Core.Domain.Entitties;
 using Shopy.Core.Domain.Entitties.Enumerations;
 using Shopy.Data;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 
 namespace Shopy.Core
 {
-    public class ShopyContextSeeder : CreateDatabaseIfNotExists<ShopyContext>
+    internal class ShopyContextSeeder : CreateDatabaseIfNotExists<ShopyContext>
     {
         protected override void Seed(ShopyContext dbContext)
         {
-            //standalone models
+            //define products
             var products = GetProducts();
-            var categoires = GetCategories();
 
             //define categories
-            var tShirts = categoires["T-shirts"];
-            var jackets = categoires["Jackets"];
-            var footwear = categoires["Footwear"];
-            var shoes = categoires["Shoes"];
-            var clothes = categoires["Clothes"];
+            var tShirts = new Category("T-shirts");
+            var jackets = new Category("Jackets");
+            var footwear = new Category("Footwear");
+            var shoes = new Category("Shoes");
+            var clothes = new Category("Clothes");
 
             //define brands
             var active = BrandType.From(BrandTypeId.Active);
@@ -146,17 +145,8 @@ namespace Shopy.Core
             products[12].SetBrand(puma);
             products[13].SetBrand(nike);
 
-            //products
+            //add products
             dbContext.Products.AddRange(products);
-
-            //categories
-            dbContext.Categories.AddRange(categoires.Values);
-
-            //sizes
-            dbContext.BrandTypes.AddRange(new[] { active, addidas, puma, nike, rebook });
-
-            //brands
-            dbContext.SizeTypes.AddRange(new[] { xs, s, m, l, xl });
 
             //save
             dbContext.SaveChanges();
@@ -279,18 +269,6 @@ namespace Shopy.Core
                     37.5m
                 )
             };
-        }
-
-        private Dictionary<string, Category> GetCategories()
-        {
-            return new Dictionary<string, Category>
-            {
-                { "Shoes", new Category("Shoes") },
-                { "Jackets", new Category("Jackets")},
-                { "Clothes", new Category("Clothes") },
-                { "Footwear", new Category("Footwear")},
-                { "T-shirts", new Category("TShirts") }
-            }; ;
         }
     }
 }

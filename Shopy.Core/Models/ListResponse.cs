@@ -1,17 +1,16 @@
-﻿using Mediator.Net.Contracts;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Shopy.Core.Models
 {
-    public class ListResponse<T> : IResponse
+    public class ListResponse<TReponseModel, TDomainModel>
+        : Response<IEnumerable<TReponseModel>, IEnumerable<TDomainModel>>
     {
-        public IEnumerable<T> Result { get; set; }
-
         public int TotalRecords { get; set; }
-        public ListResponse(IEnumerable<T> result, int totalRecords)
+
+        public ListResponse(IEnumerable<TDomainModel> domainModel, int totalCount)
+            : base(domainModel)
         {
-            Result = result;
-            TotalRecords = totalRecords;
+            TotalRecords = totalCount;
         }
     }
 }

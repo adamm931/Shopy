@@ -1,17 +1,22 @@
 ﻿using Shopy.Core.Common;
 using Shopy.Core.Domain.Entitties.Base;
 using Shopy.Core.Domain.Entitties.Enumerations;
+using Shopy.Core.Domain.Entitties.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Shopy.Core.Domain.Entitties
 {
-    public class Product : NameEntity
+    public class Product : NameEntity, IUid
     {
         // private readonly List<SizeType> sizes;
 
         // private readonly List<Category> categories;
+
+        private IEnumerable<Product> _relatedProducts;
+
+        private const int RelatedProductsLimit = 4;
 
         public Guid Uid { get; private set; }
 
@@ -27,6 +32,8 @@ namespace Shopy.Core.Domain.Entitties
 
         // TODO: See how to use private fields with in EF 6
         public ICollection<Category> Categories { get; private set; }
+
+        public IEnumerable<Product> RelatedProducts => _relatedProducts ??= GetRelatedProducts();
 
         public Product(Guid uid, string name, string description, decimal price) : base(name)
         {
@@ -78,7 +85,7 @@ namespace Shopy.Core.Domain.Entitties
 
         public void AddCategory(Category categoryToAdd)
         {
-            if (Categories.Any(category => category.Id == categoryToAdd.Id))
+            if (Categories.Any(category => category.Uid == categoryToAdd.Uid))
             {
                 return;
             }
@@ -119,6 +126,15 @@ namespace Shopy.Core.Domain.Entitties
             {
                 Sizes.Add(sizeType);
             }
+        }
+
+        private IEnumerable<Product> GetRelatedProducts()
+        {
+            return Categories
+                .SelectMany(category => category.Products)
+                .Where(product => product.Uid != Uid)
+                .Randomize()
+                .Take(RelatedProductsLimit);
         }
     }
 }

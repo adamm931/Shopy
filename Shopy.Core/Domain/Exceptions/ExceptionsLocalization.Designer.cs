@@ -61,6 +61,15 @@ namespace Shopy.Core.Domain.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Entity &apos;{0}&apos; with identifier &apos;{1}&apos; is not found.
+        /// </summary>
+        internal static string EntityNotFound {
+            get {
+                return ResourceManager.GetString("EntityNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name can&apos;t be null or empty.
         /// </summary>
         internal static string NameIsEmpty {

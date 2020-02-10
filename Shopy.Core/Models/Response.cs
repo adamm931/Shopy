@@ -1,14 +1,14 @@
-﻿using Mediator.Net.Contracts;
+﻿using Shopy.Core.Mappings;
 
 namespace Shopy.Core.Models
 {
-    public class Response<T> : IResponse
+    public class Response<TResponseModel, TDomainModel>
     {
-        public T Result { get; }
+        public TResponseModel Result { get; }
 
-        public Response(T result)
+        public Response(TDomainModel result)
         {
-            Result = result;
+            Result = result.MapTo<TResponseModel>();
         }
     }
 }

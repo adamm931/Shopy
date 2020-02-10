@@ -1,9 +1,11 @@
-﻿using Shopy.Core.Application.Products.Add;
-using Shopy.Core.Application.Products.AddToCategory;
-using Shopy.Core.Application.Products.Commands;
-using Shopy.Core.Application.Products.Edit;
-using Shopy.Core.Application.Products.Get;
-using Shopy.Core.Application.Products.RemoveFromCategory;
+﻿using MediatR;
+using Shopy.Application.Products.Add;
+using Shopy.Application.Products.AddToCategory;
+using Shopy.Application.Products.Commands;
+using Shopy.Application.Products.Edit;
+using Shopy.Application.Products.Get;
+using Shopy.Application.Products.RemoveFromCategory;
+using Shopy.Core.Logging;
 using Shopy.Core.Models;
 using System;
 using System.Threading.Tasks;
@@ -14,19 +16,22 @@ namespace Shopy.Api.Controllers
     [RoutePrefix("api/products")]
     public class ProductsController : BaseApiController
     {
+        public ProductsController(IMediator mediator, ILogger logger) : base(mediator, logger)
+        {
+        }
+
         [HttpGet]
         public async Task<IHttpActionResult> List([FromUri]ProductFilter filter)
         {
             return await ProcessRequest(
-                request: () => Mediator.RequestAsync<ListProductsRequest, ListProductsResponse>(
-                    new ListProductsRequest(filter)));
+                request: () => Mediator.Send(new ListProductsRequest(filter)));
         }
 
         [HttpGet]
         public async Task<IHttpActionResult> Get(Guid? uid)
         {
             return await ProcessRequest(
-                request: () => Mediator.RequestAsync<GetProductRequest, GetProductResponse>(new GetProductRequest(uid.Value)),
+                request: () => Mediator.Send(new GetProductRequest(uid.Value)),
                 paramValidators: RequestParamValidator.ProductUidValidator(uid));
         }
 
@@ -35,7 +40,7 @@ namespace Shopy.Api.Controllers
         public async Task<IHttpActionResult> Details(Guid uid)
         {
             return await ProcessRequest(
-                request: () => Mediator.RequestAsync<GetProductDetailsRequest, GetProductDetailsResponse>(new GetProductDetailsRequest(uid)),
+                request: () => Mediator.Send(new GetProductDetailsRequest(uid)),
                 paramValidators: RequestParamValidator.ProductUidValidator(uid));
         }
 
@@ -43,7 +48,7 @@ namespace Shopy.Api.Controllers
         public async Task<IHttpActionResult> Post([FromBody]AddProductRequest addProduct)
         {
             return await ProcessRequest(
-                request: () => Mediator.RequestAsync<AddProductRequest, AddProductResponse>(addProduct),
+                request: () => Mediator.Send(addProduct),
                 paramValidators: RequestParamValidator.ProductAddValidator(addProduct));
         }
 
@@ -53,7 +58,7 @@ namespace Shopy.Api.Controllers
             editProduct.Uid = uid.Value;
 
             return await ProcessCommand(
-                command: () => Mediator.SendAsync(editProduct),
+                command: () => Mediator.Send(editProduct),
                 paramValidators: RequestParamValidator.ProductEditValidator(editProduct));
         }
 
@@ -61,7 +66,7 @@ namespace Shopy.Api.Controllers
         public async Task<IHttpActionResult> Delete(Guid? uid)
         {
             return await ProcessCommand(
-                command: () => Mediator.SendAsync(new DeleteProductCommand(uid.Value)),
+                command: () => Mediator.Send(new DeleteProductCommand(uid.Value)),
                 paramValidators: RequestParamValidator.ProductUidValidator(uid));
         }
 
@@ -76,7 +81,7 @@ namespace Shopy.Api.Controllers
             };
 
             return await ProcessCommand(
-                command: () => Mediator.SendAsync(new AddProductFromCategoryCommand(productid.Value, categoryid.Value)),
+                command: () => Mediator.Send(new AddProductToCategoryCommand(productid.Value, categoryid.Value)),
                 paramValidators: paramValidators);
         }
 
@@ -91,7 +96,7 @@ namespace Shopy.Api.Controllers
             };
 
             return await ProcessCommand(
-                command: () => Mediator.SendAsync(new RemoveProductFromCategoryCommand(productid, categoryid)),
+                command: () => Mediator.Send(new RemoveProductFromCategoryCommand(productid, categoryid)),
                 paramValidators: paramValidators);
         }
     }

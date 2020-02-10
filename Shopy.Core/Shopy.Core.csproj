@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
@@ -37,11 +39,12 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Mediator.Net">
-      <HintPath>..\packages\Mediator.Net.2.0.2\lib\net46\Mediator.Net.dll</HintPath>
+    <Reference Include="MediatR, Version=8.0.0.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediatR.8.0.0\lib\net461\MediatR.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -51,53 +54,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\Brands\Get\ListBrandsHandler.cs" />
-    <Compile Include="Application\Brands\Get\ListBrandsRequest.cs" />
-    <Compile Include="Application\Brands\Get\ListBrandsResponse.cs" />
-    <Compile Include="Application\Categories\Add\AddCategoryHandler.cs" />
-    <Compile Include="Application\Categories\Add\AddCategoryRequest.cs" />
-    <Compile Include="Application\Categories\Add\AddCategoryResponse.cs" />
-    <Compile Include="Application\Categories\Delete\DeleteCategoryCommand.cs" />
-    <Compile Include="Application\Categories\Delete\DeleteCategoryCommandHandler.cs" />
-    <Compile Include="Application\Categories\Edit\EditCategoryCommand.cs" />
-    <Compile Include="Application\Categories\Edit\EditCategorytCommandHandler.cs" />
-    <Compile Include="Application\Categories\Get\GetCategoryHandler.cs" />
-    <Compile Include="Application\Categories\Get\GetCategoryRequest.cs" />
-    <Compile Include="Application\Categories\Get\GetCategoryResponse.cs" />
-    <Compile Include="Application\Categories\Get\ListCategoriesHandler.cs" />
-    <Compile Include="Application\Categories\Get\ListCategoriesRequest.cs" />
-    <Compile Include="Application\Categories\Get\ListCategoriesResponse.cs" />
-    <Compile Include="Application\Products\Add\AddProductResponse.cs" />
-    <Compile Include="Application\Products\Add\AddProductRequest.cs" />
-    <Compile Include="Application\Products\Add\AddProductRequestHandler.cs" />
-    <Compile Include="Application\Products\AddToCategory\AddProductToCategoryCommand.cs" />
-    <Compile Include="Application\Products\AddToCategory\AddProductToCategoryCommandHandler.cs" />
-    <Compile Include="Application\Products\Delete\DeleteProductCommand.cs" />
-    <Compile Include="Application\Products\Delete\DeleteProductCommandHandler.cs" />
-    <Compile Include="Application\Products\RemoveFromCategory\RemoveFromCategoryCommand.cs" />
-    <Compile Include="Application\Products\RemoveFromCategory\RemoveFromCategoryCommandHandler.cs" />
-    <Compile Include="Application\Products\Edit\EditProductCommand.cs" />
-    <Compile Include="Application\Products\Edit\EditProductCommandHandler.cs" />
-    <Compile Include="Application\Products\Get\GetProductDetailsHandler.cs" />
-    <Compile Include="Application\Products\Get\GetProductDetailsRequest.cs" />
-    <Compile Include="Application\Products\Get\GetProductDetailsResponse.cs" />
-    <Compile Include="Application\Products\Get\GetProductHandler.cs" />
-    <Compile Include="Application\Products\Get\GetProductRequest.cs" />
-    <Compile Include="Application\Products\Get\GetProductResponse.cs" />
-    <Compile Include="Application\Products\Get\ListProductsHandler.cs" />
-    <Compile Include="Application\Products\Get\ListProductsRequest.cs" />
-    <Compile Include="Application\Products\Get\ListProductsResponse.cs" />
-    <Compile Include="Application\Sizes\Get\ListSizesHandler.cs" />
-    <Compile Include="Application\Sizes\Get\ListSizesRequest.cs" />
-    <Compile Include="Application\Sizes\Get\ListSizesResponse.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\EnumProvider.cs" />
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Data\Configurations\BrandTypeConfiguration.cs" />
     <Compile Include="Data\Configurations\CategoryConfiguration.cs" />
-    <Compile Include="Data\Configurations\EnumEntityConfiguration.cs" />
     <Compile Include="Data\Configurations\ProductConfiguration.cs" />
     <Compile Include="Data\Configurations\SizeTypeConfiguration.cs" />
+    <Compile Include="Data\Extensions\QueriableExtensions.cs" />
+    <Compile Include="Data\IShopyContext.cs" />
+    <Compile Include="Data\ShopyContextFactory.cs" />
     <Compile Include="Domain\Entitties\Base\Entity.cs" />
     <Compile Include="Domain\Entitties\Base\EnumEntity.cs" />
     <Compile Include="Domain\Entitties\Base\NameEntity.cs" />
@@ -107,35 +73,41 @@
     <Compile Include="Domain\Entitties\Enumerations\SizeTypeId.cs" />
     <Compile Include="Domain\Entitties\Interfaces\IId.cs" />
     <Compile Include="Domain\Entitties\Interfaces\IName.cs" />
+    <Compile Include="Domain\Entitties\Interfaces\IProduct.cs" />
     <Compile Include="Domain\Entitties\Interfaces\IUid.cs" />
     <Compile Include="Domain\Entitties\Product.cs" />
     <Compile Include="Domain\Entitties\SizeType.cs" />
     <Compile Include="Data\Intilializer\ShopyContextSeeder.cs" />
     <Compile Include="Data\ShopyContext.cs" />
+    <Compile Include="Domain\Exceptions\EntityNotFoundException.cs" />
     <Compile Include="Domain\Exceptions\ExceptionsLocalization.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ExceptionsLocalization.resx</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Exceptions\LocalizedException.cs" />
     <Compile Include="Domain\Exceptions\NameIsEmptyException.cs" />
-    <Compile Include="Exceptions\CategoryNotFoundException.cs" />
-    <Compile Include="Exceptions\BrandNotFoundException.cs" />
-    <Compile Include="Exceptions\SizesNotFoundException.cs" />
-    <Compile Include="Exceptions\ProductNotFoundException.cs" />
-    <Compile Include="Extensions\AutoMapperExtensions.cs" />
-    <Compile Include="Factory\AutoMapperFactory.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\LoggerFactory.cs" />
+    <Compile Include="Mappings\Mapper.cs" />
+    <Compile Include="Mappings\AutoMapperExtensions.cs" />
     <Compile Include="Factory\MediatorFactory.cs" />
-    <Compile Include="Mappings\EnumerationProfiles.cs" />
+    <Compile Include="Mappings\Profiles.cs" />
     <Compile Include="Models\BrandResponse.cs" />
+    <Compile Include="Models\CategoryProductResponse.cs" />
     <Compile Include="Models\CategoryReponse.cs" />
     <Compile Include="Models\EnumResponse.cs" />
     <Compile Include="Models\ListResponse.cs" />
+    <Compile Include="Models\ProductCategoryResponse.cs" />
     <Compile Include="Models\ProductReponse.cs" />
     <Compile Include="Models\ProductDetailsResponse.cs" />
     <Compile Include="Models\ProductFilter.cs" />
+    <Compile Include="Models\RelatedProductResponse.cs" />
     <Compile Include="Models\RequestValidator.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\SizeResponse.cs" />
+    <Compile Include="Models\TReponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +119,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
