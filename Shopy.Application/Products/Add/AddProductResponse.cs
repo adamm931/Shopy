@@ -1,5 +1,5 @@
 ﻿using Shopy.Core.Domain.Entitties;
-using Shopy.Core.Models;
+using Shopy.Application.Models;
 
 namespace Shopy.Application.Products.Add
 {

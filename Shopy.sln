@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopy.Proto", "Shopy.Proto\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopy.Application", "Shopy.Application\Shopy.Application.csproj", "{4807C110-1DCB-459F-8FDA-76A093ED463A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopy.Infrastructure", "Shopy.Infrastructure\Shopy.Infrastructure.csproj", "{EEC12031-4E75-4B13-8D0B-FBA24A020220}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{4807C110-1DCB-459F-8FDA-76A093ED463A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4807C110-1DCB-459F-8FDA-76A093ED463A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4807C110-1DCB-459F-8FDA-76A093ED463A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEC12031-4E75-4B13-8D0B-FBA24A020220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEC12031-4E75-4B13-8D0B-FBA24A020220}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEC12031-4E75-4B13-8D0B-FBA24A020220}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEC12031-4E75-4B13-8D0B-FBA24A020220}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

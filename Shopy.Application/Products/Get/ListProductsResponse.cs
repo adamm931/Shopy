@@ -1,5 +1,5 @@
 ﻿using Shopy.Core.Domain.Entitties;
-using Shopy.Core.Models;
+using Shopy.Application.Models;
 using System.Collections.Generic;
 
 namespace Shopy.Application.Products.Get

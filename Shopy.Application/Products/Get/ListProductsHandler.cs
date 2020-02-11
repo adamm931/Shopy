@@ -1,7 +1,7 @@
 ﻿using Shopy.Application.Base;
+using Shopy.Application.Models;
 using Shopy.Core.Data;
 using Shopy.Core.Domain.Entitties;
-using Shopy.Core.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading;

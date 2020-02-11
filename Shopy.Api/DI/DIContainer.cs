@@ -1,6 +1,7 @@
 ﻿using Shopy.Application.Products.Add;
 using Shopy.Core.Data;
 using Shopy.Core.Logging;
+using Shopy.Infrastructure.Logging;
 using System;
 using Unity;
 using Unity.Lifetime;
@@ -28,8 +29,10 @@ namespace Shopy.Api.DI
             container.RegisterFactory<IShopyContext>(
                 container => ShopyContextFactory.CreateContext(), new TransientLifetimeManager());
 
+            container.RegisterType<ILoggerProvider, LoggerProvider>();
+
             container.RegisterFactory<ILogger>(
-                container => LoggerFactory.GetLogger(), new TransientLifetimeManager());
+                container => container.Resolve<ILoggerProvider>().GetLogger());
 
             return container;
         }

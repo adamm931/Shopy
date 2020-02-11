@@ -88,26 +88,7 @@
     <Compile Include="Domain\Exceptions\LocalizedException.cs" />
     <Compile Include="Domain\Exceptions\NameIsEmptyException.cs" />
     <Compile Include="Logging\ILogger.cs" />
-    <Compile Include="Logging\Logger.cs" />
-    <Compile Include="Logging\LoggerFactory.cs" />
-    <Compile Include="Mappings\Mapper.cs" />
-    <Compile Include="Mappings\AutoMapperExtensions.cs" />
-    <Compile Include="Factory\MediatorFactory.cs" />
-    <Compile Include="Mappings\Profiles.cs" />
-    <Compile Include="Models\BrandResponse.cs" />
-    <Compile Include="Models\CategoryProductResponse.cs" />
-    <Compile Include="Models\CategoryReponse.cs" />
-    <Compile Include="Models\EnumResponse.cs" />
-    <Compile Include="Models\ListResponse.cs" />
-    <Compile Include="Models\ProductCategoryResponse.cs" />
-    <Compile Include="Models\ProductReponse.cs" />
-    <Compile Include="Models\ProductDetailsResponse.cs" />
-    <Compile Include="Models\ProductFilter.cs" />
-    <Compile Include="Models\RelatedProductResponse.cs" />
-    <Compile Include="Models\RequestValidator.cs" />
-    <Compile Include="Models\Response.cs" />
-    <Compile Include="Models\SizeResponse.cs" />
-    <Compile Include="Models\TReponseModel.cs" />
+    <Compile Include="Logging\ILoggerProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

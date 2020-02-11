@@ -238,6 +238,10 @@
       <Project>{c035bda9-4b4f-408d-8f96-1e87763b8f3c}</Project>
       <Name>Shopy.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shopy.Infrastructure\Shopy.Infrastructure.csproj">
+      <Project>{EEC12031-4E75-4B13-8D0B-FBA24A020220}</Project>
+      <Name>Shopy.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

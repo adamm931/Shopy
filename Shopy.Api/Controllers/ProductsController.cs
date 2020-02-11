@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Shopy.Application.Models;
 using Shopy.Application.Products.Add;
 using Shopy.Application.Products.AddToCategory;
 using Shopy.Application.Products.Commands;
@@ -6,7 +7,6 @@ using Shopy.Application.Products.Edit;
 using Shopy.Application.Products.Get;
 using Shopy.Application.Products.RemoveFromCategory;
 using Shopy.Core.Logging;
-using Shopy.Core.Models;
 using System;
 using System.Threading.Tasks;
 using System.Web.Http;

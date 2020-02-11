@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Shopy.Core.Models;
+using Shopy.Application.Models;
 
 namespace Shopy.Application.Products.Get
 {

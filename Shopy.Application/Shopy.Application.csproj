@@ -36,6 +36,9 @@
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -73,6 +76,23 @@
     <Compile Include="Categories\Get\ListCategoriesHandler.cs" />
     <Compile Include="Categories\Get\ListCategoriesRequest.cs" />
     <Compile Include="Categories\Get\ListCategoriesResponse.cs" />
+    <Compile Include="Mappings\AutoMapperExtensions.cs" />
+    <Compile Include="Mappings\Mapper.cs" />
+    <Compile Include="Mappings\Profiles.cs" />
+    <Compile Include="Models\BrandResponse.cs" />
+    <Compile Include="Models\CategoryProductResponse.cs" />
+    <Compile Include="Models\CategoryReponse.cs" />
+    <Compile Include="Models\EnumResponse.cs" />
+    <Compile Include="Models\ListResponse.cs" />
+    <Compile Include="Models\ProductCategoryResponse.cs" />
+    <Compile Include="Models\ProductDetailsResponse.cs" />
+    <Compile Include="Models\ProductFilter.cs" />
+    <Compile Include="Models\ProductReponse.cs" />
+    <Compile Include="Models\RelatedProductResponse.cs" />
+    <Compile Include="Models\RequestValidator.cs" />
+    <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\SizeResponse.cs" />
+    <Compile Include="Models\TReponseModel.cs" />
     <Compile Include="Pipelines\LoggingPipeline.cs" />
     <Compile Include="Pipelines\SaveChangesPipeline.cs" />
     <Compile Include="Products\AddToCategory\AddProductToCategoryCommand.cs" />
