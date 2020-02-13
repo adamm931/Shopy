@@ -16,11 +16,11 @@ namespace Shopy.Application.Pipelines
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            _logger.Info($"Begin of request: {typeof(TRequest).Name}");
+            _logger.Debug($"Begin of request: {typeof(TRequest).Name}");
 
             var response = await next();
 
-            _logger.Info($"End of request: {typeof(TRequest).Name}");
+            _logger.Debug($"End of request: {typeof(TRequest).Name}");
 
             return response;
         }

@@ -1,22 +1,31 @@
-﻿using Shopy.Infrastructure.Logging;
+﻿using Shopy.Core.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Shopy.Core.Logging
+namespace Shopy.Infrastructure.Logging
 {
-    public class LoggerFactory
+    public class LoggerFactory : ILoggerFactory
     {
-        public static ILogger GetLogger(string type)
+        private readonly List<ILoggerProvider> _loggerProviders = new List<ILoggerProvider>();
+
+        public void AddProvider(ILoggerProvider loggerProvider)
         {
-            if (type == "File")
+            if (loggerProvider == null)
             {
-                return new FileLogger();
+                throw new ArgumentNullException(nameof(loggerProvider));
             }
 
-            if (type == "EventLog")
-            {
-                return new EventLogLogger();
-            }
+            _loggerProviders.Add(loggerProvider);
+        }
 
-            return null;
+        public ILogger GetLogger()
+        {
+            var loggers = _loggerProviders
+                .Select(provider => provider.GetLogger())
+                .ToList();
+
+            return new Logger(loggers);
         }
     }
 }
