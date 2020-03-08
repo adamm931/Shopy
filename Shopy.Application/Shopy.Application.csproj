@@ -76,6 +76,7 @@
     <Compile Include="Categories\Get\ListCategoriesHandler.cs" />
     <Compile Include="Categories\Get\ListCategoriesRequest.cs" />
     <Compile Include="Categories\Get\ListCategoriesResponse.cs" />
+    <Compile Include="Identity\Login\IdenityLoginRequestHandler.cs" />
     <Compile Include="Mappings\AutoMapperExtensions.cs" />
     <Compile Include="Mappings\Mapper.cs" />
     <Compile Include="Mappings\Profiles.cs" />
@@ -84,6 +85,9 @@
     <Compile Include="Models\CategoryReponse.cs" />
     <Compile Include="Models\EnumResponse.cs" />
     <Compile Include="Models\ListResponse.cs" />
+    <Compile Include="Identity\Login\LoginRequest.cs" />
+    <Compile Include="Identity\Login\LoginResponse.cs" />
+    <Compile Include="Models\IdentityLoginResponse.cs" />
     <Compile Include="Models\ProductCategoryResponse.cs" />
     <Compile Include="Models\ProductDetailsResponse.cs" />
     <Compile Include="Models\ProductFilter.cs" />

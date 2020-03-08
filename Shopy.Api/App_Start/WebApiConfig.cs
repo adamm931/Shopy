@@ -23,6 +23,15 @@ namespace Shopy
         {
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
+                routeTemplate: "api/{controller}/{action}",
+                defaults: new
+                {
+                    action = RouteParameter.Optional
+                }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApiWithUid",
                 routeTemplate: "api/{controller}/{uid}/{action}",
                 defaults: new
                 {

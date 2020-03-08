@@ -13,7 +13,6 @@ using System.Web.Http;
 
 namespace Shopy.Api.Controllers
 {
-    [RoutePrefix("api/products")]
     public class ProductsController : BaseApiController
     {
         public ProductsController(IMediator mediator, ILogger logger) : base(mediator, logger)
