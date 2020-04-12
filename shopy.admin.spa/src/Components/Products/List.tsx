@@ -30,7 +30,7 @@ class ProductList extends React.Component {
                 </tr>
             </thead>
             <tbody>
-                {products.map(product => <ProductItem {...product} />)}
+                {products.map(product => <ProductItem key={product.Id} {...product} />)}
             </tbody>
         </table>
     }
