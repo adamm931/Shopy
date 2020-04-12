@@ -2,6 +2,7 @@
 using Shopy.Api.DI;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Unity.WebApi;
 
 namespace Shopy
@@ -17,6 +18,8 @@ namespace Shopy
             config.SetupJsonFormat();
 
             config.SetupUnity();
+
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
         }
 
         private static HttpConfiguration MapRoutes(this HttpConfiguration config)

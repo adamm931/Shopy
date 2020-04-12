@@ -5,11 +5,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App/App'
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import { ShopyStore } from './State/ShopyStore';
+import { shopyStore } from './State/ShopyStore';
+import { shopyHistory } from './State/ShopyStore';
+import { Router } from 'react-router';
 
 const app = (
-    <Provider store={ShopyStore}>
-        <App />
+    <Provider store={shopyStore}>
+        <Router history={shopyHistory}>
+            <App />
+        </Router>
     </Provider>
 )
 

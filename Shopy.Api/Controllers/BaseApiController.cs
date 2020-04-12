@@ -7,6 +7,7 @@ using System.Web.Http;
 
 namespace Shopy.Api.Controllers
 {
+    [Route("api/[controller]")]
     public class BaseApiController : ApiController
     {
         protected IMediator Mediator { get; }
@@ -59,6 +60,7 @@ namespace Shopy.Api.Controllers
             {
                 var message = string.Join(
                     ". ", invalidParams.Select(s => s.Message));
+
                 return BadRequest(message);
             }
 

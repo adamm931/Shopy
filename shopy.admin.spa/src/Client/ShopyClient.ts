@@ -28,7 +28,7 @@ class ShopyClient implements IShopyClient {
     }
 
     public static Create(): IShopyClient {
-        return new ShopyClient("http://localhost:50181/");
+        return new ShopyClient("http://localhost:50181/api");
     }
 
     async Get<TResult>(path: string): Promise<IApiResponse<TResult>> {
@@ -36,15 +36,15 @@ class ShopyClient implements IShopyClient {
     }
 
     async Post<TResult, TRequest>(path: string, body: TRequest): Promise<IApiResponse<TResult>> {
-        return await this.request<TResult>(HttpMethod.Get, path, body);
+        return await this.request<TResult>(HttpMethod.Post, path, body);
     }
 
     async Put<TResult, TRequest>(path: string, body: TRequest): Promise<IApiResponse<TResult>> {
-        return await this.request<TResult>(HttpMethod.Get, path, body);
+        return await this.request<TResult>(HttpMethod.Put, path, body);
     }
 
     async Delete<TResult>(path: string): Promise<IApiResponse<TResult>> {
-        return await this.request<TResult>(HttpMethod.Get, path);
+        return await this.request<TResult>(HttpMethod.Delete, path);
     }
 
     async request<TResult, TRequest = {}>(
@@ -60,7 +60,7 @@ class ShopyClient implements IShopyClient {
                 });
 
             return {
-                Body: response.data as TResult
+                Body: response.data.Result as TResult
             } as IApiResponse<TResult>;
         }
         catch (error) {
@@ -72,7 +72,7 @@ class ShopyClient implements IShopyClient {
     createClient = () => axios.create({
         baseURL: this.BaseAddress,
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         }
     })
 

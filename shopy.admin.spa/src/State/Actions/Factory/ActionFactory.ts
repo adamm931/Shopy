@@ -1,8 +1,9 @@
 import { IUserLogedAction } from './../Login/IUserLogedAction';
 import { ActionTypes } from '../Base/ActionTypes';
 
-export const UserLogin = (isSuccess: boolean): IUserLogedAction => {
+export const UserLogedIn = (): IUserLogedAction => {
     return {
-        type: ActionTypes.USER_LOGED_IN
-    } as IUserLogedAction
+        type: ActionTypes.USER_LOGED_IN,
+        Payload: {}
+    }
 }
