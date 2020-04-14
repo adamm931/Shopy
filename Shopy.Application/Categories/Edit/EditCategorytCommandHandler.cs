@@ -19,6 +19,8 @@ namespace Shopy.Application.Categories.Edit
 
             category.SetName(request.Caption);
 
+            await Context.Save();
+
             return Unit.Value;
         }
     }

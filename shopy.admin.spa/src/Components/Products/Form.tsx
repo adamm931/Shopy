@@ -102,8 +102,6 @@ class ProductForm extends React.Component<ProductFormPropsType, IProductFormStat
                 data.Brand,
                 data.Sizes)
         }
-
-        HistoryUtils.Redirect(Routes.Products.Root);
     }
 
     componentWillReceiveProps(newProps: IProductFormProps) {

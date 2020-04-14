@@ -26,6 +26,8 @@ namespace Shopy.Application.Products.Edit
 
             product.Update(request.Caption, request.Description, request.Price, brand, sizes);
 
+            await Context.Save();
+
             return Unit.Value;
         }
     }

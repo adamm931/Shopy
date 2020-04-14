@@ -1,5 +1,6 @@
 ﻿using Shopy.Application.Products.Add;
 using Shopy.Core.Data;
+using Shopy.Data;
 using Shopy.Infrastructure.Logging;
 using Shopy.Infrastructure.Logging.DI;
 using System;
@@ -26,7 +27,9 @@ namespace Shopy.Api.DI
                 .RegisterMediator(new HierarchicalLifetimeManager())
                 .RegisterMediatorHandlers(typeof(AddProductResponse).Assembly);
 
-            container.RegisterFactory<IShopyContext>(container => ShopyContextFactory.CreateContext(), new PerThreadLifetimeManager());
+            //container.RegisterFactory<IShopyContext>(container => ShopyContextFactory.CreateContext(), new PerThreadLifetimeManager());
+
+            container.RegisterType<IShopyContext, ShopyContext>();
 
             container.AddLogging(factory =>
             {

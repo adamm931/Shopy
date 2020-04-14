@@ -25,6 +25,8 @@ namespace Shopy.Application.Products.RemoveFromCategory
 
             product.RemoveCategory(request.CategoryUid);
 
+            await Context.Save();
+
             return Unit.Value;
         }
     }

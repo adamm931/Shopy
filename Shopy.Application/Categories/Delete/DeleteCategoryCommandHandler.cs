@@ -18,6 +18,8 @@ namespace Shopy.Application.Categories.Delete
             var category = await Context.Categories.ByUidAsync(request.Uid);
             Context.Categories.Remove(category);
 
+            await Context.Save();
+
             return Unit.Value;
         }
     }

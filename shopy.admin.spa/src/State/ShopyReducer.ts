@@ -26,5 +26,17 @@ export const ShopyReducer = (state: IShopyState = InitialState, action: IActions
                 EditingProduct: action.Payload
             }
         }
+        case ActionTypes.REDIRECT: {
+            return {
+                ...state,
+                RedirectTo: action.Payload.Url
+            }
+        }
+        case ActionTypes.CLEAR_REDIRECT: {
+            return {
+                ...state,
+                RedirectTo: undefined
+            }
+        }
     }
 }

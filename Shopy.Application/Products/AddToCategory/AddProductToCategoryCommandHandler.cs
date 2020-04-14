@@ -25,6 +25,8 @@ namespace Shopy.Application.Products.AddToCategory
 
             product.AddCategory(category);
 
+            await Context.Save();
+
             return Unit.Value;
         }
     }

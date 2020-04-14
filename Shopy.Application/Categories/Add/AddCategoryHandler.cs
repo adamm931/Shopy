@@ -16,6 +16,8 @@ namespace Shopy.Application.Categories.Add
         {
             var category = Context.Categories.Add(new Category(request.Caption));
 
+            await Context.Save();
+
             return new AddCategoryResponse(category);
         }
     }

@@ -34,6 +34,8 @@ namespace Shopy.Application.Products.Add
 
             Context.Products.Add(product);
 
+            await Context.Save();
+
             return new AddProductResponse(product);
         }
     }

@@ -5,7 +5,7 @@ import { IShopyState } from '../../State/ShopyState'
 import { IProductListProps } from './Types/IProductListProps'
 import { IProductListDispatch } from './Types/IProductListDispatch'
 import * as RequestFactory from '../../State/Requests/Factory/RequestFactory'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 class ProductList extends React.Component<IProductListProps & IProductListDispatch> {
     componentDidMount() {

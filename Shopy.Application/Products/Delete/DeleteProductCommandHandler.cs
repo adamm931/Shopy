@@ -19,6 +19,8 @@ namespace Shopy.Application.Products.Commands
 
             Context.Products.Remove(product);
 
+            await Context.Save();
+
             return Unit.Value;
         }
     }

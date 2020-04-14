@@ -6,6 +6,7 @@ export interface IShopyState {
     IsUserLogged: boolean;
     ProductList: IProductListItem[];
     EditingProduct: IProduct;
+    RedirectTo?: string;
 }
 
 export const EmptyEditingProduct = (): IProduct => ({
@@ -20,6 +21,6 @@ export const EmptyEditingProduct = (): IProduct => ({
 export const InitialState: IShopyState = {
     IsUserLogged: new AuthService().IsUserLogged(),
     ProductList: [],
-    EditingProduct: EmptyEditingProduct()
+    EditingProduct: EmptyEditingProduct(),
 };
 

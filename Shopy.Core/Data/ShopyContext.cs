@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shopy.Data
 {
-    internal class ShopyContext : DbContext, IShopyContext
+    public class ShopyContext : DbContext, IShopyContext
     {
         public IDbSet<Product> Products { get; set; }
 

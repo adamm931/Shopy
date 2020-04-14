@@ -12,6 +12,7 @@ import { AuthService } from '../Service/Auth/AuthService';
 import * as ActionFactory from './Actions/Factory/ActionFactory';
 import { IAuthenticateResponse } from '../Service/Auth/ILoginResponse';
 import { IProductsListRequest } from './Requests/Products/IProductsListRequest';
+import { Routes } from '../Common/Routes';
 
 function* WatchLoginUser() {
     yield takeLatest(RequestTypes.LOGIN_USER, LoginUser)
@@ -47,20 +48,24 @@ function* LoginUser(request: ILoginUserRequest) {
 
     if (authenticateResponse.IsAuthenticated) {
         yield put(ActionFactory.UserLogedIn());
+        yield put(ActionFactory.Redirect(Routes.Products.Root))
     }
 }
 
-function LogoutUser() {
+function* LogoutUser() {
     var authService = new AuthService();
     authService.LogoutUser();
+    yield put(ActionFactory.Redirect(Routes.Root))
 }
 
 function* AddProduct(request: IAddProductRequest) {
     yield call(() => ProductsService.AddProduct(request.Payload));
+    yield put(ActionFactory.Redirect(Routes.Products.Root))
 }
 
 function* EditProduct(request: IEditProductRequest) {
     yield call(() => ProductsService.EditProduct(request.Payload));
+    yield put(ActionFactory.Redirect(Routes.Products.Root))
 }
 
 function* GetProduct(request: IGetProductRequest) {
