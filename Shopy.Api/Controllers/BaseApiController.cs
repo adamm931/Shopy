@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace Shopy.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [RoutePrefix("api/[controller]")]
     public class BaseApiController : ApiController
     {
         protected IMediator Mediator { get; }

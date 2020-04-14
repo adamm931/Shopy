@@ -7,10 +7,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 const Body: React.FC = () => (
     <div className="container-fluid main-container">
         <div className="row">
-            <Router>
-                <Sidebar />
-                <Main />
-            </Router>
+            <Sidebar />
+            <Main />
         </div>
         <Footer />
     </div>

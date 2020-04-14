@@ -9,10 +9,11 @@ namespace Shopy.Application.Mappings
         public Profiles()
         {
             CreateMap<SizeType, SizeResponse>();
-
             CreateMap<BrandType, BrandResponse>();
 
-            CreateMap<Product, ProductResponse>();
+            CreateMap<Product, ProductResponse>()
+                .ForMember(dst => dst.Brand, opt => opt.MapFrom(src => src.BrandType));
+
             CreateMap<Product, CategoryProductResponse>();
             CreateMap<Product, RelatedProductResponse>();
             CreateMap<Product, ProductDetailsResponse>();

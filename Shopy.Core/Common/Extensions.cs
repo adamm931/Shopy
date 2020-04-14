@@ -8,7 +8,9 @@ namespace Shopy.Core.Common
     {
         public static void RemoveAll<TItem>(this ICollection<TItem> items, Func<TItem, bool> filter)
         {
-            foreach (var item in items.Where(filter))
+            var listItems = items.ToList();
+
+            foreach (var item in listItems.Where(filter))
             {
                 items.Remove(item);
             }

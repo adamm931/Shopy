@@ -15,7 +15,7 @@ namespace Shopy
 
             config.MapRoutes();
 
-            config.SetupJsonFormat();
+            config.SetupMediaFormats();
 
             config.SetupUnity();
 
@@ -25,21 +25,26 @@ namespace Shopy
         private static HttpConfiguration MapRoutes(this HttpConfiguration config)
         {
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{action}",
+                name: "1",
+                routeTemplate: "api/{controller}/{productid}/{action}/{categoryid}"
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "2",
+                routeTemplate: "api/{controller}/{uid}/{action}",
                 defaults: new
                 {
-                    action = RouteParameter.Optional
+                    action = RouteParameter.Optional,
+                    uid = RouteParameter.Optional
                 }
             );
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApiWithUid",
-                routeTemplate: "api/{controller}/{uid}/{action}",
+                name: "3",
+                routeTemplate: "api/{controller}/{uid}",
                 defaults: new
                 {
-                    uid = RouteParameter.Optional,
-                    action = RouteParameter.Optional
+                    uid = RouteParameter.Optional
                 }
             );
 
@@ -53,10 +58,12 @@ namespace Shopy
             return config;
         }
 
-        private static HttpConfiguration SetupJsonFormat(this HttpConfiguration config)
+        private static HttpConfiguration SetupMediaFormats(this HttpConfiguration config)
         {
-            config.Formatters.JsonFormatter.SupportedMediaTypes
-                .Add(new MediaTypeHeaderValue("text/html"));
+            var mediaType = config.Formatters.JsonFormatter.SupportedMediaTypes;
+
+            mediaType.Add(new MediaTypeHeaderValue("multipart/form-data"));
+            mediaType.Add(new MediaTypeHeaderValue("text/html"));
 
             config.Formatters.JsonFormatter.SerializerSettings = new JsonSerializerSettings
             {

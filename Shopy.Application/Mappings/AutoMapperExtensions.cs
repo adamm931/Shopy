@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace Shopy.Application.Mappings
+﻿namespace Shopy.Application.Mappings
 {
     public static class AutoMapperExtensions
     {
@@ -9,11 +7,6 @@ namespace Shopy.Application.Mappings
             return Mapper
                 .Current
                 .Map<TDestination>(source);
-        }
-
-        public static async Task<TDestination> MapToAsync<TDestination>(this object source)
-        {
-            return await Task.Run(() => source.MapTo<TDestination>());
         }
     }
 }

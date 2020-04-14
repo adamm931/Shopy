@@ -26,8 +26,7 @@ namespace Shopy.Api.DI
                 .RegisterMediator(new HierarchicalLifetimeManager())
                 .RegisterMediatorHandlers(typeof(AddProductResponse).Assembly);
 
-            container.RegisterFactory<IShopyContext>(
-                container => ShopyContextFactory.CreateContext(), new TransientLifetimeManager());
+            container.RegisterFactory<IShopyContext>(container => ShopyContextFactory.CreateContext(), new PerThreadLifetimeManager());
 
             container.AddLogging(factory =>
             {

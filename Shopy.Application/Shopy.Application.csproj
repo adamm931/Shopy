@@ -96,7 +96,6 @@
     <Compile Include="Models\RequestValidator.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\SizeResponse.cs" />
-    <Compile Include="Models\TReponseModel.cs" />
     <Compile Include="Pipelines\LoggingPipeline.cs" />
     <Compile Include="Pipelines\SaveChangesPipeline.cs" />
     <Compile Include="Products\AddToCategory\AddProductToCategoryCommand.cs" />

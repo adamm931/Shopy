@@ -1,9 +1,8 @@
-import { createBrowserHistory } from 'history'
+import { history } from './../State/ShopyStore';
 
 export class HistoryUtils {
 
     public static Redirect(path: string): void {
-        let history = createBrowserHistory();
         history.push(path);
     }
 }

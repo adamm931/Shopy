@@ -5,9 +5,8 @@ import { ILoginFormDispatch } from './Types/ILoginFormDispatch'
 import { ILoginFormProps } from './Types/ILoginFormProps'
 import * as RequestFactory from '../../State/Requests/Factory/RequestFactory'
 import { IShopyState } from '../../State/ShopyState'
-import { HistoryUtils } from '../../Utils/HistoryUtils'
 import { Routes } from '../../Common/Routes'
-import { Redirect } from 'react-router'
+import { HistoryUtils } from '../../Utils/HistoryUtils'
 
 class Login extends React.Component<ILoginFormDispatch & ILoginFormProps, ILoginFormState> {
 
@@ -52,23 +51,19 @@ class Login extends React.Component<ILoginFormDispatch & ILoginFormProps, ILogin
             Username: '',
             Password: ''
         });
+
+        HistoryUtils.Redirect(Routes.Products.Root);
     }
 
     isValidForm = () => {
         return this.state.Password !== '' && this.state.Username !== '';
     }
 
-    componentDidMount() {
-        if (this.props.IsUserLogged) {
-            HistoryUtils.Redirect(Routes.Products);
-        }
-    }
-
     render() {
 
-        if (this.props.IsUserLogged) {
-            return <Redirect to={Routes.Products} />
-        }
+        // if (this.props.IsUserLogged) {
+        //     return <Redirect to={Routes.Products.Root} />
+        // }
 
         return (<div>
             <form className="form-signin" onSubmit={this.onSubmit} autoComplete="off" >

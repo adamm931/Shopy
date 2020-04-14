@@ -1,4 +1,5 @@
 import { IBaseRequest } from './../Base/IBaseRequest';
+import { RequestTypes } from '../Base/RequestTypes';
 
 export interface ILoginUserRequest extends IBaseRequest<ILoginUserRequestPayload> {
 }

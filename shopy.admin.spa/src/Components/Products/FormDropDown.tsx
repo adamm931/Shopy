@@ -7,6 +7,8 @@ export const ProductFormDropDown: React.FC<IProductDropDownProps> = (props) => (
         <DropDownList
             Name={props.Name}
             Items={props.Items}
+            SelectedItem={props.SelectedItem}
+            SelectedItems={props.SelectedItems}
             Multiple={props.Multiple}
             ClassName="custom-select d-block"
             OnChange={props.OnChange}

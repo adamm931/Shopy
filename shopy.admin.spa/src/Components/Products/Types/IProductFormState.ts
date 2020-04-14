@@ -1,16 +1,18 @@
+import { IProductFormProps } from './IProductFormProps';
+
 export interface IProductFormState {
-    Caption: string;
+    Name: string;
     Description: string;
     Price: number;
     Brand: string;
     Sizes: string[];
 }
 
-export const EmptyFormState = (): IProductFormState => (
+export const GetStateFromProps = (props: IProductFormProps): IProductFormState => (
     {
-        Caption: '',
-        Description: '',
-        Price: 0,
-        Brand: '',
-        Sizes: []
+        Name: props.Name,
+        Description: props.Description,
+        Price: props.Price,
+        Brand: props.Brand,
+        Sizes: props.Sizes,
     })

@@ -1,5 +1,5 @@
-import { IAuthenticateResponse } from '../../Models/Auth/ILoginResponse';
-import { AuthenticateRequest } from "../../Models/Auth/LoginRequest";
+import { IAuthenticateResponse } from './ILoginResponse';
+import { AuthenticateRequest } from "./LoginRequest";
 
 export interface IAuthService {
 

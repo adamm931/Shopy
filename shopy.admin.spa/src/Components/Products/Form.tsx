@@ -2,17 +2,23 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { ProductFormItem } from './FormItem'
 import { ProductFormButtons } from './FormButtons'
-import { IProductFormProps } from './Types/IProductFormProps'
-import { IProductFormState, EmptyFormState as EmptyFormState } from './Types/IProductFormState'
+import { IProductFormProps, IProductFormDispatch } from './Types/IProductFormProps'
+import { IProductFormState, GetStateFromProps as GetStateFromProps } from './Types/IProductFormState'
 import { ProductFormDropDown } from './FormDropDown'
 import { ProductUtils } from '../../Utils/ProductUtils'
+import * as RequestFactory from '../../State/Requests/Factory/RequestFactory'
+import { } from 'react-router'
+import { Routes } from '../../Common/Routes'
+import { HistoryUtils } from '../../Utils/HistoryUtils'
 
-class ProductForm extends React.Component<IProductFormProps, IProductFormState> {
+type ProductFormPropsType = IProductFormProps & IProductFormDispatch;
 
-    constructor(props: IProductFormProps) {
+class ProductForm extends React.Component<ProductFormPropsType, IProductFormState> {
+
+    constructor(props: ProductFormPropsType) {
         super(props);
 
-        this.state = EmptyFormState();
+        this.state = GetStateFromProps(props);
     }
 
     onCaptionChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +26,7 @@ class ProductForm extends React.Component<IProductFormProps, IProductFormState> 
 
         this.setState({
             ...this.state,
-            Caption: event.target.value
+            Name: event.target.value
         })
     }
 
@@ -69,35 +75,88 @@ class ProductForm extends React.Component<IProductFormProps, IProductFormState> 
 
         // validate form here
 
-        console.log('state', this.state);
+        let data = this.state;
 
-        // request submit with saga
+        console.log('state', data);
+
+        if (this.props.Type == "Add") {
+            this.props.Add(
+                data.Name,
+                data.Description,
+                data.Price,
+                data.Brand,
+                data.Sizes)
+        }
+
+        else {
+
+            if (this.props.Uuid == undefined) {
+                throw 'Product uuid is not present';
+            }
+
+            this.props.Edit(
+                this.props.Uuid,
+                data.Name,
+                data.Description,
+                data.Price,
+                data.Brand,
+                data.Sizes)
+        }
+
+        HistoryUtils.Redirect(Routes.Products.Root);
+    }
+
+    componentWillReceiveProps(newProps: IProductFormProps) {
+        this.setState({
+            ...this.state,
+            Name: newProps.Name,
+            Description: newProps.Description,
+            Price: newProps.Price,
+            Brand: newProps.Brand,
+            Sizes: newProps.Sizes
+        })
     }
 
     render() {
-
         return (
             <div className="col-md-12 order-md-1">
                 <div>
                     <h2>{this.props.Type} product</h2>
                 </div>
-                <form onSubmit={this.onSubmit} >
-                    <ProductFormItem Type="text" Name="caption" Value={this.props.Caption} OnChange={this.onCaptionChanged} />
-                    <ProductFormItem Type="text" Name="description" Value={this.props.Description} OnChange={this.onDescriptionChanged} />
-                    <ProductFormItem Type="number" Name="price" Value={this.props.Price} OnChange={this.onPriceChanged} />
+                <form onSubmit={this.onSubmit} encType="multipart/form-data">
+                    <ProductFormItem Type="text" Name="caption" Value={this.state.Name} OnChange={this.onCaptionChanged} />
+                    <ProductFormItem Type="text" Name="description" Value={this.state.Description} OnChange={this.onDescriptionChanged} />
+                    <ProductFormItem Type="number" Name="price" Value={this.state.Price} OnChange={this.onPriceChanged} />
 
                     <ProductFormDropDown
                         Name="Brand"
+                        SelectedItem={this.state.Brand}
                         Items={ProductUtils.GetBrands()}
                         OnChange={this.onBrandChanged}
                     />
 
                     <ProductFormDropDown
                         Name="Sizes"
+                        SelectedItems={this.state.Sizes}
                         Items={ProductUtils.GetSizes()}
                         Multiple
                         OnChange={this.onSizesChanged}
                     />
+
+                    {/* <ProductFormImage
+                        Index={0} {...this.props.Images[0]}
+                        OnChange={(event) => this.onImageChanged(event, 0)}
+                    />
+
+                    <ProductFormImage
+                        Index={1} {...this.props.Images[1]}
+                        OnChange={(event) => this.onImageChanged(event, 1)}
+                    />
+
+                    <ProductFormImage
+                        Index={2} {...this.props.Images[2]}
+                        OnChange={(event) => this.onImageChanged(event, 2)}
+                    /> */}
 
                     <ProductFormButtons />
                 </form >
@@ -106,4 +165,11 @@ class ProductForm extends React.Component<IProductFormProps, IProductFormState> 
     }
 }
 
-export default connect()(ProductForm)
+const mapDispatchToProps = (dispatch: any): IProductFormDispatch => ({
+    Add: (caption: string, description: string, price: number, brand: string, sizes: string[]) =>
+        dispatch(RequestFactory.AddProductRequest(caption, description, price, brand, sizes)),
+    Edit: (uuid: string, caption: string, description: string, price: number, brand: string, sizes: string[]) =>
+        dispatch(RequestFactory.EditProductRequest(uuid, caption, description, price, brand, sizes))
+})
+
+export default connect(null, mapDispatchToProps)(ProductForm)

@@ -32,6 +32,8 @@ namespace Shopy.Application.Products.Add
                 product.AddSize(sizeType);
             }
 
+            Context.Products.Add(product);
+
             return new AddProductResponse(product);
         }
     }
