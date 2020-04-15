@@ -31,6 +31,11 @@ namespace Shopy
 
             config.Routes.MapHttpRoute(
                 name: "2",
+                routeTemplate: "api/{controller}/{action}"
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "3",
                 routeTemplate: "api/{controller}/{uid}/{action}",
                 defaults: new
                 {
@@ -40,7 +45,7 @@ namespace Shopy
             );
 
             config.Routes.MapHttpRoute(
-                name: "3",
+                name: "4",
                 routeTemplate: "api/{controller}/{uid}",
                 defaults: new
                 {

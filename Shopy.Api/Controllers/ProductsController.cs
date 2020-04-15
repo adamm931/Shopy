@@ -44,6 +44,16 @@ namespace Shopy.Api.Controllers
                 paramValidators: RequestParamValidator.ProductUidValidator(uid));
         }
 
+        [HttpGet]
+        [ActionName("categories")]
+        public async Task<IHttpActionResult> Categories(Guid? uid)
+        {
+            return await ProcessRequest(
+                request: () => Mediator.Send(new GetProductCategoriesRequest(uid.Value)),
+                paramValidators: RequestParamValidator.ProductUidValidator(uid));
+        }
+
+
         [HttpPost]
         public async Task<IHttpActionResult> Post(AddProductRequest addProduct)
         {

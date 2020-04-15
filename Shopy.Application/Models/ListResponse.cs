@@ -12,5 +12,11 @@ namespace Shopy.Application.Models
         {
             TotalRecords = totalCount;
         }
+
+        public ListResponse(IEnumerable<TDomainModel> domainModel)
+            : base(domainModel)
+        {
+            TotalRecords = -1;
+        }
     }
 }

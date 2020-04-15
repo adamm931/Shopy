@@ -1,3 +1,8 @@
+import { IProductRemovedFromCategoryAction } from './../Products/IProductRemovedFromCategoryAction';
+import { IProductAddedToCategoryAction } from './../Products/IProductAddedToCategoryAction';
+import { ILookupCategoriesAction } from './../Categories/ILookupCategoriesAction';
+import { IGetProductCategoriesAction } from './../Products/IProductCategoriesAction';
+import { INameUidApiModel } from './../../../Service/Api/INameUidApiModel';
 import { IProductDeletedAction } from './../Products/IProductDeletedAction';
 import { IClearRedirectAction } from './../Redirect/IClearRedirectAction';
 import { IRedirectAction } from './../Redirect/IRedirectAction';
@@ -40,4 +45,34 @@ export const Redirect = (url: string): IRedirectAction => ({
 export const ClearRedirect = (): IClearRedirectAction => ({
     type: ActionTypes.CLEAR_REDIRECT,
     Payload: {}
+})
+
+export const ProductCategories = (data: INameUidApiModel[]): IGetProductCategoriesAction => ({
+    type: ActionTypes.PRODUCT_CATEGORIES,
+    Payload: {
+        Categories: data
+    }
+})
+
+export const LookupCategories = (data: INameUidApiModel[]): ILookupCategoriesAction => ({
+    type: ActionTypes.CATEGORIES_LOOKUP,
+    Payload: {
+        Lookup: data
+    }
+})
+
+export const ProductAddedToCategory = (productUid: string, categoryUid: string): IProductAddedToCategoryAction => ({
+    type: ActionTypes.PRODUCT_ADDED_TO_CATEGORY,
+    Payload: {
+        ProductUid: productUid,
+        CategoryUid: categoryUid
+    }
+})
+
+export const ProductRemovedFromCategory = (productUid: string, categoryUid: string): IProductRemovedFromCategoryAction => ({
+    type: ActionTypes.PRODUCT_REMOVED_FROM_CATEGORY,
+    Payload: {
+        ProductUid: productUid,
+        CategoryUid: categoryUid
+    }
 })

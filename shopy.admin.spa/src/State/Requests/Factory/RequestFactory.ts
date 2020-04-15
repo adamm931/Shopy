@@ -1,10 +1,14 @@
+import { IGetProductCategoriesRequest } from './../Products/IGetProductCategoriesRequest';
+import { IRemoveProductFromCategoryRequest } from './../Products/IRemoveProductFromCategoryRequest';
+import { IAddProductToCategoryRequest } from './../Products/IAddProductToCategoryRequest';
 import { IDeleteProductRequest } from './../Products/IDeleteProductRequest';
 import { IEditProductRequest } from './../Products/IEditProductRequest';
 import { IGetProductRequest } from './../Products/IGetPropductRequest';
 import { IProductsListRequest } from '../Products/IProductsListRequest';
-import { IAddProductRequest, IAddProductRequestPayload } from './../Products/IAddProductRequest';
-import { ILoginUserRequest, ILoginUserRequestPayload } from './../Login/ILoginUserRequest';
+import { IAddProductRequest } from './../Products/IAddProductRequest';
+import { ILoginUserRequest } from './../Login/ILoginUserRequest';
 import { RequestTypes } from '../Base/RequestTypes';
+import { ILookupCategoriesRequest } from './../Categories/ILookupCategoriesRequest'
 
 export const LoginUserRequest = (username: string, password: string): ILoginUserRequest => ({
     Payload: {
@@ -54,4 +58,32 @@ export const GetProductRequest = (uid: string): IGetProductRequest => ({
         Uid: uid
     },
     type: RequestTypes.GET_PRODUCT
+})
+
+export const AddProductToCategory = (productUid: string, categoryUid: string): IAddProductToCategoryRequest => ({
+    Payload: {
+        ProductUid: productUid,
+        CategoryUid: categoryUid
+    },
+    type: RequestTypes.ADD_PRODUCT_TO_CATEGORY
+})
+
+export const RemoveProductFromCategory = (productUid: string, categoryUid: string): IRemoveProductFromCategoryRequest => ({
+    Payload: {
+        ProductUid: productUid,
+        CategoryUid: categoryUid
+    },
+    type: RequestTypes.REMOVE_PRODUCT_FROM_CATEGORY
+})
+
+export const GetProductCategories = (productUid: string): IGetProductCategoriesRequest => ({
+    Payload: {
+        Uid: productUid
+    },
+    type: RequestTypes.GET_PRODUCT_CATEGORIES
+})
+
+export const LookupCategories = (): ILookupCategoriesRequest => ({
+    Payload: {},
+    type: RequestTypes.LOOKUP_CATEGORIES
 })

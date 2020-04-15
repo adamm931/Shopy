@@ -24,11 +24,19 @@ namespace Shopy.Api.Controllers
         }
 
         [HttpGet]
+        [ActionName("lookup")]
+        public async Task<IHttpActionResult> Lookup()
+        {
+            return await ProcessRequest(
+                request: () => Mediator.Send(new LookupCategoriesRequest()));
+        }
+
+        [HttpGet]
         public async Task<IHttpActionResult> Get(Guid? uid)
         {
             return await ProcessRequest(
                 request: () => Mediator.Send(new GetCategoryRequest(uid.Value)),
-                paramValidators: RequestParamValidator.ProductUidValidator(uid));
+                paramValidators: RequestParamValidator.CategoryUidValidator(uid));
         }
 
         [HttpPost]

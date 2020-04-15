@@ -1,3 +1,5 @@
+import { CategoryService } from './../Service/Categories/CategoryService';
+import { INameUidApiModel } from './../Service/Api/INameUidApiModel';
 import { IDeleteProductRequest } from './Requests/Products/IDeleteProductRequest';
 import { IProduct } from '../Service/Products/IProduct'
 import { IGetProductRequest } from './Requests/Products/IGetPropductRequest';
@@ -14,6 +16,8 @@ import * as ActionFactory from './Actions/Factory/ActionFactory';
 import { IAuthenticateResponse } from '../Service/Auth/ILoginResponse';
 import { IProductsListRequest } from './Requests/Products/IProductsListRequest';
 import { Routes } from '../Common/Routes';
+import { IAddProductToCategoryRequest } from './Requests/Products/IAddProductToCategoryRequest';
+import { IRemoveProductFromCategoryRequest } from './Requests/Products/IRemoveProductFromCategoryRequest';
 
 function* WatchLoginUser() {
     yield takeLatest(RequestTypes.LOGIN_USER, LoginUser)
@@ -41,6 +45,22 @@ function* WatchProductGet() {
 
 function* WatchProductList() {
     yield takeLatest(RequestTypes.LIST_PRODUCTS, ListProducts)
+}
+
+function* WatchProductGetCategories() {
+    yield takeLatest(RequestTypes.GET_PRODUCT_CATEGORIES, GetProductCategories)
+}
+
+function* WatchProductAddToCategory() {
+    yield takeLatest(RequestTypes.ADD_PRODUCT_TO_CATEGORY, AddProductToCategory)
+}
+
+function* WatchProductRemoveFromCategory() {
+    yield takeLatest(RequestTypes.REMOVE_PRODUCT_FROM_CATEGORY, RemoveProductFromCategory)
+}
+
+function* WatchCategoriesLookup() {
+    yield takeLatest(RequestTypes.LOOKUP_CATEGORIES, LookupCategories)
 }
 
 function* LoginUser(request: ILoginUserRequest) {
@@ -79,7 +99,6 @@ function* GetProduct(request: IGetProductRequest) {
 }
 
 function* DeleteProduct(request: IDeleteProductRequest) {
-    console.log('saga-delete', request.Payload);
     yield call(() => ProductsService.DeleteProduct(request.Payload));
     yield put(ActionFactory.ProductDeleted(request.Payload.Uid))
 }
@@ -87,6 +106,28 @@ function* DeleteProduct(request: IDeleteProductRequest) {
 function* ListProducts(request: IProductsListRequest) {
     var products: IProductListItem[] = yield call(() => ProductsService.ListProducts());
     yield put(ActionFactory.ProductList(products));
+}
+
+function* GetProductCategories(request: IGetProductRequest) {
+    var productCategories: INameUidApiModel[] = yield call(() => ProductsService.GetProductCategories(request.Payload.Uid));
+    yield put(ActionFactory.ProductCategories(productCategories));
+}
+
+function* AddProductToCategory(request: IAddProductToCategoryRequest) {
+    let payload = request.Payload
+    yield call(() => ProductsService.AddProductToCategory(request.Payload));
+    yield put(ActionFactory.ProductAddedToCategory(payload.ProductUid, payload.CategoryUid));
+}
+
+function* RemoveProductFromCategory(request: IRemoveProductFromCategoryRequest) {
+    let payload = request.Payload
+    yield call(() => ProductsService.RemoveProductFromCategory(payload));
+    yield put(ActionFactory.ProductRemovedFromCategory(payload.ProductUid, payload.CategoryUid));
+}
+
+function* LookupCategories(request: IProductsListRequest) {
+    var lookup: INameUidApiModel[] = yield call(() => CategoryService.Lookup())
+    yield put(ActionFactory.LookupCategories(lookup));
 }
 
 export function* Watch() {
@@ -97,6 +138,10 @@ export function* Watch() {
         WatchProductList(),
         WatchProductEdit(),
         WatchProductDelete(),
-        WatchProductGet()
+        WatchProductGet(),
+        WatchProductGetCategories(),
+        WatchProductAddToCategory(),
+        WatchProductRemoveFromCategory(),
+        WatchCategoriesLookup()
     ])
 }

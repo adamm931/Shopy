@@ -1,3 +1,6 @@
+import { IRemoveProductFromCategoryRequestPayload } from './../../State/Requests/Products/IRemoveProductFromCategoryRequest';
+import { IAddProductToCategoryRequestPayload } from './../../State/Requests/Products/IAddProductToCategoryRequest';
+import { INameUidApiModel } from './../Api/INameUidApiModel';
 import { IDeleteProductRequestPayload } from './../../State/Requests/Products/IDeleteProductRequest';
 import { IProductApiModel } from '../Api/IProductApiModel'
 import { IProduct } from './IProduct'
@@ -20,6 +23,15 @@ export class ProductsService {
 
     public static ListProducts = async (): Promise<IProductListItem[]> =>
         await Get<IProductListItem[]>("/products")
+
+    public static GetProductCategories = async (uid: string): Promise<INameUidApiModel[]> =>
+        await Get<INameUidApiModel[]>(`/products/${uid}/categories`)
+
+    public static AddProductToCategory = async (request: IAddProductToCategoryRequestPayload): Promise<any> =>
+        await Post<any, {}>(`/products/${request.ProductUid}/add-to-category/${request.CategoryUid}`, {});
+
+    public static RemoveProductFromCategory = async (request: IRemoveProductFromCategoryRequestPayload): Promise<any> =>
+        await Post<any, {}>(`/products/${request.ProductUid}/remove-from-category/${request.CategoryUid}`, {});
 
     public static GetProduct = async (request: IGetProductRequestPayload): Promise<IProduct> => {
         var apiProduct = await Get<IProductApiModel>(`/products/${request.Uid}/get`)

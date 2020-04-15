@@ -6,6 +6,7 @@ import { IProductEditProps } from './Types/IProductEditProps'
 import { IProductEditDispatch } from './Types/IProductEditDisptach'
 import * as RequestFactory from '../../State/Requests/Factory/RequestFactory'
 import { RouteComponentProps } from 'react-router-dom';
+import { RouteUtils } from '../../Utils/RouterUtils'
 
 type Props = IProductEditDispatch & IProductEditProps & RouteComponentProps
 
@@ -17,10 +18,8 @@ class ProductEdit extends React.Component<Props, IProductEditProps> {
         this.setState(EmptyEditingProduct())
     }
 
-    getProductUid = () => Object.values(this.props.match.params)[0] as string
-
     componentDidMount() {
-        this.props.RequestGetProduct(this.getProductUid());
+        this.props.RequestGetProduct(RouteUtils.GetIdParam(this.props));
     }
 
     componentWillReceiveProps(nextProps: IProductEditProps) {
@@ -32,7 +31,7 @@ class ProductEdit extends React.Component<Props, IProductEditProps> {
             ? <React.Fragment />
             : (
                 <ProductForm
-                    Uuid={this.getProductUid()}
+                    Uuid={RouteUtils.GetIdParam(this.props)}
                     Name={this.state.Name}
                     Description={this.state.Description}
                     Price={this.state.Price}

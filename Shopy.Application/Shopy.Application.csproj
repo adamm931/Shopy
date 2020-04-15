@@ -76,6 +76,9 @@
     <Compile Include="Categories\Get\ListCategoriesHandler.cs" />
     <Compile Include="Categories\Get\ListCategoriesRequest.cs" />
     <Compile Include="Categories\Get\ListCategoriesResponse.cs" />
+    <Compile Include="Categories\Lookup\LookupCategoriesHandler.cs" />
+    <Compile Include="Categories\Lookup\LookupCategoriesRequest.cs" />
+    <Compile Include="Categories\Lookup\LookupCategoriesResponse.cs" />
     <Compile Include="Identity\Login\IdenityLoginRequestHandler.cs" />
     <Compile Include="Mappings\AutoMapperExtensions.cs" />
     <Compile Include="Mappings\Mapper.cs" />
@@ -88,6 +91,7 @@
     <Compile Include="Identity\Login\LoginRequest.cs" />
     <Compile Include="Identity\Login\LoginResponse.cs" />
     <Compile Include="Models\IdentityLoginResponse.cs" />
+    <Compile Include="Models\LookupResponse.cs" />
     <Compile Include="Models\ProductCategoryResponse.cs" />
     <Compile Include="Models\ProductDetailsResponse.cs" />
     <Compile Include="Models\ProductFilter.cs" />
@@ -107,6 +111,9 @@
     <Compile Include="Products\Delete\DeleteProductCommandHandler.cs" />
     <Compile Include="Products\Edit\EditProductCommand.cs" />
     <Compile Include="Products\Edit\EditProductCommandHandler.cs" />
+    <Compile Include="Products\GetCategories\GetProductCategoriesHandler.cs" />
+    <Compile Include="Products\GetCategories\GetProductCategoriesRequest.cs" />
+    <Compile Include="Products\GetCategories\GetProductCategoriesResponse.cs" />
     <Compile Include="Products\Get\GetProductDetailsHandler.cs" />
     <Compile Include="Products\Get\GetProductDetailsRequest.cs" />
     <Compile Include="Products\Get\GetProductDetailsResponse.cs" />

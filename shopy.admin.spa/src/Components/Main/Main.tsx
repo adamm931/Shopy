@@ -6,6 +6,7 @@ import CategoriesList from '../Categories/List'
 import AuthRoute from '../AuthRoute/AuthRoute'
 import ProductEdit from '../Products/Edit'
 import ProductAdd from '../Products/Add'
+import ChangeCategories from '../Products/ChangeCategories'
 
 const Main = () => (
     <main id="content-wrap" role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 ">
@@ -14,6 +15,7 @@ const Main = () => (
             <AuthRoute exact path="/products" component={ProductList} />
             <AuthRoute exact path="/products/add" component={ProductAdd} />
             <AuthRoute exact path="/products/:id/edit" component={ProductEdit} />
+            <AuthRoute exact path="/products/:id/changeCategories" component={ChangeCategories} />
             <AuthRoute exact path="/categories" component={CategoriesList} />
         </Switch>
     </main>

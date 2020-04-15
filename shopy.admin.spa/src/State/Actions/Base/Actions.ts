@@ -1,3 +1,7 @@
+import { IProductRemovedFromCategoryAction } from './../Products/IProductRemovedFromCategoryAction';
+import { IProductAddedToCategoryAction } from '../Products/IProductAddedToCategoryAction';
+import { IGetProductCategoriesAction } from './../Products/IProductCategoriesAction';
+import { ILookupCategoriesAction } from './../Categories/ILookupCategoriesAction';
 import { IProductDeletedAction } from './../Products/IProductDeletedAction';
 import { IClearRedirectAction } from './../Redirect/IClearRedirectAction';
 import { IRedirectAction } from './../Redirect/IRedirectAction';
@@ -10,4 +14,8 @@ export type IActions = IUserLogedAction
     | IProductEditAction
     | IRedirectAction
     | IClearRedirectAction
-    | IProductDeletedAction;
+    | IProductDeletedAction
+    | ILookupCategoriesAction
+    | IGetProductCategoriesAction
+    | IProductAddedToCategoryAction
+    | IProductRemovedFromCategoryAction;

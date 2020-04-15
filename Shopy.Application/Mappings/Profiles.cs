@@ -20,6 +20,7 @@ namespace Shopy.Application.Mappings
 
             CreateMap<Category, CategoryReponse>();
             CreateMap<Category, ProductCategoryResponse>();
+            CreateMap<Category, LookupResponse>();
         }
     }
 }

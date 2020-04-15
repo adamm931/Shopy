@@ -17,7 +17,7 @@ namespace Shopy.Application.Categories.Get
         {
             var categories = Context.Categories
                .Include(p => p.Products)
-               .Include("Products.Brand")
+               .Include("Products.BrandType")
                .Include("Products.Sizes");
 
             if (request.WithProductsOnly)
