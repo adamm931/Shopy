@@ -1,3 +1,4 @@
+import { IDeleteProductRequest } from './Requests/Products/IDeleteProductRequest';
 import { IProduct } from '../Service/Products/IProduct'
 import { IGetProductRequest } from './Requests/Products/IGetPropductRequest';
 import { IEditProductRequest } from './Requests/Products/IEditProductRequest';
@@ -28,6 +29,10 @@ function* WatchProductAdd() {
 
 function* WatchProductEdit() {
     yield takeLatest(RequestTypes.EDIT_PRODUCT, EditProduct)
+}
+
+function* WatchProductDelete() {
+    yield takeLatest(RequestTypes.DELETE_PRODUCT, DeleteProduct)
 }
 
 function* WatchProductGet() {
@@ -70,7 +75,13 @@ function* EditProduct(request: IEditProductRequest) {
 
 function* GetProduct(request: IGetProductRequest) {
     var product: IProduct = yield call(() => ProductsService.GetProduct(request.Payload));
-    yield put(ActionFactory.EditingProduct(product))
+    yield put(ActionFactory.ProductEdit(product))
+}
+
+function* DeleteProduct(request: IDeleteProductRequest) {
+    console.log('saga-delete', request.Payload);
+    yield call(() => ProductsService.DeleteProduct(request.Payload));
+    yield put(ActionFactory.ProductDeleted(request.Payload.Uid))
 }
 
 function* ListProducts(request: IProductsListRequest) {
@@ -85,6 +96,7 @@ export function* Watch() {
         WatchProductAdd(),
         WatchProductList(),
         WatchProductEdit(),
+        WatchProductDelete(),
         WatchProductGet()
     ])
 }

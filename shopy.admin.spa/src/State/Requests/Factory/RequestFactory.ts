@@ -1,3 +1,4 @@
+import { IDeleteProductRequest } from './../Products/IDeleteProductRequest';
 import { IEditProductRequest } from './../Products/IEditProductRequest';
 import { IGetProductRequest } from './../Products/IGetPropductRequest';
 import { IProductsListRequest } from '../Products/IProductsListRequest';
@@ -34,6 +35,13 @@ export const EditProductRequest = (uid: string, name: string, description: strin
         Sizes: sizes,
     },
     type: RequestTypes.EDIT_PRODUCT
+})
+
+export const DeleteProductRequest = (uid: string): IDeleteProductRequest => ({
+    Payload: {
+        Uid: uid
+    },
+    type: RequestTypes.DELETE_PRODUCT
 })
 
 export const ListProductsRequest = (): IProductsListRequest => ({

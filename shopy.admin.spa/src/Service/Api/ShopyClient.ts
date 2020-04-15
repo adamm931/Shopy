@@ -79,6 +79,8 @@ class ShopyClient implements IShopyClient {
 
             const response = await this.createClient().request(request);
 
+            console.log('api - response', response)
+
             return response.data.Result as TResult;
         }
         catch (error) {

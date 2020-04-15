@@ -6,8 +6,12 @@ import { IShopyState, InitialState } from './ShopyState';
 const authService = new AuthService();
 
 export const ShopyReducer = (state: IShopyState = InitialState, action: IActions): IShopyState => {
+
+    console.log('state', state)
+
     switch (action.type) {
         case ActionTypes.USER_LOGED_IN: {
+
             authService.LoginUser();
             return {
                 ...state,
@@ -20,11 +24,17 @@ export const ShopyReducer = (state: IShopyState = InitialState, action: IActions
                 ProductList: action.Payload
             }
         }
-        case ActionTypes.EDITING_PRODUCT: {
+        case ActionTypes.PRODUCT_EDIT: {
             return {
                 ...state,
                 EditingProduct: action.Payload
             }
+        }
+        case ActionTypes.PRODUCT_DELETED: {
+            return {
+                ...state,
+                ProductList: state.ProductList.filter(product => product.Uid !== action.Payload.Uid)
+            };
         }
         case ActionTypes.REDIRECT: {
             return {
@@ -37,6 +47,9 @@ export const ShopyReducer = (state: IShopyState = InitialState, action: IActions
                 ...state,
                 RedirectTo: undefined
             }
+        }
+        default: {
+            return state
         }
     }
 }

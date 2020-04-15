@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { ProductItem } from '../../Components/Products/Item'
 import { IShopyState } from '../../State/ShopyState'
 import { IProductListProps } from './Types/IProductListProps'
 import { IProductListDispatch } from './Types/IProductListDispatch'
 import * as RequestFactory from '../../State/Requests/Factory/RequestFactory'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import ProductItem from './Item'
 
 class ProductList extends React.Component<IProductListProps & IProductListDispatch> {
     componentDidMount() {
@@ -27,7 +27,10 @@ class ProductList extends React.Component<IProductListProps & IProductListDispat
                             </tr>
                         </thead >
                         <tbody>
-                            {this.props.Products.map((product, index) => <ProductItem key={index} {...product} Index={index} />)}
+                            {this.props.Products == undefined
+                                ? []
+                                : this.props.Products.map((product, index) =>
+                                    <ProductItem key={index} {...product} Index={index} />)}
                         </tbody>
                     </table>
                 </div>
@@ -37,7 +40,7 @@ class ProductList extends React.Component<IProductListProps & IProductListDispat
 }
 
 const mapStateToProps = (state: IShopyState): IProductListProps => ({
-    Products: state == undefined ? [] : state.ProductList
+    Products: state.ProductList
 })
 
 const mapDispatchToProps = (dispatch: any): IProductListDispatch => ({

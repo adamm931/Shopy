@@ -1,6 +1,7 @@
+import { IProductDeletedAction } from './../Products/IProductDeletedAction';
 import { IClearRedirectAction } from './../Redirect/IClearRedirectAction';
 import { IRedirectAction } from './../Redirect/IRedirectAction';
-import { IEditingProductAction } from './../Products/IEditingProductAction';
+import { IProductEditAction } from './../Products/IEditingProductAction';
 import { IProduct } from '../../../Service/Products/IProduct'
 import { IProductListItem } from '../../../Service/Products/IProductListItem';
 import { IUserLogedAction } from './../Login/IUserLogedAction';
@@ -17,9 +18,16 @@ export const ProductList = (products: IProductListItem[]): IProductListAction =>
     Payload: products
 })
 
-export const EditingProduct = (product: IProduct): IEditingProductAction => ({
-    type: ActionTypes.EDITING_PRODUCT,
+export const ProductEdit = (product: IProduct): IProductEditAction => ({
+    type: ActionTypes.PRODUCT_EDIT,
     Payload: product
+})
+
+export const ProductDeleted = (uid: string): IProductDeletedAction => ({
+    type: ActionTypes.PRODUCT_DELETED,
+    Payload: {
+        Uid: uid
+    }
 })
 
 export const Redirect = (url: string): IRedirectAction => ({
