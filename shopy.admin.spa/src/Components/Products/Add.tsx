@@ -12,6 +12,7 @@ class ProductAdd extends React.Component {
                 Price={0}
                 Brand=""
                 Sizes={[]}
+                Images={[]}
                 Type="Add" />
         )
     }

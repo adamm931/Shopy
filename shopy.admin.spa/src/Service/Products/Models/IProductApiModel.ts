@@ -1,4 +1,5 @@
-import { INameIdApiModel } from './INameIdApiModel';
+import { INameIdApiModel } from './../../Api/INameIdApiModel';
+
 export interface IProductApiModel {
     Uid: string;
     Name: string;

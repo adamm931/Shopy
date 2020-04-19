@@ -7,8 +7,8 @@ import { IProductDeletedAction } from './../Products/IProductDeletedAction';
 import { IClearRedirectAction } from './../Redirect/IClearRedirectAction';
 import { IRedirectAction } from './../Redirect/IRedirectAction';
 import { IProductEditAction } from './../Products/IEditingProductAction';
-import { IProduct } from '../../../Service/Products/IProduct'
-import { IProductListItem } from '../../../Service/Products/IProductListItem';
+import { IProduct } from '../../../Service/Products/Models/IProduct'
+import { IProductListItem } from '../../../Service/Products/Models/IProductListItem';
 import { IUserLogedAction } from './../Login/IUserLogedAction';
 import { ActionTypes } from '../Base/ActionTypes';
 import { IProductListAction } from '../Products/IProductListAction';

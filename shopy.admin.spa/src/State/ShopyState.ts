@@ -1,7 +1,7 @@
 import { INameUidApiModel } from './../Service/Api/INameUidApiModel';
 import { AuthService } from './../Service/Auth/AuthService';
-import { IProduct } from '../Service/Products/IProduct';
-import { IProductListItem } from '../Service/Products/IProductListItem';
+import { IProduct } from '../Service/Products/Models/IProduct';
+import { IProductListItem } from '../Service/Products/Models/IProductListItem';
 
 export interface IShopyState {
     IsUserLogged: boolean

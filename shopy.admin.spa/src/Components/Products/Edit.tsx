@@ -27,8 +27,10 @@ class ProductEdit extends React.Component<Props, IProductEditProps> {
     }
 
     render() {
+        console.log('rendering form')
+
         return this.state == null
-            ? <React.Fragment />
+            ? null
             : (
                 <ProductForm
                     Uuid={RouteUtils.GetIdParam(this.props)}
@@ -37,6 +39,7 @@ class ProductEdit extends React.Component<Props, IProductEditProps> {
                     Price={this.state.Price}
                     Brand={this.state.Brand}
                     Sizes={this.state.Sizes}
+                    Images={[]}
                     Type="Edit"
                 />
             )

@@ -1,25 +1,26 @@
+import { IProductApiModel } from './Models/IProductApiModel';
 import { IRemoveProductFromCategoryRequestPayload } from './../../State/Requests/Products/IRemoveProductFromCategoryRequest';
 import { IAddProductToCategoryRequestPayload } from './../../State/Requests/Products/IAddProductToCategoryRequest';
 import { INameUidApiModel } from './../Api/INameUidApiModel';
 import { IDeleteProductRequestPayload } from './../../State/Requests/Products/IDeleteProductRequest';
-import { IProductApiModel } from '../Api/IProductApiModel'
-import { IProduct } from './IProduct'
+import { IProduct } from './Models/IProduct'
 import { IEditProductRequestPayload } from './../../State/Requests/Products/IEditProductRequest';
 import { IAddProductRequestPayload } from './../../State/Requests/Products/IAddProductRequest';
 import { Post, Get, Put, Delete } from '../Api/ShopyClient';
-import { IProductListItem } from './IProductListItem';
+import { IProductListItem } from './Models/IProductListItem';
 import { IGetProductRequestPayload } from '../../State/Requests/Products/IGetPropductRequest';
+import { FileService } from '../Files/FileService';
 
 export class ProductsService {
 
     public static AddProduct = async (product: IAddProductRequestPayload): Promise<any> =>
-        await Post<any, IAddProductRequestPayload>("/products", product)
+        await Post<any, IAddProductRequestPayload>("/products/add", product)
 
     public static EditProduct = async (product: IEditProductRequestPayload): Promise<any> =>
-        await Put<any, IEditProductRequestPayload>(`/products/${product.Uuid}`, product);
+        await Put<any, IEditProductRequestPayload>(`/products/${product.Uuid}/edit`, product);
 
     public static DeleteProduct = async (product: IDeleteProductRequestPayload): Promise<any> =>
-        await Delete<any>(`/products/${product.Uid}`)
+        await Delete<any>(`/products/${product.Uid}/delete`)
 
     public static ListProducts = async (): Promise<IProductListItem[]> =>
         await Get<IProductListItem[]>("/products")
@@ -43,5 +44,23 @@ export class ProductsService {
             Sizes: apiProduct.Sizes.map(model => model.Name),
             Brand: apiProduct.Brand.Name
         }
+    }
+
+    public static UploadImage = async (image: File, productUid: string, index: number) => {
+        let imageName = ""
+
+        if (index == 0) {
+            imageName = "main"
+        }
+
+        else if (index == 1) {
+            imageName = "second"
+        }
+
+        else {
+            imageName = "third"
+        }
+
+        await FileService.Upload(image, `Images/${productUid}/${imageName}.png`)
     }
 }

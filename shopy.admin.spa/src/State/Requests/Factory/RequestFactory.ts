@@ -1,3 +1,4 @@
+import { IUploadProductImageRequest } from './../Products/IUploadProductImageRequest';
 import { IGetProductCategoriesRequest } from './../Products/IGetProductCategoriesRequest';
 import { IRemoveProductFromCategoryRequest } from './../Products/IRemoveProductFromCategoryRequest';
 import { IAddProductToCategoryRequest } from './../Products/IAddProductToCategoryRequest';
@@ -9,6 +10,7 @@ import { IAddProductRequest } from './../Products/IAddProductRequest';
 import { ILoginUserRequest } from './../Login/ILoginUserRequest';
 import { RequestTypes } from '../Base/RequestTypes';
 import { ILookupCategoriesRequest } from './../Categories/ILookupCategoriesRequest'
+import { IProductFormImageState } from '../../../Components/Products/Types/IProductFormImageState';
 
 export const LoginUserRequest = (username: string, password: string): ILoginUserRequest => ({
     Payload: {
@@ -86,4 +88,12 @@ export const GetProductCategories = (productUid: string): IGetProductCategoriesR
 export const LookupCategories = (): ILookupCategoriesRequest => ({
     Payload: {},
     type: RequestTypes.LOOKUP_CATEGORIES
+})
+
+export const UploadProductImages = (productUid: string, images: File[]): IUploadProductImageRequest => ({
+    Payload: {
+        ProductUid: productUid,
+        Images: images
+    },
+    type: RequestTypes.UPLOAD_PRODUCT_IMAGES
 })

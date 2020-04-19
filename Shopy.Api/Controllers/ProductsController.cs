@@ -6,6 +6,7 @@ using Shopy.Application.Products.Commands;
 using Shopy.Application.Products.Edit;
 using Shopy.Application.Products.Get;
 using Shopy.Application.Products.RemoveFromCategory;
+using Shopy.Application.Services;
 using Shopy.Core.Logging;
 using System;
 using System.Threading.Tasks;
@@ -15,8 +16,14 @@ namespace Shopy.Api.Controllers
 {
     public class ProductsController : BaseApiController
     {
-        public ProductsController(IMediator mediator, ILogger logger) : base(mediator, logger)
+        private readonly IFileUploader _imageUploader;
+
+        public ProductsController(
+            IMediator mediator,
+            ILogger logger,
+            IFileUploader imageUploader) : base(mediator, logger)
         {
+            _imageUploader = imageUploader;
         }
 
         [HttpGet]
@@ -53,43 +60,17 @@ namespace Shopy.Api.Controllers
                 paramValidators: RequestParamValidator.ProductUidValidator(uid));
         }
 
-
         [HttpPost]
+        [ActionName("add")]
         public async Task<IHttpActionResult> Post(AddProductRequest addProduct)
         {
-            #region Upload image logic
-
-            //// move this to command handler
-            //var context = HttpContext.Current;
-            //var root = context.Server.MapPath("~/App_Data");
-            //var provider = new MultipartFormDataStreamProvider(root);
-
-            //try
-            //{
-            //    await Request.Content.ReadAsMultipartAsync(provider);
-
-            //    foreach (var file in provider.Contents)
-            //    {
-            //        var fileName = file.Headers.ContentDisposition.FileName.Trim('\"');
-            //        var bytes = await file.ReadAsByteArrayAsync();
-
-            //        File.WriteAllBytes(fileName, bytes);
-            //    }
-            //}
-
-            //catch (Exception e)
-            //{
-            //    var some = e;
-            //}
-
-            #endregion
-
             return await ProcessRequest(
                 request: () => Mediator.Send(addProduct),
                 paramValidators: RequestParamValidator.ProductAddValidator(addProduct));
         }
 
         [HttpPut]
+        [ActionName("edit")]
         public async Task<IHttpActionResult> Put(Guid? uid, [FromBody]EditProductCommand editProduct)
         {
             editProduct.Uid = uid.Value;
@@ -100,6 +81,7 @@ namespace Shopy.Api.Controllers
         }
 
         [HttpDelete]
+        [ActionName("delete")]
         public async Task<IHttpActionResult> Delete(Guid? uid)
         {
             return await ProcessCommand(
@@ -108,7 +90,6 @@ namespace Shopy.Api.Controllers
         }
 
         [HttpPost]
-        //[Route("{productid}/add-to-category/{categoryid}")]
         [ActionName("add-to-category")]
         public async Task<IHttpActionResult> AddToCategory(Guid? productid, Guid? categoryid)
         {
@@ -124,7 +105,6 @@ namespace Shopy.Api.Controllers
         }
 
         [HttpPost]
-        //[Route("{productid}/remove-from-category/{categoryid}")]
         [ActionName("remove-from-category")]
         public async Task<IHttpActionResult> RemoveFromCategory(Guid productid, Guid categoryid)
         {

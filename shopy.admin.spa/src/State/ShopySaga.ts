@@ -1,10 +1,11 @@
+import { IUploadProductImageRequest } from './Requests/Products/IUploadProductImageRequest';
 import { CategoryService } from './../Service/Categories/CategoryService';
 import { INameUidApiModel } from './../Service/Api/INameUidApiModel';
 import { IDeleteProductRequest } from './Requests/Products/IDeleteProductRequest';
-import { IProduct } from '../Service/Products/IProduct'
+import { IProduct } from '../Service/Products/Models/IProduct'
 import { IGetProductRequest } from './Requests/Products/IGetPropductRequest';
 import { IEditProductRequest } from './Requests/Products/IEditProductRequest';
-import { IProductListItem } from '../Service/Products/IProductListItem';
+import { IProductListItem } from '../Service/Products/Models/IProductListItem';
 import { ProductsService } from '../Service/Products/ProductsService';
 import { IAddProductRequest } from './Requests/Products/IAddProductRequest';
 import { AuthenticateRequest } from '../Service/Auth/LoginRequest';
@@ -61,6 +62,10 @@ function* WatchProductRemoveFromCategory() {
 
 function* WatchCategoriesLookup() {
     yield takeLatest(RequestTypes.LOOKUP_CATEGORIES, LookupCategories)
+}
+
+function* WatchUploadProductImages() {
+    yield takeLatest(RequestTypes.UPLOAD_PRODUCT_IMAGES, UploadProductImages)
 }
 
 function* LoginUser(request: ILoginUserRequest) {
@@ -130,6 +135,12 @@ function* LookupCategories(request: IProductsListRequest) {
     yield put(ActionFactory.LookupCategories(lookup));
 }
 
+function* UploadProductImages(request: IUploadProductImageRequest) {
+    let payload = request.Payload
+    yield call(() => payload.Images.forEach((image, index) => {
+        ProductsService.UploadImage(image, payload.ProductUid, index)
+    }))
+}
 export function* Watch() {
     yield all([
         WatchLoginUser(),
@@ -142,6 +153,7 @@ export function* Watch() {
         WatchProductGetCategories(),
         WatchProductAddToCategory(),
         WatchProductRemoveFromCategory(),
-        WatchCategoriesLookup()
+        WatchCategoriesLookup(),
+        WatchUploadProductImages()
     ])
 }

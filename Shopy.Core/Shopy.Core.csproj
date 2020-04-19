@@ -94,6 +94,7 @@
     </Compile>
     <Compile Include="Domain\Exceptions\LocalizedException.cs" />
     <Compile Include="Domain\Exceptions\NameIsEmptyException.cs" />
+    <Compile Include="Files\IFileProvider.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\ILoggerFactory.cs" />
     <Compile Include="Logging\ILoggerProvider.cs" />

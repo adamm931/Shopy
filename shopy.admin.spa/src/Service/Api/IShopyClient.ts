@@ -1,5 +1,7 @@
+import { IKeyValue } from './../../Components/Shared/Types/IKeyValue';
+
 export default interface IShopyClient {
-    BaseAddress: string;
+    AddHeader(headers: IKeyValue[]): void;
 
     Get<TResult>(path: string): Promise<TResult>;
 

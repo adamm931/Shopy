@@ -1,6 +1,7 @@
 import { IKeyValue } from './../Components/Shared/Types/IKeyValue';
 
 export class ProductUtils {
+
     public static GetBrands = (): IKeyValue[] =>
         [
             {
@@ -47,4 +48,6 @@ export class ProductUtils {
                 Value: 'Extra large'
             }
         ]
+
+    public static DefaultImageUrl = process.env.REACT_APP_DEFAULT_IMAGE_URL || ""
 }

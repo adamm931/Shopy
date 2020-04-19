@@ -1,4 +1,4 @@
-import { IProduct } from '../../../Service/Products/IProduct';
+import { IProduct } from '../../../Service/Products/Models/IProduct';
 import { IBaseAction } from './../Base/IBaseAction';
 import { ActionTypes } from '../Base/ActionTypes';
 

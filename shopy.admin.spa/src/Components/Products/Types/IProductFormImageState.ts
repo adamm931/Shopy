@@ -1,3 +1,4 @@
 export interface IProductFormImageState {
-    File: File;
+    Url: string;
+    File?: File;
 }

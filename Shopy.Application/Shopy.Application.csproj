@@ -51,6 +51,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -79,7 +80,10 @@
     <Compile Include="Categories\Lookup\LookupCategoriesHandler.cs" />
     <Compile Include="Categories\Lookup\LookupCategoriesRequest.cs" />
     <Compile Include="Categories\Lookup\LookupCategoriesResponse.cs" />
+    <Compile Include="Contants\HeaderContants.cs" />
     <Compile Include="Identity\Login\IdenityLoginRequestHandler.cs" />
+    <Compile Include="File\Upload\UploadFileFromContextRequest.cs" />
+    <Compile Include="File\Upload\UploadFileFromContextRequestHandler.cs" />
     <Compile Include="Mappings\AutoMapperExtensions.cs" />
     <Compile Include="Mappings\Mapper.cs" />
     <Compile Include="Mappings\Profiles.cs" />
@@ -126,6 +130,8 @@
     <Compile Include="Products\RemoveFromCategory\RemoveFromCategoryCommand.cs" />
     <Compile Include="Products\RemoveFromCategory\RemoveFromCategoryCommandHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IHttpContextProvider.cs" />
+    <Compile Include="Services\IFileUploader.cs" />
     <Compile Include="Sizes\Get\ListSizesHandler.cs" />
     <Compile Include="Sizes\Get\ListSizesRequest.cs" />
     <Compile Include="Sizes\Get\ListSizesResponse.cs" />

@@ -7,9 +7,7 @@ import { IProductFormState, GetStateFromProps as GetStateFromProps } from './Typ
 import { ProductFormDropDown } from './FormDropDown'
 import { ProductUtils } from '../../Utils/ProductUtils'
 import * as RequestFactory from '../../State/Requests/Factory/RequestFactory'
-import { } from 'react-router'
-import { Routes } from '../../Common/Routes'
-import { HistoryUtils } from '../../Utils/HistoryUtils'
+import { ProductFormImage } from './FormImage'
 
 type ProductFormPropsType = IProductFormProps & IProductFormDispatch;
 
@@ -101,7 +99,30 @@ class ProductForm extends React.Component<ProductFormPropsType, IProductFormStat
                 data.Price,
                 data.Brand,
                 data.Sizes)
+
+            let files = this.state.Images
+                .filter(img => img.File !== undefined)
+                .map(file => file.File as File)
+
+            console.log('dispatching request', files)
+
+            this.props.UploadImages(this.props.Uuid, files)
         }
+    }
+
+    onImageChanged = (url: string, file: File, index: number) => {
+
+        let currentImages = this.state.Images;
+
+        currentImages[index] = {
+            Url: url,
+            File: file
+        }
+
+        this.setState({
+            ...this.state,
+            Images: currentImages
+        })
     }
 
     componentWillReceiveProps(newProps: IProductFormProps) {
@@ -111,7 +132,11 @@ class ProductForm extends React.Component<ProductFormPropsType, IProductFormStat
             Description: newProps.Description,
             Price: newProps.Price,
             Brand: newProps.Brand,
-            Sizes: newProps.Sizes
+            Sizes: newProps.Sizes,
+            Images: newProps.Images.map(image => ({
+                Url: image.Url,
+                File: image.File
+            }))
         })
     }
 
@@ -141,20 +166,22 @@ class ProductForm extends React.Component<ProductFormPropsType, IProductFormStat
                         OnChange={this.onSizesChanged}
                     />
 
-                    {/* <ProductFormImage
-                        Index={0} {...this.props.Images[0]}
-                        OnChange={(event) => this.onImageChanged(event, 0)}
-                    />
+                    <div className="ml-3 row">
+                        <ProductFormImage
+                            Index={0} {...this.props.Images[0]}
+                            OnImageChange={(url, file) => this.onImageChanged(url, file, 0)}
+                        />
+                        <ProductFormImage
+                            Index={1} {...this.props.Images[1]}
+                            OnImageChange={(url, file) => this.onImageChanged(url, file, 1)}
+                        />
+                        <ProductFormImage
+                            Index={2} {...this.props.Images[2]}
+                            OnImageChange={(url, file) => this.onImageChanged(url, file, 2)}
+                        />
+                    </div>
 
-                    <ProductFormImage
-                        Index={1} {...this.props.Images[1]}
-                        OnChange={(event) => this.onImageChanged(event, 1)}
-                    />
-
-                    <ProductFormImage
-                        Index={2} {...this.props.Images[2]}
-                        OnChange={(event) => this.onImageChanged(event, 2)}
-                    /> */}
+                    <br />
 
                     <ProductFormButtons />
                 </form >
@@ -166,8 +193,10 @@ class ProductForm extends React.Component<ProductFormPropsType, IProductFormStat
 const mapDispatchToProps = (dispatch: any): IProductFormDispatch => ({
     Add: (caption: string, description: string, price: number, brand: string, sizes: string[]) =>
         dispatch(RequestFactory.AddProductRequest(caption, description, price, brand, sizes)),
-    Edit: (uuid: string, caption: string, description: string, price: number, brand: string, sizes: string[]) =>
-        dispatch(RequestFactory.EditProductRequest(uuid, caption, description, price, brand, sizes))
+    Edit: (uid: string, caption: string, description: string, price: number, brand: string, sizes: string[]) =>
+        dispatch(RequestFactory.EditProductRequest(uid, caption, description, price, brand, sizes)),
+    UploadImages: (uid: string, images: File[]) =>
+        dispatch(RequestFactory.UploadProductImages(uid, images))
 })
 
 export default connect(null, mapDispatchToProps)(ProductForm)

@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Files\FileProvider.cs" />
     <Compile Include="Logging\DI\DIExtensions.cs" />
     <Compile Include="Logging\Internal\EventLogLogger.cs" />
     <Compile Include="Logging\Internal\EventViewLoggerProvider.cs" />

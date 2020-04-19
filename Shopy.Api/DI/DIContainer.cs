@@ -1,6 +1,10 @@
-﻿using Shopy.Application.Products.Add;
+﻿using Shopy.Api.Services;
+using Shopy.Application.Products.Add;
+using Shopy.Application.Services;
 using Shopy.Core.Data;
+using Shopy.Core.Files;
 using Shopy.Data;
+using Shopy.Infrastructure.Files;
 using Shopy.Infrastructure.Logging;
 using Shopy.Infrastructure.Logging.DI;
 using System;
@@ -27,9 +31,10 @@ namespace Shopy.Api.DI
                 .RegisterMediator(new HierarchicalLifetimeManager())
                 .RegisterMediatorHandlers(typeof(AddProductResponse).Assembly);
 
-            //container.RegisterFactory<IShopyContext>(container => ShopyContextFactory.CreateContext(), new PerThreadLifetimeManager());
-
             container.RegisterType<IShopyContext, ShopyContext>();
+            container.RegisterType<IFileUploader, FileUploader>();
+            container.RegisterType<IFileProvider, FileProvider>();
+            container.RegisterType<IHttpContextProvider, HttpContextProvider>();
 
             container.AddLogging(factory =>
             {
