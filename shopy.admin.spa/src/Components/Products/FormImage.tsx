@@ -9,7 +9,7 @@ export class ProductFormImage extends React.Component<IProductFormImageProps, IP
         super(props)
 
         this.state = {
-            Url: ProductUtils.DefaultImageUrl,
+            Url: ProductUtils.GetImageUrl(this.props.Index, this.props.ProductUid),
         }
     }
 
@@ -34,6 +34,12 @@ export class ProductFormImage extends React.Component<IProductFormImageProps, IP
         this.props.OnImageChange(imageUrl, imageFile)
     }
 
+    setDefaultImage = (even: React.SyntheticEvent<HTMLImageElement>) => {
+        this.state = {
+            Url: ProductUtils.DefaultImageUrl
+        }
+    }
+
     render() {
         return (<div className="col-md-2 mr-2 border">
             <label className="custom-file-label">
@@ -45,7 +51,14 @@ export class ProductFormImage extends React.Component<IProductFormImageProps, IP
                 className="custom-file-input"
                 onChange={this.onImageChanged}>
             </input>
-            <img className="ml-3 mt-2 mb-2" width="100" height="100" src={this.state.Url} alt="" />
+            <img
+                className="ml-3 mt-2 mb-2"
+                width="100"
+                height="100"
+                src={this.state.Url}
+                alt=""
+                onError={this.setDefaultImage}
+            />
         </div>)
     }
 }

@@ -1,4 +1,4 @@
-import { LocalStorageKeys } from './../../Common/LocalStorageKeys';
+import { LocalStorageKeys } from '../../Enums/LocalStorageKeys';
 import { StorageUtils } from '../../Utils/LocalStorageService';
 import { LoginUrl } from '../Api/Urls'
 import { IAuthenticateResponse } from './ILoginResponse';

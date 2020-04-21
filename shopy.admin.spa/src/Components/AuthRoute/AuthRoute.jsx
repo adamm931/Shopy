@@ -1,7 +1,7 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router';
 import { connect } from 'react-redux'
-import { Routes } from '../../Common/Routes';
+import { Routes } from '../../Enums/Routes';
 import { AuthService } from '../../Service/Auth/AuthService';
 import { HistoryUtils } from '../../Utils/HistoryUtils';
 import * as ActionFactory from '../../State/Actions/Factory/ActionFactory'

@@ -1,4 +1,4 @@
-import { HeaderKeys } from './../../Common/HeaderKeys';
+import { HeaderKeys } from '../../Enums/HeaderKeys';
 import { IKeyValue } from './../../Components/Shared/Types/IKeyValue';
 import { PostForm } from "../Api/ShopyClient"
 

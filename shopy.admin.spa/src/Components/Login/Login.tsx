@@ -5,7 +5,7 @@ import { ILoginFormDispatch } from './Types/ILoginFormDispatch'
 import { ILoginFormProps } from './Types/ILoginFormProps'
 import * as RequestFactory from '../../State/Requests/Factory/RequestFactory'
 import { IShopyState } from '../../State/ShopyState'
-import { Routes } from '../../Common/Routes'
+import { Routes } from '../../Enums/Routes'
 import { HistoryUtils } from '../../Utils/HistoryUtils'
 
 class Login extends React.Component<ILoginFormDispatch & ILoginFormProps, ILoginFormState> {

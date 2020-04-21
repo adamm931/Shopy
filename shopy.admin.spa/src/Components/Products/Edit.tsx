@@ -27,22 +27,22 @@ class ProductEdit extends React.Component<Props, IProductEditProps> {
     }
 
     render() {
-        console.log('rendering form')
 
-        return this.state == null
-            ? null
-            : (
-                <ProductForm
-                    Uuid={RouteUtils.GetIdParam(this.props)}
-                    Name={this.state.Name}
-                    Description={this.state.Description}
-                    Price={this.state.Price}
-                    Brand={this.state.Brand}
-                    Sizes={this.state.Sizes}
-                    Images={[]}
-                    Type="Edit"
-                />
-            )
+        if (this.state == null) {
+            return null
+        }
+
+        return (
+            <ProductForm
+                Uuid={RouteUtils.GetIdParam(this.props)}
+                Name={this.state.Name}
+                Description={this.state.Description}
+                Price={this.state.Price}
+                Brand={this.state.Brand}
+                Sizes={this.state.Sizes}
+                Images={[]}
+                Type="Edit"
+            />)
     }
 }
 

@@ -16,7 +16,7 @@ import { AuthService } from '../Service/Auth/AuthService';
 import * as ActionFactory from './Actions/Factory/ActionFactory';
 import { IAuthenticateResponse } from '../Service/Auth/ILoginResponse';
 import { IProductsListRequest } from './Requests/Products/IProductsListRequest';
-import { Routes } from '../Common/Routes';
+import { Routes } from '../Enums/Routes';
 import { IAddProductToCategoryRequest } from './Requests/Products/IAddProductToCategoryRequest';
 import { IRemoveProductFromCategoryRequest } from './Requests/Products/IRemoveProductFromCategoryRequest';
 

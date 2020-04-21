@@ -8,6 +8,7 @@ import { ProductFormDropDown } from './FormDropDown'
 import { ProductUtils } from '../../Utils/ProductUtils'
 import * as RequestFactory from '../../State/Requests/Factory/RequestFactory'
 import { ProductFormImage } from './FormImage'
+import { IProductFormImageProps } from './Types/IProductFormImageProps'
 
 type ProductFormPropsType = IProductFormProps & IProductFormDispatch;
 
@@ -104,8 +105,6 @@ class ProductForm extends React.Component<ProductFormPropsType, IProductFormStat
                 .filter(img => img.File !== undefined)
                 .map(file => file.File as File)
 
-            console.log('dispatching request', files)
-
             this.props.UploadImages(this.props.Uuid, files)
         }
     }
@@ -168,16 +167,22 @@ class ProductForm extends React.Component<ProductFormPropsType, IProductFormStat
 
                     <div className="ml-3 row">
                         <ProductFormImage
-                            Index={0} {...this.props.Images[0]}
+                            Index={0}
                             OnImageChange={(url, file) => this.onImageChanged(url, file, 0)}
+                            ProductUid={this.props.Uuid}
+                            {...this.props.Images[0]}
                         />
                         <ProductFormImage
-                            Index={1} {...this.props.Images[1]}
+                            Index={1}
                             OnImageChange={(url, file) => this.onImageChanged(url, file, 1)}
+                            ProductUid={this.props.Uuid}
+                            {...this.props.Images[1]}
                         />
                         <ProductFormImage
-                            Index={2} {...this.props.Images[2]}
+                            Index={2}
                             OnImageChange={(url, file) => this.onImageChanged(url, file, 2)}
+                            ProductUid={this.props.Uuid}
+                            {...this.props.Images[2]}
                         />
                     </div>
 
