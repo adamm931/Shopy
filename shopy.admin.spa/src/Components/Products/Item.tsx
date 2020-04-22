@@ -12,7 +12,7 @@ const ProductItem: React.FC<Props> = (props) => <tr>
     <td>{props.Name}</td>
     <td>{props.Price}</td>
     <td><Link to={`products/${props.Uid}/edit`} className="btn btn-primary" role="button">Edit</Link></td>
-    <td><Link to="#" onClick={(event) => onDeleteClicked(props)} className="btn btn-danger">Delete</Link></td>
+    <td><Link to="#" onClick={() => onDeleteClicked(props)} className="btn btn-danger">Delete</Link></td>
     <td><Link to={`products/${props.Uid}/changeCategories`} className="btn btn-secondary" role="button">Change categories</Link></td>
 </tr>
 

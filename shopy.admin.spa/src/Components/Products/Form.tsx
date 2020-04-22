@@ -145,7 +145,7 @@ class ProductForm extends React.Component<ProductFormPropsType, IProductFormStat
                 <div>
                     <h2>{this.props.Type} product</h2>
                 </div>
-                <form onSubmit={this.onSubmit} encType="multipart/form-data">
+                <form onSubmit={this.onSubmit}>
                     <ProductFormItem Type="text" Name="caption" Value={this.state.Name} OnChange={this.onCaptionChanged} />
                     <ProductFormItem Type="text" Name="description" Value={this.state.Description} OnChange={this.onDescriptionChanged} />
                     <ProductFormItem Type="number" Name="price" Value={this.state.Price} OnChange={this.onPriceChanged} />

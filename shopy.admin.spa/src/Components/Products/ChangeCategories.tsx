@@ -29,9 +29,6 @@ class ChangeCategories extends React.Component<Props, IChangeCategoriesState> {
     }
 
     componentWillReceiveProps = (newProps: IChangeCategoriesProps) => {
-
-        console.log('componentWillReceiveProps', newProps)
-
         this.setState({
             ...this.state,
             AvailableCategories: newProps.AvailableCategories,
@@ -41,9 +38,6 @@ class ChangeCategories extends React.Component<Props, IChangeCategoriesState> {
 
     setSelectedCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
         event.preventDefault();
-
-        console.log('setSelectedCategory', event.target.value)
-
         this.setState({
             ...this.state,
             SelectedCategoryUid: event.target.value
@@ -134,8 +128,6 @@ class ChangeCategories extends React.Component<Props, IChangeCategoriesState> {
 }
 
 const mapStateToProps = (state: IShopyState): IChangeCategoriesProps => {
-    console.log('mapStateToProps', state)
-
     return {
         AvailableCategories: state.AvailableProductCategories.map(model => ({
             Key: model.Uid,

@@ -14,6 +14,7 @@ class ProductList extends React.Component<IProductListProps & IProductListDispat
 
     render() {
         return (
+            // TODO: Create table component
             <React.Fragment>
                 <h2>Products <Link to="products/add" className="btn btn-success">Add</Link></h2>
                 <div className="table-responsive">
