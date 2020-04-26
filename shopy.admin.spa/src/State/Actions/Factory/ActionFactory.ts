@@ -1,3 +1,7 @@
+import { CategoryDeleteAction } from './../Categories/CategoryDeleteAction';
+import { CategoryEditAction } from './../Categories/CategoryEditAction';
+import { CategoryListAction } from './../Categories/CategoryListAction';
+import { Category } from './../../../Service/Categories/Models/Category';
 import { IProductRemovedFromCategoryAction } from './../Products/IProductRemovedFromCategoryAction';
 import { IProductAddedToCategoryAction } from './../Products/IProductAddedToCategoryAction';
 import { ILookupCategoriesAction } from './../Categories/ILookupCategoriesAction';
@@ -6,7 +10,7 @@ import { INameUidApiModel } from './../../../Service/Api/INameUidApiModel';
 import { IProductDeletedAction } from './../Products/IProductDeletedAction';
 import { IClearRedirectAction } from './../Redirect/IClearRedirectAction';
 import { IRedirectAction } from './../Redirect/IRedirectAction';
-import { IProductEditAction } from './../Products/IEditingProductAction';
+import { IProductEditAction } from '../Products/IProductEditAction';
 import { IProduct } from '../../../Service/Products/Models/IProduct'
 import { IProductListItem } from '../../../Service/Products/Models/IProductListItem';
 import { IUserLogedAction } from './../Login/IUserLogedAction';
@@ -74,5 +78,26 @@ export const ProductRemovedFromCategory = (productUid: string, categoryUid: stri
     Payload: {
         ProductUid: productUid,
         CategoryUid: categoryUid
+    }
+})
+
+export const CategoryList = (categories: Category[]): CategoryListAction => ({
+    type: ActionTypes.CATEGORY_LIST,
+    Payload: {
+        Categories: categories
+    }
+})
+
+export const CategoryEdit = (category: Category): CategoryEditAction => ({
+    type: ActionTypes.CATEGORY_EDIT,
+    Payload: {
+        Category: category
+    }
+})
+
+export const CategoryDelete = (uid: string): CategoryDeleteAction => ({
+    type: ActionTypes.CATEGORY_DELETE,
+    Payload: {
+        Uid: uid
     }
 })

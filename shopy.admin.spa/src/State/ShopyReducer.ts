@@ -66,13 +66,7 @@ export const ShopyReducer = (state: IShopyState = InitialState, action: IActions
         }
         case ActionTypes.PRODUCT_ADDED_TO_CATEGORY: {
 
-            console.log('PRODUCT_ADDED_TO_CATEGORY', action.Payload)
-
             var { addingList, removingList } = getCategoryModifiedLists(action.Payload.CategoryUid, true, state)
-
-            console.log('addingList', addingList)
-            console.log('removingList', removingList)
-            console.log('state', state)
 
             return {
                 ...state,
@@ -82,8 +76,6 @@ export const ShopyReducer = (state: IShopyState = InitialState, action: IActions
         }
         case ActionTypes.PRODUCT_REMOVED_FROM_CATEGORY: {
 
-            console.log('PRODUCT_REMOVED_FROM_CATEGORY', action.Payload)
-
             var { addingList, removingList } = getCategoryModifiedLists(action.Payload.CategoryUid, false, state)
 
             return {
@@ -92,6 +84,28 @@ export const ShopyReducer = (state: IShopyState = InitialState, action: IActions
                 AvailableProductCategories: addingList
             }
         }
+
+        case ActionTypes.CATEGORY_LIST: {
+            return {
+                ...state,
+                Categories: action.Payload.Categories
+            }
+        }
+
+        case ActionTypes.CATEGORY_EDIT: {
+            return {
+                ...state,
+                EditingCategory: action.Payload.Category
+            }
+        }
+
+        case ActionTypes.CATEGORY_DELETE: {
+            return {
+                ...state,
+                Categories: state.Categories.filter(category => category.Uid !== action.Payload.Uid)
+            }
+        }
+
         default: {
             return state
         }

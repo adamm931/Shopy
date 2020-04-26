@@ -34,12 +34,6 @@ export class ProductFormImage extends React.Component<IProductFormImageProps, IP
         this.props.OnImageChange(imageUrl, imageFile)
     }
 
-    setDefaultImage = (even: React.SyntheticEvent<HTMLImageElement>) => {
-        this.state = {
-            Url: ProductUtils.DefaultImageUrl
-        }
-    }
-
     render() {
         return (<div className="col-md-2 mr-2 border">
             <label className="custom-file-label">
@@ -57,7 +51,6 @@ export class ProductFormImage extends React.Component<IProductFormImageProps, IP
                 height="100"
                 src={this.state.Url}
                 alt=""
-                onError={this.setDefaultImage}
             />
         </div>)
     }

@@ -1,4 +1,4 @@
-import { IKeyValue } from './IKeyValue';
+import { IKeyValue } from "../../Types/IKeyValue";
 
 export interface IDropDownProps {
     Items: IKeyValue[];

@@ -7,7 +7,7 @@ namespace Shopy.Application.Models
     {
         public Guid Uid { get; set; }
 
-        public string Caption { get; set; }
+        public string Name { get; set; }
 
         public IEnumerable<CategoryProductResponse> Products { get; set; }
     }

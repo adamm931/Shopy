@@ -1,54 +1,49 @@
 import React from 'react'
-import { CategoryListProps } from './Types/CategoryListProps'
 import { connect } from 'react-redux'
-import { CategoryListItem } from './ListItem'
+import { CategoryListProps } from './Types/CategoryListProps'
+import CategoryListItem from './ListItem'
+import { CategoryListDispatch } from './Types/CategoryListDispatch'
+import { IShopyState } from '../../State/ShopyState'
+import * as RequestFactory from '../../State/Requests/Factory/RequestFactory'
+import { Link } from 'react-router-dom'
+import { Table } from '../Shared/Table/Table'
 
-class CategoriesList extends React.Component<CategoryListProps> {
+
+class CategoriesList extends React.Component<CategoryListProps & CategoryListDispatch> {
 
     componentDidMount() {
-        // calling dipatch here
+        this.props.List()
     }
 
     render() {
-        return <div className="table-responsive">
-            <table className="table table-striped table-sm">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Caption</th>
-                        <th colSpan={2}>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {Props.Items.map((category, index) =>
-                        <CategoryListItem key={index} {...category} Index={index} />)}
-                </tbody>
-            </table>
-        </div>
+        return <Table
+            Title="Categories"
+            AddItemUrl="categories/add"
+            Header={[
+                { Name: 'Name' },
+            ]}
+            ActionsCount={2}
+            RenderBody={() => this.props.Categories.map((category, index) =>
+                <CategoryListItem
+                    key={index}
+                    {...category}
+                    Index={index}
+                />)
+            }
+        />
     }
 }
 
+const mapStateToProps = (state: IShopyState): CategoryListProps => ({
+    Categories: state.Categories.map((item, index) => ({
+        Index: index,
+        Uid: item.Uid,
+        Name: item.Name
+    }))
+})
 
-const Props: CategoryListProps = {
-    Items: [{
-        Index: 0,
-        Uid: '12312asdasdas',
-        Name: 'Shoes'
-    },
-    {
-        Index: 1,
-        Uid: '1234453453453',
-        Name: 'Jackets'
-    },
-    {
-        Index: 2,
-        Uid: 'asdaasrty45645645',
-        Name: 'TShirts'
-    }, {
-        Index: 3,
-        Uid: 'asdasd657857kghjg',
-        Name: 'Footweat'
-    }]
-}
+const mapDisptachToProps = (dispatch: any): CategoryListDispatch => ({
+    List: () => dispatch(RequestFactory.ListCategories())
+})
 
-export default connect()(CategoriesList)
+export default connect(mapStateToProps, mapDisptachToProps)(CategoriesList)

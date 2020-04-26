@@ -8,7 +8,6 @@ import { ProductFormDropDown } from './FormDropDown'
 import { ProductUtils } from '../../Utils/ProductUtils'
 import * as RequestFactory from '../../State/Requests/Factory/RequestFactory'
 import { ProductFormImage } from './FormImage'
-import { IProductFormImageProps } from './Types/IProductFormImageProps'
 
 type ProductFormPropsType = IProductFormProps & IProductFormDispatch;
 

@@ -17,7 +17,7 @@ namespace Shopy.Application.Categories.Edit
         {
             var category = await Context.Categories.ByUidAsync(request.Uid);
 
-            category.SetName(request.Caption);
+            category.SetName(request.Name);
 
             await Context.Save();
 

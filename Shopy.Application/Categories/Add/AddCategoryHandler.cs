@@ -14,7 +14,7 @@ namespace Shopy.Application.Categories.Add
 
         public override async Task<AddCategoryResponse> Handle(AddCategoryRequest request, CancellationToken cancellationToken)
         {
-            var category = Context.Categories.Add(new Category(request.Caption));
+            var category = Context.Categories.Add(new Category(request.Name));
 
             await Context.Save();
 

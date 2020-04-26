@@ -1,3 +1,8 @@
+import { DeleteCategoryRequest } from './Requests/Categories/DeleteCategoryRequest';
+import { GetCategoryRequest } from './Requests/Categories/GetCategoryRequest';
+import { Category } from './../Service/Categories/Models/Category';
+import { EditCategoryRequest } from './Requests/Categories/EditCategoryRequest';
+import { AddCategoryRequest } from './Requests/Categories/AddCategoryRequest';
 import { IUploadProductImageRequest } from './Requests/Products/IUploadProductImageRequest';
 import { CategoryService } from './../Service/Categories/CategoryService';
 import { INameUidApiModel } from './../Service/Api/INameUidApiModel';
@@ -19,6 +24,7 @@ import { IProductsListRequest } from './Requests/Products/IProductsListRequest';
 import { Routes } from '../Enums/Routes';
 import { IAddProductToCategoryRequest } from './Requests/Products/IAddProductToCategoryRequest';
 import { IRemoveProductFromCategoryRequest } from './Requests/Products/IRemoveProductFromCategoryRequest';
+import { CategoriesListRequest } from './Requests/Categories/CategoriesListRequest';
 
 function* WatchLoginUser() {
     yield takeLatest(RequestTypes.LOGIN_USER, LoginUser)
@@ -66,6 +72,26 @@ function* WatchCategoriesLookup() {
 
 function* WatchUploadProductImages() {
     yield takeLatest(RequestTypes.UPLOAD_PRODUCT_IMAGES, UploadProductImages)
+}
+
+function* WatchCategoryAdd() {
+    yield takeLatest(RequestTypes.ADD_CATEGORY, AddCategory)
+}
+
+function* WatchCategoryEdit() {
+    yield takeLatest(RequestTypes.EDIT_CATEGORY, EditCategory)
+}
+
+function* WatchCategoryList() {
+    yield takeLatest(RequestTypes.LIST_CATEGORIES, ListCategories)
+}
+
+function* WatchCategoryGet() {
+    yield takeLatest(RequestTypes.GET_CATEGORY, GetCategory)
+}
+
+function* WatchCategoryDelete() {
+    yield takeLatest(RequestTypes.DELETE_CATEGORY, DeleteCategory)
 }
 
 function* LoginUser(request: ILoginUserRequest) {
@@ -141,6 +167,35 @@ function* UploadProductImages(request: IUploadProductImageRequest) {
         ProductsService.UploadImage(image, payload.ProductUid, index)
     }))
 }
+
+function* AddCategory(request: AddCategoryRequest) {
+    let payload = request.Payload
+    yield call(() => CategoryService.Add(payload))
+    yield put(ActionFactory.Redirect(Routes.Categories.Root))
+}
+
+function* EditCategory(request: EditCategoryRequest) {
+    let payload = request.Payload
+    yield call(() => CategoryService.Edit(payload))
+    yield put(ActionFactory.Redirect(Routes.Categories.Root))
+}
+
+function* ListCategories(request: CategoriesListRequest) {
+    let categories: Category[] = yield call(() => CategoryService.List())
+    yield put(ActionFactory.CategoryList(categories));
+}
+
+function* GetCategory(request: GetCategoryRequest) {
+    let category: Category = yield call(() => CategoryService.Get(request.Payload))
+    yield put(ActionFactory.CategoryEdit(category));
+}
+
+function* DeleteCategory(request: DeleteCategoryRequest) {
+    let payload = request.Payload
+    yield call(() => CategoryService.Delete(payload))
+    yield put(ActionFactory.CategoryDelete(payload.Uid));
+}
+
 export function* Watch() {
     yield all([
         WatchLoginUser(),
@@ -154,6 +209,11 @@ export function* Watch() {
         WatchProductAddToCategory(),
         WatchProductRemoveFromCategory(),
         WatchCategoriesLookup(),
-        WatchUploadProductImages()
+        WatchUploadProductImages(),
+        WatchCategoryAdd(),
+        WatchCategoryEdit(),
+        WatchCategoryList(),
+        WatchCategoryGet(),
+        WatchCategoryDelete()
     ])
 }

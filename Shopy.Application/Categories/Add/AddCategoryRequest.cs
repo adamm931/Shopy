@@ -4,6 +4,6 @@ namespace Shopy.Application.Categories.Add
 {
     public class AddCategoryRequest : IRequest<AddCategoryResponse>
     {
-        public string Caption { get; set; }
+        public string Name { get; set; }
     }
 }

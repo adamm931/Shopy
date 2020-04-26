@@ -1,6 +1,6 @@
 import React from 'react'
 import { IDropDownProps } from './Types/IDropDownProps'
-import { IKeyValue } from './Types/IKeyValue'
+import { IKeyValue } from '../Types/IKeyValue'
 
 export const DropDownList: React.FC<IDropDownProps> = (props) =>
     (

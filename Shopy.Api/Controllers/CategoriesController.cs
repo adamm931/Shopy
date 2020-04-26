@@ -32,6 +32,7 @@ namespace Shopy.Api.Controllers
         }
 
         [HttpGet]
+        [ActionName("get")]
         public async Task<IHttpActionResult> Get(Guid? uid)
         {
             return await ProcessRequest(
@@ -40,6 +41,7 @@ namespace Shopy.Api.Controllers
         }
 
         [HttpPost]
+        [ActionName("add")]
         public async Task<IHttpActionResult> Post([FromBody]AddCategoryRequest addCategory)
         {
             return await ProcessRequest(
@@ -48,6 +50,7 @@ namespace Shopy.Api.Controllers
         }
 
         [HttpPut]
+        [ActionName("edit")]
         public async Task<IHttpActionResult> Put(Guid uid, [FromBody]EditCategoryCommand editCategory)
         {
             editCategory.Uid = uid;
@@ -58,6 +61,7 @@ namespace Shopy.Api.Controllers
         }
 
         [HttpDelete]
+        [ActionName("delete")]
         public async Task<IHttpActionResult> Delete(Guid? uid)
         {
             return await ProcessCommand(

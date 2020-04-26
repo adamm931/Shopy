@@ -7,6 +7,6 @@ namespace Shopy.Application.Categories.Edit
     {
         public Guid Uid { get; set; }
 
-        public string Caption { get; set; }
+        public string Name { get; set; }
     }
 }

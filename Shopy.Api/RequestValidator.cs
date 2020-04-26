@@ -35,7 +35,7 @@ namespace Shopy.Api
         {
             return new[] {
                 new RequestParamValidator(() => addRequest == null, "Request has to be set"),
-                new RequestParamValidator(() => string.IsNullOrEmpty(addRequest?.Caption), "Caption has to be set for category")
+                new RequestParamValidator(() => string.IsNullOrEmpty(addRequest?.Name), "Caption has to be set for category")
             };
         }
 
@@ -44,7 +44,7 @@ namespace Shopy.Api
             return new[] {
                 new RequestParamValidator(() => editCommand == null, "Request has to be set"),
                 CategoryUidValidator(editCommand?.Uid),
-                new RequestParamValidator(() => string.IsNullOrEmpty(editCommand.Caption), "Caption has to be set for category")
+                new RequestParamValidator(() => string.IsNullOrEmpty(editCommand.Name), "Caption has to be set for category")
             };
         }
 

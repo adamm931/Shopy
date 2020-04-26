@@ -1,3 +1,4 @@
+import { Category } from './../Service/Categories/Models/Category';
 import { INameUidApiModel } from './../Service/Api/INameUidApiModel';
 import { AuthService } from './../Service/Auth/AuthService';
 import { IProduct } from '../Service/Products/Models/IProduct';
@@ -10,7 +11,9 @@ export interface IShopyState {
     RedirectTo?: string
     ProductCategories: INameUidApiModel[],
     AvailableProductCategories: INameUidApiModel[],
-    LookupCategories: INameUidApiModel[]
+    LookupCategories: INameUidApiModel[],
+    Categories: Category[],
+    EditingCategory: Category
 }
 
 export const EmptyEditingProduct = (): IProduct => ({
@@ -22,12 +25,19 @@ export const EmptyEditingProduct = (): IProduct => ({
     Sizes: []
 })
 
+export const EmptyEditingCategory = (): Category => ({
+    Uid: '',
+    Name: ''
+})
+
 export const InitialState: IShopyState = {
     IsUserLogged: new AuthService().IsUserLogged(),
     ProductList: [],
     EditingProduct: EmptyEditingProduct(),
     ProductCategories: [],
     AvailableProductCategories: [],
-    LookupCategories: []
+    LookupCategories: [],
+    Categories: [],
+    EditingCategory: EmptyEditingCategory()
 };
 

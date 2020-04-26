@@ -1,7 +1,7 @@
 import React from 'react';
 import { IChangeCategoriesProps } from './Types/IChangeProductCategoriesProps'
 import { ChangeCategoryItem } from './ChangeCategoryItem'
-import { DropDownList } from '../Shared/DropDownList'
+import { DropDownList } from '../Shared/Dropdown/DropDownList'
 import { IChangeCategoriesState } from './Types/IChangeCategoriesState'
 import { IChangeCategoriesDispatch } from './Types/IChangeCategoriesDIspatch';
 import * as RequestFactory from '../../State/Requests/Factory/RequestFactory'

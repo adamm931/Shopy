@@ -1,4 +1,4 @@
-import { DropDownList } from '../Shared/DropDownList'
+import { DropDownList } from '../Shared/Dropdown/DropDownList'
 import { IProductDropDownProps } from './Types/IProductDropDownProps'
 import React from 'react'
 

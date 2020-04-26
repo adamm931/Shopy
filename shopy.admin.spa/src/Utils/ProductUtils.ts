@@ -54,6 +54,8 @@ export class ProductUtils {
     public static DefaultImageUrl = process.env.REACT_APP_DEFAULT_IMAGE_URL || ""
 
     public static GetImageUrl = (index: number, productUid: string) =>
-        process.env.REACT_APP_IMAGE_ROOT + `/${productUid}/${ProdutImageUtils.GetImageNameByIndex(index)}.png`
+        productUid == undefined ?
+            ProductUtils.DefaultImageUrl :
+            process.env.REACT_APP_IMAGE_ROOT + `/${productUid}/${ProdutImageUtils.GetImageNameByIndex(index)}.png`
 
 }
