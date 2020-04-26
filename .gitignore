@@ -6,3 +6,4 @@ obj
 /logs.txt
 /Log
 node_modules
+build
