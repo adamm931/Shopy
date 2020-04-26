@@ -2,7 +2,7 @@
 *.user
 bin
 obj
-/.vs
+.vs
 /logs.txt
 /Log
 node_modules
