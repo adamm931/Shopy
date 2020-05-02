@@ -6,7 +6,7 @@ namespace Shopy.Application.Products.Add
 {
     public class AddProductRequest : IRequest<AddProductResponse>
     {
-        public string Caption { get; set; }
+        public string Name { get; set; }
 
         public string Description { get; set; }
 

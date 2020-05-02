@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Shopy.Admin.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Shopy.Admin.ViewModels
@@ -11,8 +13,8 @@ namespace Shopy.Admin.ViewModels
 
         [Required]
         [StringLength(100)]
-        [Display(Name = "Caption")]
-        public string Caption { get; set; }
+        [Display(Name = "Name")]
+        public string Name { get; set; }
 
         [Required]
         [StringLength(300)]
@@ -45,5 +47,15 @@ namespace Shopy.Admin.ViewModels
         public IEnumerable<SelectListItem> BrandsSelectList { get; set; }
 
         public MultiSelectList SelectedSizesML { get; set; }
+
+        public ProductViewModel()
+        {
+        }
+
+        public async Task PopulateSizesAndBrands(ISelectListUtils selectListUtils)
+        {
+            BrandsSelectList = await selectListUtils.GetBrandsSL();
+            SelectedSizesML = await selectListUtils.GetSizesMSL();
+        }
     }
 }

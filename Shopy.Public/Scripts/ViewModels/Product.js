@@ -4,7 +4,7 @@
 
     self.id = item.Uid;
     self.price = item.Price.toFixed(2) + "$";
-    self.caption = item.Caption;
+    self.caption = item.Name;
     self.detailsLink = endpoints.Details.replace("id", item.Uid);
     self.image1Url = item.Image1.Url;
     self.sizes = _.map(item.Sizes, s => new Size(s));

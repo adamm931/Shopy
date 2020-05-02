@@ -2,7 +2,7 @@
 
     var self = this;
 
-    self.id = size.EId;
-    self.caption = size.Caption;
+    self.id = size.Id;
+    self.caption = size.Name;
     self.checked = ko.observable(false);
 }

@@ -20,8 +20,8 @@
             @foreach(CategoryListItemViewModel item in Model.Items)
             {
                 <tr>
-                    <td>@item.CategoryId</td>
-                    <td>@item.Caption</td>
+                    <td>@item.Uid</td>
+                    <td>@item.Name</td>
                     <td>
                         <a href="@Url.RouteUrl("Categories", new { action = "Edit", uid = item.Uid})"
                            class="btn btn-primary" role="button">

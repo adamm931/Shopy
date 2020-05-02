@@ -1,5 +1,5 @@
 ﻿using Shopy.Admin.Validation;
-using Shopy.Proto.Common;
+using Shopy.Sdk.Common;
 using System.Web;
 
 namespace Shopy.Admin.ViewModels
@@ -18,9 +18,20 @@ namespace Shopy.Admin.ViewModels
         {
             Url = url;
         }
+
         public ImageViewModel()
         {
 
+        }
+
+        private ImageViewModel(ImageViewModel model)
+        {
+            Url = model.Url;
+        }
+
+        public ImageViewModel Clone()
+        {
+            return new ImageViewModel(this);
         }
     }
 }

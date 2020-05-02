@@ -11,8 +11,8 @@
     <table class="table table-striped table-sm">
         <thead>
             <tr>
-                <th>#ID</th>
-                <th>Caption</th>
+                <th>#</th>
+                <th>Name</th>
                 <th>Price ($)</th>
                 <th colspan="3">Actions</th>
             </tr>
@@ -22,8 +22,8 @@
             @foreach (ProductListItemViewModel item in Model.Items)
             { 
                 <tr>
-                    <td>@item.ProductId</td>
-                    <td>@item.Caption</td>
+                    <td>@item.Index</td>
+                    <td>@item.Name</td>
                     <td>@item.Price</td>
                     <td>
                         <a href="@Url.RouteUrl("Products" , new { action = "Edit", uid = item.Uid})" 

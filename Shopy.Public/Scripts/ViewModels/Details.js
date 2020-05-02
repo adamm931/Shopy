@@ -56,7 +56,7 @@
                     var product = details.Product;
                     
                     self.id(product.Uid);
-                    self.caption(product.Caption);
+                    self.caption(product.Name);
                     self.price(product.Price.toFixed(2));
                     self.description(product.Description);
                     self.sizes(product.Sizes);

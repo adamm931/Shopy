@@ -1,6 +1,6 @@
-﻿using Shopy.Admin.ModelBuilder;
-using Shopy.Admin.ViewModels;
-using Shopy.Proto;
+﻿using Shopy.Admin.ViewModels;
+using Shopy.Admin.ViewModels.Interfaces;
+using Shopy.Sdk;
 using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -10,14 +10,22 @@ namespace Shopy.Admin.Controllers
     [Authorize]
     public class ProductsController : BaseController
     {
-        public ProductsController(IShopyDriver shopy) : base(shopy)
-        { }
+        private readonly Lazy<IProductViewModelService> _productViewModelService;
+
+        private IProductViewModelService ProductViewModelService => _productViewModelService.Value;
+
+
+        public ProductsController(
+            IShopyDriver shopy,
+            Lazy<IProductViewModelService> productViewModelService) : base(shopy)
+        {
+            _productViewModelService = productViewModelService;
+        }
 
         [HttpGet]
         public async Task<ActionResult> List()
         {
-            var model = await DiC.GetService<ProductListModelBuilder>()
-                .BuildAsync();
+            var model = await ProductViewModelService.GetProductList();
 
             return View(model);
         }
@@ -25,8 +33,7 @@ namespace Shopy.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> Add()
         {
-            var model = await DiC.GetService<DefaultProductModelBuilder>()
-                .BuildAsync();
+            var model = await ProductViewModelService.GetEmptyProduct();
 
             return View(model);
         }
@@ -36,18 +43,13 @@ namespace Shopy.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var resultModel = await DiC.GetService<DefaultProductModelBuilder>()
-                    .WithInner(model)
-                    .BuildAsync();
+                model = await ProductViewModelService.PopulateProduct(model);
 
-                return View(resultModel);
+                return View(model);
             }
 
-            var addProduct = await DiC.GetService<AddEditProductModelBuidler>()
-                .FromViewModel(model)
-                .BuildAsync();
+            await ProductViewModelService.AddProduct(model);
 
-            var product = await Shopy.AddProductAsync(addProduct);
             return RedirectToAction("List");
         }
 
@@ -55,9 +57,7 @@ namespace Shopy.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(Guid uid)
         {
-            var model = await DiC.GetService<ProductModelBuilder>()
-                .WithUid(uid)
-                .BuildAsync();
+            var model = await ProductViewModelService.GetProduct(uid);
 
             return View(model);
         }
@@ -67,18 +67,12 @@ namespace Shopy.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var resultModel = await DiC.GetService<DefaultProductModelBuilder>()
-                    .WithInner(model)
-                    .BuildAsync();
+                model = await ProductViewModelService.PopulateProduct(model);
 
-                return View(resultModel);
+                return View(model);
             }
 
-            var product = await DiC.GetService<AddEditProductModelBuidler>()
-                .FromViewModel(model)
-                .BuildAsync();
-
-            await Shopy.EditProductAsync(product);
+            await ProductViewModelService.EditProduct(model);
 
             return RedirectToAction("List");
         }
@@ -87,18 +81,14 @@ namespace Shopy.Admin.Controllers
         public async Task<ActionResult> Delete(Guid uid)
         {
             await Shopy.DeleteProductAsync(uid);
+
             return RedirectToAction("List");
         }
 
         [HttpGet]
         public async Task<ActionResult> ChangeCategories(Guid uid)
         {
-            var product = await Shopy.GetProductAsync(uid);
-            var model = new ChangeProductCategoriesViewModel()
-            {
-                ProductUid = uid,
-                Caption = product.Caption
-            };
+            var model = await ProductViewModelService.GetProductCategoryChange(uid);
 
             return View(model);
         }
@@ -106,9 +96,7 @@ namespace Shopy.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> LoadCategories(Guid uid)
         {
-            var response = await DiC.GetService<ProductCategoriesModelBuidler>()
-                .ForProduct(uid)
-                .BuildAsync();
+            var response = await ProductViewModelService.GetProductCategories(uid);
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
@@ -117,6 +105,7 @@ namespace Shopy.Admin.Controllers
         public async Task<ActionResult> AddToCategory(Guid uid, Guid categoryUid)
         {
             await Shopy.AddProductToCategoryAsync(uid, categoryUid);
+
             return Json(true);
         }
 
@@ -124,6 +113,7 @@ namespace Shopy.Admin.Controllers
         public async Task<ActionResult> RemoveFromCategory(Guid uid, Guid categoryUid)
         {
             await Shopy.RemoveProductFromCategoryAsync(uid, categoryUid);
+
             return Json(true);
         }
     }

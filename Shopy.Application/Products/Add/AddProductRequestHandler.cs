@@ -18,7 +18,7 @@ namespace Shopy.Application.Products.Add
         {
             var product = new Product(
                 Guid.NewGuid(),
-                request.Caption,
+                request.Name,
                 request.Description,
                 request.Price.Value);
 

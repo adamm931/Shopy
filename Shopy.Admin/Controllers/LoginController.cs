@@ -1,15 +1,14 @@
 ﻿using Shopy.Admin.Filters;
 using Shopy.Admin.Utils;
 using Shopy.Admin.ViewModels;
-using Shopy.Proto;
-using System.Web;
+using Shopy.Sdk;
 using System.Web.Mvc;
 
 namespace Shopy.Admin.Controllers
 {
     public class LoginController : BaseController
     {
-        private IAuthenticationUtils _authenticationUtils;
+        private readonly IAuthenticationUtils _authenticationUtils;
 
         public LoginController(
             IAuthenticationUtils authenticationUtils,
@@ -34,9 +33,7 @@ namespace Shopy.Admin.Controllers
                 return View("Index");
             }
 
-            var referrerQuery = HttpUtility.ParseQueryString(Request.UrlReferrer.Query);
-            var redirectUrl = referrerQuery[Constants.ReturnUrl];
-            var result = _authenticationUtils.LoginUser(model.Username, model.Remember, redirectUrl);
+            var result = _authenticationUtils.LoginUser(model.Username, model.Remember, Request);
 
             return Redirect(result.RedirectUrl);
         }

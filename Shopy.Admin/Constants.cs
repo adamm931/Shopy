@@ -1,4 +1,4 @@
-﻿using Shopy.Proto.Common;
+﻿using Shopy.Sdk.Common;
 
 namespace Shopy.Admin
 {

@@ -16,11 +16,11 @@ namespace Shopy.Application.Products.GetCategories
 
         public override async Task<GetProductCategoriesResponse> Handle(GetProductCategoriesRequest request, CancellationToken cancellationToken)
         {
-            var product = await Context.Products
+            var productByUid = await Context.Products
                 .Include(product => product.Categories)
                 .SingleAsync(product => product.Uid == request.Uid);
 
-            return new GetProductCategoriesResponse(product.Categories.ToList());
+            return new GetProductCategoriesResponse(productByUid.Categories.ToList());
         }
     }
 }

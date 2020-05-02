@@ -1,5 +1,5 @@
-﻿using Shopy.Proto;
-using Shopy.Proto.Models;
+﻿using Shopy.Sdk;
+using Shopy.Sdk.Models;
 using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -14,7 +14,7 @@ namespace Shopy.Public.Controllers
         {
             get
             {
-                return shopy ?? (shopy = new ShopyDriveBuilder().Configure());
+                return shopy ?? (shopy = ShopyDriveBuilder.GetDriver());
             }
         }
 

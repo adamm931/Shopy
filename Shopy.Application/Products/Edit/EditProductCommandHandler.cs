@@ -24,7 +24,7 @@ namespace Shopy.Application.Products.Edit
             var brand = await Context.BrandTypes.ByEnumIdAsync(request.Brand);
             var sizes = await Context.SizeTypes.ByEnumIdsAsync(request.Sizes);
 
-            product.Update(request.Caption, request.Description, request.Price, brand, sizes);
+            product.Update(request.Name, request.Description, request.Price, brand, sizes);
 
             await Context.Save();
 

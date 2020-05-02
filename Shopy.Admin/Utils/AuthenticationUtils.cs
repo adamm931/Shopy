@@ -6,48 +6,28 @@ namespace Shopy.Admin.Utils
 {
     public class AuthenticationUtils : IAuthenticationUtils
     {
-        public string DefaultUrl
-        {
-            get
-            {
-                return FormsAuthentication.DefaultUrl;
-            }
-        }
+        public string DefaultUrl => FormsAuthentication.DefaultUrl;
 
-        public string LoginUrl
-        {
-            get
-            {
-                return FormsAuthentication.LoginUrl;
-            }
-        }
+        public string LoginUrl => FormsAuthentication.LoginUrl;
 
         public bool IsUserAuthenticated(HttpContextBase httpContext)
-        {
-            return httpContext?.User?.Identity.IsAuthenticated ?? false;
-        }
+            => httpContext?.User?.Identity.IsAuthenticated ?? false;
 
         public bool ValidateCredentials(string username, string password)
-        {
-            return FormsAuthentication.Authenticate(username, password);
-        }
+            => FormsAuthentication.Authenticate(username, password);
 
-        public UserLogedInResult LoginUser(string username, bool rememberMe = false, string redirectUrl = null)
+        public UserLogedInResult LoginUser(string username, bool rememberMe, HttpRequestBase currentRequest)
         {
             FormsAuthentication.SetAuthCookie(username, rememberMe);
 
-            var result = new UserLogedInResult()
+            return new UserLogedInResult
             {
-                RedirectUrl = string.IsNullOrEmpty(redirectUrl) ? DefaultUrl : redirectUrl
+                RedirectUrl = GetRedirectUrl(currentRequest)
             };
-
-            return result;
         }
 
         public void LogOut()
-        {
-            FormsAuthentication.SignOut();
-        }
+            => FormsAuthentication.SignOut();
 
         private string GetRedirectUrl(HttpRequestBase request)
         {

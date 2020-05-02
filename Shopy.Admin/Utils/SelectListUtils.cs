@@ -1,5 +1,5 @@
 ﻿using Shopy.Admin.Utils;
-using Shopy.Proto;
+using Shopy.Sdk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,13 +20,13 @@ namespace Shopy.Admin
         public async Task<IEnumerable<SelectListItem>> GetBrandsSL()
         {
             var brands = await _shopyDriver.ListBrandsAsync();
-            return Convert(brands, b => b.Caption, b => b.EId.ToString());
+            return Convert(brands, b => b.Name, b => b.Id.ToString());
         }
 
         public async Task<MultiSelectList> GetSizesMSL()
         {
             var sizes = await _shopyDriver.ListSizesAsync();
-            return new MultiSelectList(sizes, "EId", "Caption");
+            return new MultiSelectList(sizes, "Id", "Name");
         }
 
         private IEnumerable<SelectListItem> Convert<T>(
@@ -34,7 +34,7 @@ namespace Shopy.Admin
             Func<T, string> textProvider,
             Func<T, string> valueProvider)
         {
-            return source.Select(s => new SelectListItem()
+            return source.Select(s => new SelectListItem
             {
                 Text = textProvider(s),
                 Value = valueProvider(s)

@@ -35,7 +35,7 @@ namespace Shopy.Api
         {
             return new[] {
                 new RequestParamValidator(() => addRequest == null, "Request has to be set"),
-                new RequestParamValidator(() => string.IsNullOrEmpty(addRequest?.Name), "Caption has to be set for category")
+                new RequestParamValidator(() => string.IsNullOrEmpty(addRequest?.Name), "Name has to be set for category")
             };
         }
 
@@ -44,7 +44,7 @@ namespace Shopy.Api
             return new[] {
                 new RequestParamValidator(() => editCommand == null, "Request has to be set"),
                 CategoryUidValidator(editCommand?.Uid),
-                new RequestParamValidator(() => string.IsNullOrEmpty(editCommand.Name), "Caption has to be set for category")
+                new RequestParamValidator(() => string.IsNullOrEmpty(editCommand.Name), "Name has to be set for category")
             };
         }
 
@@ -55,7 +55,7 @@ namespace Shopy.Api
                 //new RequestParamValidator(() => string.IsNullOrEmpty(addRequest?.Brand), "Brand has to been set for product"),
                 new RequestParamValidator(() => addRequest?.Sizes == null || !addRequest.Sizes.Any(), "Sizes have to be set for product"),
                 new RequestParamValidator(() => addRequest?.Price == null, "Price has to be set for product"),
-                new RequestParamValidator(() => string.IsNullOrEmpty(addRequest?.Caption), "Caption has to be set for product"),
+                new RequestParamValidator(() => string.IsNullOrEmpty(addRequest?.Name), "Name has to be set for product"),
                 new RequestParamValidator(() => string.IsNullOrEmpty(addRequest?.Description), "Description has to be set for product")
             };
 

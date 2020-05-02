@@ -4,11 +4,11 @@ namespace Shopy.Admin.ViewModels
 {
     public class ProductListItemViewModel
     {
+        public int Index { get; set; }
+
         public Guid Uid { get; set; }
 
-        public long ProductId { get; set; }
-
-        public string Caption { get; set; }
+        public string Name { get; set; }
 
         public decimal Price { get; set; }
     }

@@ -1,4 +1,6 @@
-﻿namespace Shopy.Core.Logging
+﻿using System.Collections.Generic;
+
+namespace Shopy.Core.Logging
 {
     public class LogLevel
     {
@@ -32,6 +34,17 @@
         public override string ToString()
         {
             return Name;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is LogLevel level &&
+                   Name == level.Name;
+        }
+
+        public override int GetHashCode()
+        {
+            return 539060726 + EqualityComparer<string>.Default.GetHashCode(Name);
         }
     }
 }

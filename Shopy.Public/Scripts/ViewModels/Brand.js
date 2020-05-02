@@ -2,7 +2,7 @@
 
     var self = this;
 
-    self.id = brand.EId;
-    self.caption = brand.Caption;
+    self.id = brand.Id;
+    self.caption = brand.Name;
     self.checked = ko.observable(false);
 }

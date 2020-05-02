@@ -13,7 +13,7 @@ namespace Shopy.Admin.Utils
 
         bool ValidateCredentials(string username, string password);
 
-        UserLogedInResult LoginUser(string username, bool rememberMe = false, string redirectUrl = null);
+        UserLogedInResult LoginUser(string username, bool rememberMe, HttpRequestBase currentRequest);
 
         void LogOut();
     }

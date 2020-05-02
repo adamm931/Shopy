@@ -17,6 +17,7 @@ namespace Shopy.Api.Controllers
         }
 
         [HttpGet]
+        [ActionName("list")]
         public async Task<IHttpActionResult> Get(bool withProductsOnly = false)
         {
             return await ProcessRequest(
