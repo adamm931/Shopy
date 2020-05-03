@@ -80,7 +80,7 @@ namespace Shopy.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> Delete(Guid uid)
         {
-            await Shopy.DeleteProductAsync(uid);
+            await Shopy.DeleteProduct(uid);
 
             return RedirectToAction("List");
         }
@@ -104,7 +104,7 @@ namespace Shopy.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> AddToCategory(Guid uid, Guid categoryUid)
         {
-            await Shopy.AddProductToCategoryAsync(uid, categoryUid);
+            await Shopy.AddProductToCategory(uid, categoryUid);
 
             return Json(true);
         }
@@ -112,7 +112,7 @@ namespace Shopy.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> RemoveFromCategory(Guid uid, Guid categoryUid)
         {
-            await Shopy.RemoveProductFromCategoryAsync(uid, categoryUid);
+            await Shopy.RemoveProductFromCategory(uid, categoryUid);
 
             return Json(true);
         }

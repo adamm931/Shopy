@@ -21,22 +21,16 @@ namespace Shopy.Sdk.Models
 
         public Guid? CategoryUid { get; set; }
 
-        public ProductFilter()
-        {
-            Sizes = Enumerable.Empty<SizeTypeId>();
-            Brands = Enumerable.Empty<BrandTypeId>();
-        }
-
         public string GetQueryString()
         {
             var @params = new Dictionary<string, object>();
 
-            if (Brands.Any())
+            if (Brands != null && Brands.Any())
             {
                 @params.Add("brands", string.Join(",", Brands));
             }
 
-            if (Sizes.Any())
+            if (Sizes != null && Sizes.Any())
             {
                 @params.Add("sizes", string.Join(",", Sizes));
             }

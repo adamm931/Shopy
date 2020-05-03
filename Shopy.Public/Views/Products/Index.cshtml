@@ -18,7 +18,7 @@
                         <!-- ko foreach: categories-->
                         <a href="javascript:void(0);" 
                            class="list-group-item serif"
-                           data-bind="css: { price: selected }, text: caption, click: $root.setSelectedCategory">
+                           data-bind="css: { price: selected }, text: name, click: $root.setSelectedCategory">
                         </a>
                         <!-- /ko -->
                     </div>
@@ -53,8 +53,8 @@
                     <div class="list-group">
                         <!-- ko foreach: sizes-->
                         <div class="custom-control custom-checkbox">
-                            <input data-bind="attr: {id: id}, checked: $parent.selectedSizes, checkedValue: id" type="checkbox" class="custom-control-input">
-                            <label data-bind="text: caption, attr: {for: id}" class="custom-control-label"></label>
+                            <input data-bind="attr: {id: name}, checked: $parent.selectedSizes, checkedValue: value" type="checkbox" class="custom-control-input">
+                            <label data-bind="text: name, attr: {for: name}" class="custom-control-label"></label>
                         </div>
                         <!-- /ko -->
                     </div>
@@ -71,8 +71,8 @@
                     <div class="list-group">
                         <!-- ko foreach: brands -->
                         <div class="custom-control custom-checkbox">
-                            <input data-bind="attr: {id: id}, checked: $parent.selectedBrands, checkedValue: id"type="checkbox" class="custom-control-input">
-                            <label data-bind="text: caption, attr: {for: id}" class="custom-control-label"></label>
+                            <input data-bind="attr: {id: name}, checked: $parent.selectedBrands, checkedValue: value"type="checkbox" class="custom-control-input">
+                            <label data-bind="text: name, attr: {for: name}" class="custom-control-label"></label>
                         </div>
                         <!-- /ko -->
                     </div>
@@ -91,7 +91,7 @@
                 <div class="col-lg-4 col-md-6">
                     <a data-bind="attr: { href: detailsLink }">
                         <div class="card h-90" data-bind="event: { mouseover: toogleDetails, mouseout: toogleDetails }">
-                            <img data-bind="attr: { src: image1Url }, css: { 'cart-img-small': detailsVisible }" class="card-img-top m-auto" alt="">
+                            <img data-bind="attr: { src: mainImageUrl }, css: { 'cart-img-small': detailsVisible }" class="card-img-top m-auto" alt="">
                             <div class="card-body">
                                 <h4 class="ellipsis serif" data-bind="text: caption, css: { price: detailsVisible }" class="card-title"></h4>
                                 <h5 data-bind="text: price, visible: !detailsVisible()" class="price font-weight-bold"></h5>
@@ -102,8 +102,7 @@
                                             <!-- ko if: $index() > 0 -->
                                             <span> - </span>
                                             <!-- /ko -->
-                                        <span  class="my-2 font-weight-normal serif-font text-lowercase" 
-                                              data-bind="text: $data.id"></span>
+                                        <span class="my-2 font-weight-normal serif-font text-lowercase" data-bind="text: $data"></span>
                                         <!-- /ko -->
                                     </div>
                                     <div class="pt-3 border-bottom mx-auto mb-3">
@@ -141,7 +140,6 @@
 <!-- /ko -->
 
 @section scripts {
-
  <script type="text/javascript">
 
      var Public = Public || {};
@@ -149,11 +147,10 @@
      products.init();
 
      ko.applyBindings(products);
-</script>
-<script>
-    $(document).ready(function() {
-        var slider = new Slider();
-        slider.create(products);
-    })
+
+     $(document).ready(function () {
+         var slider = new Slider();
+         slider.create(products);
+     })
 </script>
 }

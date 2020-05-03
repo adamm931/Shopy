@@ -149,11 +149,14 @@
     <Reference Include="Unity.Abstractions, Version=5.11.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.Abstractions.5.11.3\lib\net47\Unity.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Container, Version=5.11.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.11.3\lib\net47\Unity.Container.dll</HintPath>
+    <Reference Include="Unity.Container, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Container.5.11.1\lib\net47\Unity.Container.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mvc5, Version=1.4.0.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.Mvc5.1.4.0\lib\net45\Unity.Mvc5.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -220,13 +223,12 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Filters\LogedInCheck.cs" />
-    <Compile Include="Filters\LogExceptionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Mapping\AutoMapperUnityExtensions.cs" />
     <Compile Include="Mapping\ShopyAdminProfile.cs" />
     <Compile Include="Models\UserLogedInResult.cs" />
+    <Compile Include="Unity\ShopyAdminUnityInstaller.cs" />
     <Compile Include="Utils\AuthenticationUtils.cs" />
     <Compile Include="Utils\IAuthenticationUtils.cs" />
     <Compile Include="Utils\ISelectListUtils.cs" />
@@ -263,6 +265,10 @@
     <ProjectReference Include="..\Shopy.Sdk\Shopy.Sdk.csproj">
       <Project>{ee5b36a8-3408-4291-ac6a-4cc197f01ce7}</Project>
       <Name>Shopy.Sdk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shopy.Web\Shopy.Web.csproj">
+      <Project>{F165BE66-5FF2-4EA2-9D6F-3AA2E88159DE}</Project>
+      <Name>Shopy.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -9,45 +9,45 @@ namespace Shopy.Sdk
     {
         #region Categories
 
-        Task<IEnumerable<Category>> ListCategoriesAsync();
+        Task<IEnumerable<CategoryLookup>> LookupCategories();
 
-        Task<IEnumerable<Category>> ListCategoriesWithProductsAsync();
+        Task<IEnumerable<Category>> ListCategories();
 
-        Task<Category> GetCategoryAsync(Guid uid);
+        Task<Category> GetCategory(Guid uid);
 
-        Task<Category> AddCategoryAsync(Category category);
+        Task<Category> AddCategory(Category category);
 
-        Task EditCategoryAsync(Category category);
+        Task EditCategory(Category category);
 
-        Task DeleteCategoryAsync(Guid uid);
+        Task DeleteCategory(Guid uid);
 
         #endregion
 
         #region Products
 
-        Task<ProductListResponse> ListProductsAsync(ProductFilter filter = null);
+        Task<ProductListResponse> ListProducts(ProductFilter filter = null);
 
-        Task<ProductDetails> GetProductDetailsAsync(Guid uid);
+        Task<ProductDetails> GetProductDetails(Guid uid);
 
-        Task<Product> GetProductAsync(Guid uid);
+        Task<Product> GetProduct(Guid uid);
 
-        Task<Product> AddProductAsync(AddEditProduct product);
-    
-        Task EditProductAsync(AddEditProduct product);
+        Task AddProduct(AddEditProduct product);
 
-        Task AddProductToCategoryAsync(Guid productUid, Guid categoryUid);
+        Task EditProduct(AddEditProduct product);
 
-        Task RemoveProductFromCategoryAsync(Guid productUid, Guid categoryUid);
+        Task AddProductToCategory(Guid productUid, Guid categoryUid);
 
-        Task DeleteProductAsync(Guid uid);
+        Task RemoveProductFromCategory(Guid productUid, Guid categoryUid);
+
+        Task DeleteProduct(Guid uid);
 
         #endregion
 
         #region Brands and Sizes
 
-        Task<IEnumerable<Size>> ListSizesAsync();
+        Task<IEnumerable<Size>> ListSizes();
 
-        Task<IEnumerable<Brand>> ListBrandsAsync();
+        Task<IEnumerable<Brand>> ListBrands();
 
         #endregion
     }

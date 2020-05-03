@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Shopy.Api.DI;
+using Shopy.Web;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -20,6 +21,8 @@ namespace Shopy
             config.SetupUnity();
 
             config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
+
+            config.AddWebApiExceptionFilter();
         }
 
         private static HttpConfiguration MapRoutes(this HttpConfiguration config)

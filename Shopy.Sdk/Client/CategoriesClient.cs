@@ -20,9 +20,9 @@ namespace Shopy.Sdk.Client
             return list.Result;
         }
 
-        public async Task<IEnumerable<Category>> ListWithProductsAsync()
+        public async Task<IEnumerable<CategoryLookup>> LookupAsync()
         {
-            var list = await _client.GetAsync<ListResponse<Category>>($"categories/list?withProductsOnly={true}");
+            var list = await _client.GetAsync<ListResponse<CategoryLookup>>("categories/lookup");
             return list.Result;
         }
 

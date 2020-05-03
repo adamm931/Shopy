@@ -250,6 +250,10 @@
       <Project>{EEC12031-4E75-4B13-8D0B-FBA24A020220}</Project>
       <Name>Shopy.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shopy.Web\Shopy.Web.csproj">
+      <Project>{f165be66-5ff2-4ea2-9d6f-3aa2e88159de}</Project>
+      <Name>Shopy.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

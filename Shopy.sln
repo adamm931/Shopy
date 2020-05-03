@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopy.Infrastructure", "Sho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopy.Sdk", "Shopy.Sdk\Shopy.Sdk.csproj", "{EE5B36A8-3408-4291-AC6A-4CC197F01CE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopy.Web", "Shopy.Web\Shopy.Web.csproj", "{F165BE66-5FF2-4EA2-9D6F-3AA2E88159DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{EE5B36A8-3408-4291-AC6A-4CC197F01CE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE5B36A8-3408-4291-AC6A-4CC197F01CE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE5B36A8-3408-4291-AC6A-4CC197F01CE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F165BE66-5FF2-4EA2-9D6F-3AA2E88159DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F165BE66-5FF2-4EA2-9D6F-3AA2E88159DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F165BE66-5FF2-4EA2-9D6F-3AA2E88159DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F165BE66-5FF2-4EA2-9D6F-3AA2E88159DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

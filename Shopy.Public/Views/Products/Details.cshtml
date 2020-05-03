@@ -1,9 +1,8 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ProductDetails";
 }
 
-@model Guid
+@model Guid?
 
 <!-- ko with: productDetails -->
         <div class="card">
@@ -31,7 +30,7 @@
                                     <!-- ko if: $index() > 0 -->
                                     <span> - </span>
                                     <!-- /ko -->
-                                    <a href="javascript:void(0);" class="my-3 serif" data-bind="text: $data.EId"></a>
+                                    <a href="javascript:void(0);" class="my-3 serif" data-bind="text: $data"></a>
                                 <!-- /ko -->
                             </div>
                             <div class="col-md-6">
@@ -74,7 +73,7 @@
                     <div class="col-lg-4 col-md-6">
                         <a data-bind="attr: { href: detailsLink }">
                             <div class="card h-90" data-bind="event: { mouseover: toogleDetails, mouseout: toogleDetails }">
-                                <img data-bind="attr: { src: image1Url }, css: { 'cart-img-small': detailsVisible }" class="card-img-top m-auto" alt="">
+                                <img data-bind="attr: { src: mainImageUrl }, css: { 'cart-img-small': detailsVisible }" class="card-img-top m-auto" alt="">
                                 <div class="card-body">
                                     <h4 class="ellipsis serif" data-bind="text: caption, css: { price: detailsVisible }" class="card-title"></h4>
                                     <h5 data-bind="text: price, visible: !detailsVisible()" class="price font-weight-bold"></h5>
@@ -85,7 +84,7 @@
                                             <!-- ko if: $index() > 0 -->
                                             <span> - </span>
                                             <!-- /ko -->
-                                            <span class="my-2 serif text-lowercase" data-bind="text: $data.id"></span>
+                                            <span class="my-2 serif text-lowercase" data-bind="text: $data"></span>
                                             <!-- /ko -->
                                         </div>
                                         <div class="pt-3 border-bottom mx-auto mb-3">

@@ -43,19 +43,19 @@ namespace Shopy.Application.Products.Get
             //size
             if (!string.IsNullOrWhiteSpace(productFilter.Sizes))
             {
-                var filterSizes = productFilter.Sizes.Split(',');
+                var sizeTypeIds = SizeType.ParseIds(productFilter.Sizes);
 
                 products = products
-                    .Where(p => filterSizes.Any(fs => p.Sizes.Any(s => s.Name == fs)));
+                    .Where(p => sizeTypeIds.Any(fs => p.Sizes.Any(s => s.Id == fs)));
             }
 
             //brand
             if (!string.IsNullOrWhiteSpace(productFilter.Brands))
             {
-                var brands = productFilter.Brands.Split(',');
+                var brandTypeIds = BrandType.ParseIds(productFilter.Brands);
 
                 products = products
-                    .Where(p => brands.Any(b => p.Name == b));
+                    .Where(p => brandTypeIds.Any(b => p.BrandTypeId == b));
             }
 
             //category

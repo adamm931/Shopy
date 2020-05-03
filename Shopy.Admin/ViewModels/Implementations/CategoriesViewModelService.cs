@@ -26,19 +26,19 @@ namespace Shopy.Admin.ViewModels.Implementations
                 Name = model.Name
             };
 
-            await _shopy.AddCategoryAsync(addCategory);
+            await _shopy.AddCategory(addCategory);
         }
 
         public async Task EditCategory(CategoryViewModel model)
         {
             var category = _mapper.Map<Category>(model);
 
-            await _shopy.EditCategoryAsync(category);
+            await _shopy.EditCategory(category);
         }
 
         public async Task<CategoryViewModel> GetCategory(Guid uid)
         {
-            var category = await _shopy.GetCategoryAsync(uid);
+            var category = await _shopy.GetCategory(uid);
             var viewModel = _mapper.Map<CategoryViewModel>(category);
 
             return viewModel;
@@ -46,7 +46,7 @@ namespace Shopy.Admin.ViewModels.Implementations
 
         public async Task<CategoryListViewModel> GetCategoryList()
         {
-            var categories = await _shopy.ListCategoriesAsync();
+            var categories = await _shopy.ListCategories();
 
             var viewModel = new CategoryListViewModel
             {

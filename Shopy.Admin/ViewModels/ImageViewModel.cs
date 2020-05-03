@@ -1,5 +1,5 @@
 ﻿using Shopy.Admin.Validation;
-using Shopy.Sdk.Common;
+using Shopy.Sdk.Helpers;
 using System.Web;
 
 namespace Shopy.Admin.ViewModels
@@ -11,8 +11,7 @@ namespace Shopy.Admin.ViewModels
 
         public string Url { get; set; }
 
-        public static ImageViewModel Empty = new ImageViewModel(
-            $@"{ProtoSettingsHelper.ImageDirectoryUrl}\{ProtoSettingsHelper.EmptyImageName}");
+        public static ImageViewModel Empty = new ImageViewModel(ImageHelper.GetEmptyImageUrl());
 
         public ImageViewModel(string url)
         {
@@ -21,17 +20,6 @@ namespace Shopy.Admin.ViewModels
 
         public ImageViewModel()
         {
-
-        }
-
-        private ImageViewModel(ImageViewModel model)
-        {
-            Url = model.Url;
-        }
-
-        public ImageViewModel Clone()
-        {
-            return new ImageViewModel(this);
         }
     }
 }

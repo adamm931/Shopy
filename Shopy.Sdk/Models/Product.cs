@@ -1,12 +1,11 @@
 ﻿using Shopy.Sdk.Common;
-using Shopy.Sdk.Images;
+using Shopy.Sdk.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Shopy.Sdk.Models
 {
-    public class Product : IHasImageSetup<Product>
+    public class Product
     {
         public Guid Uid { get; set; }
 
@@ -20,20 +19,12 @@ namespace Shopy.Sdk.Models
 
         public IEnumerable<Size> Sizes { get; set; }
 
-        public IEnumerable<Category> Categories { get; set; }
+        public IEnumerable<CategoryLookup> Categories { get; set; }
 
-        public Image Image1 { get; set; }
+        public string Image1Url => ImageHelper.GetImageUrl(Uid, SettingsHelper.Image1Name);
 
-        public Image Image2 { get; set; }
+        public string Image2Url => ImageHelper.GetImageUrl(Uid, SettingsHelper.Image2Name);
 
-        public Image Image3 { get; set; }
-
-        public async Task<Product> SetUpImages(ImageProvider imageProvider)
-        {
-            Image1 = new Image(await imageProvider.GetImageUrl(Uid, ProtoSettingsHelper.Image1Name));
-            Image2 = new Image(await imageProvider.GetImageUrl(Uid, ProtoSettingsHelper.Image2Name));
-            Image3 = new Image(await imageProvider.GetImageUrl(Uid, ProtoSettingsHelper.Image3Name));
-            return this;
-        }
+        public string Image3Url => ImageHelper.GetImageUrl(Uid, SettingsHelper.Image3Name);
     }
 }

@@ -1,25 +1,32 @@
-﻿using Shopy.Sdk.Images;
+﻿using Shopy.Sdk.Common;
+using Shopy.Sdk.Helpers;
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Shopy.Sdk.Models
 {
-    public class ProductDetails : IHasImageSetup<ProductDetails>
+    public class ProductDetails
     {
-        public Product Product { get; set; }
+        public Guid Uid { get; set; }
+
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public decimal Price { get; set; }
+
+        public Brand Brand { get; set; }
+
+        public IEnumerable<Size> Sizes { get; set; }
+
+        public IEnumerable<CategoryLookup> Categories { get; set; }
 
         public IEnumerable<Product> RelatedProducts { get; set; }
 
-        public async Task<ProductDetails> SetUpImages(ImageProvider imageProvider)
-        {
-            await Product.SetUpImages(imageProvider);
+        public string Image1Url => ImageHelper.GetImageUrl(Uid, SettingsHelper.Image1Name);
 
-            foreach (var product in RelatedProducts)
-            {
-                await product.SetUpImages(imageProvider);
-            }
+        public string Image2Url => ImageHelper.GetImageUrl(Uid, SettingsHelper.Image2Name);
 
-            return this;
-        }
+        public string Image3Url => ImageHelper.GetImageUrl(Uid, SettingsHelper.Image3Name);
     }
 }

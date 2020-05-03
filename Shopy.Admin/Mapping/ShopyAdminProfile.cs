@@ -15,11 +15,13 @@ namespace Shopy.Admin.Mapping
             CreateMap<Size, string>()
                 .ConstructUsing(src => src.Id.ToString());
 
-            CreateMap<Image, ImageViewModel>();
-
-            CreateMap<ImageViewModel, Image>();
+            CreateMap<string, ImageViewModel>()
+                .ConstructUsing(src => new ImageViewModel(src));
 
             CreateMap<Product, ProductViewModel>()
+                .ForMember(dst => dst.Image1, opts => opts.MapFrom(src => src.Image1Url))
+                .ForMember(dst => dst.Image2, opts => opts.MapFrom(src => src.Image2Url))
+                .ForMember(dst => dst.Image3, opts => opts.MapFrom(src => src.Image3Url))
                 .ForMember(dst => dst.Sizes, opts => opts.MapFrom(src => src.Sizes))
                 .ForMember(dst => dst.Brand, opts => opts.MapFrom(src => src.Brand));
 

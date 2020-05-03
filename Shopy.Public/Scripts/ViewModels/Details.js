@@ -6,7 +6,6 @@
 
         var self = this;
 
-        self.product = ko.observable();
         self.relatedProducts = ko.observableArray();
 
         self.id = ko.observable();
@@ -30,7 +29,7 @@
         self.images = ko.observableArray();
         self.mainImage = ko.observable();
 
-        self.setAsMain = function (item, callback) {
+        self.setAsMain = function (item) {
             self.mainImage(item);
         }
 
@@ -51,19 +50,16 @@
                 url: endpoints.LoadDetails,
                 type: 'GET',
                 success: function (response) {
-
-                    var details = response.Details;
-                    var product = details.Product;
                     
-                    self.id(product.Uid);
-                    self.caption(product.Name);
-                    self.price(product.Price.toFixed(2));
-                    self.description(product.Description);
-                    self.sizes(product.Sizes);
+                    self.id(response.Uid);
+                    self.caption(response.Name);
+                    self.price(response.Price.toFixed(2));
+                    self.description(response.Description);
+                    self.sizes(response.Sizes);
 
-                    self.relatedProducts(_.map(details.RelatedProducts, rp => new Product(rp)));
+                    self.relatedProducts(_.map(response.RelatedProducts, rp => new Product(rp)));
 
-                    setImages(product);
+                    setImages(response);
                 }
             });
         }
@@ -71,9 +67,9 @@
         var setImages = function (product) {
 
             var images = [
-                product.Image1.Url,
-                product.Image2.Url,
-                product.Image3.Url
+                product.Image1Url,
+                product.Image2Url,
+                product.Image3Url
             ];
 
             self.mainImage(images[0]);

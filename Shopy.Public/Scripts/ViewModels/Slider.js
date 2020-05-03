@@ -37,11 +37,10 @@
 
         minInput.addEventListener('change', function () {
             slider.noUiSlider.set([this.value, null]);
-            callSearch();
         });
+
         maxInput.addEventListener('change', function () {
             slider.noUiSlider.set([null, this.value]);
-            callSearch();
         });
     }
 

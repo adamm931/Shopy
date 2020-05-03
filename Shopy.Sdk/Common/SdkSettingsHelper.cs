@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Shopy.Sdk.Common
 {
-    public class ProtoSettingsHelper
+    public class SettingsHelper
     {
         private static KeyValueConfigurationCollection appSettings = GetAppSettings();
 

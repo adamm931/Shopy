@@ -1,4 +1,4 @@
-﻿using Shopy.Admin.Filters;
+﻿using Shopy.Web;
 using System.Web.Mvc;
 
 namespace Shopy.Admin
@@ -8,7 +8,7 @@ namespace Shopy.Admin
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
-            filters.Add(new LogExceptionFilter());
+            filters.AddMvcExceptionFilter();
         }
     }
 }

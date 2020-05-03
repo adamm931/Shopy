@@ -1,4 +1,4 @@
-﻿function SearchFilters(minPrice, maxPrice) {
+﻿function SearchFilters() {
 
     var self = this;
 
@@ -12,7 +12,6 @@
     self.maxPrice = sliderOptions.maxInitial;
 
     self.nextPage = function () {
-        //self.pageIndex += 1;
         self.pageSize += self.pageSize;
         setToCache('pageSize', self.pageSize);
     }
@@ -22,7 +21,7 @@
     }
 
     self.getBrands = function () {
-        return self.brands.split(',');
+        return self.brands === null ? [] : self.brands.split(',');
     }
 
     self.setSizes = function (sizes) {
@@ -30,7 +29,7 @@
     }
 
     self.getSizes = function () {
-        return self.sizes.split(',');
+        return self.sizes === null ? [] : self.sizes.split(',');
     }
 
     self.setMinPrice = function (min) {
@@ -42,7 +41,6 @@
     }
 
     self.setCategory = function (categoryId) {
-        //self.categoryId = setToCache('categoryId', categoryId);
         self.categoryId = categoryId;
     }
     
@@ -60,16 +58,15 @@
 
     self.init = function () {
 
-        self.pageSize = self.getFromCache('pageSize') || publicOptions.pageSize;
-        //self.categoryId = self.getFromCache('categoryId') || self.categoryId;
-        self.brands = self.getFromCache('brands') || '';
-        self.sizes = self.getFromCache('sizes') || '';
-        self.minPrice = self.getFromCache('minPrice') || sliderOptions.minInitial;
-        self.maxPrice = self.getFromCache('maxPrice') || sliderOptions.maxInitial;
+        self.pageSize = self.getFromCache('pageSize', publicOptions.pageSize)
+        self.brands = self.getFromCache('brands', null)
+        self.sizes = self.getFromCache('sizes', null)
+        self.minPrice = self.getFromCache('minPrice', sliderOptions.minInitial)
+        self.maxPrice = self.getFromCache('maxPrice', sliderOptions.maxInitial)
     }
 
-    self.getFromCache = function(key) {
-        return sessionStorage.getItem(key);
+    self.getFromCache = function(key, defaultValue) {
+        return sessionStorage.getItem(key) || defaultValue
     }
 
     var setToCache = function (key, value) {

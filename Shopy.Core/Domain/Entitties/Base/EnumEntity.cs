@@ -1,5 +1,6 @@
 ﻿using Shopy.Core.Domain.Entitties.Interfaces;
 using System;
+using System.Collections.Generic;
 
 namespace Shopy.Core.Domain.Entitties.Base
 {
@@ -16,6 +17,16 @@ namespace Shopy.Core.Domain.Entitties.Base
 
         protected EnumEntity()
         {
+        }
+
+        public static IEnumerable<TEnum> ParseIds(string comaseparatedList)
+        {
+            var values = comaseparatedList.Split(',');
+
+            foreach (var value in values)
+            {
+                yield return (TEnum)Enum.Parse(typeof(TEnum), value);
+            }
         }
     }
 }

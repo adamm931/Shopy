@@ -6,7 +6,6 @@ using Shopy.Application.Products.Commands;
 using Shopy.Application.Products.Edit;
 using Shopy.Application.Products.Get;
 using Shopy.Application.Products.RemoveFromCategory;
-using Shopy.Application.Services;
 using Shopy.Core.Logging;
 using System;
 using System.Threading.Tasks;
@@ -16,14 +15,8 @@ namespace Shopy.Api.Controllers
 {
     public class ProductsController : BaseApiController
     {
-        private readonly IFileUploader _imageUploader;
-
-        public ProductsController(
-            IMediator mediator,
-            ILogger logger,
-            IFileUploader imageUploader) : base(mediator, logger)
+        public ProductsController(IMediator mediator, ILogger logger) : base(mediator, logger)
         {
-            _imageUploader = imageUploader;
         }
 
         [HttpGet]

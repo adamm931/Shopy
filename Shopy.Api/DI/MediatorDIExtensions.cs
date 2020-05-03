@@ -33,11 +33,9 @@ namespace Shopy.Api.DI
         public static IUnityContainer RegisterMediatorHandlers(this IUnityContainer container, Assembly assembly)
         {
             container.RegisterType(typeof(IPipelineBehavior<,>), typeof(LoggingPipeline<,>), "LoggingPipeline");
-            container.RegisterType(typeof(IPipelineBehavior<,>), typeof(SaveChangesPipeline<,>), "SaveChangesPipeline");
             container.RegisterTypesImplementingType(assembly, typeof(IRequestHandler<,>));
 
             return container;
-            // .RegisterNamedTypesImplementingType(assembly, typeof(INotificationHandler<>));
         }
 
         public static IUnityContainer RegisterTypesImplementingType(this IUnityContainer container, Assembly assembly, Type type)

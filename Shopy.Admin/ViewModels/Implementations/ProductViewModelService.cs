@@ -48,7 +48,7 @@ namespace Shopy.Admin.ViewModels.Implementations
 
         public async Task<ProductViewModel> GetProduct(Guid uid)
         {
-            var product = await _shopy.GetProductAsync(uid);
+            var product = await _shopy.GetProduct(uid);
             var viewModel = _mapper.Map<ProductViewModel>(product);
             await viewModel.PopulateSizesAndBrands(_selectListUtils);
 
@@ -57,7 +57,7 @@ namespace Shopy.Admin.ViewModels.Implementations
 
         public async Task<ProductListViewModel> GetProductList()
         {
-            var products = await _shopy.ListProductsAsync();
+            var products = await _shopy.ListProducts();
             var viewModel = _mapper.Map<ProductListViewModel>(products);
 
             return viewModel;
@@ -67,19 +67,19 @@ namespace Shopy.Admin.ViewModels.Implementations
         {
             var productToAdd = _mapper.Map<AddEditProduct>(product);
 
-            await _shopy.AddProductAsync(productToAdd);
+            await _shopy.AddProduct(productToAdd);
         }
 
         public async Task EditProduct(ProductViewModel product)
         {
             var productToAdd = _mapper.Map<AddEditProduct>(product);
 
-            await _shopy.EditProductAsync(productToAdd);
+            await _shopy.EditProduct(productToAdd);
         }
 
         public async Task<ChangeProductCategoriesViewModel> GetProductCategoryChange(Guid uid)
         {
-            var product = await _shopy.GetProductAsync(uid);
+            var product = await _shopy.GetProduct(uid);
 
             var model = new ChangeProductCategoriesViewModel
             {
@@ -92,7 +92,7 @@ namespace Shopy.Admin.ViewModels.Implementations
 
         public async Task<ProductCategoriesViewModel> GetProductCategories(Guid uid)
         {
-            var categories = await _shopy.ListCategoriesAsync();
+            var categories = await _shopy.ListCategories();
 
             var model = new ProductCategoriesViewModel()
             {

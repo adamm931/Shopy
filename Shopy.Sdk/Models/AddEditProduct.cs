@@ -1,15 +1,12 @@
 ﻿using Newtonsoft.Json;
 using Shopy.Core.Domain.Entitties.Enumerations;
-using Shopy.Sdk.Common;
-using Shopy.Sdk.Images;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace Shopy.Sdk.Models
 {
-    public class AddEditProduct : ISavesImage
+    public class AddEditProduct
     {
         public Guid Uid { get; set; }
 
@@ -31,12 +28,5 @@ namespace Shopy.Sdk.Models
 
         [JsonIgnore]
         public HttpPostedFileBase Image3 { get; set; }
-
-        public async Task SaveImageAsync(ImageProvider imageProvider)
-        {
-            await imageProvider.SaveImageAsync(Image1, Uid, ProtoSettingsHelper.Image1Name);
-            await imageProvider.SaveImageAsync(Image2, Uid, ProtoSettingsHelper.Image2Name);
-            await imageProvider.SaveImageAsync(Image3, Uid, ProtoSettingsHelper.Image3Name);
-        }
     }
 }

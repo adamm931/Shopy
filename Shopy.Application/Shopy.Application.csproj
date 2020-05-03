@@ -108,7 +108,6 @@
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\SizeResponse.cs" />
     <Compile Include="Pipelines\LoggingPipeline.cs" />
-    <Compile Include="Pipelines\SaveChangesPipeline.cs" />
     <Compile Include="Products\AddToCategory\AddProductToCategoryCommand.cs" />
     <Compile Include="Products\AddToCategory\AddProductToCategoryCommandHandler.cs" />
     <Compile Include="Products\Add\AddProductRequest.cs" />

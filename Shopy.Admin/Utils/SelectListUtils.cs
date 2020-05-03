@@ -19,13 +19,13 @@ namespace Shopy.Admin
 
         public async Task<IEnumerable<SelectListItem>> GetBrandsSL()
         {
-            var brands = await _shopyDriver.ListBrandsAsync();
+            var brands = await _shopyDriver.ListBrands();
             return Convert(brands, b => b.Name, b => b.Id.ToString());
         }
 
         public async Task<MultiSelectList> GetSizesMSL()
         {
-            var sizes = await _shopyDriver.ListSizesAsync();
+            var sizes = await _shopyDriver.ListSizes();
             return new MultiSelectList(sizes, "Id", "Name");
         }
 

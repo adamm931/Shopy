@@ -1,4 +1,4 @@
-﻿using Shopy.Sdk;
+﻿using Shopy.Public.Service;
 using Shopy.Sdk.Models;
 using System;
 using System.Threading.Tasks;
@@ -9,13 +9,11 @@ namespace Shopy.Public.Controllers
     [HandleError]
     public class ProductsController : Controller
     {
-        private IShopyDriver shopy;
-        protected IShopyDriver Shopy
+        private readonly IProductsViewModelService _productViewModelService;
+
+        public ProductsController(IProductsViewModelService productViewModelService)
         {
-            get
-            {
-                return shopy ?? (shopy = ShopyDriveBuilder.GetDriver());
-            }
+            _productViewModelService = productViewModelService;
         }
 
         [HttpGet]
@@ -27,40 +25,17 @@ namespace Shopy.Public.Controllers
         [HttpGet]
         public async Task<ActionResult> Filters()
         {
-            var response = new
-            {
-                Categories = await Shopy.ListCategoriesAsync(),
-                Sizes = await Shopy.ListSizesAsync(),
-                Brands = await Shopy.ListBrandsAsync(),
-            };
+            var model = await _productViewModelService.GetFilters();
 
-            return Json(response, JsonRequestBehavior.AllowGet);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public async Task<ActionResult> Search(ProductFilter filter)
         {
-            object response = null;
+            var products = await _productViewModelService.FilterProducts(filter);
 
-            try
-            {
-                response = new
-                {
-                    Success = true,
-                    Data = await Shopy.ListProductsAsync(filter)
-                };
-            }
-
-            catch (Exception e)
-            {
-                response = new
-                {
-                    Success = false,
-                    Message = e.Message
-                };
-            }
-
-            return Json(response, JsonRequestBehavior.AllowGet);
+            return Json(products, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -72,34 +47,9 @@ namespace Shopy.Public.Controllers
         [HttpGet]
         public async Task<ActionResult> LoadDetails(Guid id)
         {
-            object response = null;
+            var details = await _productViewModelService.GetProductDetails(id);
 
-            try
-            {
-                var details = await Shopy.GetProductDetailsAsync(id);
-
-                if (details == null)
-                {
-                    throw new Exception($"Product not found with id: {id}");
-                }
-
-                response = new
-                {
-                    Success = true,
-                    Details = details
-                };
-            }
-
-            catch (Exception e)
-            {
-                response = new
-                {
-                    Success = false,
-                    Message = e.Message
-                };
-            }
-
-            return Json(response, JsonRequestBehavior.AllowGet);
+            return Json(details, JsonRequestBehavior.AllowGet);
         }
     }
 }

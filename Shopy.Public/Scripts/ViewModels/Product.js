@@ -6,10 +6,8 @@
     self.price = item.Price.toFixed(2) + "$";
     self.caption = item.Name;
     self.detailsLink = endpoints.Details.replace("id", item.Uid);
-    self.image1Url = item.Image1.Url;
-    self.sizes = _.map(item.Sizes, s => new Size(s));
-    self.brand = new Brand(item.Brand);
-    self.categories = _.map(item.Categories, c => new Category(c));
+    self.mainImageUrl = item.MainImageUrl;
+    self.sizes = item.Sizes;
 
     self.detailsVisible = ko.observable(false);
 

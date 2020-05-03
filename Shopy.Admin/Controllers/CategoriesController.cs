@@ -72,7 +72,7 @@ namespace Shopy.Admin.Controllers
         [HttpGet]
         public async Task<ActionResult> Delete(Guid uid)
         {
-            await Shopy.DeleteCategoryAsync(uid);
+            await Shopy.DeleteCategory(uid);
 
             return RedirectToAction("List");
         }

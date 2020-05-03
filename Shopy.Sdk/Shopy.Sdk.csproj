@@ -56,14 +56,13 @@
     <Compile Include="Client\SizesClient.cs" />
     <Compile Include="Common\SdkSettingsHelper.cs" />
     <Compile Include="Common\SettingKeys.cs" />
-    <Compile Include="Images\IHasImageSetup.cs" />
-    <Compile Include="Images\ImageProvider.cs" />
-    <Compile Include="Images\ISavesImage.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="IShopyDriver.cs" />
     <Compile Include="Models\AddEditProduct.cs" />
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\CategoryLookup.cs" />
     <Compile Include="Models\ListResponse.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductDetails.cs" />

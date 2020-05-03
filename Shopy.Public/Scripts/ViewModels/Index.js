@@ -2,7 +2,7 @@
 
 (function ($, ko, ns) {
     
-    function Index(spinner) {
+    function Index() {
         var self = this;
 
         self.init = function () {
@@ -42,15 +42,9 @@
                 type: 'POST',
                 success: function (response) {
 
-                    if (response.Success) {
-                        var responseData= response.Data;
-                        var items = _.map(responseData.Result, i => new Product(i));
-                        self.items(items);
-                        self.hasMoreRecords(self.filters.pageSize < responseData.TotalRecords)
-                    }
-                    else {
-                        console.error(response.Message);
-                    }
+                    var items = _.map(response.Items, i => new Product(i));
+                    self.items(items);
+                    self.hasMoreRecords(self.filters.pageSize < response.TotalRecords)
 
                     loadingOff();
                 },
@@ -62,13 +56,13 @@
 
         }
 
-        self.setSelectedCategory = function (category, callback) {
+        self.setSelectedCategory = function (category) {
 
-            _.each(self.categories(), cf => cf.selected(cf.id == category.id));
+            _.each(self.categories(), cf => cf.selected(cf.value == category.value));
 
             var selectedCategory = _.find(self.categories(), cf => cf.selected() == true);
 
-            self.filters.setCategory(selectedCategory.id);
+            self.filters.setCategory(selectedCategory.value);
 
             self.search();
         }
@@ -87,11 +81,6 @@
 
         self.selectedSizes.subscribe(function (value) {
             self.filters.setSizes(value);
-            self.search();
-        });
-
-        self.selectedBrands.subscribe(function (value) {
-            self.filters.setBrands(value);
             self.search();
         });
 
@@ -133,13 +122,13 @@
                 success: function (response) {
 
                     //load brands
-                    self.brands(_.map(response.Brands, b => new Brand(b)));
+                    self.brands(_.map(response.BrandFilters, b => new Filter(b)));
 
                     //load sizes
-                    self.sizes(_.map(response.Sizes, s => new Size(s)));
+                    self.sizes(_.map(response.SizeFilters, s => new Filter(s)));
 
                     //load categories
-                    self.categories(_.map(response.Categories, c => new Category(c)));
+                    self.categories(_.map(response.CategoryFilters, c => new Filter(c)));
                 },
                 failure: function (data) {
                     alert(data);
